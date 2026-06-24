@@ -174,51 +174,36 @@
             }
         }
 
-        @keyframes typingDot {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-8px);
-            }
-        }
-
         .animate-fade-up {
             animation: fadeInUp 0.6s ease forwards;
         }
-
+        .animate-fade-down {
+            animation: fadeInDown 0.5s ease forwards;
+        }
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }
-
         .animate-glow {
             animation: glowPulse 2.5s ease-in-out infinite;
         }
-
         .animate-pulse {
             animation: pulse 2s ease-in-out infinite;
         }
-
         .animate-slide-left {
             animation: slideInLeft 0.5s ease forwards;
         }
-
         .animate-slide-right {
             animation: slideInRight 0.5s ease forwards;
         }
-
         .animate-scale {
             animation: scaleIn 0.5s ease forwards;
         }
-
         .animate-rotate {
             animation: rotateSlow 10s linear infinite;
         }
-
         .animate-border-glow {
             animation: borderGlow 2s ease-in-out infinite;
         }
-
         .animate-message {
             animation: messageAppear 0.4s ease forwards;
         }
@@ -226,7 +211,6 @@
         .hover-scale {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
         .hover-scale:hover {
             transform: scale(1.05);
         }
@@ -234,7 +218,6 @@
         .hover-glow {
             transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
         }
-
         .hover-glow:hover {
             box-shadow: 0 0 30px rgba(255, 127, 23, 0.15);
             border-color: #ff7f17;
@@ -246,7 +229,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn-hover::after {
             content: '';
             position: absolute;
@@ -258,19 +240,17 @@
             transform: rotate(45deg);
             transition: all 0.6s ease;
         }
-
         .btn-hover:hover::after {
             left: 100%;
         }
-
         .btn-hover:hover {
             transform: translateY(-3px) scale(1.02);
         }
 
         /* ========================================================= */
-        /* ВЫБОР СЕРВЕРА */
+        /* СТРАНИЦА ВЫБОРА СЕРВЕРА (ПЕРВИЧНАЯ) */
         /* ========================================================= */
-        .server-select {
+        .server-select-primary {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -281,7 +261,7 @@
             overflow: hidden;
         }
 
-        .server-select::before {
+        .server-select-primary::before {
             content: '';
             position: absolute;
             top: -30%;
@@ -292,7 +272,7 @@
             animation: rotateSlow 30s linear infinite;
         }
 
-        .server-select__particles {
+        .server-select-primary__particles {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -302,7 +282,7 @@
             overflow: hidden;
         }
 
-        .server-select__particle {
+        .server-select-primary__particle {
             position: absolute;
             width: 4px;
             height: 4px;
@@ -310,14 +290,13 @@
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
+        .server-select-primary__particle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; width: 6px; height: 6px; }
+        .server-select-primary__particle:nth-child(2) { top: 70%; left: 80%; animation-delay: 1s; }
+        .server-select-primary__particle:nth-child(3) { top: 30%; left: 90%; animation-delay: 2s; width: 8px; height: 8px; }
+        .server-select-primary__particle:nth-child(4) { top: 80%; left: 10%; animation-delay: 0.5s; }
+        .server-select-primary__particle:nth-child(5) { top: 50%; left: 50%; animation-delay: 1.5s; width: 10px; height: 10px; opacity: 0.1; }
 
-        .server-select__particle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; width: 6px; height: 6px; }
-        .server-select__particle:nth-child(2) { top: 70%; left: 80%; animation-delay: 1s; }
-        .server-select__particle:nth-child(3) { top: 30%; left: 90%; animation-delay: 2s; width: 8px; height: 8px; }
-        .server-select__particle:nth-child(4) { top: 80%; left: 10%; animation-delay: 0.5s; }
-        .server-select__particle:nth-child(5) { top: 50%; left: 50%; animation-delay: 1.5s; width: 10px; height: 10px; opacity: 0.1; }
-
-        .server-select__box {
+        .server-select-primary__box {
             text-align: center;
             max-width: 600px;
             width: 100%;
@@ -326,7 +305,7 @@
             animation: fadeInUp 0.8s ease;
         }
 
-        .server-select__title {
+        .server-select-primary__title {
             font-size: 42px;
             font-weight: 900;
             margin-bottom: 8px;
@@ -337,23 +316,70 @@
             animation: shimmer 4s linear infinite;
         }
 
-        .server-select__title-icon {
+        .server-select-primary__title-icon {
             display: inline-block;
             animation: rotateSlow 8s linear infinite;
         }
 
-        .server-select__subtitle {
+        .server-select-primary__subtitle {
             color: rgba(255, 255, 255, 0.4);
             font-size: 14px;
             margin-bottom: 30px;
         }
 
-        .server-select__grid {
+        .server-select-primary__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
         }
 
+        /* ========================================================= */
+        /* ВЫБОР СЕРВЕРА (ВТОРИЧНЫЙ - ПОСЛЕ ВХОДА) */
+        /* ========================================================= */
+        .server-select-secondary {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        .server-select-secondary.active {
+            display: flex;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .server-select-secondary__box {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .server-select-secondary__title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 6px;
+            background: linear-gradient(90deg, #fff, #ff7f17);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .server-select-secondary__subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .server-select-secondary__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        /* ========================================================= */
+        /* КАРТОЧКИ СЕРВЕРОВ (ОБЩИЕ) */
+        /* ========================================================= */
         .server-card {
             background: rgba(255, 255, 255, 0.03);
             border: 2px solid rgba(255, 255, 255, 0.06);
@@ -435,6 +461,25 @@
             border: 1px solid rgba(255, 127, 23, 0.1);
         }
 
+        .server-card .server-card__select-btn {
+            margin-top: 14px;
+            padding: 6px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .server-card:hover .server-card__select-btn {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
         /* ========================================================= */
         /* МОДАЛЬНОЕ ОКНО ВХОДА */
         /* ========================================================= */
@@ -446,10 +491,14 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.85);
             z-index: 9999;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(8px);
+        }
+
+        .login-modal.active {
+            display: flex;
             animation: fadeInUp 0.5s ease;
         }
 
@@ -571,6 +620,10 @@
             min-height: 18px;
         }
 
+        .login-modal__error.success {
+            color: #4caf50;
+        }
+
         .login-modal__register {
             text-align: center;
             margin-top: 12px;
@@ -612,6 +665,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .header__left {
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
@@ -684,7 +743,7 @@
             animation: pulse 1.5s infinite;
         }
 
-        .header__user {
+        .header__right {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1373,17 +1432,14 @@
             color: #ff7f17;
             margin: 16px 0 8px;
         }
-
         .content-page__body h1 { font-size: 24px; }
         .content-page__body h2 { font-size: 20px; }
         .content-page__body h3 { font-size: 17px; }
-
         .content-page__body ul,
         .content-page__body ol {
             padding-left: 24px;
             margin: 8px 0;
         }
-
         .content-page__body li {
             margin: 4px 0;
         }
@@ -1435,7 +1491,6 @@
             font-size: 20px;
             font-weight: 900;
         }
-
         .complaints-page__title i {
             color: #ff7f17;
             margin-right: 8px;
@@ -1557,7 +1612,6 @@
             font-size: 10px;
             color: rgba(255, 255, 255, 0.3);
         }
-
         .complaint-item__meta span {
             margin-right: 10px;
         }
@@ -1579,7 +1633,6 @@
             font-size: 12px;
             color: rgba(255, 255, 255, 0.6);
         }
-
         .complaint-item__answer strong {
             color: #4caf50;
         }
@@ -1596,7 +1649,6 @@
             padding: 24px 16px;
             color: rgba(255, 255, 255, 0.15);
         }
-
         .no-items i {
             font-size: 28px;
             display: block;
@@ -1636,7 +1688,6 @@
             font-size: 14px;
             font-weight: 700;
         }
-
         .chat-header__title i {
             color: #ff7f17;
             margin-right: 6px;
@@ -1783,12 +1834,10 @@
             background: rgba(255, 127, 23, 0.1);
             transform: scale(1.1);
         }
-
         .chat-message__actions button.danger:hover {
             color: #ff1744;
             background: rgba(255, 23, 68, 0.1);
         }
-
         .chat-message__actions button.reply-btn:hover {
             color: #2196f3;
             background: rgba(33, 150, 243, 0.1);
@@ -1841,7 +1890,6 @@
             transform: scale(1.05);
             box-shadow: 0 4px 20px rgba(255, 127, 23, 0.2);
         }
-
         .chat-input-area button:active {
             transform: scale(0.95);
         }
@@ -1882,7 +1930,6 @@
             padding: 30px 16px;
             color: rgba(255, 255, 255, 0.15);
         }
-
         .chat-empty i {
             font-size: 28px;
             display: block;
@@ -1915,7 +1962,6 @@
             font-weight: 900;
             margin-bottom: 4px;
         }
-
         .dev-panel__title i {
             color: #ff7f17;
             margin-right: 10px;
@@ -2028,7 +2074,6 @@
             background: rgba(255, 127, 23, 0.08);
             transform: scale(1.1);
         }
-
         .dev-panel__user-item .actions button.danger:hover {
             color: #ff1744;
             background: rgba(255, 23, 68, 0.08);
@@ -2280,7 +2325,6 @@
         .topic-item__title a {
             transition: color 0.3s ease;
         }
-
         .topic-item__title a:hover {
             color: #ff7f17;
         }
@@ -2311,7 +2355,6 @@
             color: rgba(255, 255, 255, 0.25);
             margin-top: 2px;
         }
-
         .topic-item__meta span {
             margin-right: 10px;
         }
@@ -2322,7 +2365,6 @@
             text-align: right;
             flex-shrink: 0;
         }
-
         .topic-item__right .author {
             display: block;
             font-weight: 600;
@@ -2398,7 +2440,6 @@
             .header__user-name {
                 display: none;
             }
-
             .header__user-prefix {
                 display: none;
             }
@@ -2406,7 +2447,6 @@
             .hero__title {
                 font-size: 22px;
             }
-
             .hero__stats {
                 gap: 14px;
             }
@@ -2441,12 +2481,16 @@
                 max-height: 250px;
             }
 
-            .server-select__grid {
+            .server-select-primary__grid,
+            .server-select-secondary__grid {
                 grid-template-columns: 1fr;
             }
 
-            .server-select__title {
+            .server-select-primary__title {
                 font-size: 28px;
+            }
+            .server-select-secondary__title {
+                font-size: 24px;
             }
         }
 
@@ -2454,7 +2498,6 @@
             .header__logo-text {
                 font-size: 14px;
             }
-
             .header__online {
                 font-size: 10px;
             }
@@ -2462,21 +2505,24 @@
             .hero__title {
                 font-size: 18px;
             }
-
             .forum-section__title {
                 font-size: 14px;
             }
-
             .content-page__title {
                 font-size: 20px;
             }
-
             .complaints-page__title {
                 font-size: 17px;
             }
-
             .dev-panel__title {
                 font-size: 17px;
+            }
+
+            .server-select-primary__title {
+                font-size: 22px;
+            }
+            .server-select-secondary__title {
+                font-size: 20px;
             }
         }
     </style>
@@ -2484,32 +2530,32 @@
 <body>
 
 <!-- ========================================================= -->
-<!-- ВЫБОР СЕРВЕРА -->
+<!-- ПЕРВИЧНЫЙ ВЫБОР СЕРВЕРА (ДО АВТОРИЗАЦИИ) -->
 <!-- ========================================================= -->
-<div class="server-select" id="serverSelect">
-    <div class="server-select__particles">
-        <div class="server-select__particle"></div>
-        <div class="server-select__particle"></div>
-        <div class="server-select__particle"></div>
-        <div class="server-select__particle"></div>
-        <div class="server-select__particle"></div>
+<div class="server-select-primary" id="serverSelectPrimary">
+    <div class="server-select-primary__particles">
+        <div class="server-select-primary__particle"></div>
+        <div class="server-select-primary__particle"></div>
+        <div class="server-select-primary__particle"></div>
+        <div class="server-select-primary__particle"></div>
+        <div class="server-select-primary__particle"></div>
     </div>
 
-    <div class="server-select__box">
-        <div class="server-select__title">
-            <span class="server-select__title-icon">❄️</span> CRYSTAL <span>RUSSIA</span>
+    <div class="server-select-primary__box">
+        <div class="server-select-primary__title">
+            <span class="server-select-primary__title-icon">❄️</span> CRYSTAL <span>RUSSIA</span>
         </div>
-        <div class="server-select__subtitle">✨ Выберите сервер для входа</div>
+        <div class="server-select-primary__subtitle">✨ Выберите сервер для входа</div>
 
-        <div class="server-select__grid">
-            <div class="server-card animate-float hover-glow" onclick="selectServer('crystal')">
+        <div class="server-select-primary__grid">
+            <div class="server-card animate-float hover-glow" onclick="selectServerPrimary('crystal')">
                 <span class="server-card__badge">★ ПОПУЛЯРНЫЙ</span>
                 <span class="server-card__icon">💎</span>
                 <div class="server-card__name">Crystal</div>
                 <div class="server-card__desc">Основной RP сервер</div>
                 <div class="server-card__online">🟢 128 онлайн</div>
             </div>
-            <div class="server-card animate-float hover-glow" style="animation-delay:0.5s;" onclick="selectServer('russia')">
+            <div class="server-card animate-float hover-glow" style="animation-delay:0.5s;" onclick="selectServerPrimary('russia')">
                 <span class="server-card__badge">🆕 НОВЫЙ</span>
                 <span class="server-card__icon">🇷🇺</span>
                 <div class="server-card__name">Russia</div>
@@ -2526,17 +2572,52 @@
 <div class="login-modal" id="loginModal">
     <div class="login-modal__box animate-glow">
         <div class="login-modal__title">❄️ CRYSTAL <span>RUSSIA</span></div>
-        <div class="login-modal__subtitle" id="loginSubtitle">Войдите в свой аккаунт</div>
+        <div class="login-modal__subtitle" id="loginSubtitle">🔑 Войдите в свой аккаунт</div>
 
-        <input class="login-modal__input" id="loginUsername" placeholder="Имя пользователя" type="text">
-        <input class="login-modal__input" id="loginPassword" placeholder="Пароль" type="password">
+        <input class="login-modal__input" id="loginUsername" placeholder="👤 Имя пользователя" type="text">
+        <input class="login-modal__input" id="loginPassword" placeholder="🔒 Пароль" type="password">
 
-        <button class="login-modal__btn" id="loginBtn">Войти</button>
+        <button class="login-modal__btn" id="loginBtn">🚀 Войти</button>
 
         <div class="login-modal__error" id="loginError"></div>
 
         <div class="login-modal__register">
             <span id="registerText">Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a></span>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- ВТОРИЧНЫЙ ВЫБОР СЕРВЕРА (ПОСЛЕ АВТОРИЗАЦИИ) -->
+<!-- ========================================================= -->
+<div class="server-select-secondary" id="serverSelectSecondary">
+    <div class="server-select-secondary__box">
+        <div class="server-select-secondary__title">❄️ CRYSTAL RUSSIA</div>
+        <div class="server-select-secondary__subtitle">✨ <span id="secondaryUserGreeting">Игрок</span>, выберите сервер для игры</div>
+
+        <div class="server-select-secondary__grid">
+            <div class="server-card animate-float hover-glow" onclick="selectServerSecondary('crystal')">
+                <span class="server-card__badge">★ ПОПУЛЯРНЫЙ</span>
+                <span class="server-card__icon">💎</span>
+                <div class="server-card__name">Crystal</div>
+                <div class="server-card__desc">Основной RP сервер</div>
+                <div class="server-card__online">🟢 128 онлайн</div>
+                <button class="server-card__select-btn"><i class="fas fa-play"></i> Войти</button>
+            </div>
+            <div class="server-card animate-float hover-glow" style="animation-delay:0.5s;" onclick="selectServerSecondary('russia')">
+                <span class="server-card__badge">🆕 НОВЫЙ</span>
+                <span class="server-card__icon">🇷🇺</span>
+                <div class="server-card__name">Russia</div>
+                <div class="server-card__desc">Новый RP сервер</div>
+                <div class="server-card__online">🟢 67 онлайн</div>
+                <button class="server-card__select-btn"><i class="fas fa-play"></i> Войти</button>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+            <button class="btn btn-secondary" onclick="logoutFromSecondary()">
+                <i class="fas fa-sign-out-alt"></i> Выйти из аккаунта
+            </button>
         </div>
     </div>
 </div>
@@ -2601,7 +2682,7 @@
             </div>
 
             <div class="burger-nav-title">🌐 Сервер</div>
-            <a onclick="changeServer()"><i class="fas fa-exchange-alt"></i> Сменить сервер</a>
+            <a onclick="showServerSelection()"><i class="fas fa-exchange-alt"></i> Сменить сервер</a>
 
             <div class="burger-nav-title">👤 Личное</div>
             <a onclick="navigateTo('profile')"><i class="fas fa-user"></i> Мой профиль</a>
@@ -2609,7 +2690,10 @@
         </nav>
 
         <div class="burger-footer">
-            <button class="header__logout" onclick="logout()" style="width:100%;">
+            <button class="btn btn-primary" onclick="showServerSelection()" style="width:100%;margin-bottom:6px;">
+                <i class="fas fa-globe"></i> Сменить сервер
+            </button>
+            <button class="btn btn-danger" onclick="logout()" style="width:100%;">
                 <i class="fas fa-sign-out-alt"></i> Выйти
             </button>
         </div>
@@ -2618,36 +2702,45 @@
     <!-- ШАПКА -->
     <header class="header">
         <div class="container header__container">
-            <div style="display:flex;align-items:center;gap:8px;">
+            <div class="header__left">
                 <div class="burger-icon" id="burgerIcon" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
+
                 <div class="header__logo">
                     <span class="header__logo-icon">❄️</span>
                     <span class="header__logo-text">CRYSTAL <span>RUSSIA</span></span>
                 </div>
-                <span class="header__server" id="headerServer" onclick="changeServer()">
+
+                <span class="header__server" id="headerServer" onclick="showServerSelection()">
                     🌐 Crystal <i class="fas fa-chevron-down" style="font-size:8px;opacity:0.5;"></i>
                 </span>
+
                 <div class="header__online">
                     <span class="header__online-dot"></span>
                     <span>Игроков: <strong id="onlineCount">0</strong></span>
                 </div>
             </div>
-            <div class="header__user">
+
+            <div class="header__right">
                 <a class="header__messages" onclick="navigateTo('notifications')">
                     <i class="fas fa-envelope"></i>
                     <span class="badge" id="notifBadgeHeader">0</span>
                 </a>
+
                 <div class="header__user-avatar" id="headerAvatar" onclick="navigateTo('profile')">
                     <span id="headerAvatarText">И</span>
                     <span class="status-dot status-online" id="headerStatusDot"></span>
                 </div>
+
                 <span class="header__user-name" id="headerUsername">Игрок</span>
                 <span class="header__user-prefix" id="headerPrefix">Игрок</span>
-                <button class="header__logout" onclick="logout()">Выйти</button>
+
+                <button class="header__logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -2655,7 +2748,7 @@
     <!-- ========================================================= -->
     <!-- КОНТЕЙНЕР ДЛЯ СТРАНИЦ -->
     <!-- ========================================================= -->
-    <div id="pageContainer">
+    <div class="container main-content" id="pageContainer">
 
         <!-- ГЛАВНАЯ -->
         <div id="page-home">
@@ -2990,10 +3083,7 @@
                 <h1 class="content-page__title" id="contentTitle">Заголовок</h1>
                 <div class="content-page__subtitle" id="contentSubtitle">Контент страницы</div>
 
-                <!-- Режим просмотра -->
                 <div class="content-page__body" id="contentBody"></div>
-
-                <!-- Режим редактирования -->
                 <textarea class="content-page__editor hidden" id="contentEditor" placeholder="Введите текст здесь..."></textarea>
 
                 <div class="content-page__actions">
@@ -3488,39 +3578,68 @@
     }
 
     // =========================================================
-    // ВЫБОР СЕРВЕРА
+    // ВЫБОР СЕРВЕРА (ПЕРВИЧНЫЙ - ДО АВТОРИЗАЦИИ)
     // =========================================================
-    function selectServer(server) {
+    function selectServerPrimary(server) {
         currentServer = server;
         localStorage.setItem('current_server', server);
-        document.getElementById('serverSelect').style.display = 'none';
-        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('serverSelectPrimary').style.display = 'none';
+        document.getElementById('loginModal').classList.add('active');
+        document.getElementById('loginSubtitle').textContent = '🔑 Войдите на сервер ' + (server === 'crystal' ? 'Crystal' : 'Russia');
         document.getElementById('headerServer').textContent = '🌐 ' + (server === 'crystal' ? 'Crystal' : 'Russia');
 
-        // Показываем кнопки создания для разработчиков
-        const data = getServerData(server);
-        const devs = data.developers || [];
-        const isDev = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
-
-        document.getElementById('createEventBtn').style.display = isDev ? 'inline-flex' : 'none';
-        document.getElementById('createEventBtn2').style.display = isDev ? 'inline-flex' : 'none';
+        // Очищаем ошибки
+        document.getElementById('loginError').textContent = '';
+        document.getElementById('loginError').className = 'login-modal__error';
     }
 
-    function changeServer() {
-        if (confirm('Сменить сервер? Все несохраненные данные будут потеряны.')) {
-            document.getElementById('mainContent').classList.add('hidden');
-            document.getElementById('serverSelect').style.display = 'flex';
-            currentServer = null;
-            if (currentUser) {
-                const data = getServerData(currentServer);
-                const user = data.users.find(u => u.username === currentUser.username);
-                if (user) {
-                    user.online = false;
-                    saveServerData(currentServer, data);
-                }
-            }
-            currentUser = null;
-            localStorage.removeItem('current_user');
+    // =========================================================
+    // ВЫБОР СЕРВЕРА (ВТОРИЧНЫЙ - ПОСЛЕ АВТОРИЗАЦИИ)
+    // =========================================================
+    function showServerSelection() {
+        if (!currentUser) return;
+
+        // Скрываем основной контент и показываем выбор сервера
+        document.getElementById('mainContent').classList.add('hidden');
+        document.getElementById('serverSelectSecondary').classList.add('active');
+        document.getElementById('secondaryUserGreeting').textContent = currentUser.username;
+
+        // Закрываем бургер-меню
+        if (document.getElementById('burgerMenu').classList.contains('open')) {
+            toggleMenu();
+        }
+    }
+
+    function selectServerSecondary(server) {
+        if (!currentUser) return;
+
+        // Сохраняем выбор сервера
+        currentServer = server;
+        localStorage.setItem('current_server', server);
+
+        // Обновляем статус пользователя на новом сервере
+        const data = getServerData(server);
+        const user = data.users.find(u => u.username === currentUser.username);
+
+        if (user) {
+            user.online = true;
+            saveServerData(server, data);
+            currentUser = user;
+            localStorage.setItem('current_user', JSON.stringify(currentUser));
+        }
+
+        // Скрываем выбор сервера и показываем основной контент
+        document.getElementById('serverSelectSecondary').classList.remove('active');
+        document.getElementById('mainContent').classList.remove('hidden');
+        document.getElementById('headerServer').textContent = '🌐 ' + (server === 'crystal' ? 'Crystal' : 'Russia');
+
+        // Обновляем интерфейс
+        showMainContent();
+    }
+
+    function logoutFromSecondary() {
+        if (confirm('Выйти из аккаунта?')) {
+            logout();
         }
     }
 
@@ -3529,30 +3648,59 @@
     // =========================================================
     function loadUser() {
         const saved = localStorage.getItem('current_user');
-        if (saved && currentServer) {
-            currentUser = JSON.parse(saved);
-            const data = getServerData(currentServer);
-            const banned = data.banned || [];
-            if (banned.includes(currentUser.username)) {
+        if (saved) {
+            try {
+                currentUser = JSON.parse(saved);
+                const savedServer = localStorage.getItem('current_server');
+
+                if (savedServer && ['crystal', 'russia'].includes(savedServer)) {
+                    currentServer = savedServer;
+                    const data = getServerData(currentServer);
+                    const user = data.users.find(u => u.username === currentUser.username);
+
+                    if (user) {
+                        const banned = data.banned || [];
+                        if (banned.includes(currentUser.username)) {
+                            localStorage.removeItem('current_user');
+                            currentUser = null;
+                            alert('⛔ Ваш аккаунт заблокирован!');
+                            return;
+                        }
+
+                        user.online = true;
+                        saveServerData(currentServer, data);
+                        currentUser = user;
+                        localStorage.setItem('current_user', JSON.stringify(currentUser));
+
+                        // Показываем основной контент
+                        document.getElementById('serverSelectPrimary').style.display = 'none';
+                        document.getElementById('loginModal').classList.remove('active');
+                        document.getElementById('serverSelectSecondary').classList.remove('active');
+                        document.getElementById('mainContent').classList.remove('hidden');
+                        document.getElementById('headerServer').textContent = '🌐 ' + (currentServer === 'crystal' ? 'Crystal' :
+                            'Russia');
+                        showMainContent();
+                        return true;
+                    }
+                }
+
+                // Если сервер не найден, показываем выбор сервера после авторизации
+                document.getElementById('serverSelectPrimary').style.display = 'none';
+                document.getElementById('loginModal').classList.remove('active');
+                showServerSelection();
+                return true;
+
+            } catch (e) {
+                console.error('Ошибка загрузки пользователя:', e);
                 localStorage.removeItem('current_user');
                 currentUser = null;
-                alert('⛔ Ваш аккаунт заблокирован!');
-                return;
             }
-            const user = data.users.find(u => u.username === currentUser.username);
-            if (user) {
-                user.online = true;
-                saveServerData(currentServer, data);
-                currentUser = user;
-                localStorage.setItem('current_user', JSON.stringify(currentUser));
-            }
-            showMainContent();
         }
+        return false;
     }
 
     function showMainContent() {
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('mainContent').classList.remove('hidden');
+        if (!currentUser || !currentServer) return;
 
         const data = getServerData(currentServer);
         const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
@@ -3644,9 +3792,12 @@
             saveServerData(currentServer, data);
             currentUser = user;
             localStorage.setItem('current_user', JSON.stringify(user));
-            showMainContent();
+
+            // Закрываем окно входа и показываем выбор сервера (вторичный)
+            document.getElementById('loginModal').classList.remove('active');
+            showServerSelection();
         } else {
-            errorEl.textContent = 'Неверный логин или пароль';
+            errorEl.textContent = '❌ Неверный логин или пароль!';
         }
     }
 
@@ -3671,17 +3822,18 @@
 
         const data = getServerData(currentServer);
         if (data.users.find(u => u.username === username)) {
-            errorEl.textContent = 'Пользователь уже существует';
+            errorEl.textContent = '❌ Пользователь уже существует!';
             return;
         }
 
         data.users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '', online: true });
         saveServerData(currentServer, data);
         errorEl.textContent = '✅ Регистрация успешна! Войдите.';
-        document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
-        document.getElementById('loginBtn').textContent = 'Войти';
+        document.getElementById('loginSubtitle').textContent = '🔑 Войдите в свой аккаунт';
+        document.getElementById('loginBtn').textContent = '🚀 Войти';
         document.getElementById('registerText').innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
         document.getElementById('toggleAuth').onclick = toggleAuth;
+        document.getElementById('loginPassword').value = '';
     }
 
     function toggleAuth() {
@@ -3689,19 +3841,20 @@
         const btn = document.getElementById('loginBtn');
         const text = document.getElementById('registerText');
 
-        if (btn.textContent === 'Войти') {
-            subtitle.textContent = 'Создайте новый аккаунт';
-            btn.textContent = 'Зарегистрироваться';
+        if (btn.textContent === '🚀 Войти') {
+            subtitle.textContent = '📝 Создайте новый аккаунт';
+            btn.textContent = '✨ Зарегистрироваться';
             text.innerHTML = 'Уже есть аккаунт? <a id="toggleAuth">Войти</a>';
             btn.onclick = register;
         } else {
-            subtitle.textContent = 'Войдите в свой аккаунт';
-            btn.textContent = 'Войти';
+            subtitle.textContent = '🔑 Войдите в свой аккаунт';
+            btn.textContent = '🚀 Войти';
             text.innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
             btn.onclick = login;
         }
         document.getElementById('toggleAuth').onclick = toggleAuth;
         document.getElementById('loginError').textContent = '';
+        document.getElementById('loginError').className = 'login-modal__error';
     }
 
     function logout() {
@@ -3713,14 +3866,26 @@
                 saveServerData(currentServer, data);
             }
         }
+
         localStorage.removeItem('current_user');
+        localStorage.removeItem('current_server');
         currentUser = null;
+        currentServer = null;
+
+        // Показываем первичный выбор сервера
         document.getElementById('mainContent').classList.add('hidden');
-        document.getElementById('serverSelect').style.display = 'flex';
-        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('serverSelectSecondary').classList.remove('active');
+        document.getElementById('loginModal').classList.remove('active');
+        document.getElementById('serverSelectPrimary').style.display = 'flex';
+
         document.getElementById('loginError').textContent = '';
+        document.getElementById('loginError').className = 'login-modal__error';
         document.getElementById('loginUsername').value = '';
         document.getElementById('loginPassword').value = '';
+
+        if (document.getElementById('burgerMenu').classList.contains('open')) {
+            toggleMenu();
+        }
     }
 
     // =========================================================
@@ -3800,7 +3965,8 @@
         if (page === 'devpanel') renderDevPanel();
         if (page === 'profile') loadProfile();
         if (page === 'notifications') renderNotifications();
-        if (page === 'home') { renderTopics(); updateStats(); }
+        if (page === 'home') { renderTopics();
+            updateStats(); }
 
         if (['rules', 'guides', 'lore', 'lspd', 'government', 'mafia', 'business'].includes(page)) {
             renderContentPage(page);
@@ -3867,6 +4033,9 @@
             body.classList.remove('hidden');
             editor.classList.add('hidden');
             contentEditMode = false;
+
+            document.getElementById('contentTitle').textContent = pageTitles[page] || page;
+            document.getElementById('contentSubtitle').textContent = 'Страница: ' + (pageTitles[page] || page);
             return;
         }
 
@@ -3914,9 +4083,14 @@
     }
 
     function toggleLspdEdit() { toggleSectionEdit('lspd', 'lspdBody', 'lspdEditor', 'lspdEditBtn', 'lspdSaveBtn'); }
-    function toggleGovernmentEdit() { toggleSectionEdit('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn', 'governmentSaveBtn'); }
+
+    function toggleGovernmentEdit() { toggleSectionEdit('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn',
+            'governmentSaveBtn'); }
+
     function toggleMafiaEdit() { toggleSectionEdit('mafia', 'mafiaBody', 'mafiaEditor', 'mafiaEditBtn', 'mafiaSaveBtn'); }
-    function toggleBusinessEdit() { toggleSectionEdit('business', 'businessBody', 'businessEditor', 'businessEditBtn', 'businessSaveBtn'); }
+
+    function toggleBusinessEdit() { toggleSectionEdit('business', 'businessBody', 'businessEditor', 'businessEditBtn',
+            'businessSaveBtn'); }
 
     function toggleSectionEdit(key, bodyId, editorId, editBtnId, saveBtnId) {
         const body = document.getElementById(bodyId);
@@ -3934,9 +4108,14 @@
     }
 
     function saveLspd() { saveSectionContent('lspd', 'lspdBody', 'lspdEditor', 'lspdEditBtn', 'lspdSaveBtn'); }
-    function saveGovernment() { saveSectionContent('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn', 'governmentSaveBtn'); }
+
+    function saveGovernment() { saveSectionContent('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn',
+            'governmentSaveBtn'); }
+
     function saveMafia() { saveSectionContent('mafia', 'mafiaBody', 'mafiaEditor', 'mafiaEditBtn', 'mafiaSaveBtn'); }
-    function saveBusiness() { saveSectionContent('business', 'businessBody', 'businessEditor', 'businessEditBtn', 'businessSaveBtn'); }
+
+    function saveBusiness() { saveSectionContent('business', 'businessBody', 'businessEditor', 'businessEditBtn',
+            'businessSaveBtn'); }
 
     function saveSectionContent(key, bodyId, editorId, editBtnId, saveBtnId) {
         const editor = document.getElementById(editorId);
@@ -3987,10 +4166,18 @@
         const id = topics.length > 0 ? Math.max(...topics.map(t => t.id)) + 1 : 1;
 
         topics.unshift({
-            id, title, content, images, video,
+            id,
+            title,
+            content,
+            images,
+            video,
             author: currentUser.username,
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-            replies: 0, views: 0, status: '', tag: ''
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
+                minute: '2-digit' }),
+            replies: 0,
+            views: 0,
+            status: '',
+            tag: ''
         });
 
         data.topics = topics;
@@ -4028,25 +4215,25 @@
             const videoHtml = t.video ? ' 🎬' : '';
 
             return `
-                <div class="topic-item" onclick="viewTopic(${t.id})">
-                    <div class="topic-item__left">
-                        <span class="topic-item__status ${t.status}">${statusIcon}</span>
-                        <div>
-                            <div class="topic-item__title"><a href="#">${t.title}</a> ${tagHtml} ${imagesHtml} ${videoHtml}</div>
-                            <div class="topic-item__meta">
-                                <span>Автор: <strong>${t.author}</strong></span>
-                                <span>📅 ${t.date}</span>
-                                <span>💬 ${t.replies}</span>
-                                <span>👁️ ${t.views}</span>
+                    <div class="topic-item" onclick="viewTopic(${t.id})">
+                        <div class="topic-item__left">
+                            <span class="topic-item__status ${t.status}">${statusIcon}</span>
+                            <div>
+                                <div class="topic-item__title"><a href="#">${t.title}</a> ${tagHtml} ${imagesHtml} ${videoHtml}</div>
+                                <div class="topic-item__meta">
+                                    <span>Автор: <strong>${t.author}</strong></span>
+                                    <span>📅 ${t.date}</span>
+                                    <span>💬 ${t.replies}</span>
+                                    <span>👁️ ${t.views}</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="topic-item__right">
+                            <span class="author">${t.author}</span>
+                            <span class="date">${t.date}</span>
+                        </div>
                     </div>
-                    <div class="topic-item__right">
-                        <span class="author">${t.author}</span>
-                        <span class="date">${t.date}</span>
-                    </div>
-                </div>
-            `;
+                `;
         }).join('');
     }
 
@@ -4126,9 +4313,13 @@
         const id = events.length > 0 ? Math.max(...events.map(e => e.id)) + 1 : 1;
 
         events.unshift({
-            id, title, desc, status,
+            id,
+            title,
+            desc,
+            status,
             author: currentUser.username,
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
+                minute: '2-digit' }),
             participants: 0
         });
 
@@ -4161,23 +4352,24 @@
                     'ended': '<span style="color:#757575;">⚫ Завершен</span>'
                 };
 
-                const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+                const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' ||
+                    currentUser?.role === 'developer';
 
                 return `
-                    <div class="forum-card" onclick="viewEvent(${e.id})">
-                        <div class="forum-card__header">
-                            <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
-                            <span class="forum-card__title">${e.title}</span>
+                        <div class="forum-card" onclick="viewEvent(${e.id})">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
+                                <span class="forum-card__title">${e.title}</span>
+                            </div>
+                            <div class="forum-card__desc">${e.desc || 'Нет описания'}</div>
+                            <div class="forum-card__meta">
+                                <span>📅 ${e.date}</span>
+                                <span>👤 ${e.participants || 0} участников</span>
+                                <span>${statusMap[e.status] || statusMap.upcoming}</span>
+                            </div>
+                            ${isDev ? `<div style="margin-top:6px;font-size:10px;color:#ff7f17;">🛠 Кликните для управления</div>` : ''}
                         </div>
-                        <div class="forum-card__desc">${e.desc || 'Нет описания'}</div>
-                        <div class="forum-card__meta">
-                            <span>📅 ${e.date}</span>
-                            <span>👤 ${e.participants || 0} участников</span>
-                            <span>${statusMap[e.status] || statusMap.upcoming}</span>
-                        </div>
-                        ${isDev ? `<div style="margin-top:6px;font-size:10px;color:#ff7f17;">🛠 Кликните для управления</div>` : ''}
-                    </div>
-                `;
+                    `;
             }).join('');
         };
 
@@ -4193,7 +4385,8 @@
         const event = events.find(e => e.id === id);
         if (!event) return;
 
-        const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+        const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser
+            ?.role === 'developer';
 
         let html = `🏆 <b>${event.title}</b>\n\n`;
         html += `📝 ${event.desc || 'Нет описания'}\n`;
@@ -4271,30 +4464,42 @@
         document.getElementById('statUsers').textContent = users.length;
         document.getElementById('statTopics').textContent = topics.length;
         document.getElementById('statPosts').textContent = totalPosts;
-        document.getElementById('statOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 50) + 10;
+        document.getElementById('statOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 50) +
+            10;
         document.getElementById('statNew').textContent = topics.filter(t => t.date.includes('Сегодня')).length;
 
-        document.getElementById('onlineCount').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 100) + 30;
-        document.getElementById('serverOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 100) + 30;
-        document.getElementById('chatOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 20) + 5;
+        document.getElementById('onlineCount').textContent = users.filter(u => u.online).length || Math.floor(Math.random() *
+            100) + 30;
+        document.getElementById('serverOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() *
+            100) + 30;
+        document.getElementById('chatOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() *
+            20) + 5;
 
-        document.getElementById('newsReplies').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) => s + t.replies, 0) || 0;
-        document.getElementById('newsViews').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) => s + t.views, 0) || 0;
+        document.getElementById('newsReplies').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) =>
+            s + t.replies, 0) || 0;
+        document.getElementById('newsViews').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) => s +
+            t.views, 0) || 0;
         document.getElementById('newsBadge').textContent = topics.filter(t => t.title.includes('Обновление')).length;
 
         document.getElementById('complaintsTotal').textContent = complaints.length;
-        document.getElementById('complaintsBadgeCard').textContent = complaints.filter(c => c.status === 'new' || c.status === 'review').length;
-        document.getElementById('complaintsBadge').textContent = complaints.filter(c => c.status === 'new' || c.status === 'review').length;
+        document.getElementById('complaintsBadgeCard').textContent = complaints.filter(c => c.status === 'new' || c.status ===
+            'review').length;
+        document.getElementById('complaintsBadge').textContent = complaints.filter(c => c.status === 'new' || c.status ===
+            'review').length;
     }
 
     // =========================================================
     // ЖАЛОБЫ
     // =========================================================
     const complaintConfigs = {
-        'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'player', title: 'Жалоба на игрока', fields: ['target', 'author', 'title', 'desc'] },
-        'admin': { formId: 'complaintFormAdmin', listId: 'adminComplaintsList', storageKey: 'admin', title: 'Жалоба на администрацию', fields: ['target', 'author', 'title', 'desc'] },
-        'unban': { formId: 'complaintFormUnban', listId: 'unbanList', storageKey: 'unban', title: 'Заявка на разбан', fields: ['author', 'title', 'desc'] },
-        'question': { formId: 'complaintFormQuestion', listId: 'questionsList', storageKey: 'questions', title: 'Вопрос', fields: ['author', 'title', 'desc'] }
+        'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'player', title: 'Жалоба на игрока',
+            fields: ['target', 'author', 'title', 'desc'] },
+        'admin': { formId: 'complaintFormAdmin', listId: 'adminComplaintsList', storageKey: 'admin',
+            title: 'Жалоба на администрацию', fields: ['target', 'author', 'title', 'desc'] },
+        'unban': { formId: 'complaintFormUnban', listId: 'unbanList', storageKey: 'unban', title: 'Заявка на разбан',
+            fields: ['author', 'title', 'desc'] },
+        'question': { formId: 'complaintFormQuestion', listId: 'questionsList', storageKey: 'questions', title: 'Вопрос',
+            fields: ['author', 'title', 'desc'] }
     };
 
     function showComplaintForm(type) {
@@ -4342,8 +4547,10 @@
         const id = complaints.length > 0 ? Math.max(...complaints.map(c => c.id)) + 1 : 1;
 
         complaints.unshift({
-            id, ...data,
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            id,
+            ...data,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
+                minute: '2-digit' }),
             status: 'new',
             answer: ''
         });
@@ -4357,7 +4564,8 @@
             title: `${currentUser.username} подал(а) ${config.title}`,
             message: `Жалоба: ${data.title}`,
             type: 'complaint',
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
+                minute: '2-digit' }),
             read: false
         });
         saveServerData(currentServer, serverData);
@@ -4392,39 +4600,44 @@
         };
 
         const devs = serverData.developers || [];
-        const isAdmin = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+        const isAdmin = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role ===
+            'developer';
 
         container.innerHTML = complaints.map(c => {
             const status = statusMap[c.status] || statusMap.new;
-            const answerHtml = c.answer ? `<div class="complaint-item__answer"><strong>📩 Ответ:</strong> ${c.answer}</div>` : '';
+            const answerHtml = c.answer ? `<div class="complaint-item__answer"><strong>📩 Ответ:</strong> ${c.answer}</div>` :
+                '';
 
             const actionsHtml = isAdmin ? `
-                <div class="complaint-item__actions">
-                    <button class="btn btn-sm btn-success" onclick="answerComplaint('${type}', ${c.id})"><i class="fas fa-reply"></i> Ответить</button>
-                    <button class="btn btn-sm btn-primary" onclick="changeStatus('${type}', ${c.id}, 'review')">В работу</button>
-                    <button class="btn btn-sm btn-success" onclick="changeStatus('${type}', ${c.id}, 'answered')">✅ Решить</button>
-                    <button class="btn btn-sm btn-danger" onclick="changeStatus('${type}', ${c.id}, 'rejected')">❌ Отклонить</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteComplaint('${type}', ${c.id})" style="background:rgba(255,23,68,0.1);color:#ff1744;border:1px solid rgba(255,23,68,0.12);">🗑️ Удалить</button>
-                </div>
-            ` : '';
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-success" onclick="answerComplaint('${type}', ${c.id})"><i class="fas fa-reply"></i> Ответить</button>
+                        <button class="btn btn-sm btn-primary" onclick="changeStatus('${type}', ${c.id}, 'review')">В работу</button>
+                        <button class="btn btn-sm btn-success" onclick="changeStatus('${type}', ${c.id}, 'answered')">✅ Решить</button>
+                        <button class="btn btn-sm btn-danger" onclick="changeStatus('${type}', ${c.id}, 'rejected')">❌ Отклонить</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteComplaint('${type}', ${c.id})" style="background:rgba(255,23,68,0.1);color:#ff1744;border:1px solid rgba(255,23,68,0.12);">🗑️ Удалить</button>
+                    </div>
+                ` :
+                '';
 
             let metaHtml = `<span>📝 Автор: <strong>${c.author}</strong></span><span>📅 ${c.date}</span>`;
             if (c.target) {
-                metaHtml = `<span>👤 ${type === 'admin' ? 'Администратор' : 'Нарушитель'}: <strong>${c.target}</strong></span>` + metaHtml;
+                metaHtml =
+                    `<span>👤 ${type === 'admin' ? 'Администратор' : 'Нарушитель'}: <strong>${c.target}</strong></span>` +
+                    metaHtml;
             }
 
             return `
-                <div class="complaint-item">
-                    <div class="complaint-item__header">
-                        <span class="complaint-item__title">${c.title}</span>
-                        <span class="complaint-item__status ${status.class}">${status.text}</span>
+                    <div class="complaint-item">
+                        <div class="complaint-item__header">
+                            <span class="complaint-item__title">${c.title}</span>
+                            <span class="complaint-item__status ${status.class}">${status.text}</span>
+                        </div>
+                        <div class="complaint-item__meta">${metaHtml}</div>
+                        <div class="complaint-item__body">${c.desc}</div>
+                        ${answerHtml}
+                        ${actionsHtml}
                     </div>
-                    <div class="complaint-item__meta">${metaHtml}</div>
-                    <div class="complaint-item__body">${c.desc}</div>
-                    ${answerHtml}
-                    ${actionsHtml}
-                </div>
-            `;
+                `;
         }).join('');
     }
 
@@ -4460,7 +4673,8 @@
             title: `Администратор ответил на Вашу жалобу`,
             message: `${complaints[index].title} - ${answer}`,
             type: 'complaint',
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
+                minute: '2-digit' }),
             read: false
         });
 
@@ -4536,19 +4750,19 @@
         }
 
         container.innerHTML = notifications.map(n => `
-            <div class="complaint-item" style="${n.read ? 'opacity:0.5;' : ''}">
-                <div class="complaint-item__header">
-                    <span class="complaint-item__title">${n.title}</span>
-                    <span class="complaint-item__status status-new">${n.read ? 'Прочитано' : 'Новое'}</span>
+                <div class="complaint-item" style="${n.read ? 'opacity:0.5;' : ''}">
+                    <div class="complaint-item__header">
+                        <span class="complaint-item__title">${n.title}</span>
+                        <span class="complaint-item__status status-new">${n.read ? 'Прочитано' : 'Новое'}</span>
+                    </div>
+                    <div class="complaint-item__meta"><span>📅 ${n.date}</span></div>
+                    <div class="complaint-item__body">${n.message}</div>
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-primary" onclick="markNotifRead(${n.id})">Прочитать</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteNotif(${n.id})">🗑️</button>
+                    </div>
                 </div>
-                <div class="complaint-item__meta"><span>📅 ${n.date}</span></div>
-                <div class="complaint-item__body">${n.message}</div>
-                <div class="complaint-item__actions">
-                    <button class="btn btn-sm btn-primary" onclick="markNotifRead(${n.id})">Прочитать</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteNotif(${n.id})">🗑️</button>
-                </div>
-            </div>
-        `).join('');
+            `).join('');
     }
 
     function markNotifRead(id) {
@@ -4603,10 +4817,13 @@
         }
 
         const users = serverData.users || [];
-        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
-        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик',
+            'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator',
+            'developer': 'prefix-developer', 'user': 'prefix-user' };
 
-        const isAdmin = (serverData.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+        const isAdmin = (serverData.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' ||
+            currentUser?.role === 'developer';
 
         container.innerHTML = messages.map(m => {
             const user = users.find(u => u.username === m.author);
@@ -4617,39 +4834,41 @@
             const isMuted = muted.includes(m.author);
 
             const replyHtml = m.replyTo ? `
-                <div class="chat-message__reply-to" onclick="scrollToMessage(${m.replyTo})">
-                    📩 Ответ на сообщение от ${m.replyToName || 'пользователя'}
-                </div>
-            ` : '';
+                    <div class="chat-message__reply-to" onclick="scrollToMessage(${m.replyTo})">
+                        📩 Ответ на сообщение от ${m.replyToName || 'пользователя'}
+                    </div>
+                ` :
+                '';
 
             const actionsHtml = isAdmin ? `
-                <div class="chat-message__actions">
-                    <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
-                    ${isMuted ? `<button onclick="unmuteUser('${m.author}')" style="color:#4caf50;" title="Размутить"><i class="fas fa-microphone"></i></button>` :
-                    `<button onclick="muteUser('${m.author}')" title="Замутить"><i class="fas fa-microphone-slash"></i></button>`}
-                    <button class="danger" onclick="deleteChatMessage(${m.id})" title="Удалить"><i class="fas fa-trash"></i></button>
-                </div>
-            ` : `
-                <div class="chat-message__actions">
-                    <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
-                </div>
-            `;
+                    <div class="chat-message__actions">
+                        <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
+                        ${isMuted ? `<button onclick="unmuteUser('${m.author}')" style="color:#4caf50;" title="Размутить"><i class="fas fa-microphone"></i></button>` :
+                        `<button onclick="muteUser('${m.author}')" title="Замутить"><i class="fas fa-microphone-slash"></i></button>`}
+                        <button class="danger" onclick="deleteChatMessage(${m.id})" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </div>
+                ` :
+                `
+                    <div class="chat-message__actions">
+                        <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
+                    </div>
+                `;
 
             return `
-                <div class="chat-message" id="msg-${m.id}">
-                    <div class="chat-message__avatar">${avatar}</div>
-                    <div class="chat-message__content">
-                        <div class="chat-message__user">
-                            ${m.author} ${isMuted ? '🔇' : ''}
-                            <span class="prefix ${prefixClassMap[prefix] || 'prefix-user'}">${prefixMap[prefix] || 'Игрок'}</span>
+                    <div class="chat-message" id="msg-${m.id}">
+                        <div class="chat-message__avatar">${avatar}</div>
+                        <div class="chat-message__content">
+                            <div class="chat-message__user">
+                                ${m.author} ${isMuted ? '🔇' : ''}
+                                <span class="prefix ${prefixClassMap[prefix] || 'prefix-user'}">${prefixMap[prefix] || 'Игрок'}</span>
+                            </div>
+                            ${replyHtml}
+                            <div class="chat-message__text">${isMuted ? '🔇 Сообщение скрыто (заглушен)' : m.text}</div>
                         </div>
-                        ${replyHtml}
-                        <div class="chat-message__text">${isMuted ? '🔇 Сообщение скрыто (заглушен)' : m.text}</div>
+                        <div class="chat-message__time">${m.time}</div>
+                        ${actionsHtml}
                     </div>
-                    <div class="chat-message__time">${m.time}</div>
-                    ${actionsHtml}
-                </div>
-            `;
+                `;
         }).join('');
 
         container.scrollTop = container.scrollHeight;
@@ -4721,7 +4940,6 @@
         renderChat();
         updateStats();
 
-        // Анимация отправки сообщения
         const lastMsg = document.querySelector('.chat-message:last-child');
         if (lastMsg) {
             lastMsg.style.animation = 'none';
@@ -4825,13 +5043,17 @@
             if (!sel) return;
             sel.innerHTML = '<option value="">Выберите пользователя</option>' +
                 users.filter(u => u.username !== currentUser?.username)
-                .map(u => `<option value="${u.username}">${u.username} ${banned.includes(u.username) ? '🔒' : ''} ${u.online ? '🟢' : '⚫'}</option>`)
+                .map(u =>
+                    `<option value="${u.username}">${u.username} ${banned.includes(u.username) ? '🔒' : ''} ${u.online ? '🟢' : '⚫'}</option>`
+                    )
                 .join('');
         });
 
         const list = document.getElementById('devUserList');
-        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
-        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик',
+            'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator',
+            'developer': 'prefix-developer', 'user': 'prefix-user' };
 
         list.innerHTML = users.map(u => {
             const isBanned = banned.includes(u.username);
@@ -4840,23 +5062,23 @@
             const prefixClass = prefixClassMap[u.prefix] || 'prefix-user';
 
             return `
-                <div class="dev-panel__user-item">
-                    <div>
-                        <strong>${u.username}</strong>
-                        <span class="prefix ${prefixClass}">${prefixText}</span>
-                        ${isDev ? ' 👨‍💻' : ''}
-                        ${isBanned ? ' 🔒' : ''}
-                        ${u.online ? ' 🟢' : ' ⚫'}
+                    <div class="dev-panel__user-item">
+                        <div>
+                            <strong>${u.username}</strong>
+                            <span class="prefix ${prefixClass}">${prefixText}</span>
+                            ${isDev ? ' 👨‍💻' : ''}
+                            ${isBanned ? ' 🔒' : ''}
+                            ${u.online ? ' 🟢' : ' ⚫'}
+                        </div>
+                        <div class="actions">
+                            <button onclick="devAction('edit', '${u.username}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                            <button class="danger" onclick="devAction('ban', '${u.username}')" title="${isBanned ? 'Разбанить' : 'Забанить'}">
+                                <i class="fas ${isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
+                            </button>
+                            <button class="danger" onclick="devAction('delete', '${u.username}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                        </div>
                     </div>
-                    <div class="actions">
-                        <button onclick="devAction('edit', '${u.username}')" title="Редактировать"><i class="fas fa-edit"></i></button>
-                        <button class="danger" onclick="devAction('ban', '${u.username}')" title="${isBanned ? 'Разбанить' : 'Забанить'}">
-                            <i class="fas ${isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
-                        </button>
-                        <button class="danger" onclick="devAction('delete', '${u.username}')" title="Удалить"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-            `;
+                `;
         }).join('');
     }
 
@@ -4909,7 +5131,8 @@
         }
 
         if (action === 'edit') {
-            const newPrefix = prompt('Префикс (user, helper, moderator, admin, developer):', users[userIndex].prefix || 'user');
+            const newPrefix = prompt('Префикс (user, helper, moderator, admin, developer):', users[userIndex].prefix ||
+                'user');
             if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                 users[userIndex].prefix = newPrefix;
                 if (newPrefix === 'developer' && !(serverData.developers || []).includes(username)) {
@@ -5018,18 +5241,22 @@
     function loadProfile() {
         if (!currentUser) return;
 
-        const avatar = currentUser.avatar ? `<img src="${currentUser.avatar}" alt="">` : currentUser.username.charAt(0).toUpperCase();
+        const avatar = currentUser.avatar ? `<img src="${currentUser.avatar}" alt="">` : currentUser.username.charAt(0)
+            .toUpperCase();
         document.getElementById('profileAvatarText').innerHTML = avatar;
         document.getElementById('profileName').textContent = currentUser.username;
         document.getElementById('profileUsername').value = currentUser.username;
         document.getElementById('profileEmail').value = currentUser.email || '';
         document.getElementById('profilePassword').value = '';
 
-        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
-        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик',
+            'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator',
+            'developer': 'prefix-developer', 'user': 'prefix-user' };
 
         document.getElementById('profilePrefix').textContent = prefixMap[currentUser.prefix] || 'Игрок';
-        document.getElementById('profilePrefix').className = 'profile-card__prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
+        document.getElementById('profilePrefix').className = 'profile-card__prefix ' + (prefixClassMap[currentUser
+            .prefix] || 'prefix-user');
 
         const prefixField = document.getElementById('profilePrefixField');
         if (currentUser.role === 'developer' || currentUser.role === 'admin') {
@@ -5155,6 +5382,7 @@
     }
 
     document.getElementById('burgerOverlay').addEventListener('click', toggleMenu);
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const menu = document.getElementById('burgerMenu');
@@ -5178,12 +5406,22 @@
             if (e.key === 'Enter') login();
         });
 
+        // Проверяем сохраненные данные
+        const savedUser = localStorage.getItem('current_user');
         const savedServer = localStorage.getItem('current_server');
-        if (savedServer && ['crystal', 'russia'].includes(savedServer)) {
-            selectServer(savedServer);
-            loadUser();
+
+        if (savedUser && savedServer && ['crystal', 'russia'].includes(savedServer)) {
+            // Пробуем загрузить пользователя
+            const loaded = loadUser();
+            if (!loaded) {
+                // Если не загрузился - показываем первичный выбор сервера
+                document.getElementById('serverSelectPrimary').style.display = 'flex';
+            }
         } else {
-            document.getElementById('serverSelect').style.display = 'flex';
+            // Показываем первичный выбор сервера
+            document.getElementById('serverSelectPrimary').style.display = 'flex';
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('serverSelectSecondary').classList.remove('active');
         }
 
         console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
@@ -5191,6 +5429,7 @@
         console.log('👤 Разработчик: Artyom_Orlov / 123456');
         console.log('👤 Игрок: Игрок_228 / 123456');
         console.log('🌐 Доступные серверы: Crystal, Russia');
+        console.log('💡 После входа вы сможете выбрать сервер');
     });
 </script>
 
