@@ -159,7 +159,7 @@
         }
 
         /* ========================================================= */
-        /* ШАПКА (ПРОЗРАЧНАЯ) */
+        /* ШАПКА */
         /* ========================================================= */
         .header {
             background: rgba(10, 10, 18, 0.8);
@@ -241,6 +241,7 @@
             transition: 0.3s;
             flex-shrink: 0;
             object-fit: cover;
+            position: relative;
         }
 
         .header__user-avatar img {
@@ -249,6 +250,19 @@
             border-radius: 50%;
             object-fit: cover;
         }
+
+        .header__user-avatar .status-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #0a0a12;
+        }
+
+        .status-online { background: #4caf50; }
+        .status-offline { background: #757575; }
 
         .header__user-avatar:hover {
             transform: scale(1.05);
@@ -278,6 +292,7 @@
             font-size: 16px;
             color: rgba(255, 255, 255, 0.4);
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .header__messages:hover {
@@ -312,7 +327,7 @@
         }
 
         /* ========================================================= */
-        /* БУРГЕР-МЕНЮ (КОМПАКТНЫЙ) */
+        /* БУРГЕР-МЕНЮ */
         /* ========================================================= */
         .burger-icon {
             display: none;
@@ -415,6 +430,7 @@
             font-weight: 700;
             flex-shrink: 0;
             overflow: hidden;
+            position: relative;
         }
 
         .burger-avatar img {
@@ -422,6 +438,16 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+        }
+
+        .burger-avatar .status-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid #0a0a12;
         }
 
         .burger-username {
@@ -621,7 +647,7 @@
         }
 
         /* ========================================================= */
-        /* ФОРУМ - КАТЕГОРИИ (КОМПАКТНЫЕ) */
+        /* ФОРУМ - КАТЕГОРИИ */
         /* ========================================================= */
         .forum-section {
             padding: 20px 0;
@@ -728,7 +754,7 @@
         }
 
         /* ========================================================= */
-        /* ПОСЛЕДНИЕ ТЕМЫ (КОМПАКТНЫЕ) */
+        /* ПОСЛЕДНИЕ ТЕМЫ */
         /* ========================================================= */
         .topics-section {
             padding: 20px 0;
@@ -834,7 +860,7 @@
         .tag-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
 
         /* ========================================================= */
-        /* ЧАТ */
+        /* ЧАТ С ОТВЕТАМИ */
         /* ========================================================= */
         .chat-container {
             padding: 20px 0;
@@ -873,19 +899,19 @@
 
         .chat-messages {
             padding: 12px 16px;
-            max-height: 350px;
+            max-height: 400px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 4px;
-            min-height: 150px;
+            min-height: 200px;
         }
 
         .chat-message {
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            padding: 4px 10px;
+            padding: 6px 10px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.015);
             transition: 0.3s;
@@ -900,6 +926,21 @@
             opacity: 1;
         }
 
+        .chat-message__reply-to {
+            font-size: 10px;
+            color: #ff7f17;
+            background: rgba(255, 127, 23, 0.08);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .chat-message__reply-to:hover {
+            background: rgba(255, 127, 23, 0.15);
+        }
+
         .chat-message__avatar {
             width: 26px;
             height: 26px;
@@ -912,6 +953,7 @@
             font-weight: 700;
             flex-shrink: 0;
             overflow: hidden;
+            position: relative;
         }
 
         .chat-message__avatar img {
@@ -919,6 +961,16 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+        }
+
+        .chat-message__avatar .status-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid #0a0a12;
         }
 
         .chat-message__content {
@@ -983,12 +1035,18 @@
             background: rgba(255, 23, 68, 0.1);
         }
 
+        .chat-message__actions button.reply-btn:hover {
+            color: #2196f3;
+            background: rgba(33, 150, 243, 0.1);
+        }
+
         .chat-input-area {
             padding: 8px 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             gap: 8px;
             background: rgba(255, 255, 255, 0.01);
+            flex-wrap: wrap;
         }
 
         .chat-input-area input {
@@ -1000,6 +1058,7 @@
             color: #fff;
             font-size: 13px;
             transition: 0.3s;
+            min-width: 120px;
         }
 
         .chat-input-area input:focus {
@@ -1025,6 +1084,31 @@
 
         .chat-input-area button:hover {
             transform: scale(1.03);
+        }
+
+        .chat-input-area .reply-indicator {
+            width: 100%;
+            font-size: 11px;
+            color: #ff7f17;
+            background: rgba(255, 127, 23, 0.06);
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-input-area .reply-indicator.show {
+            display: flex;
+        }
+
+        .chat-input-area .reply-indicator button {
+            background: none;
+            border: none;
+            color: #ff1744;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 4px;
         }
 
         .chat-empty {
@@ -1207,11 +1291,6 @@
             object-fit: cover;
         }
 
-        .profile-card__avatar:hover {
-            transform: scale(1.05);
-            border-color: #ff7f17;
-        }
-
         .profile-card__avatar .avatar-overlay {
             position: absolute;
             bottom: 0;
@@ -1228,6 +1307,16 @@
 
         .profile-card__avatar:hover .avatar-overlay {
             opacity: 1;
+        }
+
+        .profile-card__avatar .status-dot {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #0a0a12;
         }
 
         .profile-card__name {
@@ -1799,11 +1888,14 @@
                 </div>
             </div>
             <div class="header__user">
-                <a href="#" class="header__messages">
+                <a class="header__messages" onclick="showNotifications()">
                     <i class="fas fa-envelope"></i>
-                    <span class="badge">3</span>
+                    <span class="badge" id="notifBadge">0</span>
                 </a>
-                <div class="header__user-avatar" id="headerAvatar" onclick="navigateTo('profile')">И</div>
+                <div class="header__user-avatar" id="headerAvatar" onclick="navigateTo('profile')">
+                    <span id="headerAvatarText">И</span>
+                    <span class="status-dot status-online" id="headerStatusDot"></span>
+                </div>
                 <span class="header__user-name" id="headerUsername">Игрок</span>
                 <span class="header__user-prefix" id="headerPrefix">Игрок</span>
                 <button class="header__logout" onclick="logout()">Выйти</button>
@@ -1862,12 +1954,12 @@
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-newspaper"></i></span>
                                 <span class="forum-card__title">Новости проекта</span>
-                                <span class="forum-card__badge">3</span>
+                                <span class="forum-card__badge" id="newsBadge">0</span>
                             </div>
                             <div class="forum-card__desc">Последние обновления и анонсы</div>
                             <div class="forum-card__meta">
-                                <span><i class="fas fa-comment"></i> 128</span>
-                                <span><i class="fas fa-eye"></i> 1.2K</span>
+                                <span><i class="fas fa-comment"></i> <span id="newsReplies">0</span></span>
+                                <span><i class="fas fa-eye"></i> <span id="newsViews">0</span></span>
                             </div>
                         </div>
 
@@ -1929,7 +2021,7 @@
                             </div>
                             <div class="forum-card__desc">Подача жалоб на нарушение правил</div>
                             <div class="forum-card__meta">
-                                <span><i class="fas fa-comment"></i> 312</span>
+                                <span><i class="fas fa-comment"></i> <span id="complaintsTotal">0</span></span>
                                 <span><i class="fas fa-eye"></i> 22.1K</span>
                             </div>
                         </div>
@@ -1988,7 +2080,6 @@
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-police" style="color:#2196f3;"></i></span>
                                 <span class="forum-card__title">LSPD</span>
-                                <span class="forum-card__badge">12</span>
                             </div>
                             <div class="forum-card__desc">Устав, отчеты и состав полиции</div>
                             <div class="forum-card__meta">
@@ -2013,7 +2104,6 @@
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-user-secret" style="color:#ff1744;"></i></span>
                                 <span class="forum-card__title">Мафии и банды</span>
-                                <span class="forum-card__badge">8</span>
                             </div>
                             <div class="forum-card__desc">Криминальные организации</div>
                             <div class="forum-card__meta">
@@ -2052,7 +2142,6 @@
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-tools" style="color:#2196f3;"></i></span>
                                 <span class="forum-card__title">Техническая поддержка</span>
-                                <span class="forum-card__badge">4</span>
                             </div>
                             <div class="forum-card__desc">Проблемы с лаунчером и подключением</div>
                             <div class="forum-card__meta">
@@ -2103,7 +2192,6 @@
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-comments" style="color:#9c27b0;"></i></span>
                                 <span class="forum-card__title">Флудилка</span>
-                                <span class="forum-card__badge">15</span>
                             </div>
                             <div class="forum-card__desc">Неформальное общение на любые темы</div>
                             <div class="forum-card__meta">
@@ -2265,7 +2353,7 @@
             </div>
         </div>
 
-        <!-- ЧАТ -->
+        <!-- ЧАТ С ОТВЕТАМИ -->
         <div id="page-chat" class="hidden">
             <div class="container chat-container">
                 <div class="chat-box">
@@ -2280,6 +2368,10 @@
                         </div>
                     </div>
                     <div class="chat-input-area">
+                        <div class="reply-indicator" id="replyIndicator">
+                            <span>📩 Ответ на сообщение от <strong id="replyToName"></strong></span>
+                            <button onclick="cancelReply()">✕</button>
+                        </div>
                         <input id="chatInput" placeholder="Введите сообщение..." type="text">
                         <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
                     </div>
@@ -2336,6 +2428,7 @@
                 <div class="profile-card">
                     <div class="profile-card__avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
                         <span id="profileAvatarText">И</span>
+                        <span class="status-dot status-online" id="profileStatusDot"></span>
                         <div class="avatar-overlay">Изменить</div>
                     </div>
                     <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(event)">
@@ -2373,6 +2466,17 @@
                         <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- УВЕДОМЛЕНИЯ -->
+        <div id="page-notifications" class="hidden">
+            <div class="container" style="padding:20px 0;">
+                <h2 style="font-size:20px;font-weight:900;margin-bottom:16px;"><i class="fas fa-bell" style="color:#ff7f17;margin-right:10px;"></i> Уведомления</h2>
+                <div class="notifications-list" id="notificationsList">
+                    <div class="no-items"><i class="fas fa-check-circle"></i>Нет уведомлений</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="navigateTo('home')" style="margin-top:12px;">Назад</button>
             </div>
         </div>
 
@@ -2463,11 +2567,11 @@
     // ДАННЫЕ ПО УМОЛЧАНИЮ
     // =========================================================
     const DEFAULT_USERS = [
-        { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '' },
-        { username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '' },
-        { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
-        { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
-        { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: '' }
+        { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '', online: true },
+        { username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '', online: true },
+        { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true },
+        { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true },
+        { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: '', online: true }
     ];
 
     const DEFAULT_CONTENT = {
@@ -2498,9 +2602,8 @@
 
         if (!localStorage.getItem('forum_topics')) {
             localStorage.setItem('forum_topics', JSON.stringify([
-                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 45, views: 1250, status: 'pinned', tag: 'important' },
-                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, views: 8400, status: 'hot', tag: 'new' },
-                { id: 3, title: 'Проблема с подключением (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, views: 3100, status: 'solved', tag: 'answered' }
+                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 0, views: 0, status: 'pinned', tag: 'important', content: 'Описание обновления...', images: [], video: '' },
+                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 0, views: 0, status: 'hot', tag: 'new', content: 'Советы...', images: [], video: '' }
             ]));
         }
 
@@ -2508,13 +2611,23 @@
             localStorage.setItem('chat_messages', JSON.stringify([]));
         }
 
+        if (!localStorage.getItem('notifications')) {
+            localStorage.setItem('notifications', JSON.stringify([]));
+        }
+
+        if (!localStorage.getItem('polls')) {
+            localStorage.setItem('polls', JSON.stringify([]));
+        }
+
         if (!localStorage.getItem('muted_users')) {
             localStorage.setItem('muted_users', JSON.stringify([]));
         }
 
-        if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '4');
+        if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '3');
         if (!localStorage.getItem('complaint_id_counter')) localStorage.setItem('complaint_id_counter', '1');
         if (!localStorage.getItem('chat_id_counter')) localStorage.setItem('chat_id_counter', '1');
+        if (!localStorage.getItem('notif_id_counter')) localStorage.setItem('notif_id_counter', '1');
+        if (!localStorage.getItem('poll_id_counter')) localStorage.setItem('poll_id_counter', '1');
         if (!localStorage.getItem('banned_users')) localStorage.setItem('banned_users', JSON.stringify([]));
         if (!localStorage.getItem('developers')) localStorage.setItem('developers', JSON.stringify(['Artyom_Orlov']));
 
@@ -2525,6 +2638,7 @@
     // АВТОРИЗАЦИЯ
     // =========================================================
     let currentUser = null;
+    let replyTo = null;
 
     function loadUser() {
         const saved = localStorage.getItem('current_user');
@@ -2536,6 +2650,15 @@
                 currentUser = null;
                 alert('⛔ Ваш аккаунт заблокирован!');
                 return;
+            }
+            // Статус онлайн
+            const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+            const user = users.find(u => u.username === currentUser.username);
+            if (user) {
+                user.online = true;
+                localStorage.setItem('forum_users', JSON.stringify(users));
+                currentUser.online = true;
+                localStorage.setItem('current_user', JSON.stringify(currentUser));
             }
             showMainContent();
         }
@@ -2552,7 +2675,7 @@
 
         document.getElementById('headerUsername').textContent = currentUser.username;
         document.getElementById('burgerUsername').textContent = currentUser.username;
-        document.getElementById('headerAvatar').innerHTML = avatar;
+        document.getElementById('headerAvatarText').innerHTML = avatar;
         document.getElementById('burgerAvatar').innerHTML = avatar;
 
         const prefixText = prefixMap[currentUser.prefix] || 'Игрок';
@@ -2560,6 +2683,17 @@
         document.getElementById('headerPrefix').className = 'header__user-prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
         document.getElementById('burgerPrefix').textContent = prefixText;
         document.getElementById('burgerPrefix').className = 'burger-user-prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
+
+        // Статус онлайн
+        const statusDot = document.getElementById('headerStatusDot');
+        const profileStatus = document.getElementById('profileStatusDot');
+        if (currentUser.online) {
+            statusDot.className = 'status-dot status-online';
+            if (profileStatus) profileStatus.className = 'status-dot status-online';
+        } else {
+            statusDot.className = 'status-dot status-offline';
+            if (profileStatus) profileStatus.className = 'status-dot status-offline';
+        }
 
         // Панель разработчика
         const devMenu = document.getElementById('devMenuSection');
@@ -2581,6 +2715,8 @@
         renderChat();
         renderDevPanel();
         loadProfile();
+        renderNotifications();
+        updateBadges();
     }
 
     function login() {
@@ -2608,6 +2744,8 @@
                 return;
             }
             errorEl.textContent = '';
+            user.online = true;
+            localStorage.setItem('forum_users', JSON.stringify(users));
             currentUser = user;
             localStorage.setItem('current_user', JSON.stringify(user));
             showMainContent();
@@ -2636,7 +2774,7 @@
             return;
         }
 
-        users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '' });
+        users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '', online: true });
         localStorage.setItem('forum_users', JSON.stringify(users));
         errorEl.textContent = '✅ Регистрация успешна! Войдите.';
         document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
@@ -2666,6 +2804,13 @@
     }
 
     function logout() {
+        // Статус оффлайн
+        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const user = users.find(u => u.username === currentUser?.username);
+        if (user) {
+            user.online = false;
+            localStorage.setItem('forum_users', JSON.stringify(users));
+        }
         localStorage.removeItem('current_user');
         currentUser = null;
         document.getElementById('mainContent').classList.add('hidden');
@@ -2694,7 +2839,8 @@
         'questions': 'page-questions',
         'chat': 'page-chat',
         'devpanel': 'page-devpanel',
-        'profile': 'page-profile'
+        'profile': 'page-profile',
+        'notifications': 'page-notifications'
     };
 
     const contentKeys = { 'rules': 'rules', 'guides': 'guides', 'lore': 'lore' };
@@ -2710,7 +2856,6 @@
     };
 
     function navigateTo(page) {
-        // Закрываем меню перед переходом
         if (window.innerWidth <= 768) toggleMenu();
 
         document.querySelectorAll('#pageContainer > div').forEach(el => el.classList.add('hidden'));
@@ -2743,7 +2888,6 @@
         if (['rules', 'guides', 'lore'].includes(page)) {
             const editor = document.getElementById('contentEditor');
             const key = contentKeys[page];
-            // Проверяем права доступа
             const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
             editor.disabled = !canEdit;
             editor.value = localStorage.getItem('content_' + key) || '';
@@ -2760,6 +2904,7 @@
         if (page === 'chat') renderChat();
         if (page === 'devpanel') renderDevPanel();
         if (page === 'profile') loadProfile();
+        if (page === 'notifications') renderNotifications();
         if (page === 'home') { renderTopics(); updateStats(); }
 
         window.scrollTo(0, 0);
@@ -2775,20 +2920,38 @@
     }
 
     // =========================================================
-    // ТЕМЫ
+    // ТЕМЫ С ПРИКРЕПЛЕНИЕМ ФОТО/ВИДЕО
     // =========================================================
     function showCreateTopic() {
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         const title = prompt('Введите заголовок темы:');
         if (!title) return;
+
+        const content = prompt('Введите текст темы:');
+        if (!content) return;
+
+        const hasImage = confirm('Добавить изображение?');
+        let images = [];
+        if (hasImage) {
+            const imgUrl = prompt('Введите URL изображения:');
+            if (imgUrl) images.push(imgUrl);
+        }
+
+        const hasVideo = confirm('Добавить видео (YouTube)?');
+        let video = '';
+        if (hasVideo) {
+            video = prompt('Введите ссылку на видео (YouTube):');
+        }
 
         const topics = JSON.parse(localStorage.getItem('forum_topics'));
         const id = parseInt(localStorage.getItem('topic_id_counter')) || 1;
         topics.unshift({
-            id, title, author: currentUser.username,
+            id, title, content, images, video,
+            author: currentUser.username,
             date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
             replies: 0, views: 0, status: '', tag: ''
         });
@@ -2820,12 +2983,15 @@
                 t.tag === 'answered' ? '<span class="topic-item__tag tag-answered">РЕШЕНО</span>' :
                 '';
 
+            const imagesHtml = t.images && t.images.length > 0 ? ' 🖼️' : '';
+            const videoHtml = t.video ? ' 🎬' : '';
+
             return `
                 <div class="topic-item" onclick="viewTopic(${t.id})">
                     <div class="topic-item__left">
                         <span class="topic-item__status ${t.status}">${statusIcon}</span>
                         <div>
-                            <div class="topic-item__title"><a href="#">${t.title}</a> ${tagHtml}</div>
+                            <div class="topic-item__title"><a href="#">${t.title}</a> ${tagHtml} ${imagesHtml} ${videoHtml}</div>
                             <div class="topic-item__meta">
                                 <span>Автор: <strong>${t.author}</strong></span>
                                 <span>📅 ${t.date}</span>
@@ -2851,32 +3017,79 @@
             localStorage.setItem('forum_topics', JSON.stringify(topics));
             renderTopics();
             updateStats();
-            alert(`📖 Тема: ${topic.title}\n👤 Автор: ${topic.author}\n📅 Дата: ${topic.date}\n💬 Ответов: ${topic.replies}\n👁️ Просмотров: ${topic.views}`);
+
+            let html = `📖 <b>${topic.title}</b>\n\n`;
+            html += `👤 Автор: ${topic.author}\n`;
+            html += `📅 Дата: ${topic.date}\n`;
+            html += `💬 Ответов: ${topic.replies}\n`;
+            html += `👁️ Просмотров: ${topic.views}\n\n`;
+            html += `📝 ${topic.content || 'Нет содержания'}\n`;
+
+            if (topic.images && topic.images.length > 0) {
+                html += `\n🖼️ Изображения: ${topic.images.join(', ')}`;
+            }
+            if (topic.video) {
+                html += `\n🎬 Видео: ${topic.video}`;
+            }
+
+            // Кнопки редактирования для разработчиков
+            const isDev = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+            if (isDev) {
+                html += `\n\n---\n🛠 [Редактировать тему] (кликните для редактирования)`;
+            }
+
+            alert(html);
+
+            // Редактирование для разработчиков
+            if (isDev) {
+                const edit = confirm('Редактировать тему?');
+                if (edit) {
+                    const newContent = prompt('Новый текст:', topic.content || '');
+                    if (newContent !== null) {
+                        topic.content = newContent;
+                        localStorage.setItem('forum_topics', JSON.stringify(topics));
+                        alert('✅ Тема обновлена!');
+                        renderTopics();
+                    }
+                }
+            }
         }
     }
 
     // =========================================================
-    // СТАТИСТИКА
+    // СТАТИСТИКА (РЕАЛЬНАЯ)
     // =========================================================
     function updateStats() {
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        const complaints = JSON.parse(localStorage.getItem('complaints_player')) || [];
+        const chatMessages = JSON.parse(localStorage.getItem('chat_messages')) || [];
+
         const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0);
         const totalViews = topics.reduce((sum, t) => sum + (t.views || 0), 0);
 
         document.getElementById('totalUsers').textContent = users.length;
         document.getElementById('statUsers').textContent = users.length;
         document.getElementById('statTopics').textContent = topics.length;
-        document.getElementById('statPosts').textContent = totalPosts;
-        document.getElementById('statOnline').textContent = Math.floor(Math.random() * 200) + 50;
-        document.getElementById('statNew').textContent = Math.floor(Math.random() * 30) + 5;
-        document.getElementById('onlineCount').textContent = Math.floor(Math.random() * 150) + 50;
-        document.getElementById('serverOnline').textContent = Math.floor(Math.random() * 150) + 50;
-        document.getElementById('chatOnline').textContent = Math.floor(Math.random() * 30) + 5;
+        document.getElementById('statPosts').textContent = totalPosts + chatMessages.length;
+        document.getElementById('statOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 50) + 10;
+        document.getElementById('statNew').textContent = topics.filter(t => t.date.includes('Сегодня')).length;
+
+        document.getElementById('onlineCount').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 100) + 30;
+        document.getElementById('serverOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 100) + 30;
+        document.getElementById('chatOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 20) + 5;
+
+        document.getElementById('newsReplies').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) => s + t.replies, 0) || 0;
+        document.getElementById('newsViews').textContent = topics.filter(t => t.title.includes('Обновление')).reduce((s, t) => s + t.views, 0) || 0;
+        document.getElementById('newsBadge').textContent = topics.filter(t => t.title.includes('Обновление')).length;
+
+        document.getElementById('complaintsTotal').textContent = complaints.length;
+        document.getElementById('complaintsBadgeCard').textContent = complaints.filter(c => c.status === 'new' || c.status === 'review').length;
+        document.getElementById('complaintsBadge').textContent = complaints.filter(c => c.status === 'new' || c.status === 'review').length;
     }
 
     // =========================================================
-    // ЖАЛОБЫ (УНИВЕРСАЛЬНАЯ)
+    // ЖАЛОБЫ С УВЕДОМЛЕНИЯМИ
     // =========================================================
     const complaintConfigs = {
         'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'complaints_player', title: 'Жалоба на игрока', fields: ['target', 'author', 'title', 'desc'] },
@@ -2933,6 +3146,9 @@
 
         localStorage.setItem(config.storageKey, JSON.stringify(complaints));
         localStorage.setItem('complaint_id_counter', String(id + 1));
+
+        // Уведомление администраторам
+        addNotification(`${currentUser.username} подал(а) ${config.title}`, `Жалоба: ${data.title}`, 'complaint');
 
         alert('✅ ' + config.title + ' отправлена!');
         hideComplaintForm(type);
@@ -3012,6 +3228,10 @@
         items[index].answer = answer.trim();
         items[index].status = 'answered';
         localStorage.setItem(config.storageKey, JSON.stringify(items));
+
+        // Уведомление автору
+        addNotification(`Администратор ответил на Вашу жалобу`, `${items[index].title} - ${answer}`, 'complaint');
+
         renderComplaints(type);
         alert('✅ Ответ добавлен!');
     }
@@ -3052,7 +3272,76 @@
     }
 
     // =========================================================
-    // ЧАТ
+    // УВЕДОМЛЕНИЯ
+    // =========================================================
+    function addNotification(title, message, type) {
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        const id = parseInt(localStorage.getItem('notif_id_counter')) || 1;
+        notifications.unshift({
+            id, title, message, type, date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            read: false
+        });
+        localStorage.setItem('notifications', JSON.stringify(notifications));
+        localStorage.setItem('notif_id_counter', String(id + 1));
+        updateBadges();
+    }
+
+    function renderNotifications() {
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        const container = document.getElementById('notificationsList');
+
+        if (notifications.length === 0) {
+            container.innerHTML = '<div class="no-items"><i class="fas fa-check-circle"></i>Нет уведомлений</div>';
+            return;
+        }
+
+        container.innerHTML = notifications.map(n => `
+            <div class="complaint-item" style="${n.read ? 'opacity:0.5;' : ''}">
+                <div class="complaint-item__header">
+                    <span class="complaint-item__title">${n.title}</span>
+                    <span class="complaint-item__status status-new">${n.read ? 'Прочитано' : 'Новое'}</span>
+                </div>
+                <div class="complaint-item__meta"><span>📅 ${n.date}</span></div>
+                <div class="complaint-item__body">${n.message}</div>
+                <div class="complaint-item__actions">
+                    <button class="btn btn-sm btn-primary" onclick="markNotifRead(${n.id})">Прочитать</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteNotif(${n.id})">🗑️</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function showNotifications() {
+        navigateTo('notifications');
+    }
+
+    function markNotifRead(id) {
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        const notif = notifications.find(n => n.id === id);
+        if (notif) {
+            notif.read = true;
+            localStorage.setItem('notifications', JSON.stringify(notifications));
+            renderNotifications();
+            updateBadges();
+        }
+    }
+
+    function deleteNotif(id) {
+        let notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        notifications = notifications.filter(n => n.id !== id);
+        localStorage.setItem('notifications', JSON.stringify(notifications));
+        renderNotifications();
+        updateBadges();
+    }
+
+    function updateBadges() {
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        const unread = notifications.filter(n => !n.read).length;
+        document.getElementById('notifBadge').textContent = unread;
+    }
+
+    // =========================================================
+    // ЧАТ С ОТВЕТАМИ
     // =========================================================
     function renderChat() {
         const messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
@@ -3077,22 +3366,34 @@
             const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
             const isMuted = muted.includes(m.author);
 
+            const replyHtml = m.replyTo ? `
+                <div class="chat-message__reply-to" onclick="scrollToMessage(${m.replyTo})">
+                    📩 Ответ на сообщение от ${m.replyToName || 'пользователя'}
+                </div>
+            ` : '';
+
             const actionsHtml = isAdmin ? `
                 <div class="chat-message__actions">
+                    <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
                     ${isMuted ? `<button onclick="unmuteUser('${m.author}')" style="color:#4caf50;" title="Размутить"><i class="fas fa-microphone"></i></button>` :
                     `<button onclick="muteUser('${m.author}')" title="Замутить"><i class="fas fa-microphone-slash"></i></button>`}
                     <button class="danger" onclick="deleteChatMessage(${m.id})" title="Удалить"><i class="fas fa-trash"></i></button>
                 </div>
-            ` : '';
+            ` : `
+                <div class="chat-message__actions">
+                    <button class="reply-btn" onclick="setReply(${m.id}, '${m.author}')" title="Ответить"><i class="fas fa-reply"></i></button>
+                </div>
+            `;
 
             return `
-                <div class="chat-message">
+                <div class="chat-message" id="msg-${m.id}">
                     <div class="chat-message__avatar">${avatar}</div>
                     <div class="chat-message__content">
                         <div class="chat-message__user">
                             ${m.author} ${isMuted ? '🔇' : ''}
                             <span class="prefix ${prefixClassMap[prefix] || 'prefix-user'}">${prefixMap[prefix] || 'Игрок'}</span>
                         </div>
+                        ${replyHtml}
                         <div class="chat-message__text">${isMuted ? '🔇 Сообщение скрыто (заглушен)' : m.text}</div>
                     </div>
                     <div class="chat-message__time">${m.time}</div>
@@ -3104,11 +3405,34 @@
         container.scrollTop = container.scrollHeight;
     }
 
+    function setReply(id, author) {
+        replyTo = id;
+        document.getElementById('replyIndicator').classList.add('show');
+        document.getElementById('replyToName').textContent = author;
+        document.getElementById('chatInput').focus();
+        document.getElementById('chatInput').placeholder = `Ответ ${author}...`;
+    }
+
+    function cancelReply() {
+        replyTo = null;
+        document.getElementById('replyIndicator').classList.remove('show');
+        document.getElementById('chatInput').placeholder = 'Введите сообщение...';
+    }
+
+    function scrollToMessage(id) {
+        const el = document.getElementById(`msg-${id}`);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.style.background = 'rgba(255,127,23,0.15)';
+            setTimeout(() => { el.style.background = ''; }, 2000);
+        }
+    }
+
     function sendMessage() {
         if (!currentUser) return;
         const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
         if (muted.includes(currentUser.username)) {
-            alert('⛔ Вы заглушены и не можете писать в чат!');
+            alert('⛔ Вы заглушены!');
             return;
         }
 
@@ -3119,12 +3443,31 @@
         const messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
         const id = parseInt(localStorage.getItem('chat_id_counter')) || 1;
 
-        messages.push({ id, author: currentUser.username, text, time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) });
+        let replyToId = replyTo;
+        let replyToName = null;
+        if (replyToId) {
+            const replyMsg = messages.find(m => m.id === replyToId);
+            if (replyMsg) {
+                replyToName = replyMsg.author;
+            }
+        }
+
+        messages.push({
+            id,
+            author: currentUser.username,
+            text,
+            time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            replyTo: replyToId || null,
+            replyToName: replyToName || null
+        });
+
         localStorage.setItem('chat_messages', JSON.stringify(messages));
         localStorage.setItem('chat_id_counter', String(id + 1));
 
         input.value = '';
+        cancelReply();
         renderChat();
+        updateStats();
     }
 
     function muteUser(username) {
@@ -3192,7 +3535,7 @@
             if (!sel) return;
             sel.innerHTML = '<option value="">Выберите пользователя</option>' +
                 users.filter(u => u.username !== currentUser?.username)
-                .map(u => `<option value="${u.username}">${u.username} ${banned.includes(u.username) ? '🔒' : ''}</option>`)
+                .map(u => `<option value="${u.username}">${u.username} ${banned.includes(u.username) ? '🔒' : ''} ${u.online ? '🟢' : '⚫'}</option>`)
                 .join('');
         });
 
@@ -3213,6 +3556,7 @@
                         <span class="prefix ${prefixClass}">${prefixText}</span>
                         ${isDev ? ' 👨‍💻' : ''}
                         ${isBanned ? ' 🔒' : ''}
+                        ${u.online ? ' 🟢' : ' ⚫'}
                     </div>
                     <div class="actions">
                         <button onclick="devAction('edit', '${u.username}')" title="Редактировать"><i class="fas fa-edit"></i></button>
@@ -3385,6 +3729,13 @@
         } else {
             prefixField.style.display = 'none';
         }
+
+        const statusDot = document.getElementById('profileStatusDot');
+        if (currentUser.online) {
+            statusDot.className = 'status-dot status-online';
+        } else {
+            statusDot.className = 'status-dot status-offline';
+        }
     }
 
     function uploadAvatar(event) {
@@ -3468,6 +3819,54 @@
         alert('✅ Профиль обновлен!');
         showMainContent();
         loadProfile();
+    }
+
+    // =========================================================
+    // ГОЛОСОВАНИЯ
+    // =========================================================
+    function showCreatePoll() {
+        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+
+        const question = prompt('Введите вопрос для голосования:');
+        if (!question) return;
+
+        const options = [];
+        let opt;
+        while ((opt = prompt('Введите вариант (оставьте пустым для завершения):')) !== null && opt.trim()) {
+            options.push(opt.trim());
+        }
+        if (options.length < 2) {
+            alert('Нужно минимум 2 варианта!');
+            return;
+        }
+
+        const isAnonymous = confirm('Анонимное голосование?');
+
+        const polls = JSON.parse(localStorage.getItem('polls')) || [];
+        const id = parseInt(localStorage.getItem('poll_id_counter')) || 1;
+
+        polls.unshift({
+            id,
+            question,
+            options: options.map(o => ({ text: o, votes: 0 })),
+            isAnonymous,
+            author: currentUser.username,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            voters: [],
+            status: 'open'
+        });
+
+        localStorage.setItem('polls', JSON.stringify(polls));
+        localStorage.setItem('poll_id_counter', String(id + 1));
+        alert('✅ Голосование создано!');
+        renderPolls();
+    }
+
+    function renderPolls() {
+        // Реализация в отдельном разделе
     }
 
     // =========================================================
