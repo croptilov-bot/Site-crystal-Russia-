@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль | CRYSTAL RUSSIA</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ (тот же самый) -->
+<div class="burger-overlay" id="burgerOverlay"></div>
+<div class="burger-menu" id="burgerMenu">
+    <button class="burger-close" onclick="toggleMenu()">✕</button>
+    <div class="burger-user">
+        <div class="burger-avatar">👤</div>
+        <div class="burger-user-info">
+            <div class="burger-username">Игрок_228</div>
+            <div class="burger-user-status">🟢 В сети</div>
+        </div>
+    </div>
+    <nav class="burger-nav">
+        <ul>
+            <li class="burger-nav-title">📌 ОСНОВНОЕ</li>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="forum.html">💬 Форум</a></li>
+            <li class="burger-nav-title">⚠️ ЖАЛОБЫ</li>
+            <li><a href="complaints.html?type=player">👥 На игроков</a></li>
+            <li><a href="complaints.html?type=admin">🛡 На администрацию</a></li>
+            <li class="burger-nav-title">📩 ЛИЧНОЕ</li>
+            <li><a href="messages.html">💌 Сообщения <span class="badge-new">3</span></a></li>
+            <li><a href="profile.html">👤 Мой профиль</a></li>
+        </ul>
+    </nav>
+    <div class="burger-footer">
+        <button class="btn btn--logout">🚪 Выйти</button>
+    </div>
+</div>
+
+<button class="burger-icon" onclick="toggleMenu()" id="burgerIcon">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- ========================================================= -->
+<!-- ШАПКА -->
+<!-- ========================================================= -->
+<header class="header">
+    <div class="container header__container">
+        <div class="header__left">
+            <div class="logo">
+                <span class="logo__icon">❄️</span>
+                <span class="logo__name">CRYSTAL <span>RUSSIA</span></span>
+            </div>
+        </div>
+        <div class="header__right">
+            <a href="messages.html" class="header__messages">💌 <span class="badge-new">3</span></a>
+            <a href="profile.html" class="header__profile">👤 Игрок_228</a>
+        </div>
+    </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- ПРОФИЛЬ -->
+<!-- ========================================================= -->
+<section class="profile">
+    <div class="container">
+        <div class="profile__card">
+            <div class="profile__avatar">
+                <span class="profile__avatar-icon">👤</span>
+                <button class="btn btn--change-avatar">📷 Сменить аватар</button>
+            </div>
+            <div class="profile__info">
+                <h1>Игрок_228</h1>
+                <div class="profile__status">🟢 В сети</div>
+                <div class="profile__stats">
+                    <div class="profile__stat">
+                        <span class="profile__stat-value">12</span>
+                        <span class="profile__stat-label">Тем на форуме</span>
+                    </div>
+                    <div class="profile__stat">
+                        <span class="profile__stat-value">47</span>
+                        <span class="profile__stat-label">Ответов</span>
+                    </div>
+                    <div class="profile__stat">
+                        <span class="profile__stat-value">3</span>
+                        <span class="profile__stat-label">Жалоб</span>
+                    </div>
+                </div>
+                <div class="profile__details">
+                    <p><strong>📅 Дата регистрации:</strong> 01.01.2025</p>
+                    <p><strong>🎮 Игровое время:</strong> 127 часов</p>
+                    <p><strong>🏆 Репутация:</strong> ⭐⭐⭐⭐ 4.7</p>
+                </div>
+                <button class="btn btn--edit-profile">✏️ Редактировать профиль</button>
+            </div>
+        </div>
+
+        <!-- Мои темы -->
+        <div class="profile__topics">
+            <h2>📋 Мои темы на форуме</h2>
+            <div class="forum__topics">
+                <div class="topic-card topic-card--compact">
+                    <a href="#" class="topic-card__title">Нужна помощь с работой</a>
+                    <div class="topic-card__meta">
+                        <span>📅 12.06.2025</span>
+                        <span>💬 5 ответов</span>
+                        <span class="topic-card__answered">✅ Отвечено</span>
+                    </div>
+                </div>
+                <div class="topic-card topic-card--compact">
+                    <a href="#" class="topic-card__title">Как заработать на старте?</a>
+                    <div class="topic-card__meta">
+                        <span>📅 05.06.2025</span>
+                        <span>💬 12 ответов</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ПОДВАЛ -->
+<!-- ========================================================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__logo">❄️ CRYSTAL RUSSIA</div>
+            <p class="footer__text">Игра бесплатная. В игре предусмотрена возможность приобретения внутриигровых предметов.</p>
+            <div class="footer__links">
+                <a href="https://t.me/crystalrussianewss" target="_blank">📩 Telegram</a>
+                <a href="#">💬 Discord</a>
+                <a href="#">📸 VK</a>
+            </div>
+            <p class="footer__copyright">© 2025 CRYSTAL RUSSIA. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
