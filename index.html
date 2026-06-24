@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRYSTAL RUSSIA | Форум RolePlay проекта</title>
+    <title>CRYSTAL RUSSIA | Форум RolePlay</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ========================================================= */
@@ -42,6 +42,121 @@
         ::-webkit-scrollbar-thumb {
             background: #ff7f17;
             border-radius: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ========================================================= */
+        /* МОДАЛЬНОЕ ОКНО ВХОДА */
+        /* ========================================================= */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .login-modal__box {
+            background: #1a1a2e;
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #ff7f17;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 0 60px rgba(255, 127, 23, 0.15);
+        }
+
+        .login-modal__title {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .login-modal__title span {
+            color: #ff7f17;
+        }
+
+        .login-modal__subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .login-modal__input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .login-modal__input:focus {
+            outline: none;
+            border-color: #ff7f17;
+            background: rgba(255, 127, 23, 0.05);
+        }
+
+        .login-modal__input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .login-modal__btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-modal__btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 127, 23, 0.3);
+        }
+
+        .login-modal__error {
+            color: #ff1744;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        .login-modal__register {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .login-modal__register a {
+            color: #ff7f17;
+            cursor: pointer;
+        }
+
+        .login-modal__register a:hover {
+            text-decoration: underline;
         }
 
         /* ========================================================= */
@@ -129,18 +244,25 @@
         }
 
         .header__user-badge {
-            background: #ff7f17;
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
+        .badge-admin {
+            background: #ff1744;
+        }
+
+        .badge-user {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
         .header__messages {
             position: relative;
             font-size: 20px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             transition: 0.3s;
         }
 
@@ -159,6 +281,22 @@
             font-weight: 700;
         }
 
+        .header__logout {
+            padding: 6px 16px;
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff1744;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .header__logout:hover {
+            background: rgba(255, 23, 68, 0.3);
+        }
+
         /* ========================================================= */
         /* БУРГЕР-МЕНЮ */
         /* ========================================================= */
@@ -168,9 +306,9 @@
             gap: 5px;
             cursor: pointer;
             padding: 8px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .burger-icon span {
@@ -197,7 +335,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
@@ -248,7 +386,7 @@
             align-items: center;
             gap: 15px;
             padding: 15px 20px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .burger-avatar {
@@ -278,7 +416,7 @@
         }
 
         .burger-nav-title {
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -290,14 +428,15 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 20px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             transition: 0.3s;
             font-size: 15px;
+            cursor: pointer;
         }
 
         .burger-nav a:hover {
             color: #ff7f17;
-            background: rgba(255,127,23,0.08);
+            background: rgba(255, 127, 23, 0.08);
             padding-left: 25px;
         }
 
@@ -310,24 +449,8 @@
 
         .burger-footer {
             padding: 15px 20px;
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             margin-top: auto;
-        }
-
-        .btn-logout {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255,23,68,0.15);
-            color: #ff1744;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-logout:hover {
-            background: rgba(255,23,68,0.3);
         }
 
         /* ========================================================= */
@@ -337,18 +460,18 @@
             padding: 60px 0 50px;
             background: radial-gradient(ellipse at 50% 50%, #1a1a2e, #0a0a12);
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .hero__badge {
             display: inline-block;
             padding: 6px 20px;
             border-radius: 50px;
-            background: rgba(255,127,23,0.15);
+            background: rgba(255, 127, 23, 0.15);
             color: #ff7f17;
             font-size: 13px;
             font-weight: 700;
-            border: 1px solid rgba(255,127,23,0.2);
+            border: 1px solid rgba(255, 127, 23, 0.2);
             margin-bottom: 20px;
         }
 
@@ -364,7 +487,7 @@
 
         .hero__subtitle {
             font-size: 18px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             max-width: 600px;
             margin: 0 auto 30px;
         }
@@ -389,7 +512,7 @@
 
         .hero__stat-label {
             font-size: 13px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* ========================================================= */
@@ -410,7 +533,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255,127,23,0.3);
+            box-shadow: 0 8px 30px rgba(255, 127, 23, 0.3);
         }
 
         .btn-primary {
@@ -419,9 +542,9 @@
         }
 
         .btn-secondary {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .btn-secondary:hover {
@@ -439,12 +562,32 @@
             padding: 10px 24px;
         }
 
+        .btn-danger {
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff1744;
+            border: 1px solid rgba(255, 23, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 23, 68, 0.3);
+        }
+
+        .btn-success {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .btn-success:hover {
+            background: rgba(76, 175, 80, 0.3);
+        }
+
         /* ========================================================= */
-        /* КАТЕГОРИИ ФОРУМА */
+        /* ФОРУМ - КАТЕГОРИИ */
         /* ========================================================= */
         .forum-section {
             padding: 40px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .forum-section:last-child {
@@ -471,7 +614,7 @@
         }
 
         .forum-section__desc {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
         }
 
@@ -482,17 +625,17 @@
         }
 
         .forum-card {
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             padding: 18px 20px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: 0.3s;
             cursor: pointer;
         }
 
         .forum-card:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,127,23,0.2);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 127, 23, 0.2);
             transform: translateY(-2px);
         }
 
@@ -515,13 +658,17 @@
             font-weight: 700;
         }
 
+        .forum-card__title a {
+            transition: 0.3s;
+        }
+
         .forum-card__title a:hover {
             color: #ff7f17;
         }
 
         .forum-card__desc {
             font-size: 13px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-left: 52px;
             margin-bottom: 10px;
         }
@@ -530,7 +677,7 @@
             display: flex;
             gap: 20px;
             font-size: 12px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             margin-left: 52px;
         }
 
@@ -584,17 +731,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 18px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             transition: 0.3s;
             flex-wrap: wrap;
             gap: 10px;
         }
 
         .topic-item:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,127,23,0.1);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 127, 23, 0.1);
         }
 
         .topic-item__left {
@@ -607,7 +754,7 @@
 
         .topic-item__status {
             font-size: 16px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .topic-item__status.pinned {
@@ -628,13 +775,17 @@
             font-size: 15px;
         }
 
+        .topic-item__title a {
+            transition: 0.3s;
+        }
+
         .topic-item__title a:hover {
             color: #ff7f17;
         }
 
         .topic-item__meta {
             font-size: 12px;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255, 255, 255, 0.35);
         }
 
         .topic-item__meta span {
@@ -646,15 +797,15 @@
             align-items: center;
             gap: 20px;
             font-size: 12px;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255, 255, 255, 0.35);
         }
 
         .topic-item__right .author {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .topic-item__right .date {
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .topic-item__tag {
@@ -666,18 +817,266 @@
         }
 
         .tag-answered {
-            background: rgba(76,175,80,0.15);
+            background: rgba(76, 175, 80, 0.15);
             color: #4caf50;
         }
 
         .tag-important {
-            background: rgba(255,23,68,0.15);
+            background: rgba(255, 23, 68, 0.15);
             color: #ff1744;
         }
 
         .tag-new {
-            background: rgba(255,127,23,0.15);
+            background: rgba(255, 127, 23, 0.15);
             color: #ff7f17;
+        }
+
+        /* ========================================================= */
+        /* СТРАНИЦА КОНТЕНТА (ПРАВИЛА, ГАЙДЫ, ЛОР) */
+        /* ========================================================= */
+        .content-page {
+            padding: 40px 0;
+            min-height: 60vh;
+        }
+
+        .content-page__title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #ff7f17;
+        }
+
+        .content-page__subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .content-page__editor {
+            width: 100%;
+            min-height: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            color: #e0e0e0;
+            font-size: 15px;
+            line-height: 1.8;
+            resize: vertical;
+            transition: 0.3s;
+        }
+
+        .content-page__editor:focus {
+            outline: none;
+            border-color: #ff7f17;
+            background: rgba(255, 127, 23, 0.03);
+        }
+
+        .content-page__editor::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .content-page__actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================================= */
+        /* СТРАНИЦА ЖАЛОБ */
+        /* ========================================================= */
+        .complaints-page {
+            padding: 40px 0;
+        }
+
+        .complaints-page__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .complaints-page__title {
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .complaints-page__title i {
+            color: #ff7f17;
+            margin-right: 12px;
+        }
+
+        .complaint-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .complaint-form__title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .complaint-form__subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .complaint-form__input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .complaint-form__input:focus {
+            outline: none;
+            border-color: #ff7f17;
+        }
+
+        .complaint-form__input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .complaint-form__textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .complaint-form__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .complaint-form__actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+
+        .complaints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .complaint-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px 20px;
+            transition: 0.3s;
+        }
+
+        .complaint-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .complaint-item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .complaint-item__title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .complaint-item__status {
+            font-size: 12px;
+            padding: 3px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background: rgba(255, 127, 23, 0.15);
+            color: #ff7f17;
+        }
+
+        .status-review {
+            background: rgba(33, 150, 243, 0.15);
+            color: #2196f3;
+        }
+
+        .status-answered {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+
+        .status-rejected {
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff1744;
+        }
+
+        .complaint-item__meta {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .complaint-item__meta span {
+            margin-right: 16px;
+        }
+
+        .complaint-item__body {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px 0 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 8px;
+        }
+
+        .complaint-item__answer {
+            background: rgba(76, 175, 80, 0.05);
+            border-left: 3px solid #4caf50;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .complaint-item__answer strong {
+            color: #4caf50;
+        }
+
+        .complaint-item__actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .no-complaints {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 16px;
+        }
+
+        .no-complaints i {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 15px;
+            opacity: 0.3;
         }
 
         /* ========================================================= */
@@ -688,14 +1087,14 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             padding: 30px 0;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             margin-top: 20px;
         }
 
         .forum-stats__item {
             text-align: center;
             padding: 15px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 10px;
         }
 
@@ -708,7 +1107,7 @@
 
         .forum-stats__label {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
         }
 
         /* ========================================================= */
@@ -717,7 +1116,7 @@
         .footer {
             background: #0d0d1a;
             padding: 40px 0 30px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .footer__container {
@@ -735,10 +1134,11 @@
 
         .footer__column a {
             display: block;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             font-size: 14px;
             padding: 4px 0;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .footer__column a:hover {
@@ -748,10 +1148,10 @@
         .footer__bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             margin-top: 30px;
             font-size: 13px;
-            color: rgba(255,255,255,0.2);
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .footer__bottom span {
@@ -800,6 +1200,15 @@
                 width: 290px;
                 left: -310px;
             }
+
+            .complaint-form__row {
+                grid-template-columns: 1fr;
+            }
+
+            .login-modal__box {
+                margin: 20px;
+                padding: 30px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -818,632 +1227,1586 @@
             .forum-section__title {
                 font-size: 18px;
             }
+
+            .content-page__title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
 
 <!-- ========================================================= -->
-<!-- БУРГЕР-МЕНЮ -->
+<!-- МОДАЛЬНОЕ ОКНО ВХОДА/РЕГИСТРАЦИИ -->
 <!-- ========================================================= -->
-<div class="burger-overlay" id="burgerOverlay"></div>
-<div class="burger-menu" id="burgerMenu">
-    <button class="burger-close" onclick="toggleMenu()">✕</button>
+<div class="login-modal" id="loginModal">
+    <div class="login-modal__box">
+        <div class="login-modal__title">❄️ CRYSTAL <span>RUSSIA</span></div>
+        <div class="login-modal__subtitle" id="loginSubtitle">Войдите в свой аккаунт</div>
 
-    <div class="burger-user">
-        <div class="burger-avatar">И</div>
-        <div>
-            <div class="burger-username">Игрок_228</div>
-            <div class="burger-user-status">🟢 В сети</div>
-        </div>
-    </div>
+        <input class="login-modal__input" id="loginUsername" placeholder="Имя пользователя" type="text">
+        <input class="login-modal__input" id="loginPassword" placeholder="Пароль" type="password">
 
-    <nav class="burger-nav">
-        <div class="burger-nav-title">📌 Основное</div>
-        <a href="#"><i class="fas fa-home"></i> Главная</a>
-        <a href="#"><i class="fas fa-newspaper"></i> Новости <span class="badge">3</span></a>
-        <a href="#"><i class="fas fa-gavel"></i> Правила</a>
-        <a href="#"><i class="fas fa-book"></i> Гайды и FAQ</a>
-        <a href="#"><i class="fas fa-scroll"></i> Лор мира</a>
+        <button class="login-modal__btn" id="loginBtn">Войти</button>
 
-        <div class="burger-nav-title">⚠️ Администрация</div>
-        <a href="#"><i class="fas fa-users"></i> Жалобы на игроков <span class="badge">5</span></a>
-        <a href="#"><i class="fas fa-shield-alt"></i> Жалобы на администрацию</a>
-        <a href="#"><i class="fas fa-unlock-alt"></i> Заявки на разбан</a>
-        <a href="#"><i class="fas fa-question-circle"></i> Вопросы к администрации</a>
+        <div class="login-modal__error" id="loginError"></div>
 
-        <div class="burger-nav-title">🎭 RolePlay</div>
-        <a href="#"><i class="fas fa-police"></i> LSPD <span class="badge">12</span></a>
-        <a href="#"><i class="fas fa-landmark"></i> Government</a>
-        <a href="#"><i class="fas fa-user-secret"></i> Мафии и банды</a>
-        <a href="#"><i class="fas fa-store"></i> Бизнес и организации</a>
-
-        <div class="burger-nav-title">🛠 Техническое</div>
-        <a href="#"><i class="fas fa-tools"></i> Техническая поддержка</a>
-        <a href="#"><i class="fas fa-bug"></i> Баг-репорты</a>
-
-        <div class="burger-nav-title">💬 Социальное</div>
-        <a href="#"><i class="fas fa-bullhorn"></i> Доска объявлений</a>
-        <a href="#"><i class="fas fa-comments"></i> Флудилка</a>
-        <a href="#"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
-
-        <div class="burger-nav-title">📦 Архивы</div>
-        <a href="#"><i class="fas fa-archive"></i> Архив жалоб</a>
-        <a href="#"><i class="fas fa-archive"></i> Архив новостей</a>
-    </nav>
-
-    <div class="burger-footer">
-        <button class="btn-logout"><i class="fas fa-sign-out-alt"></i> Выйти</button>
-    </div>
-</div>
-
-<!-- ========================================================= -->
-<!-- ШАПКА -->
-<!-- ========================================================= -->
-<header class="header">
-    <div class="container header__container">
-        <div style="display:flex;align-items:center;gap:15px;">
-            <div class="burger-icon" id="burgerIcon" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="header__logo">
-                <span class="header__logo-icon">❄️</span>
-                <span class="header__logo-text">CRYSTAL <span>RUSSIA</span></span>
-            </div>
-            <div class="header__online">
-                <span class="header__online-dot"></span>
-                <span>Игроков: <strong id="onlineCount">0</strong></span>
-            </div>
-        </div>
-        <div class="header__user">
-            <a href="#" class="header__messages">
-                <i class="fas fa-envelope"></i>
-                <span class="badge">3</span>
-            </a>
-            <div class="header__user-avatar">И</div>
-            <span class="header__user-name">Игрок_228</span>
-            <span class="header__user-badge">Игрок</span>
-        </div>
-    </div>
-</header>
-
-<!-- ========================================================= -->
-<!-- ГЛАВНЫЙ БАННЕР -->
-<!-- ========================================================= -->
-<section class="hero">
-    <div class="container">
-        <div class="hero__badge">🔥 ТОП-1 RP ПРОЕКТ 2025</div>
-        <h1 class="hero__title">Добро пожаловать в <span>CRYSTAL RUSSIA</span></h1>
-        <p class="hero__subtitle">Уникальный RolePlay проект на базе GTA 5. Создай свою историю, найди друзей и стань легендой!</p>
-        <div class="hero__stats">
-            <div class="hero__stat">
-                <span class="hero__stat-number" id="serverOnline">0</span>
-                <span class="hero__stat-label">Игроков онлайн</span>
-            </div>
-            <div class="hero__stat">
-                <span class="hero__stat-number">24/7</span>
-                <span class="hero__stat-label">Поддержка</span>
-            </div>
-            <div class="hero__stat">
-                <span class="hero__stat-number">50+</span>
-                <span class="hero__stat-label">Уникальных модов</span>
-            </div>
-            <div class="hero__stat">
-                <span class="hero__stat-number">12K+</span>
-                <span class="hero__stat-label">Зарегистрировано</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ФОРУМ: ОСНОВНЫЕ РАЗДЕЛЫ -->
-<!-- ========================================================= -->
-<section class="forum-section">
-    <div class="container">
-        <div class="forum-section__header">
-            <div>
-                <h2 class="forum-section__title"><i class="fas fa-info-circle"></i> Основные разделы</h2>
-                <div class="forum-section__desc">Новости, правила, гайды и лор проекта</div>
-            </div>
-            <a href="#" class="btn btn-new-topic"><i class="fas fa-plus"></i> Создать тему</a>
-        </div>
-
-        <div class="forum-grid">
-            <!-- Карточка 1 -->
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-newspaper"></i></span>
-                    <span class="forum-card__title"><a href="#">Новости проекта</a></span>
-                    <span class="forum-card__badge">3</span>
-                </div>
-                <div class="forum-card__desc">Последние обновления сервера, анонсы ивентов и конкурсов</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 128</span>
-                    <span><i class="fas fa-eye"></i> 1.2K</span>
-                    <span class="forum-card__new">⚡ Новое</span>
-                </div>
-            </div>
-
-            <!-- Карточка 2 -->
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-gavel"></i></span>
-                    <span class="forum-card__title"><a href="#">Правила проекта</a></span>
-                </div>
-                <div class="forum-card__desc">Полные правила сервера с примерами нарушений и наказаний</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 45</span>
-                    <span><i class="fas fa-eye"></i> 15.7K</span>
-                </div>
-            </div>
-
-            <!-- Карточка 3 -->
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-book"></i></span>
-                    <span class="forum-card__title"><a href="#">Гайды и FAQ</a></span>
-                </div>
-                <div class="forum-card__desc">Инструкции для новичков: установка, команды, лицензии, работа</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 89</span>
-                    <span><i class="fas fa-eye"></i> 8.4K</span>
-                </div>
-            </div>
-
-            <!-- Карточка 4 -->
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-scroll"></i></span>
-                    <span class="forum-card__title"><a href="#">Лор мира</a></span>
-                </div>
-                <div class="forum-card__desc">История штата, описание фракций и их задачи</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 23</span>
-                    <span><i class="fas fa-eye"></i> 3.1K</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ФОРУМ: ВЗАИМОДЕЙСТВИЕ С АДМИНИСТРАЦИЕЙ -->
-<!-- ========================================================= -->
-<section class="forum-section">
-    <div class="container">
-        <div class="forum-section__header">
-            <div>
-                <h2 class="forum-section__title"><i class="fas fa-shield-alt"></i> Взаимодействие с администрацией</h2>
-                <div class="forum-section__desc">Жалобы, разбаны и вопросы к команде</div>
-            </div>
-        </div>
-
-        <div class="forum-grid">
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-users" style="color:#ff1744;"></i></span>
-                    <span class="forum-card__title"><a href="#">Жалобы на игроков</a></span>
-                    <span class="forum-card__badge">5</span>
-                </div>
-                <div class="forum-card__desc">Подача жалоб на нарушение правил (DM, MG, NonRP)</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 312</span>
-                    <span><i class="fas fa-eye"></i> 22.1K</span>
-                    <span class="forum-card__new">⚡ Новое</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-user-shield" style="color:#ff7f17;"></i></span>
-                    <span class="forum-card__title"><a href="#">Жалобы на администрацию</a></span>
-                </div>
-                <div class="forum-card__desc">Обратная связь о действиях администрации</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 67</span>
-                    <span><i class="fas fa-eye"></i> 5.8K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-unlock-alt" style="color:#4caf50;"></i></span>
-                    <span class="forum-card__title"><a href="#">Заявки на разбан</a></span>
-                </div>
-                <div class="forum-card__desc">Апелляции и обжалование блокировок</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 156</span>
-                    <span><i class="fas fa-eye"></i> 9.3K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-question-circle" style="color:#2196f3;"></i></span>
-                    <span class="forum-card__title"><a href="#">Вопросы к администрации</a></span>
-                </div>
-                <div class="forum-card__desc">Общие вопросы по механике игры</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 203</span>
-                    <span><i class="fas fa-eye"></i> 14.6K</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ФОРУМ: ROLEPLAY -->
-<!-- ========================================================= -->
-<section class="forum-section">
-    <div class="container">
-        <div class="forum-section__header">
-            <div>
-                <h2 class="forum-section__title"><i class="fas fa-theater-masks"></i> RolePlay</h2>
-                <div class="forum-section__desc">Государственные фракции, мафии, банды и бизнес</div>
-            </div>
-        </div>
-
-        <div class="forum-grid">
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-police" style="color:#2196f3;"></i></span>
-                    <span class="forum-card__title"><a href="#">LSPD</a></span>
-                    <span class="forum-card__badge">12</span>
-                </div>
-                <div class="forum-card__desc">Устав, отчеты, состав и объявления полиции</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 234</span>
-                    <span><i class="fas fa-eye"></i> 18.7K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-landmark" style="color:#4caf50;"></i></span>
-                    <span class="forum-card__title"><a href="#">Government</a></span>
-                </div>
-                <div class="forum-card__desc">Деятельность правительства штата</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 89</span>
-                    <span><i class="fas fa-eye"></i> 6.2K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-user-secret" style="color:#ff1744;"></i></span>
-                    <span class="forum-card__title"><a href="#">Мафии и банды</a></span>
-                    <span class="forum-card__badge">8</span>
-                </div>
-                <div class="forum-card__desc">Криминальные организации и их внутренние дела</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 456</span>
-                    <span><i class="fas fa-eye"></i> 31.4K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-store" style="color:#ff7f17;"></i></span>
-                    <span class="forum-card__title"><a href="#">Бизнес и организации</a></span>
-                </div>
-                <div class="forum-card__desc">Легальный бизнес: вакансии, акции, бухгалтерия</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 178</span>
-                    <span><i class="fas fa-eye"></i> 11.5K</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ФОРУМ: ТЕХНИЧЕСКАЯ ЧАСТЬ -->
-<!-- ========================================================= -->
-<section class="forum-section">
-    <div class="container">
-        <div class="forum-section__header">
-            <div>
-                <h2 class="forum-section__title"><i class="fas fa-tools"></i> Техническая часть</h2>
-                <div class="forum-section__desc">Помощь с игрой и сообщения об ошибках</div>
-            </div>
-        </div>
-
-        <div class="forum-grid">
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-tools" style="color:#2196f3;"></i></span>
-                    <span class="forum-card__title"><a href="#">Техническая поддержка</a></span>
-                    <span class="forum-card__badge">4</span>
-                </div>
-                <div class="forum-card__desc">Проблемы с лаунчером, подключением и скриптами</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 423</span>
-                    <span><i class="fas fa-eye"></i> 27.8K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-bug" style="color:#ff1744;"></i></span>
-                    <span class="forum-card__title"><a href="#">Баг-репорты</a></span>
-                </div>
-                <div class="forum-card__desc">Сообщения о найденных ошибках в игре</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 89</span>
-                    <span><i class="fas fa-eye"></i> 5.6K</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ФОРУМ: СОЦИАЛЬНОЕ ВЗАИМОДЕЙСТВИЕ -->
-<!-- ========================================================= -->
-<section class="forum-section">
-    <div class="container">
-        <div class="forum-section__header">
-            <div>
-                <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное взаимодействие</h2>
-                <div class="forum-section__desc">Общение, объявления и ивенты</div>
-            </div>
-        </div>
-
-        <div class="forum-grid">
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-bullhorn" style="color:#ff7f17;"></i></span>
-                    <span class="forum-card__title"><a href="#">Доска объявлений</a></span>
-                </div>
-                <div class="forum-card__desc">Продажа/покупка, поиск работы и напарников</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 567</span>
-                    <span><i class="fas fa-eye"></i> 42.3K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-comments" style="color:#9c27b0;"></i></span>
-                    <span class="forum-card__title"><a href="#">Флудилка</a></span>
-                    <span class="forum-card__badge">15</span>
-                </div>
-                <div class="forum-card__desc">Неформальное общение на свободные темы</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 2.3K</span>
-                    <span><i class="fas fa-eye"></i> 89.1K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
-                    <span class="forum-card__title"><a href="#">Конкурсы и ивенты</a></span>
-                </div>
-                <div class="forum-card__desc">Анонсы и результаты мероприятий</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 134</span>
-                    <span><i class="fas fa-eye"></i> 9.8K</span>
-                </div>
-            </div>
-
-            <div class="forum-card">
-                <div class="forum-card__header">
-                    <span class="forum-card__icon"><i class="fas fa-archive" style="color:#757575;"></i></span>
-                    <span class="forum-card__title"><a href="#">Архивы</a></span>
-                </div>
-                <div class="forum-card__desc">Архив жалоб и новостей</div>
-                <div class="forum-card__meta">
-                    <span><i class="fas fa-comment"></i> 0</span>
-                    <span><i class="fas fa-eye"></i> 1.2K</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- ПОСЛЕДНИЕ ТЕМЫ -->
-<!-- ========================================================= -->
-<section class="topics-section">
-    <div class="container">
-        <div class="topics-section__header">
-            <h2 class="topics-section__title"><i class="fas fa-clock" style="color:#ff7f17;"></i> Последние темы</h2>
-            <a href="#" class="btn btn-secondary btn-sm">Все темы →</a>
-        </div>
-
-        <div class="topic-list">
-
-            <!-- Тема 1 -->
-            <div class="topic-item">
-                <div class="topic-item__left">
-                    <span class="topic-item__status pinned"><i class="fas fa-thumbtack"></i></span>
-                    <div>
-                        <div class="topic-item__title">
-                            <a href="#">Обновление 2.3: Новая система экономики</a>
-                            <span class="topic-item__tag tag-important">ВАЖНО</span>
-                        </div>
-                        <div class="topic-item__meta">
-                            <span>Автор: <strong>Admin</strong></span>
-                            <span>📅 Сегодня 15:30</span>
-                            <span>💬 45 ответов</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="topic-item__right">
-                    <span class="author">Последний: <strong>Игрок_1337</strong></span>
-                    <span class="date">2 мин назад</span>
-                </div>
-            </div>
-
-            <!-- Тема 2 -->
-            <div class="topic-item">
-                <div class="topic-item__left">
-                    <span class="topic-item__status hot"><i class="fas fa-fire"></i></span>
-                    <div>
-                        <div class="topic-item__title">
-                            <a href="#">Как заработать первый миллион? Советы новичкам</a>
-                            <span class="topic-item__tag tag-new">НОВОЕ</span>
-                        </div>
-                        <div class="topic-item__meta">
-                            <span>Автор: <strong>Игрок_228</strong></span>
-                            <span>📅 Сегодня 12:15</span>
-                            <span>💬 78 ответов</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="topic-item__right">
-                    <span class="author">Последний: <strong>Helper</strong></span>
-                    <span class="date">1 час назад</span>
-                </div>
-            </div>
-
-            <!-- Тема 3 -->
-            <div class="topic-item">
-                <div class="topic-item__left">
-                    <span class="topic-item__status solved"><i class="fas fa-check-circle"></i></span>
-                    <div>
-                        <div class="topic-item__title">
-                            <a href="#">Проблема с подключением к серверу (решение)</a>
-                            <span class="topic-item__tag tag-answered">РЕШЕНО</span>
-                        </div>
-                        <div class="topic-item__meta">
-                            <span>Автор: <strong>Игрок_777</strong></span>
-                            <span>📅 Вчера 21:40</span>
-                            <span>💬 12 ответов</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="topic-item__right">
-                    <span class="author">Последний: <strong>Игрок_228</strong></span>
-                    <span class="date">3 часа назад</span>
-                </div>
-            </div>
-
-            <!-- Тема 4 -->
-            <div class="topic-item">
-                <div class="topic-item__left">
-                    <span class="topic-item__status"><i class="fas fa-comment"></i></span>
-                    <div>
-                        <div class="topic-item__title">
-                            <a href="#">Жалоба на игрока: NonRP поведение в LSPD</a>
-                        </div>
-                        <div class="topic-item__meta">
-                            <span>Автор: <strong>Игрок_420</strong></span>
-                            <span>📅 Вчера 18:20</span>
-                            <span>💬 3 ответа</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="topic-item__right">
-                    <span class="author">Последний: <strong>Moderator</strong></span>
-                    <span class="date">5 часов назад</span>
-                </div>
-            </div>
-
-            <!-- Тема 5 -->
-            <div class="topic-item">
-                <div class="topic-item__left">
-                    <span class="topic-item__status locked"><i class="fas fa-lock"></i></span>
-                    <div>
-                        <div class="topic-item__title">
-                            <a href="#">[Архив] Обсуждение старого обновления</a>
-                        </div>
-                        <div class="topic-item__meta">
-                            <span>Автор: <strong>DevTeam</strong></span>
-                            <span>📅 12.06.2025</span>
-                            <span>💬 234 ответа</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="topic-item__right">
-                    <span class="author">Последний: <strong>Admin</strong></span>
-                    <span class="date">2 дня назад</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- СТАТИСТИКА ФОРУМА -->
-<!-- ========================================================= -->
-<div class="container">
-    <div class="forum-stats">
-        <div class="forum-stats__item">
-            <span class="forum-stats__number">12,847</span>
-            <span class="forum-stats__label">Всего тем</span>
-        </div>
-        <div class="forum-stats__item">
-            <span class="forum-stats__number">89,234</span>
-            <span class="forum-stats__label">Всего сообщений</span>
-        </div>
-        <div class="forum-stats__item">
-            <span class="forum-stats__number">9,541</span>
-            <span class="forum-stats__label">Зарегистрировано</span>
-        </div>
-        <div class="forum-stats__item">
-            <span class="forum-stats__number">247</span>
-            <span class="forum-stats__label">Сейчас онлайн</span>
-        </div>
-        <div class="forum-stats__item">
-            <span class="forum-stats__number">128</span>
-            <span class="forum-stats__label">Новых сегодня</span>
+        <div class="login-modal__register">
+            <span id="registerText">Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a></span>
         </div>
     </div>
 </div>
 
 <!-- ========================================================= -->
-<!-- ПОДВАЛ -->
+<!-- ОСНОВНОЙ КОНТЕНТ (СКРЫТ ДО АВТОРИЗАЦИИ) -->
 <!-- ========================================================= -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer__container">
-            <div class="footer__column">
-                <h4>❄️ CRYSTAL RUSSIA</h4>
-                <a href="#">О проекте</a>
-                <a href="#">Правила</a>
-                <a href="#">Политика конфиденциальности</a>
-                <a href="#">Контакты</a>
-            </div>
-            <div class="footer__column">
-                <h4>📌 Разделы</h4>
-                <a href="#">Новости</a>
-                <a href="#">Форум</a>
-                <a href="#">Гайды</a>
-                <a href="#">Жалобы</a>
-            </div>
-            <div class="footer__column">
-                <h4>📱 Соцсети</h4>
-                <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
-                <a href="#"><i class="fab fa-discord"></i> Discord</a>
-                <a href="#"><i class="fab fa-vk"></i> ВКонтакте</a>
-                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-            </div>
-            <div class="footer__column">
-                <h4>🛠 Поддержка</h4>
-                <a href="#">Техподдержка</a>
-                <a href="#">FAQ</a>
-                <a href="#">Сообщить о баге</a>
-                <a href="#">Пожертвовать</a>
+<div id="mainContent" class="hidden">
+
+    <!-- БУРГЕР-МЕНЮ -->
+    <div class="burger-overlay" id="burgerOverlay"></div>
+    <div class="burger-menu" id="burgerMenu">
+        <button class="burger-close" onclick="toggleMenu()">✕</button>
+
+        <div class="burger-user">
+            <div class="burger-avatar" id="burgerAvatar">И</div>
+            <div>
+                <div class="burger-username" id="burgerUsername">Игрок</div>
+                <div class="burger-user-status">🟢 В сети</div>
             </div>
         </div>
-        <div class="footer__bottom">
-            Copyright © 2025 <span>CRYSTAL RUSSIA</span> — Все права защищены
+
+        <nav class="burger-nav">
+            <div class="burger-nav-title">📌 Основное</div>
+            <a onclick="navigateTo('home')"><i class="fas fa-home"></i> Главная</a>
+            <a onclick="navigateTo('news')"><i class="fas fa-newspaper"></i> Новости <span class="badge">3</span></a>
+            <a onclick="navigateTo('rules')"><i class="fas fa-gavel"></i> Правила</a>
+            <a onclick="navigateTo('guides')"><i class="fas fa-book"></i> Гайды и FAQ</a>
+            <a onclick="navigateTo('lore')"><i class="fas fa-scroll"></i> Лор мира</a>
+
+            <div class="burger-nav-title">⚠️ Администрация</div>
+            <a onclick="navigateTo('complaints')"><i class="fas fa-users"></i> Жалобы на игроков <span class="badge" id="complaintsBadge">0</span></a>
+            <a onclick="navigateTo('admin-complaints')"><i class="fas fa-shield-alt"></i> Жалобы на администрацию</a>
+            <a onclick="navigateTo('unban')"><i class="fas fa-unlock-alt"></i> Заявки на разбан</a>
+            <a onclick="navigateTo('questions')"><i class="fas fa-question-circle"></i> Вопросы к администрации</a>
+
+            <div class="burger-nav-title">🎭 RolePlay</div>
+            <a onclick="navigateTo('lspd')"><i class="fas fa-police"></i> LSPD</a>
+            <a onclick="navigateTo('government')"><i class="fas fa-landmark"></i> Government</a>
+            <a onclick="navigateTo('mafia')"><i class="fas fa-user-secret"></i> Мафии и банды</a>
+            <a onclick="navigateTo('business')"><i class="fas fa-store"></i> Бизнес и организации</a>
+
+            <div class="burger-nav-title">🛠 Техническое</div>
+            <a onclick="navigateTo('support')"><i class="fas fa-tools"></i> Техническая поддержка</a>
+            <a onclick="navigateTo('bugs')"><i class="fas fa-bug"></i> Баг-репорты</a>
+
+            <div class="burger-nav-title">💬 Социальное</div>
+            <a onclick="navigateTo('bulletin')"><i class="fas fa-bullhorn"></i> Доска объявлений</a>
+            <a onclick="navigateTo('chat')"><i class="fas fa-comments"></i> Флудилка</a>
+            <a onclick="navigateTo('events')"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
+
+            <div class="burger-nav-title">📦 Архивы</div>
+            <a onclick="navigateTo('archive-complaints')"><i class="fas fa-archive"></i> Архив жалоб</a>
+            <a onclick="navigateTo('archive-news')"><i class="fas fa-archive"></i> Архив новостей</a>
+        </nav>
+
+        <div class="burger-footer">
+            <button class="header__logout" onclick="logout()" style="width:100%;">
+                <i class="fas fa-sign-out-alt"></i> Выйти
+            </button>
         </div>
     </div>
-</footer>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header__container">
+            <div style="display:flex;align-items:center;gap:15px;">
+                <div class="burger-icon" id="burgerIcon" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="header__logo">
+                    <span class="header__logo-icon">❄️</span>
+                    <span class="header__logo-text">CRYSTAL <span>RUSSIA</span></span>
+                </div>
+                <div class="header__online">
+                    <span class="header__online-dot"></span>
+                    <span>Игроков: <strong id="onlineCount">0</strong></span>
+                </div>
+            </div>
+            <div class="header__user">
+                <a href="#" class="header__messages">
+                    <i class="fas fa-envelope"></i>
+                    <span class="badge">3</span>
+                </a>
+                <div class="header__user-avatar" id="headerAvatar">И</div>
+                <span class="header__user-name" id="headerUsername">Игрок</span>
+                <span class="header__user-badge" id="headerBadge">Игрок</span>
+                <button class="header__logout" onclick="logout()">Выйти</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- КОНТЕЙНЕР ДЛЯ СТРАНИЦ -->
+    <!-- ========================================================= -->
+    <div id="pageContainer">
+
+        <!-- ГЛАВНАЯ СТРАНИЦА -->
+        <div id="page-home">
+            <!-- ГЛАВНЫЙ БАННЕР -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero__badge">🔥 ТОП-1 RP ПРОЕКТ 2025</div>
+                    <h1 class="hero__title">Добро пожаловать в <span>CRYSTAL RUSSIA</span></h1>
+                    <p class="hero__subtitle">Уникальный RolePlay проект на базе GTA 5. Создай свою историю, найди друзей и стань легендой!</p>
+                    <div class="hero__stats">
+                        <div class="hero__stat">
+                            <span class="hero__stat-number" id="serverOnline">0</span>
+                            <span class="hero__stat-label">Игроков онлайн</span>
+                        </div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-number">24/7</span>
+                            <span class="hero__stat-label">Поддержка</span>
+                        </div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-number">50+</span>
+                            <span class="hero__stat-label">Уникальных модов</span>
+                        </div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-number" id="totalUsers">0</span>
+                            <span class="hero__stat-label">Зарегистрировано</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ФОРУМ: ОСНОВНЫЕ РАЗДЕЛЫ -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-info-circle"></i> Основные разделы</h2>
+                            <div class="forum-section__desc">Новости, правила, гайды и лор проекта</div>
+                        </div>
+                        <button class="btn btn-new-topic" id="createTopicBtn" onclick="showCreateTopic()">
+                            <i class="fas fa-plus"></i> Создать тему
+                        </button>
+                    </div>
+
+                    <div class="forum-grid">
+                        <div class="forum-card" onclick="navigateTo('news')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-newspaper"></i></span>
+                                <span class="forum-card__title"><a href="#">Новости проекта</a></span>
+                                <span class="forum-card__badge">3</span>
+                            </div>
+                            <div class="forum-card__desc">Последние обновления сервера, анонсы ивентов и конкурсов</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> <span id="newsCount">128</span></span>
+                                <span><i class="fas fa-eye"></i> 1.2K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('rules')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-gavel"></i></span>
+                                <span class="forum-card__title"><a href="#">Правила проекта</a></span>
+                            </div>
+                            <div class="forum-card__desc">Полные правила сервера с примерами нарушений и наказаний</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 45</span>
+                                <span><i class="fas fa-eye"></i> 15.7K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('guides')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-book"></i></span>
+                                <span class="forum-card__title"><a href="#">Гайды и FAQ</a></span>
+                            </div>
+                            <div class="forum-card__desc">Инструкции для новичков: установка, команды, лицензии, работа</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 89</span>
+                                <span><i class="fas fa-eye"></i> 8.4K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('lore')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-scroll"></i></span>
+                                <span class="forum-card__title"><a href="#">Лор мира</a></span>
+                            </div>
+                            <div class="forum-card__desc">История штата, описание фракций и их задачи</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 23</span>
+                                <span><i class="fas fa-eye"></i> 3.1K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ФОРУМ: ВЗАИМОДЕЙСТВИЕ С АДМИНИСТРАЦИЕЙ -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-shield-alt"></i> Взаимодействие с администрацией</h2>
+                            <div class="forum-section__desc">Жалобы, разбаны и вопросы к команде</div>
+                        </div>
+                    </div>
+
+                    <div class="forum-grid">
+                        <div class="forum-card" onclick="navigateTo('complaints')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-users" style="color:#ff1744;"></i></span>
+                                <span class="forum-card__title"><a href="#">Жалобы на игроков</a></span>
+                                <span class="forum-card__badge" id="complaintsBadgeCard">0</span>
+                            </div>
+                            <div class="forum-card__desc">Подача жалоб на нарушение правил (DM, MG, NonRP)</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> <span id="complaintsTotal">312</span></span>
+                                <span><i class="fas fa-eye"></i> 22.1K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('admin-complaints')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-user-shield" style="color:#ff7f17;"></i></span>
+                                <span class="forum-card__title"><a href="#">Жалобы на администрацию</a></span>
+                            </div>
+                            <div class="forum-card__desc">Обратная связь о действиях администрации</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 67</span>
+                                <span><i class="fas fa-eye"></i> 5.8K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('unban')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-unlock-alt" style="color:#4caf50;"></i></span>
+                                <span class="forum-card__title"><a href="#">Заявки на разбан</a></span>
+                            </div>
+                            <div class="forum-card__desc">Апелляции и обжалование блокировок</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 156</span>
+                                <span><i class="fas fa-eye"></i> 9.3K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('questions')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-question-circle" style="color:#2196f3;"></i></span>
+                                <span class="forum-card__title"><a href="#">Вопросы к администрации</a></span>
+                            </div>
+                            <div class="forum-card__desc">Общие вопросы по механике игры</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 203</span>
+                                <span><i class="fas fa-eye"></i> 14.6K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ФОРУМ: ROLEPLAY -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-theater-masks"></i> RolePlay</h2>
+                            <div class="forum-section__desc">Государственные фракции, мафии, банды и бизнес</div>
+                        </div>
+                    </div>
+
+                    <div class="forum-grid">
+                        <div class="forum-card" onclick="navigateTo('lspd')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-police" style="color:#2196f3;"></i></span>
+                                <span class="forum-card__title"><a href="#">LSPD</a></span>
+                                <span class="forum-card__badge">12</span>
+                            </div>
+                            <div class="forum-card__desc">Устав, отчеты, состав и объявления полиции</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 234</span>
+                                <span><i class="fas fa-eye"></i> 18.7K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('government')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-landmark" style="color:#4caf50;"></i></span>
+                                <span class="forum-card__title"><a href="#">Government</a></span>
+                            </div>
+                            <div class="forum-card__desc">Деятельность правительства штата</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 89</span>
+                                <span><i class="fas fa-eye"></i> 6.2K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('mafia')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-user-secret" style="color:#ff1744;"></i></span>
+                                <span class="forum-card__title"><a href="#">Мафии и банды</a></span>
+                                <span class="forum-card__badge">8</span>
+                            </div>
+                            <div class="forum-card__desc">Криминальные организации и их внутренние дела</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 456</span>
+                                <span><i class="fas fa-eye"></i> 31.4K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('business')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-store" style="color:#ff7f17;"></i></span>
+                                <span class="forum-card__title"><a href="#">Бизнес и организации</a></span>
+                            </div>
+                            <div class="forum-card__desc">Легальный бизнес: вакансии, акции, бухгалтерия</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 178</span>
+                                <span><i class="fas fa-eye"></i> 11.5K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ФОРУМ: ТЕХНИЧЕСКАЯ ЧАСТЬ -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-tools"></i> Техническая часть</h2>
+                            <div class="forum-section__desc">Помощь с игрой и сообщения об ошибках</div>
+                        </div>
+                    </div>
+
+                    <div class="forum-grid">
+                        <div class="forum-card" onclick="navigateTo('support')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-tools" style="color:#2196f3;"></i></span>
+                                <span class="forum-card__title"><a href="#">Техническая поддержка</a></span>
+                                <span class="forum-card__badge">4</span>
+                            </div>
+                            <div class="forum-card__desc">Проблемы с лаунчером, подключением и скриптами</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 423</span>
+                                <span><i class="fas fa-eye"></i> 27.8K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('bugs')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-bug" style="color:#ff1744;"></i></span>
+                                <span class="forum-card__title"><a href="#">Баг-репорты</a></span>
+                            </div>
+                            <div class="forum-card__desc">Сообщения о найденных ошибках в игре</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 89</span>
+                                <span><i class="fas fa-eye"></i> 5.6K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ФОРУМ: СОЦИАЛЬНОЕ ВЗАИМОДЕЙСТВИЕ -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное взаимодействие</h2>
+                            <div class="forum-section__desc">Общение, объявления и ивенты</div>
+                        </div>
+                    </div>
+
+                    <div class="forum-grid">
+                        <div class="forum-card" onclick="navigateTo('bulletin')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-bullhorn" style="color:#ff7f17;"></i></span>
+                                <span class="forum-card__title"><a href="#">Доска объявлений</a></span>
+                            </div>
+                            <div class="forum-card__desc">Продажа/покупка, поиск работы и напарников</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 567</span>
+                                <span><i class="fas fa-eye"></i> 42.3K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('chat')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-comments" style="color:#9c27b0;"></i></span>
+                                <span class="forum-card__title"><a href="#">Флудилка</a></span>
+                                <span class="forum-card__badge">15</span>
+                            </div>
+                            <div class="forum-card__desc">Неформальное общение на свободные темы</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 2.3K</span>
+                                <span><i class="fas fa-eye"></i> 89.1K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('events')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
+                                <span class="forum-card__title"><a href="#">Конкурсы и ивенты</a></span>
+                            </div>
+                            <div class="forum-card__desc">Анонсы и результаты мероприятий</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 134</span>
+                                <span><i class="fas fa-eye"></i> 9.8K</span>
+                            </div>
+                        </div>
+
+                        <div class="forum-card" onclick="navigateTo('archive-complaints')">
+                            <div class="forum-card__header">
+                                <span class="forum-card__icon"><i class="fas fa-archive" style="color:#757575;"></i></span>
+                                <span class="forum-card__title"><a href="#">Архивы</a></span>
+                            </div>
+                            <div class="forum-card__desc">Архив жалоб и новостей</div>
+                            <div class="forum-card__meta">
+                                <span><i class="fas fa-comment"></i> 0</span>
+                                <span><i class="fas fa-eye"></i> 1.2K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ПОСЛЕДНИЕ ТЕМЫ -->
+            <section class="topics-section">
+                <div class="container">
+                    <div class="topics-section__header">
+                        <h2 class="topics-section__title"><i class="fas fa-clock" style="color:#ff7f17;"></i> Последние темы</h2>
+                        <button class="btn btn-secondary btn-sm" onclick="navigateTo('all-topics')">Все темы →</button>
+                    </div>
+
+                    <div class="topic-list" id="topicList">
+                        <!-- Темы загружаются через JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- СТРАНИЦА РЕДАКТИРУЕМОГО КОНТЕНТА (ПРАВИЛА, ГАЙДЫ, ЛОР) -->
+        <div id="page-content" class="hidden">
+            <div class="container content-page">
+                <h1 class="content-page__title" id="contentTitle">Заголовок</h1>
+                <div class="content-page__subtitle" id="contentSubtitle">Редактируйте контент этой страницы</div>
+                <textarea class="content-page__editor" id="contentEditor" placeholder="Введите текст здесь..."></textarea>
+                <div class="content-page__actions">
+                    <button class="btn btn-primary" onclick="saveContent()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА ЖАЛОБ -->
+        <div id="page-complaints" class="hidden">
+            <div class="container complaints-page">
+                <div class="complaints-page__header">
+                    <h1 class="complaints-page__title"><i class="fas fa-users"></i> Жалобы на игроков</h1>
+                    <button class="btn btn-primary" onclick="showComplaintForm()"><i class="fas fa-plus"></i> Подать жалобу</button>
+                </div>
+
+                <!-- Форма подачи жалобы -->
+                <div class="complaint-form hidden" id="complaintForm">
+                    <h3 class="complaint-form__title">📝 Новая жалоба</h3>
+                    <div class="complaint-form__subtitle">Заполните все поля для подачи жалобы на игрока</div>
+
+                    <div class="complaint-form__row">
+                        <input class="complaint-form__input" id="complaintTarget" placeholder="Никнейм нарушителя">
+                        <input class="complaint-form__input" id="complaintAuthor" placeholder="Ваш никнейм">
+                    </div>
+                    <input class="complaint-form__input" id="complaintTitle" placeholder="Заголовок жалобы">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="complaintDesc" placeholder="Описание нарушения с доказательствами..."></textarea>
+
+                    <div class="complaint-form__actions">
+                        <button class="btn btn-primary" onclick="submitComplaint('player')"><i class="fas fa-paper-plane"></i> Отправить жалобу</button>
+                        <button class="btn btn-secondary" onclick="hideComplaintForm()">Отмена</button>
+                    </div>
+                </div>
+
+                <!-- Список жалоб -->
+                <div class="complaints-list" id="complaintsList">
+                    <!-- Жалобы загружаются через JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА ЖАЛОБ НА АДМИНИСТРАЦИЮ -->
+        <div id="page-admin-complaints" class="hidden">
+            <div class="container complaints-page">
+                <div class="complaints-page__header">
+                    <h1 class="complaints-page__title"><i class="fas fa-shield-alt"></i> Жалобы на администрацию</h1>
+                    <button class="btn btn-primary" onclick="showAdminComplaintForm()"><i class="fas fa-plus"></i> Подать жалобу</button>
+                </div>
+
+                <div class="complaint-form hidden" id="adminComplaintForm">
+                    <h3 class="complaint-form__title">📝 Жалоба на администрацию</h3>
+                    <div class="complaint-form__subtitle">Укажите, на кого из администрации Вы жалуетесь и причину</div>
+
+                    <input class="complaint-form__input" id="adminComplaintTarget" placeholder="Никнейм администратора">
+                    <input class="complaint-form__input" id="adminComplaintAuthor" placeholder="Ваш никнейм">
+                    <input class="complaint-form__input" id="adminComplaintTitle" placeholder="Заголовок жалобы">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="adminComplaintDesc" placeholder="Описание ситуации..."></textarea>
+
+                    <div class="complaint-form__actions">
+                        <button class="btn btn-primary" onclick="submitComplaint('admin')"><i class="fas fa-paper-plane"></i> Отправить</button>
+                        <button class="btn btn-secondary" onclick="hideAdminComplaintForm()">Отмена</button>
+                    </div>
+                </div>
+
+                <div class="complaints-list" id="adminComplaintsList">
+                    <!-- Загружается через JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА ЗАЯВОК НА РАЗБАН -->
+        <div id="page-unban" class="hidden">
+            <div class="container complaints-page">
+                <div class="complaints-page__header">
+                    <h1 class="complaints-page__title"><i class="fas fa-unlock-alt"></i> Заявки на разбан</h1>
+                    <button class="btn btn-primary" onclick="showUnbanForm()"><i class="fas fa-plus"></i> Подать заявку</button>
+                </div>
+
+                <div class="complaint-form hidden" id="unbanForm">
+                    <h3 class="complaint-form__title">📝 Заявка на разбан</h3>
+                    <div class="complaint-form__subtitle">Опишите причину, по которой Вы считаете бан несправедливым</div>
+
+                    <input class="complaint-form__input" id="unbanAuthor" placeholder="Ваш никнейм">
+                    <input class="complaint-form__input" id="unbanTitle" placeholder="Заголовок заявки">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="unbanDesc" placeholder="Причина разбана, доказательства..."></textarea>
+
+                    <div class="complaint-form__actions">
+                        <button class="btn btn-primary" onclick="submitUnban()"><i class="fas fa-paper-plane"></i> Отправить</button>
+                        <button class="btn btn-secondary" onclick="hideUnbanForm()">Отмена</button>
+                    </div>
+                </div>
+
+                <div class="complaints-list" id="unbanList">
+                    <!-- Загружается через JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА ВОПРОСОВ К АДМИНИСТРАЦИИ -->
+        <div id="page-questions" class="hidden">
+            <div class="container complaints-page">
+                <div class="complaints-page__header">
+                    <h1 class="complaints-page__title"><i class="fas fa-question-circle"></i> Вопросы к администрации</h1>
+                    <button class="btn btn-primary" onclick="showQuestionForm()"><i class="fas fa-plus"></i> Задать вопрос</button>
+                </div>
+
+                <div class="complaint-form hidden" id="questionForm">
+                    <h3 class="complaint-form__title">❓ Новый вопрос</h3>
+                    <div class="complaint-form__subtitle">Задайте вопрос администрации проекта</div>
+
+                    <input class="complaint-form__input" id="questionAuthor" placeholder="Ваш никнейм">
+                    <input class="complaint-form__input" id="questionTitle" placeholder="Заголовок вопроса">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="questionDesc" placeholder="Ваш вопрос..."></textarea>
+
+                    <div class="complaint-form__actions">
+                        <button class="btn btn-primary" onclick="submitQuestion()"><i class="fas fa-paper-plane"></i> Отправить</button>
+                        <button class="btn btn-secondary" onclick="hideQuestionForm()">Отмена</button>
+                    </div>
+                </div>
+
+                <div class="complaints-list" id="questionsList">
+                    <!-- Загружается через JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- СТАТИСТИКА ФОРУМА -->
+    <div class="container">
+        <div class="forum-stats">
+            <div class="forum-stats__item">
+                <span class="forum-stats__number" id="statTopics">0</span>
+                <span class="forum-stats__label">Всего тем</span>
+            </div>
+            <div class="forum-stats__item">
+                <span class="forum-stats__number" id="statPosts">0</span>
+                <span class="forum-stats__label">Всего сообщений</span>
+            </div>
+            <div class="forum-stats__item">
+                <span class="forum-stats__number" id="statUsers">0</span>
+                <span class="forum-stats__label">Зарегистрировано</span>
+            </div>
+            <div class="forum-stats__item">
+                <span class="forum-stats__number" id="statOnline">0</span>
+                <span class="forum-stats__label">Сейчас онлайн</span>
+            </div>
+            <div class="forum-stats__item">
+                <span class="forum-stats__number" id="statNew">0</span>
+                <span class="forum-stats__label">Новых сегодня</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__column">
+                    <h4>❄️ CRYSTAL RUSSIA</h4>
+                    <a onclick="navigateTo('home')">О проекте</a>
+                    <a onclick="navigateTo('rules')">Правила</a>
+                    <a onclick="navigateTo('privacy')">Политика конфиденциальности</a>
+                    <a onclick="navigateTo('contacts')">Контакты</a>
+                </div>
+                <div class="footer__column">
+                    <h4>📌 Разделы</h4>
+                    <a onclick="navigateTo('news')">Новости</a>
+                    <a onclick="navigateTo('home')">Форум</a>
+                    <a onclick="navigateTo('guides')">Гайды</a>
+                    <a onclick="navigateTo('complaints')">Жалобы</a>
+                </div>
+                <div class="footer__column">
+                    <h4>📱 Соцсети</h4>
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="#"><i class="fab fa-vk"></i> ВКонтакте</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+                <div class="footer__column">
+                    <h4>🛠 Поддержка</h4>
+                    <a onclick="navigateTo('support')">Техподдержка</a>
+                    <a onclick="navigateTo('guides')">FAQ</a>
+                    <a onclick="navigateTo('bugs')">Сообщить о баге</a>
+                    <a href="#">Пожертвовать</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                Copyright © 2025 <span>CRYSTAL RUSSIA</span> — Все права защищены
+            </div>
+        </div>
+    </footer>
+
+</div>
 
 <!-- ========================================================= -->
 <!-- СКРИПТЫ -->
 <!-- ========================================================= -->
 <script>
+    // =========================================================
+    // ДАННЫЕ ПО УМОЛЧАНИЮ
+    // =========================================================
+    const DEFAULT_USERS = [
+        { username: 'Admin', password: 'admin123', role: 'admin' },
+        { username: 'Игрок_228', password: '123456', role: 'user' }
+    ];
+
+    const DEFAULT_CONTENT = {
+        rules: '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Правила чата\n- Запрещен флуд и капс\n- Запрещена реклама сторонних проектов\n- Общение только на русском языке\n\n### 3. Правила боя (DM)\n- Запрещен беспричинный огонь (DM)\n- Обязательно наличие RP-причины\n- Запрещен спаун-киллинг\n\n### 4. Правила транспорта\n- Соблюдайте ПДД\n- Запрещено вождение без прав\n- Запрещен умышленный таран\n\n### 5. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан',
+        guides: '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер с официального сайта\n2. Зарегистрируйтесь на форуме\n3. Установите игру\n4. Запустите лаунчер и войдите в аккаунт\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию работы\n2. Нажмите на кнопку взаимодействия\n3. Выберите желаемую профессию\n4. Следуйте инструкциям на экране\n\n### 🚗 Как получить права?\n1. Придите в автошколу\n2. Сдайте теоретический экзамен\n3. Сдайте практический экзамен\n4. Оплатите пошлину\n\n### 💰 Как заработать деньги?\n- Устройтесь на работу\n- Занимайтесь бизнесом\n- Выполняйте задания\n- Продавайте товары',
+        lore: '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас был основан в 1848 году. За долгие годы он стал центром криминальной деятельности и экономического роста.\n\n### Основные фракции\n\n**LSPD (Полиция Лос-Сантоса)**\nГлавный орган правопорядка в городе. Занимаются патрулированием, раскрытием преступлений и поддержанием порядка.\n\n**FBI (Федеральное бюро расследований)**\nЭлитное подразделение, занимающееся особо важными делами, коррупцией и организованной преступностью.\n\n**Government (Правительство штата)**\nОрган управления, регулирующий экономику, законы и социальную политику.\n\n### Криминальные структуры\n- **Мафия** — организованная преступность\n- **Банды** — уличные группировки\n- **Одиночки** — независимые преступники'
+    };
+
+    // =========================================================
+    // ИНИЦИАЛИЗАЦИЯ ДАННЫХ
+    // =========================================================
+    function initData() {
+        // Пользователи
+        if (!localStorage.getItem('forum_users')) {
+            localStorage.setItem('forum_users', JSON.stringify(DEFAULT_USERS));
+        }
+
+        // Контент (правила, гайды, лор)
+        ['rules', 'guides', 'lore'].forEach(key => {
+            if (!localStorage.getItem('content_' + key)) {
+                localStorage.setItem('content_' + key, DEFAULT_CONTENT[key]);
+            }
+        });
+
+        // Жалобы
+        if (!localStorage.getItem('complaints_player')) {
+            localStorage.setItem('complaints_player', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('complaints_admin')) {
+            localStorage.setItem('complaints_admin', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('complaints_unban')) {
+            localStorage.setItem('complaints_unban', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('complaints_questions')) {
+            localStorage.setItem('complaints_questions', JSON.stringify([]));
+        }
+
+        // Темы
+        if (!localStorage.getItem('forum_topics')) {
+            const defaultTopics = [
+                { id: 1, title: 'Обновление 2.3: Новая система экономики', author: 'Admin', date: 'Сегодня 15:30', replies: 45, views: 1200, status: 'pinned', tag: 'important' },
+                { id: 2, title: 'Как заработать первый миллион? Советы новичкам', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, views: 8400, status: 'hot', tag: 'new' },
+                { id: 3, title: 'Проблема с подключением к серверу (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, views: 3100, status: 'solved', tag: 'answered' },
+                { id: 4, title: 'Жалоба на игрока: NonRP поведение в LSPD', author: 'Игрок_420', date: 'Вчера 18:20', replies: 3, views: 5800, status: '', tag: '' },
+                { id: 5, title: '[Архив] Обсуждение старого обновления', author: 'DevTeam', date: '12.06.2025', replies: 234, views: 9300, status: 'locked', tag: '' }
+            ];
+            localStorage.setItem('forum_topics', JSON.stringify(defaultTopics));
+        }
+
+        // ID темы
+        if (!localStorage.getItem('topic_id_counter')) {
+            localStorage.setItem('topic_id_counter', '6');
+        }
+
+        // ID жалобы
+        if (!localStorage.getItem('complaint_id_counter')) {
+            localStorage.setItem('complaint_id_counter', '1');
+        }
+
+        updateStats();
+    }
+
+    // =========================================================
+    // АВТОРИЗАЦИЯ
+    // =========================================================
+    let currentUser = null;
+
+    function loadUser() {
+        const saved = localStorage.getItem('current_user');
+        if (saved) {
+            currentUser = JSON.parse(saved);
+            showMainContent();
+        }
+    }
+
+    function saveUser(user) {
+        currentUser = user;
+        localStorage.setItem('current_user', JSON.stringify(user));
+        showMainContent();
+    }
+
+    function showMainContent() {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('mainContent').classList.remove('hidden');
+
+        // Обновляем данные пользователя
+        document.getElementById('headerUsername').textContent = currentUser.username;
+        document.getElementById('burgerUsername').textContent = currentUser.username;
+        const avatar = currentUser.username.charAt(0).toUpperCase();
+        document.getElementById('headerAvatar').textContent = avatar;
+        document.getElementById('burgerAvatar').textContent = avatar;
+
+        const badge = document.getElementById('headerBadge');
+        const isAdmin = currentUser.role === 'admin';
+        badge.textContent = isAdmin ? 'Администратор' : 'Игрок';
+        badge.className = 'header__user-badge ' + (isAdmin ? 'badge-admin' : 'badge-user');
+
+        // Показываем кнопку создания темы только админам
+        document.getElementById('createTopicBtn').style.display = isAdmin ? 'inline-flex' : 'none';
+
+        // Обновляем счетчики
+        updateStats();
+        renderTopics();
+        renderComplaints();
+        renderAdminComplaints();
+        renderUnban();
+        renderQuestions();
+
+        // Загружаем контент для правил/гайдов/лора
+        loadContentPage();
+    }
+
+    function login() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const errorEl = document.getElementById('loginError');
+
+        if (!username || !password) {
+            errorEl.textContent = 'Заполните все поля';
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('forum_users'));
+        const user = users.find(u => u.username === username && u.password === password);
+
+        if (user) {
+            errorEl.textContent = '';
+            saveUser(user);
+        } else {
+            errorEl.textContent = 'Неверный логин или пароль';
+        }
+    }
+
+    function register() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const errorEl = document.getElementById('loginError');
+
+        if (!username || !password) {
+            errorEl.textContent = 'Заполните все поля';
+            return;
+        }
+        if (password.length < 4) {
+            errorEl.textContent = 'Пароль должен быть не менее 4 символов';
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('forum_users'));
+        if (users.find(u => u.username === username)) {
+            errorEl.textContent = 'Пользователь с таким именем уже существует';
+            return;
+        }
+
+        users.push({ username, password, role: 'user' });
+        localStorage.setItem('forum_users', JSON.stringify(users));
+        errorEl.textContent = 'Регистрация успешна! Теперь войдите.';
+        document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
+        document.getElementById('loginBtn').textContent = 'Войти';
+        document.getElementById('registerText').innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
+        document.getElementById('toggleAuth').onclick = toggleAuth;
+    }
+
+    function toggleAuth() {
+        const subtitle = document.getElementById('loginSubtitle');
+        const btn = document.getElementById('loginBtn');
+        const text = document.getElementById('registerText');
+
+        if (btn.textContent === 'Войти') {
+            subtitle.textContent = 'Создайте новый аккаунт';
+            btn.textContent = 'Зарегистрироваться';
+            text.innerHTML = 'Уже есть аккаунт? <a id="toggleAuth">Войти</a>';
+            btn.onclick = register;
+        } else {
+            subtitle.textContent = 'Войдите в свой аккаунт';
+            btn.textContent = 'Войти';
+            text.innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
+            btn.onclick = login;
+        }
+        document.getElementById('toggleAuth').onclick = toggleAuth;
+        document.getElementById('loginError').textContent = '';
+    }
+
+    function logout() {
+        localStorage.removeItem('current_user');
+        currentUser = null;
+        document.getElementById('mainContent').classList.add('hidden');
+        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('loginError').textContent = '';
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPassword').value = '';
+        document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
+        document.getElementById('loginBtn').textContent = 'Войти';
+        document.getElementById('loginBtn').onclick = login;
+        document.getElementById('registerText').innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
+        document.getElementById('toggleAuth').onclick = toggleAuth;
+    }
+
+    // =========================================================
+    // НАВИГАЦИЯ
+    // =========================================================
+    const pageMap = {
+        'home': 'page-home',
+        'rules': 'page-content',
+        'guides': 'page-content',
+        'lore': 'page-content',
+        'complaints': 'page-complaints',
+        'admin-complaints': 'page-admin-complaints',
+        'unban': 'page-unban',
+        'questions': 'page-questions'
+    };
+
+    const pageTitles = {
+        'rules': '📜 Правила проекта',
+        'guides': '📚 Гайды и FAQ',
+        'lore': '🌍 Лор мира'
+    };
+
+    const pageSubtitles = {
+        'rules': 'Полные правила сервера с примерами нарушений и наказаний',
+        'guides': 'Инструкции для новичков и ответы на частые вопросы',
+        'lore': 'История мира, описание фракций и их задач'
+    };
+
+    const contentKeys = {
+        'rules': 'rules',
+        'guides': 'guides',
+        'lore': 'lore'
+    };
+
+    let currentPage = 'home';
+
+    function navigateTo(page) {
+        // Скрываем все страницы
+        document.querySelectorAll('#pageContainer > div').forEach(el => {
+            el.classList.add('hidden');
+        });
+
+        const target = document.getElementById(pageMap[page]);
+        if (target) {
+            target.classList.remove('hidden');
+            currentPage = page;
+        }
+
+        // Если это страница контента - загружаем
+        if (['rules', 'guides', 'lore'].includes(page)) {
+            const editor = document.getElementById('contentEditor');
+            const key = contentKeys[page];
+            editor.value = localStorage.getItem('content_' + key) || '';
+            document.getElementById('contentTitle').textContent = pageTitles[page] || 'Страница';
+            document.getElementById('contentSubtitle').textContent = pageSubtitles[page] || 'Редактируйте контент этой страницы';
+            // Сохраняем текущую страницу для сохранения
+            editor.dataset.contentKey = key;
+        }
+
+        // Обновляем счетчики жалоб
+        if (page === 'complaints') renderComplaints();
+        if (page === 'admin-complaints') renderAdminComplaints();
+        if (page === 'unban') renderUnban();
+        if (page === 'questions') renderQuestions();
+
+        // Закрываем меню на мобильных
+        if (window.innerWidth <= 768) toggleMenu();
+
+        // Обновляем последние темы на главной
+        if (page === 'home') {
+            renderTopics();
+            updateStats();
+        }
+
+        window.scrollTo(0, 0);
+    }
+
+    function saveContent() {
+        const editor = document.getElementById('contentEditor');
+        const key = editor.dataset.contentKey;
+        if (key) {
+            localStorage.setItem('content_' + key, editor.value);
+            alert('✅ Контент сохранен!');
+        }
+    }
+
+    function loadContentPage() {
+        // Ничего не делаем, загружается при переходе
+    }
+
+    // =========================================================
+    // СОЗДАНИЕ ТЕМ (ТОЛЬКО ДЛЯ АДМИНОВ)
+    // =========================================================
+    function showCreateTopic() {
+        if (!currentUser || currentUser.role !== 'admin') {
+            alert('⛔ Только администраторы могут создавать темы!');
+            return;
+        }
+
+        const title = prompt('Введите заголовок темы:');
+        if (!title) return;
+
+        const topics = JSON.parse(localStorage.getItem('forum_topics'));
+        const id = parseInt(localStorage.getItem('topic_id_counter')) || 1;
+
+        const newTopic = {
+            id: id,
+            title: title,
+            author: currentUser.username,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            replies: 0,
+            views: 0,
+            status: '',
+            tag: ''
+        };
+
+        topics.unshift(newTopic);
+        localStorage.setItem('forum_topics', JSON.stringify(topics));
+        localStorage.setItem('topic_id_counter', String(id + 1));
+
+        alert('✅ Тема "' + title + '" создана!');
+        renderTopics();
+        updateStats();
+    }
+
+    function renderTopics() {
+        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        const container = document.getElementById('topicList');
+
+        if (topics.length === 0) {
+            container.innerHTML = '<div class="no-complaints"><i class="fas fa-comments"></i>Нет созданных тем</div>';
+            return;
+        }
+
+        container.innerHTML = topics.map(t => {
+            const statusIcon = t.status === 'pinned' ? '<i class="fas fa-thumbtack"></i>' :
+                t.status === 'hot' ? '<i class="fas fa-fire"></i>' :
+                t.status === 'solved' ? '<i class="fas fa-check-circle"></i>' :
+                t.status === 'locked' ? '<i class="fas fa-lock"></i>' :
+                '<i class="fas fa-comment"></i>';
+
+            const statusClass = t.status || '';
+
+            const tagHtml = t.tag === 'important' ? '<span class="topic-item__tag tag-important">ВАЖНО</span>' :
+                t.tag === 'new' ? '<span class="topic-item__tag tag-new">НОВОЕ</span>' :
+                t.tag === 'answered' ? '<span class="topic-item__tag tag-answered">РЕШЕНО</span>' :
+                '';
+
+            return `
+                    <div class="topic-item">
+                        <div class="topic-item__left">
+                            <span class="topic-item__status ${statusClass}">${statusIcon}</span>
+                            <div>
+                                <div class="topic-item__title">
+                                    <a href="#">${t.title}</a>
+                                    ${tagHtml}
+                                </div>
+                                <div class="topic-item__meta">
+                                    <span>Автор: <strong>${t.author}</strong></span>
+                                    <span>📅 ${t.date}</span>
+                                    <span>💬 ${t.replies} ответов</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="topic-item__right">
+                            <span class="author">Последний: <strong>${t.author}</strong></span>
+                            <span class="date">${t.date}</span>
+                        </div>
+                    </div>
+                `;
+        }).join('');
+    }
+
+    // =========================================================
+    // СТАТИСТИКА
+    // =========================================================
+    function updateStats() {
+        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        const complaints = JSON.parse(localStorage.getItem('complaints_player')) || [];
+        const questions = JSON.parse(localStorage.getItem('complaints_questions')) || [];
+
+        const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0);
+
+        document.getElementById('totalUsers').textContent = users.length;
+        document.getElementById('statUsers').textContent = users.length;
+        document.getElementById('statTopics').textContent = topics.length;
+        document.getElementById('statPosts').textContent = totalPosts;
+        document.getElementById('statOnline').textContent = Math.floor(Math.random() * 200) + 50;
+        document.getElementById('statNew').textContent = Math.floor(Math.random() * 30) + 5;
+
+        // Онлайн
+        const online = Math.floor(Math.random() * 150) + 50;
+        document.getElementById('onlineCount').textContent = online;
+        document.getElementById('serverOnline').textContent = online;
+
+        // Жалобы
+        const totalComplaints = complaints.length + questions.length;
+        document.getElementById('complaintsBadge').textContent = totalComplaints;
+        document.getElementById('complaintsBadgeCard').textContent = totalComplaints;
+        document.getElementById('complaintsTotal').textContent = complaints.length + 50;
+    }
+
+    // =========================================================
+    // ЖАЛОБЫ НА ИГРОКОВ
+    // =========================================================
+    function showComplaintForm() {
+        document.getElementById('complaintForm').classList.remove('hidden');
+        document.getElementById('complaintForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideComplaintForm() {
+        document.getElementById('complaintForm').classList.add('hidden');
+        document.getElementById('complaintTarget').value = '';
+        document.getElementById('complaintAuthor').value = '';
+        document.getElementById('complaintTitle').value = '';
+        document.getElementById('complaintDesc').value = '';
+    }
+
+    function submitComplaint(type) {
+        const isAdmin = type === 'admin';
+        const targetId = isAdmin ? 'adminComplaintTarget' : 'complaintTarget';
+        const authorId = isAdmin ? 'adminComplaintAuthor' : 'complaintAuthor';
+        const titleId = isAdmin ? 'adminComplaintTitle' : 'complaintTitle';
+        const descId = isAdmin ? 'adminComplaintDesc' : 'complaintDesc';
+        const listId = isAdmin ? 'adminComplaintsList' : 'complaintsList';
+        const storageKey = isAdmin ? 'complaints_admin' : 'complaints_player';
+        const formId = isAdmin ? 'adminComplaintForm' : 'complaintForm';
+
+        const target = document.getElementById(targetId).value.trim();
+        const author = document.getElementById(authorId).value.trim();
+        const title = document.getElementById(titleId).value.trim();
+        const desc = document.getElementById(descId).value.trim();
+
+        if (!target || !author || !title || !desc) {
+            alert('⚠️ Заполните все поля!');
+            return;
+        }
+
+        const complaints = JSON.parse(localStorage.getItem(storageKey)) || [];
+        const id = parseInt(localStorage.getItem('complaint_id_counter')) || 1;
+
+        complaints.unshift({
+            id: id,
+            target: target,
+            author: author,
+            title: title,
+            desc: desc,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            status: 'new',
+            answer: ''
+        });
+
+        localStorage.setItem(storageKey, JSON.stringify(complaints));
+        localStorage.setItem('complaint_id_counter', String(id + 1));
+
+        alert('✅ Жалоба отправлена!');
+
+        // Очищаем форму
+        document.getElementById(targetId).value = '';
+        document.getElementById(authorId).value = '';
+        document.getElementById(titleId).value = '';
+        document.getElementById(descId).value = '';
+        document.getElementById(formId).classList.add('hidden');
+
+        // Обновляем список
+        if (isAdmin) {
+            renderAdminComplaints();
+        } else {
+            renderComplaints();
+        }
+        updateStats();
+    }
+
+    function renderComplaints() {
+        const complaints = JSON.parse(localStorage.getItem('complaints_player')) || [];
+        const container = document.getElementById('complaintsList');
+
+        if (complaints.length === 0) {
+            container.innerHTML = '<div class="no-complaints"><i class="fas fa-check-circle"></i>Нет активных жалоб</div>';
+            return;
+        }
+
+        container.innerHTML = complaints.map(c => {
+            const statusClass = c.status === 'new' ? 'status-new' :
+                c.status === 'review' ? 'status-review' :
+                c.status === 'answered' ? 'status-answered' :
+                'status-rejected';
+
+            const statusText = c.status === 'new' ? 'Новая' :
+                c.status === 'review' ? 'Рассматривается' :
+                c.status === 'answered' ? 'Отвечено' :
+                'Отклонено';
+
+            const answerHtml = c.answer ? `
+                    <div class="complaint-item__answer">
+                        <strong>📩 Ответ администрации:</strong> ${c.answer}
+                    </div>
+                ` : '';
+
+            const actionsHtml = currentUser && currentUser.role === 'admin' ? `
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-success" onclick="answerComplaint('player', ${c.id})">
+                            <i class="fas fa-reply"></i> Ответить
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="changeComplaintStatus('player', ${c.id}, 'review')">
+                            В работу
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="changeComplaintStatus('player', ${c.id}, 'answered')">
+                            ✅ Решить
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="changeComplaintStatus('player', ${c.id}, 'rejected')">
+                            ❌ Отклонить
+                        </button>
+                    </div>
+                ` : '';
+
+            return `
+                    <div class="complaint-item">
+                        <div class="complaint-item__header">
+                            <span class="complaint-item__title">${c.title}</span>
+                            <span class="complaint-item__status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="complaint-item__meta">
+                            <span>👤 Нарушитель: <strong>${c.target}</strong></span>
+                            <span>📝 Автор: <strong>${c.author}</strong></span>
+                            <span>📅 ${c.date}</span>
+                        </div>
+                        <div class="complaint-item__body">
+                            ${c.desc}
+                        </div>
+                        ${answerHtml}
+                        ${actionsHtml}
+                    </div>
+                `;
+        }).join('');
+    }
+
+    function renderAdminComplaints() {
+        const complaints = JSON.parse(localStorage.getItem('complaints_admin')) || [];
+        const container = document.getElementById('adminComplaintsList');
+
+        if (complaints.length === 0) {
+            container.innerHTML = '<div class="no-complaints"><i class="fas fa-check-circle"></i>Нет жалоб на администрацию</div>';
+            return;
+        }
+
+        container.innerHTML = complaints.map(c => {
+            const statusClass = c.status === 'new' ? 'status-new' :
+                c.status === 'review' ? 'status-review' :
+                c.status === 'answered' ? 'status-answered' :
+                'status-rejected';
+
+            const statusText = c.status === 'new' ? 'Новая' :
+                c.status === 'review' ? 'Рассматривается' :
+                c.status === 'answered' ? 'Отвечено' :
+                'Отклонено';
+
+            const answerHtml = c.answer ? `
+                    <div class="complaint-item__answer">
+                        <strong>📩 Ответ администрации:</strong> ${c.answer}
+                    </div>
+                ` : '';
+
+            const actionsHtml = currentUser && currentUser.role === 'admin' ? `
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-success" onclick="answerComplaint('admin', ${c.id})">
+                            <i class="fas fa-reply"></i> Ответить
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="changeComplaintStatus('admin', ${c.id}, 'review')">
+                            В работу
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="changeComplaintStatus('admin', ${c.id}, 'answered')">
+                            ✅ Решить
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="changeComplaintStatus('admin', ${c.id}, 'rejected')">
+                            ❌ Отклонить
+                        </button>
+                    </div>
+                ` : '';
+
+            return `
+                    <div class="complaint-item">
+                        <div class="complaint-item__header">
+                            <span class="complaint-item__title">${c.title}</span>
+                            <span class="complaint-item__status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="complaint-item__meta">
+                            <span>👤 Администратор: <strong>${c.target}</strong></span>
+                            <span>📝 Автор: <strong>${c.author}</strong></span>
+                            <span>📅 ${c.date}</span>
+                        </div>
+                        <div class="complaint-item__body">
+                            ${c.desc}
+                        </div>
+                        ${answerHtml}
+                        ${actionsHtml}
+                    </div>
+                `;
+        }).join('');
+    }
+
+    function showAdminComplaintForm() {
+        document.getElementById('adminComplaintForm').classList.remove('hidden');
+        document.getElementById('adminComplaintForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideAdminComplaintForm() {
+        document.getElementById('adminComplaintForm').classList.add('hidden');
+        document.getElementById('adminComplaintTarget').value = '';
+        document.getElementById('adminComplaintAuthor').value = '';
+        document.getElementById('adminComplaintTitle').value = '';
+        document.getElementById('adminComplaintDesc').value = '';
+    }
+
+    // =========================================================
+    // ЗАЯВКИ НА РАЗБАН
+    // =========================================================
+    function showUnbanForm() {
+        document.getElementById('unbanForm').classList.remove('hidden');
+        document.getElementById('unbanForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideUnbanForm() {
+        document.getElementById('unbanForm').classList.add('hidden');
+        document.getElementById('unbanAuthor').value = '';
+        document.getElementById('unbanTitle').value = '';
+        document.getElementById('unbanDesc').value = '';
+    }
+
+    function submitUnban() {
+        const author = document.getElementById('unbanAuthor').value.trim();
+        const title = document.getElementById('unbanTitle').value.trim();
+        const desc = document.getElementById('unbanDesc').value.trim();
+
+        if (!author || !title || !desc) {
+            alert('⚠️ Заполните все поля!');
+            return;
+        }
+
+        const complaints = JSON.parse(localStorage.getItem('complaints_unban')) || [];
+        const id = parseInt(localStorage.getItem('complaint_id_counter')) || 1;
+
+        complaints.unshift({
+            id: id,
+            author: author,
+            title: title,
+            desc: desc,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            status: 'new',
+            answer: ''
+        });
+
+        localStorage.setItem('complaints_unban', JSON.stringify(complaints));
+        localStorage.setItem('complaint_id_counter', String(id + 1));
+
+        alert('✅ Заявка на разбан отправлена!');
+        hideUnbanForm();
+        renderUnban();
+        updateStats();
+    }
+
+    function renderUnban() {
+        const complaints = JSON.parse(localStorage.getItem('complaints_unban')) || [];
+        const container = document.getElementById('unbanList');
+
+        if (complaints.length === 0) {
+            container.innerHTML = '<div class="no-complaints"><i class="fas fa-unlock"></i>Нет заявок на разбан</div>';
+            return;
+        }
+
+        container.innerHTML = complaints.map(c => {
+            const statusClass = c.status === 'new' ? 'status-new' :
+                c.status === 'review' ? 'status-review' :
+                c.status === 'answered' ? 'status-answered' :
+                'status-rejected';
+
+            const statusText = c.status === 'new' ? 'Новая' :
+                c.status === 'review' ? 'Рассматривается' :
+                c.status === 'answered' ? 'Отвечено' :
+                'Отклонено';
+
+            const answerHtml = c.answer ? `
+                    <div class="complaint-item__answer">
+                        <strong>📩 Ответ администрации:</strong> ${c.answer}
+                    </div>
+                ` : '';
+
+            const actionsHtml = currentUser && currentUser.role === 'admin' ? `
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-success" onclick="answerComplaint('unban', ${c.id})">
+                            <i class="fas fa-reply"></i> Ответить
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="changeComplaintStatus('unban', ${c.id}, 'review')">
+                            В работу
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="changeComplaintStatus('unban', ${c.id}, 'answered')">
+                            ✅ Одобрить
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="changeComplaintStatus('unban', ${c.id}, 'rejected')">
+                            ❌ Отклонить
+                        </button>
+                    </div>
+                ` : '';
+
+            return `
+                    <div class="complaint-item">
+                        <div class="complaint-item__header">
+                            <span class="complaint-item__title">${c.title}</span>
+                            <span class="complaint-item__status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="complaint-item__meta">
+                            <span>📝 Автор: <strong>${c.author}</strong></span>
+                            <span>📅 ${c.date}</span>
+                        </div>
+                        <div class="complaint-item__body">
+                            ${c.desc}
+                        </div>
+                        ${answerHtml}
+                        ${actionsHtml}
+                    </div>
+                `;
+        }).join('');
+    }
+
+    // =========================================================
+    // ВОПРОСЫ К АДМИНИСТРАЦИИ
+    // =========================================================
+    function showQuestionForm() {
+        document.getElementById('questionForm').classList.remove('hidden');
+        document.getElementById('questionForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideQuestionForm() {
+        document.getElementById('questionForm').classList.add('hidden');
+        document.getElementById('questionAuthor').value = '';
+        document.getElementById('questionTitle').value = '';
+        document.getElementById('questionDesc').value = '';
+    }
+
+    function submitQuestion() {
+        const author = document.getElementById('questionAuthor').value.trim();
+        const title = document.getElementById('questionTitle').value.trim();
+        const desc = document.getElementById('questionDesc').value.trim();
+
+        if (!author || !title || !desc) {
+            alert('⚠️ Заполните все поля!');
+            return;
+        }
+
+        const complaints = JSON.parse(localStorage.getItem('complaints_questions')) || [];
+        const id = parseInt(localStorage.getItem('complaint_id_counter')) || 1;
+
+        complaints.unshift({
+            id: id,
+            author: author,
+            title: title,
+            desc: desc,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            status: 'new',
+            answer: ''
+        });
+
+        localStorage.setItem('complaints_questions', JSON.stringify(complaints));
+        localStorage.setItem('complaint_id_counter', String(id + 1));
+
+        alert('✅ Вопрос отправлен!');
+        hideQuestionForm();
+        renderQuestions();
+        updateStats();
+    }
+
+    function renderQuestions() {
+        const complaints = JSON.parse(localStorage.getItem('complaints_questions')) || [];
+        const container = document.getElementById('questionsList');
+
+        if (complaints.length === 0) {
+            container.innerHTML = '<div class="no-complaints"><i class="fas fa-question-circle"></i>Нет вопросов</div>';
+            return;
+        }
+
+        container.innerHTML = complaints.map(c => {
+            const statusClass = c.status === 'new' ? 'status-new' :
+                c.status === 'review' ? 'status-review' :
+                c.status === 'answered' ? 'status-answered' :
+                'status-rejected';
+
+            const statusText = c.status === 'new' ? 'Новый' :
+                c.status === 'review' ? 'Рассматривается' :
+                c.status === 'answered' ? 'Отвечено' :
+                'Отклонён';
+
+            const answerHtml = c.answer ? `
+                    <div class="complaint-item__answer">
+                        <strong>📩 Ответ администрации:</strong> ${c.answer}
+                    </div>
+                ` : '';
+
+            const actionsHtml = currentUser && currentUser.role === 'admin' ? `
+                    <div class="complaint-item__actions">
+                        <button class="btn btn-sm btn-success" onclick="answerComplaint('questions', ${c.id})">
+                            <i class="fas fa-reply"></i> Ответить
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="changeComplaintStatus('questions', ${c.id}, 'review')">
+                            В работу
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="changeComplaintStatus('questions', ${c.id}, 'answered')">
+                            ✅ Ответить
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="changeComplaintStatus('questions', ${c.id}, 'rejected')">
+                            ❌ Отклонить
+                        </button>
+                    </div>
+                ` : '';
+
+            return `
+                    <div class="complaint-item">
+                        <div class="complaint-item__header">
+                            <span class="complaint-item__title">${c.title}</span>
+                            <span class="complaint-item__status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="complaint-item__meta">
+                            <span>📝 Автор: <strong>${c.author}</strong></span>
+                            <span>📅 ${c.date}</span>
+                        </div>
+                        <div class="complaint-item__body">
+                            ${c.desc}
+                        </div>
+                        ${answerHtml}
+                        ${actionsHtml}
+                    </div>
+                `;
+        }).join('');
+    }
+
+    // =========================================================
+    // ОТВЕТЫ АДМИНИСТРАТОРОВ НА ЖАЛОБЫ
+    // =========================================================
+    function answerComplaint(type, id) {
+        if (!currentUser || currentUser.role !== 'admin') {
+            alert('⛔ Только администраторы могут отвечать!');
+            return;
+        }
+
+        const answer = prompt('Введите ответ на жалобу:');
+        if (answer === null) return;
+        if (!answer.trim()) {
+            alert('⚠️ Введите текст ответа!');
+            return;
+        }
+
+        const storageMap = {
+            'player': 'complaints_player',
+            'admin': 'complaints_admin',
+            'unban': 'complaints_unban',
+            'questions': 'complaints_questions'
+        };
+
+        const key = storageMap[type];
+        if (!key) return;
+
+        const items = JSON.parse(localStorage.getItem(key)) || [];
+        const index = items.findIndex(i => i.id === id);
+        if (index === -1) return;
+
+        items[index].answer = answer.trim();
+        items[index].status = 'answered';
+        localStorage.setItem(key, JSON.stringify(items));
+
+        // Обновляем список
+        if (type === 'player') renderComplaints();
+        else if (type === 'admin') renderAdminComplaints();
+        else if (type === 'unban') renderUnban();
+        else if (type === 'questions') renderQuestions();
+
+        alert('✅ Ответ добавлен!');
+    }
+
+    function changeComplaintStatus(type, id, status) {
+        if (!currentUser || currentUser.role !== 'admin') {
+            alert('⛔ Только администраторы могут менять статус!');
+            return;
+        }
+
+        const storageMap = {
+            'player': 'complaints_player',
+            'admin': 'complaints_admin',
+            'unban': 'complaints_unban',
+            'questions': 'complaints_questions'
+        };
+
+        const key = storageMap[type];
+        if (!key) return;
+
+        const items = JSON.parse(localStorage.getItem(key)) || [];
+        const index = items.findIndex(i => i.id === id);
+        if (index === -1) return;
+
+        items[index].status = status;
+        localStorage.setItem(key, JSON.stringify(items));
+
+        // Обновляем список
+        if (type === 'player') renderComplaints();
+        else if (type === 'admin') renderAdminComplaints();
+        else if (type === 'unban') renderUnban();
+        else if (type === 'questions') renderQuestions();
+
+        alert('✅ Статус изменен!');
+    }
+
     // =========================================================
     // БУРГЕР-МЕНЮ
     // =========================================================
@@ -1458,30 +2821,8 @@
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     }
 
-    // Закрытие по оверлею
     document.getElementById('burgerOverlay').addEventListener('click', toggleMenu);
 
-    // Закрытие по клику на ссылку
-    document.querySelectorAll('.burger-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) toggleMenu();
-        });
-    });
-
-    // =========================================================
-    // ОНЛАЙН (симуляция)
-    // =========================================================
-    function updateOnline() {
-        const online = Math.floor(Math.random() * 150) + 50;
-        document.getElementById('onlineCount').textContent = online;
-        document.getElementById('serverOnline').textContent = online;
-    }
-    updateOnline();
-    setInterval(updateOnline, 10000);
-
-    // =========================================================
-    // ЗАКРЫТИЕ МЕНЮ ПРИ ESC
-    // =========================================================
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const menu = document.getElementById('burgerMenu');
@@ -1489,7 +2830,41 @@
         }
     });
 
-    console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
+    // =========================================================
+    // ОНЛАЙН
+    // =========================================================
+    function updateOnline() {
+        const online = Math.floor(Math.random() * 150) + 50;
+        document.getElementById('onlineCount').textContent = online;
+        document.getElementById('serverOnline').textContent = online;
+    }
+    setInterval(updateOnline, 10000);
+
+    // =========================================================
+    // ЗАПУСК
+    // =========================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        initData();
+
+        // Настройка входа
+        document.getElementById('loginBtn').onclick = login;
+        document.getElementById('toggleAuth').onclick = toggleAuth;
+
+        // Enter для входа
+        document.getElementById('loginPassword').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') login();
+        });
+        document.getElementById('loginUsername').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') login();
+        });
+
+        // Загружаем пользователя
+        loadUser();
+
+        console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
+        console.log('👤 Админ: Admin / admin123');
+        console.log('👤 Игрок: Игрок_228 / 123456');
+    });
 </script>
 
 </body>
