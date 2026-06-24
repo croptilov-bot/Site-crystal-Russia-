@@ -32,7 +32,6 @@ class ForumDatabase {
             const saved = localStorage.getItem('forum_database');
             if (saved) {
                 const parsed = JSON.parse(saved);
-                // Объединяем с дефолтными данными, чтобы не потерять структуру
                 this.data = this.mergeDeep(this.data, parsed);
             }
         } catch (e) {
@@ -44,22 +43,8 @@ class ForumDatabase {
     save() {
         try {
             localStorage.setItem('forum_database', JSON.stringify(this.data));
-            // Также сохраняем в отдельный файл для совместимости
-            this.exportToFile();
         } catch (e) {
             console.error('Ошибка сохранения базы данных:', e);
-        }
-    }
-
-    // Экспорт данных в файл (для скачивания)
-    exportToFile() {
-        try {
-            const blob = new Blob([JSON.stringify(this.data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            // Сохраняем ссылку для скачивания
-            window._dbExportUrl = url;
-        } catch (e) {
-            console.error('Ошибка экспорта данных:', e);
         }
     }
 
@@ -147,7 +132,6 @@ class ForumDatabase {
             admin,
             date: new Date().toISOString()
         });
-        // Делаем пользователя офлайн
         this.setUserOnline(username, false);
         this.save();
         return true;
@@ -196,7 +180,6 @@ class ForumDatabase {
     isMuted(username) {
         const mute = this.data.muted.find(m => m.username === username);
         if (!mute) return false;
-        // Проверяем, не истек ли мут
         if (new Date(mute.endDate) < new Date()) {
             this.unmuteUser(username);
             return false;
@@ -215,7 +198,6 @@ class ForumDatabase {
     addDeveloper(username) {
         if (this.data.developers.includes(username)) return false;
         this.data.developers.push(username);
-        // Обновляем роль пользователя
         const user = this.getUser(username);
         if (user) {
             user.role = 'developer';
@@ -263,7 +245,8 @@ class ForumDatabase {
     // =========================================================
     
     addTopic(topic) {
-        topic.id = this.data.topics.length + 1;
+        const topics = this.data.topics || [];
+        topic.id = topics.length > 0 ? Math.max(...topics.map(t => t.id)) + 1 : 1;
         topic.created = new Date().toISOString();
         this.data.topics.unshift(topic);
         this.save();
@@ -271,11 +254,11 @@ class ForumDatabase {
     }
 
     getTopics() {
-        return this.data.topics;
+        return this.data.topics || [];
     }
 
     deleteTopic(id) {
-        this.data.topics = this.data.topics.filter(t => t.id !== id);
+        this.data.topics = (this.data.topics || []).filter(t => t.id !== id);
         this.save();
         return true;
     }
@@ -285,7 +268,8 @@ class ForumDatabase {
     // =========================================================
     
     addNews(news) {
-        news.id = this.data.news.length + 1;
+        const newsList = this.data.news || [];
+        news.id = newsList.length > 0 ? Math.max(...newsList.map(n => n.id)) + 1 : 1;
         news.created = new Date().toISOString();
         this.data.news.unshift(news);
         this.save();
@@ -293,11 +277,43 @@ class ForumDatabase {
     }
 
     getNews() {
-        return this.data.news;
+        return this.data.news || [];
     }
 
     deleteNews(id) {
-        this.data.news = this.data.news.filter(n => n.id !== id);
+        this.data.news = (this.data.news || []).filter(n => n.id !== id);
+        this.save();
+        return true;
+    }
+
+    // =========================================================
+    // УПРАВЛЕНИЕ ИВЕНТАМИ
+    // =========================================================
+    
+    addEvent(event) {
+        const events = this.data.events || [];
+        event.id = events.length > 0 ? Math.max(...events.map(e => e.id)) + 1 : 1;
+        event.created = new Date().toISOString();
+        this.data.events.unshift(event);
+        this.save();
+        return event;
+    }
+
+    getEvents() {
+        return this.data.events || [];
+    }
+
+    updateEvent(id, updates) {
+        const events = this.data.events || [];
+        const index = events.findIndex(e => e.id === id);
+        if (index === -1) return false;
+        Object.assign(events[index], updates);
+        this.save();
+        return true;
+    }
+
+    deleteEvent(id) {
+        this.data.events = (this.data.events || []).filter(e => e.id !== id);
         this.save();
         return true;
     }
@@ -307,7 +323,8 @@ class ForumDatabase {
     // =========================================================
     
     addChatMessage(message) {
-        message.id = this.data.chat.length + 1;
+        const chat = this.data.chat || [];
+        message.id = chat.length > 0 ? Math.max(...chat.map(m => m.id)) + 1 : 1;
         message.time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
         this.data.chat.push(message);
         this.save();
@@ -315,11 +332,11 @@ class ForumDatabase {
     }
 
     getChatMessages() {
-        return this.data.chat;
+        return this.data.chat || [];
     }
 
     deleteChatMessage(id) {
-        this.data.chat = this.data.chat.filter(m => m.id !== id);
+        this.data.chat = (this.data.chat || []).filter(m => m.id !== id);
         this.save();
         return true;
     }
@@ -335,7 +352,8 @@ class ForumDatabase {
     // =========================================================
     
     addComplaint(type, complaint) {
-        complaint.id = this.data.complaints[type].length + 1;
+        const complaints = this.data.complaints[type] || [];
+        complaint.id = complaints.length > 0 ? Math.max(...complaints.map(c => c.id)) + 1 : 1;
         complaint.created = new Date().toISOString();
         this.data.complaints[type].unshift(complaint);
         this.save();
@@ -365,7 +383,8 @@ class ForumDatabase {
     // =========================================================
     
     addApplication(type, application) {
-        application.id = this.data.applications[type].length + 1;
+        const apps = this.data.applications[type] || [];
+        application.id = apps.length > 0 ? Math.max(...apps.map(a => a.id)) + 1 : 1;
         application.created = new Date().toISOString();
         this.data.applications[type].unshift(application);
         this.save();
@@ -395,7 +414,8 @@ class ForumDatabase {
     // =========================================================
     
     addNotification(notification) {
-        notification.id = this.data.notifications.length + 1;
+        const notifs = this.data.notifications || [];
+        notification.id = notifs.length > 0 ? Math.max(...notifs.map(n => n.id)) + 1 : 1;
         notification.created = new Date().toISOString();
         this.data.notifications.unshift(notification);
         this.save();
@@ -403,7 +423,7 @@ class ForumDatabase {
     }
 
     getNotifications() {
-        return this.data.notifications;
+        return this.data.notifications || [];
     }
 
     markNotificationRead(id) {
@@ -422,6 +442,10 @@ class ForumDatabase {
         return true;
     }
 
+    getUnreadNotifications() {
+        return (this.data.notifications || []).filter(n => !n.read);
+    }
+
     // =========================================================
     // СТАТИСТИКА
     // =========================================================
@@ -430,14 +454,16 @@ class ForumDatabase {
         return {
             totalUsers: this.data.users.length,
             onlineUsers: this.data.users.filter(u => u.online).length,
-            totalTopics: this.data.topics.length,
-            totalNews: this.data.news.length,
-            totalChatMessages: this.data.chat.length,
+            totalTopics: (this.data.topics || []).length,
+            totalNews: (this.data.news || []).length,
+            totalEvents: (this.data.events || []).length,
+            totalChatMessages: (this.data.chat || []).length,
             totalBanned: this.data.banned.length,
             totalMuted: this.data.muted.length,
             totalDevelopers: this.data.developers.length,
             totalComplaints: Object.values(this.data.complaints).reduce((sum, arr) => sum + arr.length, 0),
-            totalApplications: Object.values(this.data.applications).reduce((sum, arr) => sum + arr.length, 0)
+            totalApplications: Object.values(this.data.applications).reduce((sum, arr) => sum + arr.length, 0),
+            totalNotifications: (this.data.notifications || []).length
         };
     }
 
@@ -471,15 +497,68 @@ class ForumDatabase {
         a.click();
         URL.revokeObjectURL(url);
     }
+
+    // =========================================================
+    // ИНИЦИАЛИЗАЦИЯ ДЕФОЛТНЫХ ДАННЫХ
+    // =========================================================
+    
+    initDefaultData() {
+        if (this.data.users.length === 0) {
+            this.addUser({ username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru' });
+            this.addUser({ username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru' });
+            this.addUser({ username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user' });
+            this.addDeveloper('Artyom_Orlov');
+            
+            this.setContent('rules', '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан');
+            
+            this.setContent('guides', '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер\n2. Зарегистрируйтесь\n3. Установите игру\n4. Запустите лаунчер\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию\n2. Нажмите взаимодействие\n3. Выберите профессию');
+            
+            this.setContent('lore', '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас основан в 1848 году.\n\n### Основные фракции\n**LSPD** — полиция\n**FBI** — федералы\n**Government** — правительство');
+            
+            this.setContent('lspd', '## 👮 LSPD - ПОЛИЦИЯ ЛОС-САНТОСА\n\n### Устав\nПолиция Лос-Сантоса (LSPD) является главным органом правопорядка в городе.\n\n### Состав\n- Начальник полиции\n- Капитаны\n- Лейтенанты\n- Сержанты\n- Офицеры');
+            
+            this.setContent('government', '## 🏛️ GOVERNMENT - ПРАВИТЕЛЬСТВО ШТАТА\n\n### Функции\n- Регулирование экономики\n- Принятие законов\n- Социальная политика\n\n### Структура\n- Губернатор\n- Сенат\n- Департаменты');
+            
+            this.setContent('mafia', '## 🔫 МАФИИ И БАНДЫ\n\n### Криминальные структуры\n\n**Мафия**\nОрганизованная преступность с четкой иерархией.\n\n**Банды**\nУличные группировки, контролирующие территории.');
+            
+            this.setContent('business', '## 🏪 БИЗНЕС И ОРГАНИЗАЦИИ\n\n### Легальный бизнес\n\n**Автосалоны**\nПродажа и покупка автомобилей\n\n**Клубы и бары**\nРазвлекательные заведения');
+            
+            this.addTopic({
+                title: 'Добро пожаловать на CRYSTAL RUSSIA!',
+                author: 'Admin',
+                content: 'Приветствуем всех на нашем RP проекте!',
+                date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+                replies: 0,
+                views: 0,
+                status: 'pinned',
+                tag: 'important'
+            });
+            
+            this.addNews({
+                title: 'Запуск CRYSTAL RUSSIA!',
+                author: 'Admin',
+                content: 'Добро пожаловать на наш новый RP проект!',
+                images: []
+            });
+            
+            this.addEvent({
+                title: '🎉 Открытие сервера',
+                author: 'Admin',
+                desc: 'Грандиозное открытие с конкурсами и подарками',
+                status: 'active',
+                participants: 0,
+                images: []
+            });
+            
+            this.save();
+            console.log('✅ Дефолтные данные инициализированы!');
+        }
+    }
 }
 
 // Создаем глобальный экземпляр базы данных
 const DB = new ForumDatabase();
-
-// Экспортируем для использования
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { ForumDatabase, DB };
-}
+DB.initDefaultData();
 
 console.log('✅ База данных загружена!');
 console.log(`📊 Пользователей: ${DB.data.users.length}`);
