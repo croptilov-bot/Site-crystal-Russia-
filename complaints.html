@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жалобы | CRYSTAL RUSSIA</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ (тот же самый) -->
+<div class="burger-overlay" id="burgerOverlay"></div>
+<div class="burger-menu" id="burgerMenu">
+    <button class="burger-close" onclick="toggleMenu()">✕</button>
+    <div class="burger-user">
+        <div class="burger-avatar">👤</div>
+        <div class="burger-user-info">
+            <div class="burger-username">Игрок_228</div>
+            <div class="burger-user-status">🟢 В сети</div>
+        </div>
+    </div>
+    <nav class="burger-nav">
+        <ul>
+            <li class="burger-nav-title">📌 ОСНОВНОЕ</li>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="forum.html">💬 Форум</a></li>
+            <li class="burger-nav-title">⚠️ ЖАЛОБЫ</li>
+            <li><a href="complaints.html?type=player">👥 На игроков</a></li>
+            <li><a href="complaints.html?type=admin">🛡 На администрацию</a></li>
+            <li><a href="complaints.html?type=my">📝 Мои жалобы</a></li>
+            <li class="burger-nav-title">📩 ЛИЧНОЕ</li>
+            <li><a href="messages.html">💌 Сообщения <span class="badge-new">3</span></a></li>
+            <li><a href="profile.html">👤 Мой профиль</a></li>
+        </ul>
+    </nav>
+    <div class="burger-footer">
+        <button class="btn btn--logout">🚪 Выйти</button>
+    </div>
+</div>
+
+<button class="burger-icon" onclick="toggleMenu()" id="burgerIcon">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- ========================================================= -->
+<!-- ШАПКА -->
+<!-- ========================================================= -->
+<header class="header">
+    <div class="container header__container">
+        <div class="header__left">
+            <div class="logo">
+                <span class="logo__icon">❄️</span>
+                <span class="logo__name">CRYSTAL <span>RUSSIA</span></span>
+            </div>
+        </div>
+        <div class="header__right">
+            <a href="messages.html" class="header__messages">💌 <span class="badge-new">3</span></a>
+            <a href="profile.html" class="header__profile">👤 Игрок_228</a>
+        </div>
+    </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- ЖАЛОБЫ -->
+<!-- ========================================================= -->
+<section class="complaints">
+    <div class="container">
+        <div class="complaints__header">
+            <h1>⚠️ Жалобы</h1>
+            <button class="btn btn--new-complaint">➕ Подать жалобу</button>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="complaints__filters">
+            <a href="complaints.html?type=player" class="filter-btn active">👥 На игроков</a>
+            <a href="complaints.html?type=admin" class="filter-btn">🛡 На администрацию</a>
+            <a href="complaints.html?type=my" class="filter-btn">📝 Мои жалобы</a>
+        </div>
+
+        <!-- Список жалоб -->
+        <div class="complaints__list">
+            <!-- Жалоба 1 -->
+            <div class="complaint-card">
+                <div class="complaint-card__status status--review">🔄 На рассмотрении</div>
+                <div class="complaint-card__content">
+                    <div class="complaint-card__header">
+                        <span class="complaint-card__type">👥 На игрока</span>
+                        <span class="complaint-card__date">📅 15.06.2025</span>
+                    </div>
+                    <a href="#" class="complaint-card__title">Гриферство и порча имущества</a>
+                    <div class="complaint-card__meta">
+                        <span>Игрок: <strong>Griefer_666</strong></span>
+                        <span>Подал: <strong>Игрок_228</strong></span>
+                    </div>
+                    <div class="complaint-card__text">
+                        Игрок Griefer_666 намеренно мешал проезду, блокировал дороги и оскорблял других игроков.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Жалоба 2 -->
+            <div class="complaint-card">
+                <div class="complaint-card__status status--answered">✅ Рассмотрено</div>
+                <div class="complaint-card__content">
+                    <div class="complaint-card__header">
+                        <span class="complaint-card__type">🛡 На администрацию</span>
+                        <span class="complaint-card__date">📅 12.06.2025</span>
+                    </div>
+                    <a href="#" class="complaint-card__title">Необоснованный бан</a>
+                    <div class="complaint-card__meta">
+                        <span>Админ: <strong>Admin_Player</strong></span>
+                        <span>Подал: <strong>Игрок_1337</strong></span>
+                    </div>
+                    <div class="complaint-card__text">
+                        Администратор выдал бан без объяснения причин и доказательств.
+                    </div>
+                    <div class="complaint-card__answer">
+                        <strong>Ответ администрации:</strong> Бан выдан обоснованно, нарушение правил зафиксировано.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Жалоба 3 (моя) -->
+            <div class="complaint-card complaint-card--my">
+                <div class="complaint-card__status status--review">🔄 На рассмотрении</div>
+                <div class="complaint-card__content">
+                    <div class="complaint-card__header">
+                        <span class="complaint-card__type">👥 На игрока</span>
+                        <span class="complaint-card__date">📅 14.06.2025</span>
+                    </div>
+                    <a href="#" class="complaint-card__title">Оскорбления и угрозы</a>
+                    <div class="complaint-card__meta">
+                        <span>Игрок: <strong>Toxic_Player</strong></span>
+                        <span>Подал: <strong>Игрок_228</strong> (Вы)</span>
+                    </div>
+                    <div class="complaint-card__text">
+                        Игрок Toxic_Player оскорблял в чате, угрожал расправой.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пагинация -->
+        <div class="complaints__pagination">
+            <button class="btn btn--pagination">◀ Назад</button>
+            <span class="pagination__current">Страница 1 из 2</span>
+            <button class="btn btn--pagination">Вперед ▶</button>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ПОДВАЛ -->
+<!-- ========================================================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__logo">❄️ CRYSTAL RUSSIA</div>
+            <p class="footer__text">Игра бесплатная. В игре предусмотрена возможность приобретения внутриигровых предметов.</p>
+            <div class="footer__links">
+                <a href="https://t.me/crystalrussianewss" target="_blank">📩 Telegram</a>
+                <a href="#">💬 Discord</a>
+                <a href="#">📸 VK</a>
+            </div>
+            <p class="footer__copyright">© 2025 CRYSTAL RUSSIA. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
