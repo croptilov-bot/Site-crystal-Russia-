@@ -765,6 +765,7 @@
             transition: 0.3s;
             flex-wrap: wrap;
             gap: 4px;
+            cursor: pointer;
         }
 
         .topic-item:hover {
@@ -888,10 +889,15 @@
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.015);
             transition: 0.3s;
+            position: relative;
         }
 
         .chat-message:hover {
             background: rgba(255, 255, 255, 0.03);
+        }
+
+        .chat-message:hover .chat-message__actions {
+            opacity: 1;
         }
 
         .chat-message__avatar {
@@ -945,6 +951,36 @@
             color: rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
             margin-top: 2px;
+        }
+
+        .chat-message__actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: 0.3s;
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        .chat-message__actions button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .chat-message__actions button:hover {
+            color: #ff7f17;
+            background: rgba(255, 127, 23, 0.1);
+        }
+
+        .chat-message__actions button.danger:hover {
+            color: #ff1744;
+            background: rgba(255, 23, 68, 0.1);
         }
 
         .chat-input-area {
@@ -2428,7 +2464,7 @@
     // =========================================================
     const DEFAULT_USERS = [
         { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '' },
-        { username: 'Artyom_Orlov', password: '1424', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '' },
+        { username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '' },
         { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
         { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
         { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: '' }
@@ -2462,14 +2498,18 @@
 
         if (!localStorage.getItem('forum_topics')) {
             localStorage.setItem('forum_topics', JSON.stringify([
-                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 45, status: 'pinned', tag: 'important' },
-                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, status: 'hot', tag: 'new' },
-                { id: 3, title: 'Проблема с подключением (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, status: 'solved', tag: 'answered' }
+                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 45, views: 1250, status: 'pinned', tag: 'important' },
+                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, views: 8400, status: 'hot', tag: 'new' },
+                { id: 3, title: 'Проблема с подключением (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, views: 3100, status: 'solved', tag: 'answered' }
             ]));
         }
 
         if (!localStorage.getItem('chat_messages')) {
             localStorage.setItem('chat_messages', JSON.stringify([]));
+        }
+
+        if (!localStorage.getItem('muted_users')) {
+            localStorage.setItem('muted_users', JSON.stringify([]));
         }
 
         if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '4');
@@ -2560,6 +2600,11 @@
             const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
             if (banned.includes(username)) {
                 errorEl.textContent = '⛔ Аккаунт заблокирован!';
+                return;
+            }
+            const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+            if (muted.includes(username)) {
+                errorEl.textContent = '⛔ Вы заглушены!';
                 return;
             }
             errorEl.textContent = '';
@@ -2665,6 +2710,9 @@
     };
 
     function navigateTo(page) {
+        // Закрываем меню перед переходом
+        if (window.innerWidth <= 768) toggleMenu();
+
         document.querySelectorAll('#pageContainer > div').forEach(el => el.classList.add('hidden'));
 
         const placeholderPages = ['news', 'lspd', 'government', 'mafia', 'business', 'support', 'bugs', 'bulletin', 'events', 'archive', 'all-topics', 'privacy', 'contacts'];
@@ -2685,7 +2733,6 @@
                 'all-topics': '📋 Все темы'
             };
             document.querySelector('#page-placeholder h2').textContent = titles[page] || 'Раздел в разработке';
-            if (window.innerWidth <= 768) toggleMenu();
             window.scrollTo(0, 0);
             return;
         }
@@ -2696,10 +2743,14 @@
         if (['rules', 'guides', 'lore'].includes(page)) {
             const editor = document.getElementById('contentEditor');
             const key = contentKeys[page];
+            // Проверяем права доступа
+            const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+            editor.disabled = !canEdit;
             editor.value = localStorage.getItem('content_' + key) || '';
             document.getElementById('contentTitle').textContent = pageTitles[page];
-            document.getElementById('contentSubtitle').textContent = pageSubtitles[page];
+            document.getElementById('contentSubtitle').textContent = pageSubtitles[page] + (canEdit ? '' : ' (только для чтения)');
             editor.dataset.contentKey = key;
+            document.querySelector('.content-page__actions .btn-primary').style.display = canEdit ? 'inline-block' : 'none';
         }
 
         if (page === 'complaints') renderComplaints('player');
@@ -2711,7 +2762,6 @@
         if (page === 'profile') loadProfile();
         if (page === 'home') { renderTopics(); updateStats(); }
 
-        if (window.innerWidth <= 768) toggleMenu();
         window.scrollTo(0, 0);
     }
 
@@ -2771,7 +2821,7 @@
                 '';
 
             return `
-                <div class="topic-item">
+                <div class="topic-item" onclick="viewTopic(${t.id})">
                     <div class="topic-item__left">
                         <span class="topic-item__status ${t.status}">${statusIcon}</span>
                         <div>
@@ -2780,6 +2830,7 @@
                                 <span>Автор: <strong>${t.author}</strong></span>
                                 <span>📅 ${t.date}</span>
                                 <span>💬 ${t.replies}</span>
+                                <span>👁️ ${t.views}</span>
                             </div>
                         </div>
                     </div>
@@ -2792,6 +2843,18 @@
         }).join('');
     }
 
+    function viewTopic(id) {
+        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        const topic = topics.find(t => t.id === id);
+        if (topic) {
+            topic.views = (topic.views || 0) + 1;
+            localStorage.setItem('forum_topics', JSON.stringify(topics));
+            renderTopics();
+            updateStats();
+            alert(`📖 Тема: ${topic.title}\n👤 Автор: ${topic.author}\n📅 Дата: ${topic.date}\n💬 Ответов: ${topic.replies}\n👁️ Просмотров: ${topic.views}`);
+        }
+    }
+
     // =========================================================
     // СТАТИСТИКА
     // =========================================================
@@ -2799,6 +2862,7 @@
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
         const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0);
+        const totalViews = topics.reduce((sum, t) => sum + (t.views || 0), 0);
 
         document.getElementById('totalUsers').textContent = users.length;
         document.getElementById('statUsers').textContent = users.length;
@@ -2894,17 +2958,19 @@
             'rejected': { class: 'status-rejected', text: 'Отклонено' }
         };
 
+        const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+
         container.innerHTML = complaints.map(c => {
             const status = statusMap[c.status] || statusMap.new;
             const answerHtml = c.answer ? `<div class="complaint-item__answer"><strong>📩 Ответ:</strong> ${c.answer}</div>` : '';
 
-            const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
             const actionsHtml = isAdmin ? `
                 <div class="complaint-item__actions">
                     <button class="btn btn-sm btn-success" onclick="answerComplaint('${type}', ${c.id})"><i class="fas fa-reply"></i> Ответить</button>
                     <button class="btn btn-sm btn-primary" onclick="changeStatus('${type}', ${c.id}, 'review')">В работу</button>
                     <button class="btn btn-sm btn-success" onclick="changeStatus('${type}', ${c.id}, 'answered')">✅ Решить</button>
                     <button class="btn btn-sm btn-danger" onclick="changeStatus('${type}', ${c.id}, 'rejected')">❌ Отклонить</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteComplaint('${type}', ${c.id})" style="background:rgba(255,23,68,0.1);color:#ff1744;border:1px solid rgba(255,23,68,0.12);">🗑️ Удалить</button>
                 </div>
             ` : '';
 
@@ -2968,6 +3034,23 @@
         alert('✅ Статус изменен!');
     }
 
+    function deleteComplaint(type, id) {
+        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+        if (!confirm('Удалить эту жалобу?')) return;
+
+        const config = complaintConfigs[type];
+        if (!config) return;
+
+        let items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
+        items = items.filter(i => i.id !== id);
+        localStorage.setItem(config.storageKey, JSON.stringify(items));
+        renderComplaints(type);
+        alert('✅ Жалоба удалена!');
+    }
+
     // =========================================================
     // ЧАТ
     // =========================================================
@@ -2984,22 +3067,36 @@
         const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
         const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
+        const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+
         container.innerHTML = messages.map(m => {
             const user = users.find(u => u.username === m.author);
             const prefix = user ? user.prefix : 'user';
             const avatar = user && user.avatar ? `<img src="${user.avatar}" alt="">` : m.author.charAt(0).toUpperCase();
+
+            const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+            const isMuted = muted.includes(m.author);
+
+            const actionsHtml = isAdmin ? `
+                <div class="chat-message__actions">
+                    ${isMuted ? `<button onclick="unmuteUser('${m.author}')" style="color:#4caf50;" title="Размутить"><i class="fas fa-microphone"></i></button>` :
+                    `<button onclick="muteUser('${m.author}')" title="Замутить"><i class="fas fa-microphone-slash"></i></button>`}
+                    <button class="danger" onclick="deleteChatMessage(${m.id})" title="Удалить"><i class="fas fa-trash"></i></button>
+                </div>
+            ` : '';
 
             return `
                 <div class="chat-message">
                     <div class="chat-message__avatar">${avatar}</div>
                     <div class="chat-message__content">
                         <div class="chat-message__user">
-                            ${m.author}
+                            ${m.author} ${isMuted ? '🔇' : ''}
                             <span class="prefix ${prefixClassMap[prefix] || 'prefix-user'}">${prefixMap[prefix] || 'Игрок'}</span>
                         </div>
-                        <div class="chat-message__text">${m.text}</div>
+                        <div class="chat-message__text">${isMuted ? '🔇 Сообщение скрыто (заглушен)' : m.text}</div>
                     </div>
                     <div class="chat-message__time">${m.time}</div>
+                    ${actionsHtml}
                 </div>
             `;
         }).join('');
@@ -3009,6 +3106,12 @@
 
     function sendMessage() {
         if (!currentUser) return;
+        const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+        if (muted.includes(currentUser.username)) {
+            alert('⛔ Вы заглушены и не можете писать в чат!');
+            return;
+        }
+
         const input = document.getElementById('chatInput');
         const text = input.value.trim();
         if (!text) return;
@@ -3022,6 +3125,52 @@
 
         input.value = '';
         renderChat();
+    }
+
+    function muteUser(username) {
+        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+        if (username === currentUser.username) {
+            alert('⛔ Нельзя замутить себя!');
+            return;
+        }
+        const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+        if (muted.includes(username)) {
+            alert('Пользователь уже заглушен!');
+            return;
+        }
+        muted.push(username);
+        localStorage.setItem('muted_users', JSON.stringify(muted));
+        renderChat();
+        alert(`✅ ${username} заглушен!`);
+    }
+
+    function unmuteUser(username) {
+        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+        let muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+        muted = muted.filter(u => u !== username);
+        localStorage.setItem('muted_users', JSON.stringify(muted));
+        renderChat();
+        alert(`✅ ${username} размучен!`);
+    }
+
+    function deleteChatMessage(id) {
+        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+        if (!confirm('Удалить сообщение?')) return;
+
+        let messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
+        messages = messages.filter(m => m.id !== id);
+        localStorage.setItem('chat_messages', JSON.stringify(messages));
+        renderChat();
+        alert('✅ Сообщение удалено!');
     }
 
     document.addEventListener('DOMContentLoaded', function() {
