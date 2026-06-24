@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сообщения | CRYSTAL RUSSIA</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ (тот же самый) -->
+<div class="burger-overlay" id="burgerOverlay"></div>
+<div class="burger-menu" id="burgerMenu">
+    <button class="burger-close" onclick="toggleMenu()">✕</button>
+    <div class="burger-user">
+        <div class="burger-avatar">👤</div>
+        <div class="burger-user-info">
+            <div class="burger-username">Игрок_228</div>
+            <div class="burger-user-status">🟢 В сети</div>
+        </div>
+    </div>
+    <nav class="burger-nav">
+        <ul>
+            <li class="burger-nav-title">📌 ОСНОВНОЕ</li>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="forum.html">💬 Форум</a></li>
+            <li class="burger-nav-title">⚠️ ЖАЛОБЫ</li>
+            <li><a href="complaints.html?type=player">👥 На игроков</a></li>
+            <li><a href="complaints.html?type=admin">🛡 На администрацию</a></li>
+            <li class="burger-nav-title">📩 ЛИЧНОЕ</li>
+            <li><a href="messages.html">💌 Сообщения <span class="badge-new">3</span></a></li>
+            <li><a href="profile.html">👤 Мой профиль</a></li>
+        </ul>
+    </nav>
+    <div class="burger-footer">
+        <button class="btn btn--logout">🚪 Выйти</button>
+    </div>
+</div>
+
+<button class="burger-icon" onclick="toggleMenu()" id="burgerIcon">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- ========================================================= -->
+<!-- ШАПКА -->
+<!-- ========================================================= -->
+<header class="header">
+    <div class="container header__container">
+        <div class="header__left">
+            <div class="logo">
+                <span class="logo__icon">❄️</span>
+                <span class="logo__name">CRYSTAL <span>RUSSIA</span></span>
+            </div>
+        </div>
+        <div class="header__right">
+            <a href="messages.html" class="header__messages">💌 <span class="badge-new">3</span></a>
+            <a href="profile.html" class="header__profile">👤 Игрок_228</a>
+        </div>
+    </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- СООБЩЕНИЯ -->
+<!-- ========================================================= -->
+<section class="messages">
+    <div class="container">
+        <div class="messages__header">
+            <h1>💌 Личные сообщения</h1>
+            <button class="btn btn--new-message">✏️ Написать</button>
+        </div>
+
+        <!-- Список диалогов -->
+        <div class="messages__list">
+            <!-- Диалог 1 (непрочитанный) -->
+            <div class="message-dialog message-dialog--unread">
+                <div class="message-dialog__avatar">👤</div>
+                <div class="message-dialog__content">
+                    <div class="message-dialog__header">
+                        <span class="message-dialog__name">Admin</span>
+                        <span class="message-dialog__time">15:30</span>
+                    </div>
+                    <div class="message-dialog__preview">Ваша жалоба рассмотрена. Подробнее...</div>
+                    <span class="badge-new">1</span>
+                </div>
+            </div>
+
+            <!-- Диалог 2 -->
+            <div class="message-dialog">
+                <div class="message-dialog__avatar">👤</div>
+                <div class="message-dialog__content">
+                    <div class="message-dialog__header">
+                        <span class="message-dialog__name">Игрок_1337</span>
+                        <span class="message-dialog__time">Вчера</span>
+                    </div>
+                    <div class="message-dialog__preview">Привет! Ты не хочешь присоединиться к нашей банде?</div>
+                </div>
+            </div>
+
+            <!-- Диалог 3 -->
+            <div class="message-dialog">
+                <div class="message-dialog__avatar">👤</div>
+                <div class="message-dialog__content">
+                    <div class="message-dialog__header">
+                        <span class="message-dialog__name">Support</span>
+                        <span class="message-dialog__time">2 дня назад</span>
+                    </div>
+                    <div class="message-dialog__preview">Спасибо за обращение! Мы решаем ваш вопрос.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ПОДВАЛ -->
+<!-- ========================================================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__logo">❄️ CRYSTAL RUSSIA</div
