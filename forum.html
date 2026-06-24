@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум | CRYSTAL RUSSIA</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- БУРГЕР-МЕНЮ (тот же самый) -->
+<div class="burger-overlay" id="burgerOverlay"></div>
+<div class="burger-menu" id="burgerMenu">
+    <button class="burger-close" onclick="toggleMenu()">✕</button>
+    <div class="burger-user">
+        <div class="burger-avatar">👤</div>
+        <div class="burger-user-info">
+            <div class="burger-username">Игрок_228</div>
+            <div class="burger-user-status">🟢 В сети</div>
+        </div>
+    </div>
+    <nav class="burger-nav">
+        <ul>
+            <li class="burger-nav-title">📌 ОСНОВНОЕ</li>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="forum.html">💬 Форум</a></li>
+            <li class="burger-nav-title">⚠️ ЖАЛОБЫ</li>
+            <li><a href="complaints.html?type=player">👥 На игроков</a></li>
+            <li><a href="complaints.html?type=admin">🛡 На администрацию</a></li>
+            <li class="burger-nav-title">📩 ЛИЧНОЕ</li>
+            <li><a href="messages.html">💌 Сообщения <span class="badge-new">3</span></a></li>
+            <li><a href="profile.html">👤 Мой профиль</a></li>
+        </ul>
+    </nav>
+    <div class="burger-footer">
+        <button class="btn btn--logout">🚪 Выйти</button>
+    </div>
+</div>
+
+<button class="burger-icon" onclick="toggleMenu()" id="burgerIcon">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- ========================================================= -->
+<!-- ШАПКА -->
+<!-- ========================================================= -->
+<header class="header">
+    <div class="container header__container">
+        <div class="header__left">
+            <div class="logo">
+                <span class="logo__icon">❄️</span>
+                <span class="logo__name">CRYSTAL <span>RUSSIA</span></span>
+            </div>
+        </div>
+        <div class="header__right">
+            <a href="messages.html" class="header__messages">💌 <span class="badge-new">3</span></a>
+            <a href="profile.html" class="header__profile">👤 Игрок_228</a>
+        </div>
+    </div>
+</header>
+
+<!-- ========================================================= -->
+<!-- ФОРУМ -->
+<!-- ========================================================= -->
+<section class="forum">
+    <div class="container">
+        <div class="forum__header">
+            <h1>💬 Форум</h1>
+            <button class="btn btn--new-topic">➕ Создать тему</button>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="forum__filters">
+            <a href="forum.html" class="filter-btn active">📋 Все темы</a>
+            <a href="forum.html?section=open" class="filter-btn">📂 Открытые</a>
+            <a href="forum.html?section=my" class="filter-btn">👤 Мои темы</a>
+            <a href="forum.html?section=answered" class="filter-btn">✅ Отвеченные</a>
+            <a href="forum.html?section=discussion" class="filter-btn">💭 Обсуждения</a>
+        </div>
+
+        <!-- Список тем -->
+        <div class="forum__topics">
+            <!-- Тема 1 -->
+            <div class="topic-card">
+                <div class="topic-card__left">
+                    <div class="topic-card__status">📌</div>
+                    <div class="topic-card__info">
+                        <a href="#" class="topic-card__title">Как стать полицейским в CRYSTAL RUSSIA?</a>
+                        <div class="topic-card__meta">
+                            <span>Автор: <strong>Игрок_228</strong></span>
+                            <span>📅 15.06.2025</span>
+                            <span>💬 12 ответов</span>
+                            <span class="topic-card__answered">✅ Отвечено</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-card__right">
+                    <span class="topic-card__last">Последний: <strong>Admin</strong> 2 мин назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 2 -->
+            <div class="topic-card">
+                <div class="topic-card__left">
+                    <div class="topic-card__status">💭</div>
+                    <div class="topic-card__info">
+                        <a href="#" class="topic-card__title">Обсуждение нового обновления</a>
+                        <div class="topic-card__meta">
+                            <span>Автор: <strong>DevTeam</strong></span>
+                            <span>📅 14.06.2025</span>
+                            <span>💬 34 ответа</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-card__right">
+                    <span class="topic-card__last">Последний: <strong>Игрок_1337</strong> 1 час назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 3 -->
+            <div class="topic-card">
+                <div class="topic-card__left">
+                    <div class="topic-card__status">📂</div>
+                    <div class="topic-card__info">
+                        <a href="#" class="topic-card__title">Помощь новичкам: FAQ</a>
+                        <div class="topic-card__meta">
+                            <span>Автор: <strong>Support</strong></span>
+                            <span>📅 10.06.2025</span>
+                            <span>💬 8 ответов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-card__right">
+                    <span class="topic-card__last">Последний: <strong>Игрок_228</strong> 3 часа назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 4 (тема игрока, который смотрит) -->
+            <div class="topic-card topic-card--highlight">
+                <div class="topic-card__left">
+                    <div class="topic-card__status">👤</div>
+                    <div class="topic-card__info">
+                        <a href="#" class="topic-card__title">Моя тема: Нужна помощь с работой</a>
+                        <div class="topic-card__meta">
+                            <span>Автор: <strong>Игрок_228</strong> (Вы)</span>
+                            <span>📅 12.06.2025</span>
+                            <span>💬 5 ответов</span>
+                            <span class="topic-card__answered">✅ Отвечено</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-card__right">
+                    <span class="topic-card__last">Последний: <strong>Helper</strong> 1 день назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 5 -->
+            <div class="topic-card">
+                <div class="topic-card__left">
+                    <div class="topic-card__status">🔥</div>
+                    <div class="topic-card__info">
+                        <a href="#" class="topic-card__title">Самые лучшие места для бизнеса</a>
+                        <div class="topic-card__meta">
+                            <span>Автор: <strong>BusinessMan</strong></span>
+                            <span>📅 08.06.2025</span>
+                            <span>💬 27 ответов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-card__right">
+                    <span class="topic-card__last">Последний: <strong>Игрок_228</strong> 2 дня назад</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пагинация -->
+        <div class="forum__pagination">
+            <button class="btn btn--pagination">◀ Назад</button>
+            <span class="pagination__current">Страница 1 из 5</span>
+            <button class="btn btn--pagination">Вперед ▶</button>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ПОДВАЛ -->
+<!-- ========================================================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__logo">❄️ CRYSTAL RUSSIA</div>
+            <p class="footer__text">Игра бесплатная. В игре предусмотрена возможность приобретения внутриигровых предметов.</p>
+            <div class="footer__links">
+                <a href="https://t.me/crystalrussianewss" target="_blank">📩 Telegram</a>
+                <a href="#">💬 Discord</a>
+                <a href="#">📸 VK</a>
+            </div>
+            <p class="footer__copyright">© 2025 CRYSTAL RUSSIA. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
