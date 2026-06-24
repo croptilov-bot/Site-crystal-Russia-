@@ -49,6 +49,89 @@
         }
 
         /* ========================================================= */
+        /* ВЫБОР СЕРВЕРА */
+        /* ========================================================= */
+        .server-select {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: radial-gradient(ellipse at center, #1a1a2e, #0a0a12);
+            padding: 20px;
+        }
+
+        .server-select__box {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .server-select__title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .server-select__title span {
+            color: #ff7f17;
+        }
+
+        .server-select__subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .server-select__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .server-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .server-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #ff7f17;
+            transform: translateY(-4px);
+        }
+
+        .server-card__icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .server-card__name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .server-card__desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+        }
+
+        .server-card__online {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 10px;
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+
+        /* ========================================================= */
         /* МОДАЛЬНОЕ ОКНО ВХОДА */
         /* ========================================================= */
         .login-modal {
@@ -198,6 +281,15 @@
 
         .header__logo-text span {
             color: #ff7f17;
+        }
+
+        .header__server {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 127, 23, 0.1);
         }
 
         .header__online {
@@ -754,113 +846,267 @@
         }
 
         /* ========================================================= */
-        /* ПОСЛЕДНИЕ ТЕМЫ */
+        /* СТРАНИЦА КОНТЕНТА (ЛОР, ПРАВИЛА, ГАЙДЫ) */
         /* ========================================================= */
-        .topics-section {
+        .content-page {
             padding: 20px 0;
+            min-height: 40vh;
         }
 
-        .topics-section__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .topics-section__title {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .topic-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .topic-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.015);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: 0.3s;
-            flex-wrap: wrap;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .topic-item:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 127, 23, 0.06);
-        }
-
-        .topic-item__left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .topic-item__status {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        .topic-item__status.pinned { color: #ff7f17; }
-        .topic-item__status.locked { color: #ff1744; }
-        .topic-item__status.solved { color: #4caf50; }
-        .topic-item__status.hot { color: #ff7f17; }
-
-        .topic-item__title {
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .topic-item__title a:hover {
+        .content-page__title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 6px;
             color: #ff7f17;
         }
 
-        .topic-item__meta {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.25);
+        .content-page__subtitle {
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 20px;
+            font-size: 14px;
         }
 
-        .topic-item__meta span {
+        .content-page__body {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .content-page__body h1,
+        .content-page__body h2,
+        .content-page__body h3 {
+            color: #ff7f17;
+            margin: 16px 0 8px;
+        }
+
+        .content-page__body h1 { font-size: 24px; }
+        .content-page__body h2 { font-size: 20px; }
+        .content-page__body h3 { font-size: 17px; }
+
+        .content-page__body ul,
+        .content-page__body ol {
+            padding-left: 24px;
+            margin: 8px 0;
+        }
+
+        .content-page__body li {
+            margin: 4px 0;
+        }
+
+        .content-page__editor {
+            width: 100%;
+            min-height: 250px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 14px;
+            color: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.7;
+            resize: vertical;
+            transition: 0.3s;
+        }
+
+        .content-page__editor:focus {
+            outline: none;
+            border-color: #ff7f17;
+        }
+
+        .content-page__actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================================= */
+        /* СТРАНИЦА ЖАЛОБ */
+        /* ========================================================= */
+        .complaints-page {
+            padding: 20px 0;
+        }
+
+        .complaints-page__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .complaints-page__title {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .complaints-page__title i {
+            color: #ff7f17;
             margin-right: 8px;
         }
 
-        .topic-item__right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.25);
+        .complaint-form {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 18px;
         }
 
-        .topic-item__right .author {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .topic-item__tag {
-            padding: 1px 8px;
-            border-radius: 20px;
-            font-size: 8px;
+        .complaint-form__title {
+            font-size: 15px;
             font-weight: 700;
-            text-transform: uppercase;
+            margin-bottom: 2px;
         }
 
-        .tag-answered { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
-        .tag-important { background: rgba(255, 23, 68, 0.1); color: #ff1744; }
-        .tag-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
+        .complaint-form__subtitle {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .complaint-form__input {
+            width: 100%;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .complaint-form__input:focus {
+            outline: none;
+            border-color: #ff7f17;
+        }
+
+        .complaint-form__input::placeholder {
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .complaint-form__textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .complaint-form__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .complaint-form__actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+
+        .complaints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .complaint-item {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 12px 14px;
+            transition: 0.3s;
+        }
+
+        .complaint-item:hover {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .complaint-item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
+
+        .complaint-item__title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .complaint-item__status {
+            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .status-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
+        .status-review { background: rgba(33, 150, 243, 0.1); color: #2196f3; }
+        .status-answered { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
+        .status-rejected { background: rgba(255, 23, 68, 0.1); color: #ff1744; }
+
+        .complaint-item__meta {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .complaint-item__meta span {
+            margin-right: 10px;
+        }
+
+        .complaint-item__body {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.45);
+            padding: 6px 0 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 4px;
+        }
+
+        .complaint-item__answer {
+            background: rgba(76, 175, 80, 0.04);
+            border-left: 3px solid #4caf50;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-top: 4px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .complaint-item__answer strong {
+            color: #4caf50;
+        }
+
+        .complaint-item__actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .no-items {
+            text-align: center;
+            padding: 24px 16px;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .no-items i {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+            opacity: 0.3;
+        }
 
         /* ========================================================= */
-        /* ЧАТ С ОТВЕТАМИ */
+        /* ЧАТ */
         /* ========================================================= */
         .chat-container {
             padding: 20px 0;
@@ -1377,233 +1623,6 @@
         }
 
         /* ========================================================= */
-        /* СТРАНИЦА КОНТЕНТА */
-        /* ========================================================= */
-        .content-page {
-            padding: 20px 0;
-            min-height: 40vh;
-        }
-
-        .content-page__title {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 4px;
-            color: #ff7f17;
-        }
-
-        .content-page__subtitle {
-            color: rgba(255, 255, 255, 0.35);
-            margin-bottom: 18px;
-            font-size: 13px;
-        }
-
-        .content-page__editor {
-            width: 100%;
-            min-height: 250px;
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 14px;
-            color: #e0e0e0;
-            font-size: 13px;
-            line-height: 1.7;
-            resize: vertical;
-            transition: 0.3s;
-        }
-
-        .content-page__editor:focus {
-            outline: none;
-            border-color: #ff7f17;
-        }
-
-        .content-page__actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
-        /* ========================================================= */
-        /* СТРАНИЦА ЖАЛОБ */
-        /* ========================================================= */
-        .complaints-page {
-            padding: 20px 0;
-        }
-
-        .complaints-page__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .complaints-page__title {
-            font-size: 20px;
-            font-weight: 900;
-        }
-
-        .complaints-page__title i {
-            color: #ff7f17;
-            margin-right: 8px;
-        }
-
-        .complaint-form {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 18px;
-        }
-
-        .complaint-form__title {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .complaint-form__subtitle {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-
-        .complaint-form__input {
-            width: 100%;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 12px;
-            margin-bottom: 8px;
-            transition: 0.3s;
-        }
-
-        .complaint-form__input:focus {
-            outline: none;
-            border-color: #ff7f17;
-        }
-
-        .complaint-form__input::placeholder {
-            color: rgba(255, 255, 255, 0.15);
-        }
-
-        .complaint-form__textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .complaint-form__row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .complaint-form__actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 2px;
-            flex-wrap: wrap;
-        }
-
-        .complaints-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .complaint-item {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 12px 14px;
-            transition: 0.3s;
-        }
-
-        .complaint-item:hover {
-            background: rgba(255, 255, 255, 0.025);
-        }
-
-        .complaint-item__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-bottom: 2px;
-        }
-
-        .complaint-item__title {
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .complaint-item__status {
-            font-size: 10px;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .status-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
-        .status-review { background: rgba(33, 150, 243, 0.1); color: #2196f3; }
-        .status-answered { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
-        .status-rejected { background: rgba(255, 23, 68, 0.1); color: #ff1744; }
-
-        .complaint-item__meta {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .complaint-item__meta span {
-            margin-right: 10px;
-        }
-
-        .complaint-item__body {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.45);
-            padding: 6px 0 4px;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            margin-top: 4px;
-        }
-
-        .complaint-item__answer {
-            background: rgba(76, 175, 80, 0.04);
-            border-left: 3px solid #4caf50;
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin-top: 4px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .complaint-item__answer strong {
-            color: #4caf50;
-        }
-
-        .complaint-item__actions {
-            display: flex;
-            gap: 4px;
-            margin-top: 6px;
-            flex-wrap: wrap;
-        }
-
-        .no-items {
-            text-align: center;
-            padding: 24px 16px;
-            color: rgba(255, 255, 255, 0.15);
-        }
-
-        .no-items i {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 6px;
-            opacity: 0.3;
-        }
-
-        /* ========================================================= */
         /* СТАТИСТИКА */
         /* ========================================================= */
         .forum-stats {
@@ -1710,16 +1729,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .topic-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .topic-item__right {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
             .burger-menu {
                 width: 230px;
                 left: -250px;
@@ -1744,6 +1753,10 @@
 
             .chat-messages {
                 max-height: 250px;
+            }
+
+            .server-select__grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1779,6 +1792,31 @@
     </style>
 </head>
 <body>
+
+<!-- ========================================================= -->
+<!-- ВЫБОР СЕРВЕРА -->
+<!-- ========================================================= -->
+<div class="server-select" id="serverSelect">
+    <div class="server-select__box">
+        <div class="server-select__title">❄️ CRYSTAL <span>RUSSIA</span></div>
+        <div class="server-select__subtitle">Выберите сервер для входа</div>
+
+        <div class="server-select__grid">
+            <div class="server-card" onclick="selectServer('crystal')">
+                <span class="server-card__icon">💎</span>
+                <div class="server-card__name">Crystal</div>
+                <div class="server-card__desc">Основной RP сервер</div>
+                <div class="server-card__online">🟢 128 онлайн</div>
+            </div>
+            <div class="server-card" onclick="selectServer('russia')">
+                <span class="server-card__icon">🇷🇺</span>
+                <div class="server-card__name">Russia</div>
+                <div class="server-card__desc">Новый RP сервер</div>
+                <div class="server-card__online">🟢 67 онлайн</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ========================================================= -->
 <!-- МОДАЛЬНОЕ ОКНО ВХОДА -->
@@ -1840,6 +1878,9 @@
             <a onclick="navigateTo('mafia')"><i class="fas fa-user-secret"></i> Мафии и банды</a>
             <a onclick="navigateTo('business')"><i class="fas fa-store"></i> Бизнес и организации</a>
 
+            <div class="burger-nav-title">🏆 События</div>
+            <a onclick="navigateTo('events')"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
+
             <div class="burger-nav-title">🛠 Техническое</div>
             <a onclick="navigateTo('support')"><i class="fas fa-tools"></i> Техподдержка</a>
             <a onclick="navigateTo('bugs')"><i class="fas fa-bug"></i> Баг-репорты</a>
@@ -1847,7 +1888,6 @@
             <div class="burger-nav-title">💬 Социальное</div>
             <a onclick="navigateTo('bulletin')"><i class="fas fa-bullhorn"></i> Доска объявлений</a>
             <a onclick="navigateTo('chat')"><i class="fas fa-comments"></i> Флудилка</a>
-            <a onclick="navigateTo('events')"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
 
             <div class="burger-nav-title">📦 Архивы</div>
             <a onclick="navigateTo('archive')"><i class="fas fa-archive"></i> Архивы</a>
@@ -1858,8 +1898,12 @@
                 <a onclick="navigateTo('devpanel')"><i class="fas fa-code"></i> Управление</a>
             </div>
 
+            <div class="burger-nav-title">🌐 Сервер</div>
+            <a onclick="changeServer()"><i class="fas fa-exchange-alt"></i> Сменить сервер</a>
+
             <div class="burger-nav-title">👤 Личное</div>
             <a onclick="navigateTo('profile')"><i class="fas fa-user"></i> Мой профиль</a>
+            <a onclick="navigateTo('notifications')"><i class="fas fa-bell"></i> Уведомления <span class="badge" id="notifBadge">0</span></a>
         </nav>
 
         <div class="burger-footer">
@@ -1882,15 +1926,16 @@
                     <span class="header__logo-icon">❄️</span>
                     <span class="header__logo-text">CRYSTAL <span>RUSSIA</span></span>
                 </div>
+                <span class="header__server" id="headerServer">🌐 Crystal</span>
                 <div class="header__online">
                     <span class="header__online-dot"></span>
                     <span>Игроков: <strong id="onlineCount">0</strong></span>
                 </div>
             </div>
             <div class="header__user">
-                <a class="header__messages" onclick="showNotifications()">
+                <a class="header__messages" onclick="navigateTo('notifications')">
                     <i class="fas fa-envelope"></i>
-                    <span class="badge" id="notifBadge">0</span>
+                    <span class="badge" id="notifBadgeHeader">0</span>
                 </a>
                 <div class="header__user-avatar" id="headerAvatar" onclick="navigateTo('profile')">
                     <span id="headerAvatarText">И</span>
@@ -2127,6 +2172,25 @@
                 </div>
             </section>
 
+            <!-- КОНКУРСЫ И ИВЕНТЫ -->
+            <section class="forum-section">
+                <div class="container">
+                    <div class="forum-section__header">
+                        <div>
+                            <h2 class="forum-section__title"><i class="fas fa-trophy" style="color:#ffd700;"></i> Конкурсы и ивенты</h2>
+                            <div class="forum-section__desc">Анонсы и результаты мероприятий</div>
+                        </div>
+                        <button class="btn btn-new-topic" id="createEventBtn" onclick="showCreateEvent()" style="display:none;">
+                            <i class="fas fa-plus"></i> Создать ивент
+                        </button>
+                    </div>
+
+                    <div class="forum-grid" id="eventsGrid">
+                        <!-- Загружается через JS -->
+                    </div>
+                </div>
+            </section>
+
             <!-- ТЕХНИЧЕСКАЯ ЧАСТЬ -->
             <section class="forum-section">
                 <div class="container">
@@ -2171,7 +2235,7 @@
                     <div class="forum-section__header">
                         <div>
                             <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное</h2>
-                            <div class="forum-section__desc">Общение, объявления и ивенты</div>
+                            <div class="forum-section__desc">Общение, объявления</div>
                         </div>
                     </div>
 
@@ -2199,30 +2263,6 @@
                                 <span><i class="fas fa-eye"></i> 89.1K</span>
                             </div>
                         </div>
-
-                        <div class="forum-card" onclick="navigateTo('events')">
-                            <div class="forum-card__header">
-                                <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
-                                <span class="forum-card__title">Конкурсы и ивенты</span>
-                            </div>
-                            <div class="forum-card__desc">Анонсы и результаты мероприятий</div>
-                            <div class="forum-card__meta">
-                                <span><i class="fas fa-comment"></i> 134</span>
-                                <span><i class="fas fa-eye"></i> 9.8K</span>
-                            </div>
-                        </div>
-
-                        <div class="forum-card" onclick="navigateTo('archive')">
-                            <div class="forum-card__header">
-                                <span class="forum-card__icon"><i class="fas fa-archive" style="color:#757575;"></i></span>
-                                <span class="forum-card__title">Архивы</span>
-                            </div>
-                            <div class="forum-card__desc">Архив жалоб и новостей</div>
-                            <div class="forum-card__meta">
-                                <span><i class="fas fa-comment"></i> 0</span>
-                                <span><i class="fas fa-eye"></i> 1.2K</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -2240,14 +2280,21 @@
             </section>
         </div>
 
-        <!-- СТРАНИЦА КОНТЕНТА -->
+        <!-- СТРАНИЦА КОНТЕНТА (ЛОР, ПРАВИЛА, ГАЙДЫ) -->
         <div id="page-content" class="hidden">
             <div class="container content-page">
                 <h1 class="content-page__title" id="contentTitle">Заголовок</h1>
-                <div class="content-page__subtitle" id="contentSubtitle">Редактируйте контент этой страницы</div>
-                <textarea class="content-page__editor" id="contentEditor" placeholder="Введите текст здесь..."></textarea>
+                <div class="content-page__subtitle" id="contentSubtitle">Контент страницы</div>
+
+                <!-- Режим просмотра -->
+                <div class="content-page__body" id="contentBody"></div>
+
+                <!-- Режим редактирования -->
+                <textarea class="content-page__editor hidden" id="contentEditor" placeholder="Введите текст здесь..."></textarea>
+
                 <div class="content-page__actions">
-                    <button class="btn btn-primary" onclick="saveContent()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-primary" id="contentEditBtn" onclick="toggleContentEdit()"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button class="btn btn-success hidden" id="contentSaveBtn" onclick="saveContent()"><i class="fas fa-save"></i> Сохранить</button>
                     <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
                 </div>
             </div>
@@ -2353,7 +2400,7 @@
             </div>
         </div>
 
-        <!-- ЧАТ С ОТВЕТАМИ -->
+        <!-- ЧАТ -->
         <div id="page-chat" class="hidden">
             <div class="container chat-container">
                 <div class="chat-box">
@@ -2376,6 +2423,79 @@
                         <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- LSPD -->
+        <div id="page-lspd" class="hidden">
+            <div class="container content-page">
+                <h1 class="content-page__title">👮 LSPD</h1>
+                <div class="content-page__subtitle">Устав, отчеты и состав полиции</div>
+                <div class="content-page__body" id="lspdBody">Загрузка...</div>
+                <div class="content-page__actions">
+                    <button class="btn btn-primary" id="lspdEditBtn" onclick="toggleLspdEdit()"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button class="btn btn-success hidden" id="lspdSaveBtn" onclick="saveLspd()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
+                </div>
+                <textarea class="content-page__editor hidden" id="lspdEditor" placeholder="Введите текст..."></textarea>
+            </div>
+        </div>
+
+        <!-- GOVERNMENT -->
+        <div id="page-government" class="hidden">
+            <div class="container content-page">
+                <h1 class="content-page__title">🏛️ Government</h1>
+                <div class="content-page__subtitle">Деятельность правительства штата</div>
+                <div class="content-page__body" id="governmentBody">Загрузка...</div>
+                <div class="content-page__actions">
+                    <button class="btn btn-primary" id="governmentEditBtn" onclick="toggleGovernmentEdit()"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button class="btn btn-success hidden" id="governmentSaveBtn" onclick="saveGovernment()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
+                </div>
+                <textarea class="content-page__editor hidden" id="governmentEditor" placeholder="Введите текст..."></textarea>
+            </div>
+        </div>
+
+        <!-- МАФИИ И БАНДЫ -->
+        <div id="page-mafia" class="hidden">
+            <div class="container content-page">
+                <h1 class="content-page__title">🔫 Мафии и банды</h1>
+                <div class="content-page__subtitle">Криминальные организации</div>
+                <div class="content-page__body" id="mafiaBody">Загрузка...</div>
+                <div class="content-page__actions">
+                    <button class="btn btn-primary" id="mafiaEditBtn" onclick="toggleMafiaEdit()"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button class="btn btn-success hidden" id="mafiaSaveBtn" onclick="saveMafia()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
+                </div>
+                <textarea class="content-page__editor hidden" id="mafiaEditor" placeholder="Введите текст..."></textarea>
+            </div>
+        </div>
+
+        <!-- БИЗНЕС И ОРГАНИЗАЦИИ -->
+        <div id="page-business" class="hidden">
+            <div class="container content-page">
+                <h1 class="content-page__title">🏪 Бизнес и организации</h1>
+                <div class="content-page__subtitle">Легальный бизнес и вакансии</div>
+                <div class="content-page__body" id="businessBody">Загрузка...</div>
+                <div class="content-page__actions">
+                    <button class="btn btn-primary" id="businessEditBtn" onclick="toggleBusinessEdit()"><i class="fas fa-edit"></i> Редактировать</button>
+                    <button class="btn btn-success hidden" id="businessSaveBtn" onclick="saveBusiness()"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Назад</button>
+                </div>
+                <textarea class="content-page__editor hidden" id="businessEditor" placeholder="Введите текст..."></textarea>
+            </div>
+        </div>
+
+        <!-- КОНКУРСЫ И ИВЕНТЫ (список) -->
+        <div id="page-events" class="hidden">
+            <div class="container">
+                <div class="complaints-page__header">
+                    <h1 class="complaints-page__title"><i class="fas fa-trophy" style="color:#ffd700;"></i> Конкурсы и ивенты</h1>
+                    <button class="btn btn-primary" id="createEventBtn2" onclick="showCreateEvent()" style="display:none;">
+                        <i class="fas fa-plus"></i> Создать ивент
+                    </button>
+                </div>
+                <div class="forum-grid" id="eventsPageGrid"></div>
             </div>
         </div>
 
@@ -2564,100 +2684,162 @@
 <!-- ========================================================= -->
 <script>
     // =========================================================
-    // ДАННЫЕ ПО УМОЛЧАНИЮ
+    // ПЕРЕМЕННЫЕ
     // =========================================================
-    const DEFAULT_USERS = [
-        { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '', online: true },
-        { username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '', online: true },
-        { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true },
-        { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true },
-        { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: '', online: true }
-    ];
+    let currentUser = null;
+    let currentServer = null;
+    let replyTo = null;
+    let contentEditMode = false;
+    let currentContentKey = '';
 
-    const DEFAULT_CONTENT = {
-        rules: '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан',
-        guides: '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер\n2. Зарегистрируйтесь\n3. Установите игру\n4. Запустите лаунчер\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию\n2. Нажмите взаимодействие\n3. Выберите профессию\n\n### 🚗 Как получить права?\n1. Придите в автошколу\n2. Сдайте экзамены\n3. Оплатите пошлину',
-        lore: '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас основан в 1848 году.\n\n### Основные фракции\n**LSPD** — полиция\n**FBI** — федералы\n**Government** — правительство\n\n### Криминал\n- Мафия\n- Банды\n- Одиночки'
+    // Данные по умолчанию для каждого сервера
+    const DEFAULT_DATA = {
+        crystal: {
+            name: 'Crystal',
+            users: [
+                { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '', online: true },
+                { username: 'Artyom_Orlov', password: '123456', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '', online: true },
+                { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true }
+            ],
+            content: {
+                rules: '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан',
+                guides: '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер\n2. Зарегистрируйтесь\n3. Установите игру\n4. Запустите лаунчер\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию\n2. Нажмите взаимодействие\n3. Выберите профессию\n\n### 🚗 Как получить права?\n1. Придите в автошколу\n2. Сдайте экзамены\n3. Оплатите пошлину',
+                lore: '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас основан в 1848 году.\n\n### Основные фракции\n**LSPD** — полиция\n**FBI** — федералы\n**Government** — правительство\n\n### Криминал\n- Мафия\n- Банды\n- Одиночки',
+                lspd: '## 👮 LSPD - ПОЛИЦИЯ ЛОС-САНТОСА\n\n### Устав\nПолиция Лос-Сантоса (LSPD) является главным органом правопорядка в городе.\n\n### Состав\n- Начальник полиции\n- Капитаны\n- Лейтенанты\n- Сержанты\n- Офицеры\n\n### Обязанности\n- Патрулирование города\n- Раскрытие преступлений\n- Поддержание порядка\n- Помощь гражданам',
+                government: '## 🏛️ GOVERNMENT - ПРАВИТЕЛЬСТВО ШТАТА\n\n### Функции\n- Регулирование экономики\n- Принятие законов\n- Социальная политика\n\n### Структура\n- Губернатор\n- Сенат\n- Департаменты',
+                mafia: '## 🔫 МАФИИ И БАНДЫ\n\n### Криминальные структуры\n\n**Мафия**\nОрганизованная преступность с четкой иерархией. Занимается рэкетом, наркотрафиком и отмыванием денег.\n\n**Банды**\nУличные группировки, контролирующие территории. Занимаются грабежами, разбоями и мелкими преступлениями.\n\n**Одиночки**\nНезависимые преступники, действующие на свой страх и риск.',
+                business: '## 🏪 БИЗНЕС И ОРГАНИЗАЦИИ\n\n### Легальный бизнес\n\n**Автосалоны**\nПродажа и покупка автомобилей\n\n**Клубы и бары**\nРазвлекательные заведения\n\n**Автомастерские**\nРемонт и тюнинг авто\n\n**Фермы**\nСельское хозяйство'
+            },
+            topics: [
+                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 0, views: 0, status: 'pinned', tag: 'important', content: 'Описание обновления...', images: [], video: '' }
+            ],
+            events: [
+                { id: 1, title: '🏁 Гонка на выживание', author: 'Admin', date: '15.06.2025', desc: 'Уличные гонки с призовым фондом 100.000$', participants: 12, status: 'active' },
+                { id: 2, title: '🎯 Турнир по покеру', author: 'Admin', date: '20.06.2025', desc: 'Крупный турнир с призовым фондом 50.000$', participants: 8, status: 'upcoming' }
+            ],
+            chat: [],
+            complaints: { player: [], admin: [], unban: [], questions: [] },
+            notifications: [],
+            muted: [],
+            banned: [],
+            developers: ['Artyom_Orlov']
+        },
+        russia: {
+            name: 'Russia',
+            users: [
+                { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@russia.ru', avatar: '', online: true },
+                { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '', online: true }
+            ],
+            content: {
+                rules: '## 📜 ПРАВИЛА ПРОЕКТА RUSSIA RP\n\n### 1. Общие правила\n- Уважайте других игроков\n- Запрещены читы\n- Соблюдайте RP',
+                guides: '## 📚 ГАЙДЫ RUSSIA RP\n\n### Как начать?\n1. Скачайте лаунчер\n2. Зарегистрируйтесь\n3. Играйте!',
+                lore: '## 🌍 ЛОР МИРА RUSSIA RP\n\n### История\nНовый RP проект с уникальной атмосферой.',
+                lspd: '## 👮 LSPD RUSSIA\n\nИнформация о полиции.',
+                government: '## 🏛️ GOVERNMENT RUSSIA\n\nИнформация о правительстве.',
+                mafia: '## 🔫 МАФИИ RUSSIA\n\nИнформация о мафиях.',
+                business: '## 🏪 БИЗНЕС RUSSIA\n\nИнформация о бизнесе.'
+            },
+            topics: [
+                { id: 1, title: 'Добро пожаловать на Russia RP!', author: 'Admin', date: 'Сегодня 12:00', replies: 0, views: 0, status: '', tag: 'new', content: 'Приветствуем всех на новом сервере!', images: [], video: '' }
+            ],
+            events: [
+                { id: 1, title: '🎉 Открытие сервера', author: 'Admin', date: '01.07.2025', desc: 'Грандиозное открытие с конкурсами и подарками', participants: 0, status: 'upcoming' }
+            ],
+            chat: [],
+            complaints: { player: [], admin: [], unban: [], questions: [] },
+            notifications: [],
+            muted: [],
+            banned: [],
+            developers: []
+        }
     };
 
     // =========================================================
     // ИНИЦИАЛИЗАЦИЯ
     // =========================================================
     function initData() {
-        if (!localStorage.getItem('forum_users')) {
-            localStorage.setItem('forum_users', JSON.stringify(DEFAULT_USERS));
-        }
+        ['crystal', 'russia'].forEach(server => {
+            const data = DEFAULT_DATA[server];
+            const key = 'forum_data_' + server;
 
-        ['rules', 'guides', 'lore'].forEach(key => {
-            if (!localStorage.getItem('content_' + key)) {
-                localStorage.setItem('content_' + key, DEFAULT_CONTENT[key]);
-            }
-        });
-
-        ['complaints_player', 'complaints_admin', 'complaints_unban', 'complaints_questions'].forEach(key => {
             if (!localStorage.getItem(key)) {
-                localStorage.setItem(key, JSON.stringify([]));
+                localStorage.setItem(key, JSON.stringify(data));
             }
         });
+    }
 
-        if (!localStorage.getItem('forum_topics')) {
-            localStorage.setItem('forum_topics', JSON.stringify([
-                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 0, views: 0, status: 'pinned', tag: 'important', content: 'Описание обновления...', images: [], video: '' },
-                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 0, views: 0, status: 'hot', tag: 'new', content: 'Советы...', images: [], video: '' }
-            ]));
+    function getServerData(server) {
+        const key = 'forum_data_' + server;
+        let data = JSON.parse(localStorage.getItem(key));
+        if (!data) {
+            data = DEFAULT_DATA[server];
+            localStorage.setItem(key, JSON.stringify(data));
         }
+        return data;
+    }
 
-        if (!localStorage.getItem('chat_messages')) {
-            localStorage.setItem('chat_messages', JSON.stringify([]));
+    function saveServerData(server, data) {
+        const key = 'forum_data_' + server;
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    // =========================================================
+    // ВЫБОР СЕРВЕРА
+    // =========================================================
+    function selectServer(server) {
+        currentServer = server;
+        document.getElementById('serverSelect').style.display = 'none';
+        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('headerServer').textContent = '🌐 ' + (server === 'crystal' ? 'Crystal' : 'Russia');
+
+        // Показываем кнопки создания для разработчиков
+        const data = getServerData(server);
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+
+        document.getElementById('createEventBtn').style.display = isDev ? 'inline-flex' : 'none';
+        document.getElementById('createEventBtn2').style.display = isDev ? 'inline-flex' : 'none';
+    }
+
+    function changeServer() {
+        if (confirm('Сменить сервер? Все несохраненные данные будут потеряны.')) {
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('serverSelect').style.display = 'flex';
+            currentServer = null;
+            if (currentUser) {
+                // Статус оффлайн
+                const data = getServerData(currentServer);
+                const user = data.users.find(u => u.username === currentUser.username);
+                if (user) {
+                    user.online = false;
+                    saveServerData(currentServer, data);
+                }
+            }
+            currentUser = null;
+            localStorage.removeItem('current_user');
         }
-
-        if (!localStorage.getItem('notifications')) {
-            localStorage.setItem('notifications', JSON.stringify([]));
-        }
-
-        if (!localStorage.getItem('polls')) {
-            localStorage.setItem('polls', JSON.stringify([]));
-        }
-
-        if (!localStorage.getItem('muted_users')) {
-            localStorage.setItem('muted_users', JSON.stringify([]));
-        }
-
-        if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '3');
-        if (!localStorage.getItem('complaint_id_counter')) localStorage.setItem('complaint_id_counter', '1');
-        if (!localStorage.getItem('chat_id_counter')) localStorage.setItem('chat_id_counter', '1');
-        if (!localStorage.getItem('notif_id_counter')) localStorage.setItem('notif_id_counter', '1');
-        if (!localStorage.getItem('poll_id_counter')) localStorage.setItem('poll_id_counter', '1');
-        if (!localStorage.getItem('banned_users')) localStorage.setItem('banned_users', JSON.stringify([]));
-        if (!localStorage.getItem('developers')) localStorage.setItem('developers', JSON.stringify(['Artyom_Orlov']));
-
-        updateStats();
     }
 
     // =========================================================
     // АВТОРИЗАЦИЯ
     // =========================================================
-    let currentUser = null;
-    let replyTo = null;
-
     function loadUser() {
         const saved = localStorage.getItem('current_user');
-        if (saved) {
+        if (saved && currentServer) {
             currentUser = JSON.parse(saved);
-            const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
+            const data = getServerData(currentServer);
+            const banned = data.banned || [];
             if (banned.includes(currentUser.username)) {
                 localStorage.removeItem('current_user');
                 currentUser = null;
                 alert('⛔ Ваш аккаунт заблокирован!');
                 return;
             }
-            // Статус онлайн
-            const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-            const user = users.find(u => u.username === currentUser.username);
+            const user = data.users.find(u => u.username === currentUser.username);
             if (user) {
                 user.online = true;
-                localStorage.setItem('forum_users', JSON.stringify(users));
-                currentUser.online = true;
+                saveServerData(currentServer, data);
+                currentUser = user;
                 localStorage.setItem('current_user', JSON.stringify(currentUser));
             }
             showMainContent();
@@ -2668,6 +2850,7 @@
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('mainContent').classList.remove('hidden');
 
+        const data = getServerData(currentServer);
         const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
         const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
@@ -2684,7 +2867,6 @@
         document.getElementById('burgerPrefix').textContent = prefixText;
         document.getElementById('burgerPrefix').className = 'burger-user-prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
 
-        // Статус онлайн
         const statusDot = document.getElementById('headerStatusDot');
         const profileStatus = document.getElementById('profileStatusDot');
         if (currentUser.online) {
@@ -2695,16 +2877,19 @@
             if (profileStatus) profileStatus.className = 'status-dot status-offline';
         }
 
-        // Панель разработчика
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
         const devMenu = document.getElementById('devMenuSection');
-        if (currentUser.role === 'developer' || currentUser.role === 'admin') {
+        if (isDev) {
             devMenu.classList.remove('hidden');
         } else {
             devMenu.classList.add('hidden');
         }
 
-        const canCreate = currentUser.role === 'admin' || currentUser.role === 'developer';
+        const canCreate = isDev || currentUser.role === 'admin';
         document.getElementById('createTopicBtn').style.display = canCreate ? 'inline-flex' : 'none';
+        document.getElementById('createEventBtn').style.display = canCreate ? 'inline-flex' : 'none';
+        document.getElementById('createEventBtn2').style.display = canCreate ? 'inline-flex' : 'none';
 
         updateStats();
         renderTopics();
@@ -2716,10 +2901,17 @@
         renderDevPanel();
         loadProfile();
         renderNotifications();
+        renderEvents();
+        renderContentPage();
         updateBadges();
     }
 
     function login() {
+        if (!currentServer) {
+            document.getElementById('loginError').textContent = 'Сначала выберите сервер!';
+            return;
+        }
+
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
         const errorEl = document.getElementById('loginError');
@@ -2729,23 +2921,23 @@
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('forum_users'));
-        const user = users.find(u => u.username === username && u.password === password);
+        const data = getServerData(currentServer);
+        const user = data.users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
+            const banned = data.banned || [];
             if (banned.includes(username)) {
                 errorEl.textContent = '⛔ Аккаунт заблокирован!';
                 return;
             }
-            const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+            const muted = data.muted || [];
             if (muted.includes(username)) {
                 errorEl.textContent = '⛔ Вы заглушены!';
                 return;
             }
             errorEl.textContent = '';
             user.online = true;
-            localStorage.setItem('forum_users', JSON.stringify(users));
+            saveServerData(currentServer, data);
             currentUser = user;
             localStorage.setItem('current_user', JSON.stringify(user));
             showMainContent();
@@ -2755,6 +2947,11 @@
     }
 
     function register() {
+        if (!currentServer) {
+            document.getElementById('loginError').textContent = 'Сначала выберите сервер!';
+            return;
+        }
+
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
         const errorEl = document.getElementById('loginError');
@@ -2768,14 +2965,14 @@
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('forum_users'));
-        if (users.find(u => u.username === username)) {
+        const data = getServerData(currentServer);
+        if (data.users.find(u => u.username === username)) {
             errorEl.textContent = 'Пользователь уже существует';
             return;
         }
 
-        users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '', online: true });
-        localStorage.setItem('forum_users', JSON.stringify(users));
+        data.users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '', online: true });
+        saveServerData(currentServer, data);
         errorEl.textContent = '✅ Регистрация успешна! Войдите.';
         document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
         document.getElementById('loginBtn').textContent = 'Войти';
@@ -2804,25 +3001,22 @@
     }
 
     function logout() {
-        // Статус оффлайн
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-        const user = users.find(u => u.username === currentUser?.username);
-        if (user) {
-            user.online = false;
-            localStorage.setItem('forum_users', JSON.stringify(users));
+        if (currentUser && currentServer) {
+            const data = getServerData(currentServer);
+            const user = data.users.find(u => u.username === currentUser.username);
+            if (user) {
+                user.online = false;
+                saveServerData(currentServer, data);
+            }
         }
         localStorage.removeItem('current_user');
         currentUser = null;
         document.getElementById('mainContent').classList.add('hidden');
-        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('serverSelect').style.display = 'flex';
+        document.getElementById('loginModal').style.display = 'none';
         document.getElementById('loginError').textContent = '';
         document.getElementById('loginUsername').value = '';
         document.getElementById('loginPassword').value = '';
-        document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
-        document.getElementById('loginBtn').textContent = 'Войти';
-        document.getElementById('loginBtn').onclick = login;
-        document.getElementById('registerText').innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
-        document.getElementById('toggleAuth').onclick = toggleAuth;
     }
 
     // =========================================================
@@ -2833,6 +3027,11 @@
         'rules': 'page-content',
         'guides': 'page-content',
         'lore': 'page-content',
+        'lspd': 'page-lspd',
+        'government': 'page-government',
+        'mafia': 'page-mafia',
+        'business': 'page-business',
+        'events': 'page-events',
         'complaints': 'page-complaints',
         'admin-complaints': 'page-admin-complaints',
         'unban': 'page-unban',
@@ -2843,16 +3042,24 @@
         'notifications': 'page-notifications'
     };
 
-    const contentKeys = { 'rules': 'rules', 'guides': 'guides', 'lore': 'lore' };
+    const contentKeys = {
+        'rules': 'rules',
+        'guides': 'guides',
+        'lore': 'lore',
+        'lspd': 'lspd',
+        'government': 'government',
+        'mafia': 'mafia',
+        'business': 'business'
+    };
+
     const pageTitles = {
         'rules': '📜 Правила проекта',
         'guides': '📚 Гайды и FAQ',
-        'lore': '🌍 Лор мира'
-    };
-    const pageSubtitles = {
-        'rules': 'Полные правила сервера',
-        'guides': 'Инструкции для новичков',
-        'lore': 'История мира и фракций'
+        'lore': '🌍 Лор мира',
+        'lspd': '👮 LSPD',
+        'government': '🏛️ Government',
+        'mafia': '🔫 Мафии и банды',
+        'business': '🏪 Бизнес и организации'
     };
 
     function navigateTo(page) {
@@ -2860,20 +3067,15 @@
 
         document.querySelectorAll('#pageContainer > div').forEach(el => el.classList.add('hidden'));
 
-        const placeholderPages = ['news', 'lspd', 'government', 'mafia', 'business', 'support', 'bugs', 'bulletin', 'events', 'archive', 'all-topics', 'privacy', 'contacts'];
+        const placeholderPages = ['news', 'support', 'bugs', 'bulletin', 'archive', 'all-topics', 'privacy', 'contacts'];
         if (placeholderPages.includes(page)) {
             const placeholder = document.getElementById('page-placeholder');
             placeholder.classList.remove('hidden');
             const titles = {
                 'news': '📰 Новости проекта',
-                'lspd': '👮 LSPD',
-                'government': '🏛️ Government',
-                'mafia': '🔫 Мафии и банды',
-                'business': '🏪 Бизнес и организации',
                 'support': '🛠 Техподдержка',
                 'bugs': '🐛 Баг-репорты',
                 'bulletin': '📢 Доска объявлений',
-                'events': '🏆 Конкурсы и ивенты',
                 'archive': '📦 Архивы',
                 'all-topics': '📋 Все темы'
             };
@@ -2885,18 +3087,7 @@
         const target = document.getElementById(pageMap[page]);
         if (target) target.classList.remove('hidden');
 
-        if (['rules', 'guides', 'lore'].includes(page)) {
-            const editor = document.getElementById('contentEditor');
-            const key = contentKeys[page];
-            const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
-            editor.disabled = !canEdit;
-            editor.value = localStorage.getItem('content_' + key) || '';
-            document.getElementById('contentTitle').textContent = pageTitles[page];
-            document.getElementById('contentSubtitle').textContent = pageSubtitles[page] + (canEdit ? '' : ' (только для чтения)');
-            editor.dataset.contentKey = key;
-            document.querySelector('.content-page__actions .btn-primary').style.display = canEdit ? 'inline-block' : 'none';
-        }
-
+        if (page === 'events') renderEvents();
         if (page === 'complaints') renderComplaints('player');
         if (page === 'admin-complaints') renderComplaints('admin');
         if (page === 'unban') renderComplaints('unban');
@@ -2907,23 +3098,170 @@
         if (page === 'notifications') renderNotifications();
         if (page === 'home') { renderTopics(); updateStats(); }
 
+        // Для страниц контента
+        if (['rules', 'guides', 'lore', 'lspd', 'government', 'mafia', 'business'].includes(page)) {
+            renderContentPage(page);
+        }
+
         window.scrollTo(0, 0);
+    }
+
+    // =========================================================
+    // КОНТЕНТ СТРАНИЦЫ (ЛОР, ПРАВИЛА, LSPD и т.д.)
+    // =========================================================
+    function renderContentPage(page) {
+        if (!currentServer) return;
+
+        const data = getServerData(currentServer);
+        const key = contentKeys[page];
+
+        if (!key) return;
+
+        // Для страниц с отдельным редактором
+        const bodyMap = {
+            'lspd': 'lspdBody',
+            'government': 'governmentBody',
+            'mafia': 'mafiaBody',
+            'business': 'businessBody'
+        };
+
+        const editorMap = {
+            'lspd': 'lspdEditor',
+            'government': 'governmentEditor',
+            'mafia': 'mafiaEditor',
+            'business': 'businessEditor'
+        };
+
+        const editBtnMap = {
+            'lspd': 'lspdEditBtn',
+            'government': 'governmentEditBtn',
+            'mafia': 'mafiaEditBtn',
+            'business': 'businessEditBtn'
+        };
+
+        const saveBtnMap = {
+            'lspd': 'lspdSaveBtn',
+            'government': 'governmentSaveBtn',
+            'mafia': 'mafiaSaveBtn',
+            'business': 'businessSaveBtn'
+        };
+
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+
+        // Для обычных страниц (rules, guides, lore)
+        if (['rules', 'guides', 'lore'].includes(page)) {
+            const body = document.getElementById('contentBody');
+            const editor = document.getElementById('contentEditor');
+            const editBtn = document.getElementById('contentEditBtn');
+            const saveBtn = document.getElementById('contentSaveBtn');
+
+            const content = data.content[key] || 'Контент не добавлен.';
+            body.textContent = content;
+            editor.value = content;
+            currentContentKey = key;
+
+            // Показываем кнопку редактирования только для разработчиков
+            editBtn.style.display = isDev ? 'inline-block' : 'none';
+            saveBtn.classList.add('hidden');
+            body.classList.remove('hidden');
+            editor.classList.add('hidden');
+            contentEditMode = false;
+            return;
+        }
+
+        // Для LSPD, Government, Mafia, Business
+        const body = document.getElementById(bodyMap[page]);
+        const editor = document.getElementById(editorMap[page]);
+        const editBtn = document.getElementById(editBtnMap[page]);
+        const saveBtn = document.getElementById(saveBtnMap[page]);
+
+        if (body && editor) {
+            const content = data.content[key] || 'Контент не добавлен.';
+            body.textContent = content;
+            editor.value = content;
+            currentContentKey = key;
+
+            editBtn.style.display = isDev ? 'inline-block' : 'none';
+            saveBtn.classList.add('hidden');
+            body.classList.remove('hidden');
+            editor.classList.add('hidden');
+        }
+    }
+
+    function toggleContentEdit() {
+        const body = document.getElementById('contentBody');
+        const editor = document.getElementById('contentEditor');
+        const editBtn = document.getElementById('contentEditBtn');
+        const saveBtn = document.getElementById('contentSaveBtn');
+
+        body.classList.toggle('hidden');
+        editor.classList.toggle('hidden');
+        editBtn.classList.toggle('hidden');
+        saveBtn.classList.toggle('hidden');
+        contentEditMode = !contentEditMode;
     }
 
     function saveContent() {
         const editor = document.getElementById('contentEditor');
-        const key = editor.dataset.contentKey;
-        if (key) {
-            localStorage.setItem('content_' + key, editor.value);
+        const key = currentContentKey;
+        if (key && currentServer) {
+            const data = getServerData(currentServer);
+            data.content[key] = editor.value;
+            saveServerData(currentServer, data);
             alert('✅ Контент сохранен!');
+            renderContentPage(Object.keys(contentKeys).find(k => contentKeys[k] === key));
         }
     }
 
+    // Функции для LSPD, Government, Mafia, Business
+    function toggleLspdEdit() { toggleSectionEdit('lspd', 'lspdBody', 'lspdEditor', 'lspdEditBtn', 'lspdSaveBtn'); }
+    function toggleGovernmentEdit() { toggleSectionEdit('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn', 'governmentSaveBtn'); }
+    function toggleMafiaEdit() { toggleSectionEdit('mafia', 'mafiaBody', 'mafiaEditor', 'mafiaEditBtn', 'mafiaSaveBtn'); }
+    function toggleBusinessEdit() { toggleSectionEdit('business', 'businessBody', 'businessEditor', 'businessEditBtn', 'businessSaveBtn'); }
+
+    function toggleSectionEdit(key, bodyId, editorId, editBtnId, saveBtnId) {
+        const body = document.getElementById(bodyId);
+        const editor = document.getElementById(editorId);
+        const editBtn = document.getElementById(editBtnId);
+        const saveBtn = document.getElementById(saveBtnId);
+
+        if (!body || !editor) return;
+
+        body.classList.toggle('hidden');
+        editor.classList.toggle('hidden');
+        editBtn.classList.toggle('hidden');
+        saveBtn.classList.toggle('hidden');
+        currentContentKey = key;
+    }
+
+    function saveLspd() { saveSectionContent('lspd', 'lspdBody', 'lspdEditor', 'lspdEditBtn', 'lspdSaveBtn'); }
+    function saveGovernment() { saveSectionContent('government', 'governmentBody', 'governmentEditor', 'governmentEditBtn', 'governmentSaveBtn'); }
+    function saveMafia() { saveSectionContent('mafia', 'mafiaBody', 'mafiaEditor', 'mafiaEditBtn', 'mafiaSaveBtn'); }
+    function saveBusiness() { saveSectionContent('business', 'businessBody', 'businessEditor', 'businessEditBtn', 'businessSaveBtn'); }
+
+    function saveSectionContent(key, bodyId, editorId, editBtnId, saveBtnId) {
+        const editor = document.getElementById(editorId);
+        if (!editor || !currentServer) return;
+
+        const data = getServerData(currentServer);
+        data.content[key] = editor.value;
+        saveServerData(currentServer, data);
+        alert('✅ Контент сохранен!');
+        renderContentPage(Object.keys(contentKeys).find(k => contentKeys[k] === key));
+    }
+
     // =========================================================
-    // ТЕМЫ С ПРИКРЕПЛЕНИЕМ ФОТО/ВИДЕО
+    // ТЕМЫ
     // =========================================================
     function showCreateTopic() {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const data = getServerData(currentServer);
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isDev) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
@@ -2947,23 +3285,28 @@
             video = prompt('Введите ссылку на видео (YouTube):');
         }
 
-        const topics = JSON.parse(localStorage.getItem('forum_topics'));
-        const id = parseInt(localStorage.getItem('topic_id_counter')) || 1;
+        const topics = data.topics || [];
+        const id = topics.length > 0 ? Math.max(...topics.map(t => t.id)) + 1 : 1;
+
         topics.unshift({
             id, title, content, images, video,
             author: currentUser.username,
             date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
             replies: 0, views: 0, status: '', tag: ''
         });
-        localStorage.setItem('forum_topics', JSON.stringify(topics));
-        localStorage.setItem('topic_id_counter', String(id + 1));
+
+        data.topics = topics;
+        saveServerData(currentServer, data);
         alert('✅ Тема создана!');
         renderTopics();
         updateStats();
     }
 
     function renderTopics() {
-        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        if (!currentServer) return;
+
+        const data = getServerData(currentServer);
+        const topics = data.topics || [];
         const container = document.getElementById('topicList');
 
         if (topics.length === 0) {
@@ -3010,68 +3353,226 @@
     }
 
     function viewTopic(id) {
-        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
+        if (!currentServer) return;
+
+        const data = getServerData(currentServer);
+        const topics = data.topics || [];
         const topic = topics.find(t => t.id === id);
-        if (topic) {
-            topic.views = (topic.views || 0) + 1;
-            localStorage.setItem('forum_topics', JSON.stringify(topics));
-            renderTopics();
-            updateStats();
+        if (!topic) return;
 
-            let html = `📖 <b>${topic.title}</b>\n\n`;
-            html += `👤 Автор: ${topic.author}\n`;
-            html += `📅 Дата: ${topic.date}\n`;
-            html += `💬 Ответов: ${topic.replies}\n`;
-            html += `👁️ Просмотров: ${topic.views}\n\n`;
-            html += `📝 ${topic.content || 'Нет содержания'}\n`;
+        topic.views = (topic.views || 0) + 1;
+        saveServerData(currentServer, data);
+        renderTopics();
+        updateStats();
 
-            if (topic.images && topic.images.length > 0) {
-                html += `\n🖼️ Изображения: ${topic.images.join(', ')}`;
-            }
-            if (topic.video) {
-                html += `\n🎬 Видео: ${topic.video}`;
-            }
+        let html = `📖 <b>${topic.title}</b>\n\n`;
+        html += `👤 Автор: ${topic.author}\n`;
+        html += `📅 Дата: ${topic.date}\n`;
+        html += `💬 Ответов: ${topic.replies}\n`;
+        html += `👁️ Просмотров: ${topic.views}\n\n`;
+        html += `📝 ${topic.content || 'Нет содержания'}\n`;
 
-            // Кнопки редактирования для разработчиков
-            const isDev = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
-            if (isDev) {
-                html += `\n\n---\n🛠 [Редактировать тему] (кликните для редактирования)`;
-            }
+        if (topic.images && topic.images.length > 0) {
+            html += `\n🖼️ Изображения: ${topic.images.join(', ')}`;
+        }
+        if (topic.video) {
+            html += `\n🎬 Видео: ${topic.video}`;
+        }
 
-            alert(html);
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+        if (isDev) {
+            html += `\n\n---\n🛠 [Редактировать тему] (кликните для редактирования)`;
+        }
 
-            // Редактирование для разработчиков
-            if (isDev) {
-                const edit = confirm('Редактировать тему?');
-                if (edit) {
-                    const newContent = prompt('Новый текст:', topic.content || '');
-                    if (newContent !== null) {
-                        topic.content = newContent;
-                        localStorage.setItem('forum_topics', JSON.stringify(topics));
-                        alert('✅ Тема обновлена!');
-                        renderTopics();
-                    }
+        alert(html);
+
+        if (isDev) {
+            const edit = confirm('Редактировать тему?');
+            if (edit) {
+                const newContent = prompt('Новый текст:', topic.content || '');
+                if (newContent !== null) {
+                    topic.content = newContent;
+                    saveServerData(currentServer, data);
+                    alert('✅ Тема обновлена!');
+                    renderTopics();
                 }
             }
         }
     }
 
     // =========================================================
-    // СТАТИСТИКА (РЕАЛЬНАЯ)
+    // ИВЕНТЫ
+    // =========================================================
+    function showCreateEvent() {
+        if (!currentUser || !currentServer) return;
+
+        const data = getServerData(currentServer);
+        const devs = data.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isDev) {
+            alert('⛔ Только администраторы и разработчики!');
+            return;
+        }
+
+        const title = prompt('Введите название ивента:');
+        if (!title) return;
+
+        const desc = prompt('Введите описание ивента:');
+        if (!desc) return;
+
+        const status = confirm('Ивент активен?') ? 'active' : 'upcoming';
+
+        const events = data.events || [];
+        const id = events.length > 0 ? Math.max(...events.map(e => e.id)) + 1 : 1;
+
+        events.unshift({
+            id, title, desc, status,
+            author: currentUser.username,
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            participants: 0
+        });
+
+        data.events = events;
+        saveServerData(currentServer, data);
+        alert('✅ Ивент создан!');
+        renderEvents();
+    }
+
+    function renderEvents() {
+        if (!currentServer) return;
+
+        const data = getServerData(currentServer);
+        const events = data.events || [];
+        const container = document.getElementById('eventsGrid');
+        const containerPage = document.getElementById('eventsPageGrid');
+
+        const renderGrid = (target) => {
+            if (!target) return;
+
+            if (events.length === 0) {
+                target.innerHTML = '<div class="no-items"><i class="fas fa-trophy"></i>Нет ивентов</div>';
+                return;
+            }
+
+            target.innerHTML = events.map(e => {
+                const statusMap = {
+                    'active': '<span style="color:#4caf50;">🟢 Активен</span>',
+                    'upcoming': '<span style="color:#ff7f17;">🟡 Скоро</span>',
+                    'ended': '<span style="color:#757575;">⚫ Завершен</span>'
+                };
+
+                const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+
+                return `
+                    <div class="forum-card" onclick="viewEvent(${e.id})">
+                        <div class="forum-card__header">
+                            <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
+                            <span class="forum-card__title">${e.title}</span>
+                        </div>
+                        <div class="forum-card__desc">${e.desc || 'Нет описания'}</div>
+                        <div class="forum-card__meta">
+                            <span>📅 ${e.date}</span>
+                            <span>👤 ${e.participants || 0} участников</span>
+                            <span>${statusMap[e.status] || statusMap.upcoming}</span>
+                        </div>
+                        ${isDev ? `<div style="margin-top:6px;font-size:10px;color:#ff7f17;">🛠 Кликните для управления</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        };
+
+        renderGrid(container);
+        renderGrid(containerPage);
+    }
+
+    function viewEvent(id) {
+        if (!currentServer) return;
+
+        const data = getServerData(currentServer);
+        const events = data.events || [];
+        const event = events.find(e => e.id === id);
+        if (!event) return;
+
+        const isDev = (data.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
+
+        let html = `🏆 <b>${event.title}</b>\n\n`;
+        html += `📝 ${event.desc || 'Нет описания'}\n`;
+        html += `📅 Дата: ${event.date}\n`;
+        html += `👤 Участников: ${event.participants || 0}\n`;
+        html += `📊 Статус: ${event.status === 'active' ? '🟢 Активен' : event.status === 'upcoming' ? '🟡 Скоро' : '⚫ Завершен'}\n`;
+
+        if (isDev) {
+            html += `\n---\n🛠 Управление ивентом:\n`;
+            html += `1. Изменить статус\n`;
+            html += `2. Редактировать\n`;
+            html += `3. Удалить\n`;
+        }
+
+        const action = prompt(html + '\n\nВыберите действие (0 - отмена):');
+
+        if (action === null || action === '0') return;
+
+        if (isDev) {
+            if (action === '1') {
+                const newStatus = prompt('Выберите статус (active, upcoming, ended):', event.status || 'active');
+                if (newStatus && ['active', 'upcoming', 'ended'].includes(newStatus)) {
+                    event.status = newStatus;
+                    saveServerData(currentServer, data);
+                    renderEvents();
+                    alert('✅ Статус обновлен!');
+                }
+                return;
+            }
+
+            if (action === '2') {
+                const newTitle = prompt('Новое название:', event.title);
+                if (newTitle !== null && newTitle.trim()) {
+                    event.title = newTitle.trim();
+                }
+                const newDesc = prompt('Новое описание:', event.desc || '');
+                if (newDesc !== null) {
+                    event.desc = newDesc.trim();
+                }
+                saveServerData(currentServer, data);
+                renderEvents();
+                alert('✅ Ивент обновлен!');
+                return;
+            }
+
+            if (action === '3') {
+                if (confirm(`Удалить ивент "${event.title}"?`)) {
+                    data.events = events.filter(e => e.id !== id);
+                    saveServerData(currentServer, data);
+                    renderEvents();
+                    alert('✅ Ивент удален!');
+                }
+                return;
+            }
+        }
+
+        alert('Неизвестная команда');
+    }
+
+    // =========================================================
+    // СТАТИСТИКА
     // =========================================================
     function updateStats() {
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
-        const complaints = JSON.parse(localStorage.getItem('complaints_player')) || [];
-        const chatMessages = JSON.parse(localStorage.getItem('chat_messages')) || [];
+        if (!currentServer) return;
 
-        const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0);
-        const totalViews = topics.reduce((sum, t) => sum + (t.views || 0), 0);
+        const data = getServerData(currentServer);
+        const users = data.users || [];
+        const topics = data.topics || [];
+        const chatMessages = data.chat || [];
+        const complaints = data.complaints?.player || [];
+
+        const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0) + chatMessages.length;
 
         document.getElementById('totalUsers').textContent = users.length;
         document.getElementById('statUsers').textContent = users.length;
         document.getElementById('statTopics').textContent = topics.length;
-        document.getElementById('statPosts').textContent = totalPosts + chatMessages.length;
+        document.getElementById('statPosts').textContent = totalPosts;
         document.getElementById('statOnline').textContent = users.filter(u => u.online).length || Math.floor(Math.random() * 50) + 10;
         document.getElementById('statNew').textContent = topics.filter(t => t.date.includes('Сегодня')).length;
 
@@ -3089,13 +3590,13 @@
     }
 
     // =========================================================
-    // ЖАЛОБЫ С УВЕДОМЛЕНИЯМИ
+    // ЖАЛОБЫ
     // =========================================================
     const complaintConfigs = {
-        'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'complaints_player', title: 'Жалоба на игрока', fields: ['target', 'author', 'title', 'desc'] },
-        'admin': { formId: 'complaintFormAdmin', listId: 'adminComplaintsList', storageKey: 'complaints_admin', title: 'Жалоба на администрацию', fields: ['target', 'author', 'title', 'desc'] },
-        'unban': { formId: 'complaintFormUnban', listId: 'unbanList', storageKey: 'complaints_unban', title: 'Заявка на разбан', fields: ['author', 'title', 'desc'] },
-        'question': { formId: 'complaintFormQuestion', listId: 'questionsList', storageKey: 'complaints_questions', title: 'Вопрос', fields: ['author', 'title', 'desc'] }
+        'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'player', title: 'Жалоба на игрока', fields: ['target', 'author', 'title', 'desc'] },
+        'admin': { formId: 'complaintFormAdmin', listId: 'adminComplaintsList', storageKey: 'admin', title: 'Жалоба на администрацию', fields: ['target', 'author', 'title', 'desc'] },
+        'unban': { formId: 'complaintFormUnban', listId: 'unbanList', storageKey: 'unban', title: 'Заявка на разбан', fields: ['author', 'title', 'desc'] },
+        'question': { formId: 'complaintFormQuestion', listId: 'questionsList', storageKey: 'questions', title: 'Вопрос', fields: ['author', 'title', 'desc'] }
     };
 
     function showComplaintForm(type) {
@@ -3116,6 +3617,8 @@
     }
 
     function submitComplaint(type) {
+        if (!currentUser || !currentServer) return;
+
         const config = complaintConfigs[type];
         if (!config) return;
 
@@ -3134,8 +3637,11 @@
             return;
         }
 
-        const complaints = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-        const id = parseInt(localStorage.getItem('complaint_id_counter')) || 1;
+        const serverData = getServerData(currentServer);
+        if (!serverData.complaints) serverData.complaints = { player: [], admin: [], unban: [], questions: [] };
+
+        const complaints = serverData.complaints[config.storageKey] || [];
+        const id = complaints.length > 0 ? Math.max(...complaints.map(c => c.id)) + 1 : 1;
 
         complaints.unshift({
             id, ...data,
@@ -3144,22 +3650,35 @@
             answer: ''
         });
 
-        localStorage.setItem(config.storageKey, JSON.stringify(complaints));
-        localStorage.setItem('complaint_id_counter', String(id + 1));
+        serverData.complaints[config.storageKey] = complaints;
+        saveServerData(currentServer, serverData);
 
-        // Уведомление администраторам
-        addNotification(`${currentUser.username} подал(а) ${config.title}`, `Жалоба: ${data.title}`, 'complaint');
+        if (!serverData.notifications) serverData.notifications = [];
+        serverData.notifications.unshift({
+            id: (serverData.notifications.length > 0 ? Math.max(...serverData.notifications.map(n => n.id)) + 1 : 1),
+            title: `${currentUser.username} подал(а) ${config.title}`,
+            message: `Жалоба: ${data.title}`,
+            type: 'complaint',
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            read: false
+        });
+        saveServerData(currentServer, serverData);
 
         alert('✅ ' + config.title + ' отправлена!');
         hideComplaintForm(type);
         renderComplaints(type);
         updateStats();
+        updateBadges();
     }
 
     function renderComplaints(type) {
+        if (!currentServer) return;
+
         const config = complaintConfigs[type];
         if (!config) return;
-        const complaints = JSON.parse(localStorage.getItem(config.storageKey)) || [];
+
+        const serverData = getServerData(currentServer);
+        const complaints = serverData.complaints?.[config.storageKey] || [];
         const container = document.getElementById(config.listId);
 
         if (complaints.length === 0) {
@@ -3174,7 +3693,8 @@
             'rejected': { class: 'status-rejected', text: 'Отклонено' }
         };
 
-        const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
 
         container.innerHTML = complaints.map(c => {
             const status = statusMap[c.status] || statusMap.new;
@@ -3211,62 +3731,93 @@
     }
 
     function answerComplaint(type, id) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         const answer = prompt('Введите ответ:');
         if (!answer || !answer.trim()) return;
 
         const config = complaintConfigs[type];
         if (!config) return;
 
-        const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-        const index = items.findIndex(i => i.id === id);
+        const complaints = serverData.complaints?.[config.storageKey] || [];
+        const index = complaints.findIndex(i => i.id === id);
         if (index === -1) return;
 
-        items[index].answer = answer.trim();
-        items[index].status = 'answered';
-        localStorage.setItem(config.storageKey, JSON.stringify(items));
+        complaints[index].answer = answer.trim();
+        complaints[index].status = 'answered';
+        serverData.complaints[config.storageKey] = complaints;
 
-        // Уведомление автору
-        addNotification(`Администратор ответил на Вашу жалобу`, `${items[index].title} - ${answer}`, 'complaint');
+        if (!serverData.notifications) serverData.notifications = [];
+        serverData.notifications.unshift({
+            id: (serverData.notifications.length > 0 ? Math.max(...serverData.notifications.map(n => n.id)) + 1 : 1),
+            title: `Администратор ответил на Вашу жалобу`,
+            message: `${complaints[index].title} - ${answer}`,
+            type: 'complaint',
+            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+            read: false
+        });
 
+        saveServerData(currentServer, serverData);
         renderComplaints(type);
+        updateBadges();
         alert('✅ Ответ добавлен!');
     }
 
     function changeStatus(type, id, status) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         const config = complaintConfigs[type];
         if (!config) return;
 
-        const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-        const index = items.findIndex(i => i.id === id);
+        const complaints = serverData.complaints?.[config.storageKey] || [];
+        const index = complaints.findIndex(i => i.id === id);
         if (index === -1) return;
 
-        items[index].status = status;
-        localStorage.setItem(config.storageKey, JSON.stringify(items));
+        complaints[index].status = status;
+        serverData.complaints[config.storageKey] = complaints;
+        saveServerData(currentServer, serverData);
         renderComplaints(type);
         alert('✅ Статус изменен!');
     }
 
     function deleteComplaint(type, id) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         if (!confirm('Удалить эту жалобу?')) return;
 
         const config = complaintConfigs[type];
         if (!config) return;
 
-        let items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-        items = items.filter(i => i.id !== id);
-        localStorage.setItem(config.storageKey, JSON.stringify(items));
+        const complaints = serverData.complaints?.[config.storageKey] || [];
+        serverData.complaints[config.storageKey] = complaints.filter(i => i.id !== id);
+        saveServerData(currentServer, serverData);
         renderComplaints(type);
         alert('✅ Жалоба удалена!');
     }
@@ -3274,20 +3825,11 @@
     // =========================================================
     // УВЕДОМЛЕНИЯ
     // =========================================================
-    function addNotification(title, message, type) {
-        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
-        const id = parseInt(localStorage.getItem('notif_id_counter')) || 1;
-        notifications.unshift({
-            id, title, message, type, date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-            read: false
-        });
-        localStorage.setItem('notifications', JSON.stringify(notifications));
-        localStorage.setItem('notif_id_counter', String(id + 1));
-        updateBadges();
-    }
-
     function renderNotifications() {
-        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const notifications = serverData.notifications || [];
         const container = document.getElementById('notificationsList');
 
         if (notifications.length === 0) {
@@ -3311,40 +3853,50 @@
         `).join('');
     }
 
-    function showNotifications() {
-        navigateTo('notifications');
-    }
-
     function markNotifRead(id) {
-        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const notifications = serverData.notifications || [];
         const notif = notifications.find(n => n.id === id);
         if (notif) {
             notif.read = true;
-            localStorage.setItem('notifications', JSON.stringify(notifications));
+            saveServerData(currentServer, serverData);
             renderNotifications();
             updateBadges();
         }
     }
 
     function deleteNotif(id) {
-        let notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        let notifications = serverData.notifications || [];
         notifications = notifications.filter(n => n.id !== id);
-        localStorage.setItem('notifications', JSON.stringify(notifications));
+        serverData.notifications = notifications;
+        saveServerData(currentServer, serverData);
         renderNotifications();
         updateBadges();
     }
 
     function updateBadges() {
-        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const notifications = serverData.notifications || [];
         const unread = notifications.filter(n => !n.read).length;
         document.getElementById('notifBadge').textContent = unread;
+        document.getElementById('notifBadgeHeader').textContent = unread;
     }
 
     // =========================================================
-    // ЧАТ С ОТВЕТАМИ
+    // ЧАТ
     // =========================================================
     function renderChat() {
-        const messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const messages = serverData.chat || [];
         const container = document.getElementById('chatMessages');
 
         if (messages.length === 0) {
@@ -3352,18 +3904,18 @@
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const users = serverData.users || [];
         const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
         const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
-        const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
+        const isAdmin = (serverData.developers || []).includes(currentUser?.username) || currentUser?.role === 'admin' || currentUser?.role === 'developer';
 
         container.innerHTML = messages.map(m => {
             const user = users.find(u => u.username === m.author);
             const prefix = user ? user.prefix : 'user';
             const avatar = user && user.avatar ? `<img src="${user.avatar}" alt="">` : m.author.charAt(0).toUpperCase();
 
-            const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+            const muted = serverData.muted || [];
             const isMuted = muted.includes(m.author);
 
             const replyHtml = m.replyTo ? `
@@ -3429,8 +3981,10 @@
     }
 
     function sendMessage() {
-        if (!currentUser) return;
-        const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const muted = serverData.muted || [];
         if (muted.includes(currentUser.username)) {
             alert('⛔ Вы заглушены!');
             return;
@@ -3440,8 +3994,8 @@
         const text = input.value.trim();
         if (!text) return;
 
-        const messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
-        const id = parseInt(localStorage.getItem('chat_id_counter')) || 1;
+        const messages = serverData.chat || [];
+        const id = messages.length > 0 ? Math.max(...messages.map(m => m.id)) + 1 : 1;
 
         let replyToId = replyTo;
         let replyToName = null;
@@ -3461,8 +4015,8 @@
             replyToName: replyToName || null
         });
 
-        localStorage.setItem('chat_messages', JSON.stringify(messages));
-        localStorage.setItem('chat_id_counter', String(id + 1));
+        serverData.chat = messages;
+        saveServerData(currentServer, serverData);
 
         input.value = '';
         cancelReply();
@@ -3471,47 +4025,73 @@
     }
 
     function muteUser(username) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         if (username === currentUser.username) {
             alert('⛔ Нельзя замутить себя!');
             return;
         }
-        const muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+
+        let muted = serverData.muted || [];
         if (muted.includes(username)) {
             alert('Пользователь уже заглушен!');
             return;
         }
+
         muted.push(username);
-        localStorage.setItem('muted_users', JSON.stringify(muted));
+        serverData.muted = muted;
+        saveServerData(currentServer, serverData);
         renderChat();
         alert(`✅ ${username} заглушен!`);
     }
 
     function unmuteUser(username) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
-        let muted = JSON.parse(localStorage.getItem('muted_users')) || [];
+
+        let muted = serverData.muted || [];
         muted = muted.filter(u => u !== username);
-        localStorage.setItem('muted_users', JSON.stringify(muted));
+        serverData.muted = muted;
+        saveServerData(currentServer, serverData);
         renderChat();
         alert(`✅ ${username} размучен!`);
     }
 
     function deleteChatMessage(id) {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isAdmin = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isAdmin) {
             alert('⛔ Только администраторы и разработчики!');
             return;
         }
+
         if (!confirm('Удалить сообщение?')) return;
 
-        let messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
+        let messages = serverData.chat || [];
         messages = messages.filter(m => m.id !== id);
-        localStorage.setItem('chat_messages', JSON.stringify(messages));
+        serverData.chat = messages;
+        saveServerData(currentServer, serverData);
         renderChat();
         alert('✅ Сообщение удалено!');
     }
@@ -3526,9 +4106,12 @@
     // ПАНЕЛЬ РАЗРАБОТЧИКА
     // =========================================================
     function renderDevPanel() {
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-        const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
-        const developers = JSON.parse(localStorage.getItem('developers')) || [];
+        if (!currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const users = serverData.users || [];
+        const banned = serverData.banned || [];
+        const developers = serverData.developers || [];
 
         ['devUserSelect', 'devBanSelect'].forEach(id => {
             const sel = document.getElementById(id);
@@ -3571,29 +4154,37 @@
     }
 
     function devAction(action, username) {
-        if (!currentUser || (currentUser.role !== 'developer' && currentUser.role !== 'admin')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isDev) {
             alert('⛔ Доступ запрещен!');
             return;
         }
+
         if (username === currentUser.username) {
             alert('⛔ Нельзя над собой!');
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const users = serverData.users || [];
         const userIndex = users.findIndex(u => u.username === username);
         if (userIndex === -1) return;
 
         if (action === 'ban') {
-            const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
+            let banned = serverData.banned || [];
             if (banned.includes(username)) {
-                localStorage.setItem('banned_users', JSON.stringify(banned.filter(b => b !== username)));
+                serverData.banned = banned.filter(b => b !== username);
                 alert(`✅ ${username} разбанен!`);
             } else {
                 banned.push(username);
-                localStorage.setItem('banned_users', JSON.stringify(banned));
+                serverData.banned = banned;
                 alert(`✅ ${username} забанен!`);
             }
+            saveServerData(currentServer, serverData);
             renderDevPanel();
             return;
         }
@@ -3601,9 +4192,9 @@
         if (action === 'delete') {
             if (!confirm(`Удалить ${username}?`)) return;
             users.splice(userIndex, 1);
-            localStorage.setItem('forum_users', JSON.stringify(users));
-            const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
-            localStorage.setItem('banned_users', JSON.stringify(banned.filter(b => b !== username)));
+            serverData.users = users;
+            serverData.banned = (serverData.banned || []).filter(b => b !== username);
+            saveServerData(currentServer, serverData);
             alert(`✅ ${username} удален!`);
             renderDevPanel();
             updateStats();
@@ -3614,12 +4205,11 @@
             const newPrefix = prompt('Префикс (user, helper, moderator, admin, developer):', users[userIndex].prefix || 'user');
             if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                 users[userIndex].prefix = newPrefix;
-                if (newPrefix === 'developer' && !JSON.parse(localStorage.getItem('developers')).includes(username)) {
-                    const devs = JSON.parse(localStorage.getItem('developers'));
-                    devs.push(username);
-                    localStorage.setItem('developers', JSON.stringify(devs));
+                if (newPrefix === 'developer' && !(serverData.developers || []).includes(username)) {
+                    if (!serverData.developers) serverData.developers = [];
+                    serverData.developers.push(username);
                 }
-                localStorage.setItem('forum_users', JSON.stringify(users));
+                saveServerData(currentServer, serverData);
                 alert(`✅ Префикс изменен на ${newPrefix}!`);
                 renderDevPanel();
                 if (currentUser.username === username) {
@@ -3632,25 +4222,31 @@
     }
 
     function setUserPrefix() {
-        if (!currentUser || (currentUser.role !== 'developer' && currentUser.role !== 'admin')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isDev) {
             alert('⛔ Доступ запрещен!');
             return;
         }
+
         const username = document.getElementById('devUserSelect').value;
         const prefix = document.getElementById('devPrefixSelect').value;
         if (!username) { alert('Выберите пользователя!'); return; }
 
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const users = serverData.users || [];
         const user = users.find(u => u.username === username);
         if (!user) { alert('Пользователь не найден'); return; }
 
         user.prefix = prefix;
-        if (prefix === 'developer' && !JSON.parse(localStorage.getItem('developers')).includes(username)) {
-            const devs = JSON.parse(localStorage.getItem('developers'));
-            devs.push(username);
-            localStorage.setItem('developers', JSON.stringify(devs));
+        if (prefix === 'developer' && !(serverData.developers || []).includes(username)) {
+            if (!serverData.developers) serverData.developers = [];
+            serverData.developers.push(username);
         }
-        localStorage.setItem('forum_users', JSON.stringify(users));
+        saveServerData(currentServer, serverData);
         alert(`✅ Префикс изменен на ${prefix}!`);
         renderDevPanel();
         if (currentUser.username === username) {
@@ -3673,25 +4269,31 @@
     }
 
     function addDeveloper() {
-        if (!currentUser || (currentUser.role !== 'developer' && currentUser.role !== 'admin')) {
+        if (!currentUser || !currentServer) return;
+
+        const serverData = getServerData(currentServer);
+        const devs = serverData.developers || [];
+        const isDev = devs.includes(currentUser.username) || currentUser.role === 'admin' || currentUser.role === 'developer';
+
+        if (!isDev) {
             alert('⛔ Доступ запрещен!');
             return;
         }
+
         const username = document.getElementById('devAddUser').value.trim();
         if (!username) { alert('Введите имя!'); return; }
 
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const users = serverData.users || [];
         const user = users.find(u => u.username === username);
         if (!user) { alert('Пользователь не найден!'); return; }
 
-        const devs = JSON.parse(localStorage.getItem('developers')) || [];
         if (devs.includes(username)) { alert('Уже разработчик!'); return; }
 
         devs.push(username);
-        localStorage.setItem('developers', JSON.stringify(devs));
+        serverData.developers = devs;
         user.role = 'developer';
         user.prefix = 'developer';
-        localStorage.setItem('forum_users', JSON.stringify(users));
+        saveServerData(currentServer, serverData);
         document.getElementById('devAddUser').value = '';
         alert(`✅ ${username} теперь разработчик!`);
         renderDevPanel();
@@ -3739,6 +4341,8 @@
     }
 
     function uploadAvatar(event) {
+        if (!currentUser) return;
+
         const file = event.target.files[0];
         if (!file) return;
 
@@ -3750,11 +4354,11 @@
         const reader = new FileReader();
         reader.onload = function(e) {
             const dataUrl = e.target.result;
-            const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-            const user = users.find(u => u.username === currentUser.username);
+            const serverData = getServerData(currentServer);
+            const user = serverData.users.find(u => u.username === currentUser.username);
             if (user) {
                 user.avatar = dataUrl;
-                localStorage.setItem('forum_users', JSON.stringify(users));
+                saveServerData(currentServer, serverData);
                 currentUser.avatar = dataUrl;
                 localStorage.setItem('current_user', JSON.stringify(currentUser));
                 showMainContent();
@@ -3766,7 +4370,7 @@
     }
 
     function saveProfile() {
-        if (!currentUser) return;
+        if (!currentUser || !currentServer) return;
 
         const newUsername = document.getElementById('profileUsername').value.trim();
         const newEmail = document.getElementById('profileEmail').value.trim();
@@ -3775,7 +4379,8 @@
 
         if (!newUsername) { alert('Имя не может быть пустым!'); return; }
 
-        const users = JSON.parse(localStorage.getItem('forum_users')) || [];
+        const serverData = getServerData(currentServer);
+        const users = serverData.users || [];
         const userIndex = users.findIndex(u => u.username === currentUser.username);
         if (userIndex === -1) return;
 
@@ -3794,79 +4399,39 @@
         if (currentUser.role === 'developer' || currentUser.role === 'admin') {
             if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                 users[userIndex].prefix = newPrefix;
-                if (newPrefix === 'developer' && !JSON.parse(localStorage.getItem('developers')).includes(newUsername)) {
-                    const devs = JSON.parse(localStorage.getItem('developers'));
-                    devs.push(newUsername);
-                    localStorage.setItem('developers', JSON.stringify(devs));
+                if (newPrefix === 'developer' && !(serverData.developers || []).includes(newUsername)) {
+                    if (!serverData.developers) serverData.developers = [];
+                    serverData.developers.push(newUsername);
                 }
             }
         }
 
         // Обновляем во всех данных
-        ['chat_messages', 'forum_topics', 'complaints_player', 'complaints_admin', 'complaints_unban', 'complaints_questions'].forEach(key => {
-            const items = JSON.parse(localStorage.getItem(key)) || [];
-            items.forEach(item => {
-                if (item.author === oldUsername) item.author = newUsername;
-                if (item.target === oldUsername) item.target = newUsername;
-            });
-            localStorage.setItem(key, JSON.stringify(items));
+        serverData.chat = (serverData.chat || []).map(m => {
+            if (m.author === oldUsername) m.author = newUsername;
+            return m;
+        });
+        serverData.topics = (serverData.topics || []).map(t => {
+            if (t.author === oldUsername) t.author = newUsername;
+            return t;
+        });
+        ['player', 'admin', 'unban', 'questions'].forEach(key => {
+            if (serverData.complaints && serverData.complaints[key]) {
+                serverData.complaints[key] = serverData.complaints[key].map(c => {
+                    if (c.author === oldUsername) c.author = newUsername;
+                    if (c.target === oldUsername) c.target = newUsername;
+                    return c;
+                });
+            }
         });
 
-        localStorage.setItem('forum_users', JSON.stringify(users));
+        saveServerData(currentServer, serverData);
         currentUser = users[userIndex];
         localStorage.setItem('current_user', JSON.stringify(currentUser));
 
         alert('✅ Профиль обновлен!');
         showMainContent();
         loadProfile();
-    }
-
-    // =========================================================
-    // ГОЛОСОВАНИЯ
-    // =========================================================
-    function showCreatePoll() {
-        if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
-            alert('⛔ Только администраторы и разработчики!');
-            return;
-        }
-
-        const question = prompt('Введите вопрос для голосования:');
-        if (!question) return;
-
-        const options = [];
-        let opt;
-        while ((opt = prompt('Введите вариант (оставьте пустым для завершения):')) !== null && opt.trim()) {
-            options.push(opt.trim());
-        }
-        if (options.length < 2) {
-            alert('Нужно минимум 2 варианта!');
-            return;
-        }
-
-        const isAnonymous = confirm('Анонимное голосование?');
-
-        const polls = JSON.parse(localStorage.getItem('polls')) || [];
-        const id = parseInt(localStorage.getItem('poll_id_counter')) || 1;
-
-        polls.unshift({
-            id,
-            question,
-            options: options.map(o => ({ text: o, votes: 0 })),
-            isAnonymous,
-            author: currentUser.username,
-            date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-            voters: [],
-            status: 'open'
-        });
-
-        localStorage.setItem('polls', JSON.stringify(polls));
-        localStorage.setItem('poll_id_counter', String(id + 1));
-        alert('✅ Голосование создано!');
-        renderPolls();
-    }
-
-    function renderPolls() {
-        // Реализация в отдельном разделе
     }
 
     // =========================================================
@@ -3896,6 +4461,7 @@
     // =========================================================
     document.addEventListener('DOMContentLoaded', function() {
         initData();
+
         document.getElementById('loginBtn').onclick = login;
         document.getElementById('toggleAuth').onclick = toggleAuth;
 
@@ -3906,12 +4472,20 @@
             if (e.key === 'Enter') login();
         });
 
-        loadUser();
+        // Загружаем сервер и пользователя
+        const savedServer = localStorage.getItem('current_server');
+        if (savedServer && ['crystal', 'russia'].includes(savedServer)) {
+            selectServer(savedServer);
+            loadUser();
+        } else {
+            document.getElementById('serverSelect').style.display = 'flex';
+        }
 
         console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
         console.log('👤 Админ: Admin / admin123');
         console.log('👤 Разработчик: Artyom_Orlov / 123456');
         console.log('👤 Игрок: Игрок_228 / 123456');
+        console.log('🌐 Доступные серверы: Crystal, Russia');
     });
 </script>
 
