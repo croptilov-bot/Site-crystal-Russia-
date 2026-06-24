@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRYSTAL RUSSIA | Форум RolePlay</title>
+    <title>CRYSTAL RUSSIA | Форум</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ========================================================= */
-        /* БАЗОВЫЕ СТИЛИ */
+        /* БАЗА */
         /* ========================================================= */
         * {
             margin: 0;
@@ -19,7 +19,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0a12;
             color: #e0e0e0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         a {
@@ -28,13 +28,13 @@
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         ::-webkit-scrollbar-track {
             background: #0a0a12;
@@ -66,20 +66,20 @@
         }
 
         .login-modal__box {
-            background: rgba(26, 26, 46, 0.95);
-            padding: 40px;
-            border-radius: 20px;
+            background: rgba(20, 20, 35, 0.95);
+            padding: 32px;
+            border-radius: 16px;
             border: 2px solid #ff7f17;
             width: 100%;
-            max-width: 420px;
-            box-shadow: 0 0 60px rgba(255, 127, 23, 0.15);
+            max-width: 380px;
+            box-shadow: 0 0 60px rgba(255, 127, 23, 0.12);
         }
 
         .login-modal__title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 900;
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .login-modal__title span {
@@ -88,41 +88,40 @@
 
         .login-modal__subtitle {
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
-            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            margin-bottom: 20px;
         }
 
         .login-modal__input {
             width: 100%;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
             color: #fff;
-            font-size: 15px;
-            margin-bottom: 15px;
+            font-size: 14px;
+            margin-bottom: 12px;
             transition: 0.3s;
         }
 
         .login-modal__input:focus {
             outline: none;
             border-color: #ff7f17;
-            background: rgba(255, 127, 23, 0.05);
         }
 
         .login-modal__input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .login-modal__btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #fff;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
@@ -132,22 +131,22 @@
 
         .login-modal__btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 127, 23, 0.3);
+            box-shadow: 0 6px 25px rgba(255, 127, 23, 0.3);
         }
 
         .login-modal__error {
             color: #ff1744;
-            font-size: 13px;
+            font-size: 12px;
             text-align: center;
-            margin-top: 10px;
-            min-height: 20px;
+            margin-top: 8px;
+            min-height: 18px;
         }
 
         .login-modal__register {
             text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.4);
+            margin-top: 12px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.35);
         }
 
         .login-modal__register a {
@@ -163,10 +162,10 @@
         /* ШАПКА (ПРОЗРАЧНАЯ) */
         /* ========================================================= */
         .header {
-            background: rgba(10, 10, 18, 0.85);
+            background: rgba(10, 10, 18, 0.8);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 127, 23, 0.15);
-            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 127, 23, 0.1);
+            padding: 8px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -177,24 +176,24 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 8px;
         }
 
         .header__logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .header__logo-icon {
-            font-size: 28px;
+            font-size: 22px;
             color: #ff7f17;
         }
 
         .header__logo-text {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .header__logo-text span {
@@ -204,14 +203,14 @@
         .header__online {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 13px;
+            gap: 5px;
+            font-size: 12px;
             color: #4caf50;
         }
 
         .header__online-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: #4caf50;
             animation: pulse 1.5s infinite;
@@ -225,21 +224,30 @@
         .header__user {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .header__user-avatar {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .header__user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .header__user-avatar:hover {
@@ -248,42 +256,27 @@
 
         .header__user-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .header__user-prefix {
-            padding: 2px 12px;
+            padding: 1px 10px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .prefix-admin {
-            background: #ff1744;
-            color: #fff;
-        }
-        .prefix-helper {
-            background: #2196f3;
-            color: #fff;
-        }
-        .prefix-developer {
-            background: #ff7f17;
-            color: #fff;
-        }
-        .prefix-user {
-            background: rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.6);
-        }
-        .prefix-moderator {
-            background: #4caf50;
-            color: #fff;
-        }
+        .prefix-admin { background: #ff1744; color: #fff; }
+        .prefix-helper { background: #2196f3; color: #fff; }
+        .prefix-developer { background: #ff7f17; color: #fff; }
+        .prefix-user { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+        .prefix-moderator { background: #4caf50; color: #fff; }
 
         .header__messages {
             position: relative;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.4);
             transition: 0.3s;
         }
 
@@ -293,47 +286,47 @@
 
         .header__messages .badge {
             position: absolute;
-            top: -6px;
-            right: -8px;
+            top: -5px;
+            right: -7px;
             background: #ff1744;
-            font-size: 9px;
-            padding: 1px 6px;
+            font-size: 8px;
+            padding: 1px 5px;
             border-radius: 20px;
             font-weight: 700;
         }
 
         .header__logout {
-            padding: 5px 14px;
-            background: rgba(255, 23, 68, 0.12);
+            padding: 4px 12px;
+            background: rgba(255, 23, 68, 0.1);
             color: #ff1744;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             transition: 0.3s;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .header__logout:hover {
-            background: rgba(255, 23, 68, 0.25);
+            background: rgba(255, 23, 68, 0.2);
         }
 
         /* ========================================================= */
-        /* БУРГЕР-МЕНЮ */
+        /* БУРГЕР-МЕНЮ (КОМПАКТНЫЙ) */
         /* ========================================================= */
         .burger-icon {
             display: none;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
-            padding: 6px 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5px 7px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .burger-icon span {
-            width: 24px;
+            width: 20px;
             height: 2px;
             background: #fff;
             border-radius: 3px;
@@ -341,13 +334,13 @@
         }
 
         .burger-icon.active span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
+            transform: rotate(45deg) translate(4px, 3px);
         }
         .burger-icon.active span:nth-child(2) {
             opacity: 0;
         }
         .burger-icon.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -4px);
+            transform: rotate(-45deg) translate(4px, -3px);
         }
 
         .burger-overlay {
@@ -356,11 +349,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: 0.4s;
+            transition: 0.3s;
         }
 
         .burger-overlay.active {
@@ -371,12 +364,12 @@
         .burger-menu {
             position: fixed;
             top: 0;
-            left: -320px;
-            width: 300px;
+            left: -260px;
+            width: 240px;
             height: 100vh;
-            background: rgba(13, 13, 26, 0.98);
-            padding: 20px 0;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(10, 10, 18, 0.98);
+            padding: 10px 0;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
             border-right: 2px solid #ff7f17;
             overflow-y: auto;
@@ -388,9 +381,9 @@
 
         .burger-close {
             position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 24px;
+            top: 8px;
+            right: 12px;
+            font-size: 20px;
             background: none;
             border: none;
             color: #fff;
@@ -405,31 +398,40 @@
         .burger-user {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 20px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            gap: 8px;
+            padding: 8px 14px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .burger-avatar {
-            width: 44px;
-            height: 44px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 13px;
             font-weight: 700;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .burger-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .burger-username {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 700;
         }
 
         .burger-user-prefix {
-            font-size: 10px;
-            padding: 1px 10px;
+            font-size: 8px;
+            padding: 0px 6px;
             border-radius: 20px;
             font-weight: 700;
             text-transform: uppercase;
@@ -437,30 +439,30 @@
         }
 
         .burger-user-status {
-            font-size: 12px;
+            font-size: 10px;
             color: #4caf50;
         }
 
         .burger-nav {
-            padding: 8px 0;
+            padding: 4px 0;
         }
 
         .burger-nav-title {
-            color: rgba(255, 255, 255, 0.25);
-            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 14px 20px 6px;
+            letter-spacing: 1.5px;
+            padding: 10px 14px 4px;
         }
 
         .burger-nav a {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 20px;
-            color: rgba(255, 255, 255, 0.65);
-            transition: 0.3s;
-            font-size: 14px;
+            padding: 6px 14px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: 0.2s;
+            font-size: 12px;
             cursor: pointer;
             border-left: 2px solid transparent;
         }
@@ -471,45 +473,49 @@
             border-left-color: #ff7f17;
         }
 
+        .burger-nav a i {
+            width: 18px;
+            font-size: 13px;
+        }
+
         .burger-nav a .badge {
             background: #ff1744;
-            font-size: 10px;
-            padding: 1px 7px;
+            font-size: 8px;
+            padding: 1px 6px;
             border-radius: 20px;
         }
 
         .burger-footer {
-            padding: 12px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: auto;
         }
 
         /* ========================================================= */
-        /* ГЛАВНЫЙ БАННЕР (БЕЗ ЧЕРНОЙ ШТУКИ) */
+        /* ГЛАВНЫЙ БАННЕР */
         /* ========================================================= */
         .hero {
-            padding: 50px 0 40px;
+            padding: 30px 0 25px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .hero__badge {
             display: inline-block;
-            padding: 4px 18px;
+            padding: 3px 14px;
             border-radius: 50px;
-            background: rgba(255, 127, 23, 0.12);
+            background: rgba(255, 127, 23, 0.1);
             color: #ff7f17;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
-            border: 1px solid rgba(255, 127, 23, 0.15);
-            margin-bottom: 16px;
+            border: 1px solid rgba(255, 127, 23, 0.12);
+            margin-bottom: 10px;
         }
 
         .hero__title {
-            font-size: 38px;
+            font-size: 28px;
             font-weight: 900;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .hero__title span {
@@ -517,16 +523,16 @@
         }
 
         .hero__subtitle {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.5);
-            max-width: 560px;
-            margin: 0 auto 25px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            max-width: 500px;
+            margin: 0 auto 18px;
         }
 
         .hero__stats {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 24px;
             flex-wrap: wrap;
         }
 
@@ -536,14 +542,14 @@
 
         .hero__stat-number {
             display: block;
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 900;
             color: #ff7f17;
         }
 
         .hero__stat-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.35);
         }
 
         /* ========================================================= */
@@ -551,10 +557,10 @@
         /* ========================================================= */
         .btn {
             display: inline-block;
-            padding: 10px 26px;
+            padding: 7px 18px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 11px;
             border: none;
             cursor: pointer;
             transition: 0.3s;
@@ -564,7 +570,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 127, 23, 0.25);
+            box-shadow: 0 4px 20px rgba(255, 127, 23, 0.2);
         }
 
         .btn-primary {
@@ -573,9 +579,9 @@
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .btn-secondary:hover {
@@ -583,42 +589,42 @@
         }
 
         .btn-sm {
-            padding: 5px 14px;
-            font-size: 11px;
+            padding: 4px 12px;
+            font-size: 10px;
         }
 
         .btn-new-topic {
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             color: #fff;
-            padding: 8px 20px;
-            font-size: 12px;
+            padding: 6px 16px;
+            font-size: 11px;
         }
 
         .btn-danger {
-            background: rgba(255, 23, 68, 0.12);
+            background: rgba(255, 23, 68, 0.1);
             color: #ff1744;
-            border: 1px solid rgba(255, 23, 68, 0.15);
+            border: 1px solid rgba(255, 23, 68, 0.12);
         }
 
         .btn-danger:hover {
-            background: rgba(255, 23, 68, 0.25);
+            background: rgba(255, 23, 68, 0.2);
         }
 
         .btn-success {
-            background: rgba(76, 175, 80, 0.12);
+            background: rgba(76, 175, 80, 0.1);
             color: #4caf50;
-            border: 1px solid rgba(76, 175, 80, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.12);
         }
 
         .btn-success:hover {
-            background: rgba(76, 175, 80, 0.25);
+            background: rgba(76, 175, 80, 0.2);
         }
 
         /* ========================================================= */
-        /* ФОРУМ - КАТЕГОРИИ */
+        /* ФОРУМ - КАТЕГОРИИ (КОМПАКТНЫЕ) */
         /* ========================================================= */
         .forum-section {
-            padding: 30px 0;
+            padding: 20px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
@@ -630,36 +636,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .forum-section__title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
         }
 
         .forum-section__title i {
             color: #ff7f17;
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         .forum-section__desc {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 13px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 11px;
         }
 
         .forum-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 10px;
         }
 
         .forum-card {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            padding: 16px 18px;
+            border-radius: 10px;
+            padding: 12px 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: 0.3s;
             cursor: pointer;
@@ -667,31 +673,27 @@
 
         .forum-card:hover {
             background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 127, 23, 0.15);
+            border-color: rgba(255, 127, 23, 0.12);
             transform: translateY(-2px);
         }
 
         .forum-card__header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
+            gap: 8px;
+            margin-bottom: 2px;
         }
 
         .forum-card__icon {
-            font-size: 20px;
+            font-size: 16px;
             color: #ff7f17;
-            width: 36px;
+            width: 28px;
             text-align: center;
         }
 
         .forum-card__title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
-        }
-
-        .forum-card__title a {
-            transition: 0.3s;
         }
 
         .forum-card__title a:hover {
@@ -699,116 +701,98 @@
         }
 
         .forum-card__desc {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-left: 46px;
-            margin-bottom: 8px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 36px;
+            margin-bottom: 6px;
         }
 
         .forum-card__meta {
             display: flex;
-            gap: 16px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.25);
-            margin-left: 46px;
+            gap: 12px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-left: 36px;
         }
 
         .forum-card__meta span i {
-            margin-right: 3px;
-        }
-
-        .forum-card__new {
-            color: #4caf50;
-            font-size: 10px;
-            font-weight: 700;
+            margin-right: 2px;
         }
 
         .forum-card__badge {
             background: #ff1744;
-            font-size: 9px;
-            padding: 1px 7px;
+            font-size: 8px;
+            padding: 1px 6px;
             border-radius: 20px;
-            margin-left: 6px;
+            margin-left: 4px;
         }
 
         /* ========================================================= */
-        /* ПОСЛЕДНИЕ ТЕМЫ */
+        /* ПОСЛЕДНИЕ ТЕМЫ (КОМПАКТНЫЕ) */
         /* ========================================================= */
         .topics-section {
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .topics-section__header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .topics-section__title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
         }
 
         .topic-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .topic-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 8px 12px;
             background: rgba(255, 255, 255, 0.015);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.03);
             transition: 0.3s;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 4px;
         }
 
         .topic-item:hover {
             background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 127, 23, 0.08);
+            border-color: rgba(255, 127, 23, 0.06);
         }
 
         .topic-item__left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             flex: 1;
-            min-width: 180px;
+            min-width: 150px;
         }
 
         .topic-item__status {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.25);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
         }
 
-        .topic-item__status.pinned {
-            color: #ff7f17;
-        }
-        .topic-item__status.locked {
-            color: #ff1744;
-        }
-        .topic-item__status.solved {
-            color: #4caf50;
-        }
-        .topic-item__status.hot {
-            color: #ff7f17;
-        }
+        .topic-item__status.pinned { color: #ff7f17; }
+        .topic-item__status.locked { color: #ff1744; }
+        .topic-item__status.solved { color: #4caf50; }
+        .topic-item__status.hot { color: #ff7f17; }
 
         .topic-item__title {
             font-weight: 600;
-            font-size: 14px;
-        }
-
-        .topic-item__title a {
-            transition: 0.3s;
+            font-size: 12px;
         }
 
         .topic-item__title a:hover {
@@ -816,124 +800,119 @@
         }
 
         .topic-item__meta {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.25);
         }
 
         .topic-item__meta span {
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         .topic-item__right {
             display: flex;
             align-items: center;
-            gap: 16px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .topic-item__right .author {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .topic-item__right .date {
+            gap: 10px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.25);
         }
 
+        .topic-item__right .author {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
         .topic-item__tag {
-            padding: 1px 10px;
+            padding: 1px 8px;
             border-radius: 20px;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .tag-answered {
-            background: rgba(76, 175, 80, 0.12);
-            color: #4caf50;
-        }
-        .tag-important {
-            background: rgba(255, 23, 68, 0.12);
-            color: #ff1744;
-        }
-        .tag-new {
-            background: rgba(255, 127, 23, 0.12);
-            color: #ff7f17;
-        }
+        .tag-answered { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
+        .tag-important { background: rgba(255, 23, 68, 0.1); color: #ff1744; }
+        .tag-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
 
         /* ========================================================= */
-        /* ЧАТ (ФЛУДИЛКА) */
+        /* ЧАТ */
         /* ========================================================= */
         .chat-container {
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .chat-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
             overflow: hidden;
         }
 
         .chat-header {
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .chat-header__title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
         }
 
         .chat-header__title i {
             color: #ff7f17;
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         .chat-header__online {
-            font-size: 12px;
+            font-size: 11px;
             color: #4caf50;
         }
 
         .chat-messages {
-            padding: 16px 20px;
-            max-height: 400px;
+            padding: 12px 16px;
+            max-height: 350px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            min-height: 200px;
+            gap: 4px;
+            min-height: 150px;
         }
 
         .chat-message {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            padding: 6px 12px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.015);
             transition: 0.3s;
         }
 
         .chat-message:hover {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .chat-message__avatar {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 700;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .chat-message__avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .chat-message__content {
@@ -943,47 +922,47 @@
 
         .chat-message__user {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .chat-message__user .prefix {
-            font-size: 9px;
-            padding: 1px 8px;
+            font-size: 8px;
+            padding: 1px 6px;
             border-radius: 20px;
             font-weight: 700;
             text-transform: uppercase;
-            margin-left: 6px;
+            margin-left: 4px;
         }
 
         .chat-message__text {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
             word-wrap: break-word;
         }
 
         .chat-message__time {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.2);
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .chat-input-area {
-            padding: 12px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.015);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.01);
         }
 
         .chat-input-area input {
             flex: 1;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
             color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
 
@@ -993,18 +972,19 @@
         }
 
         .chat-input-area input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .chat-input-area button {
-            padding: 10px 24px;
+            padding: 8px 18px;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             color: #fff;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 13px;
         }
 
         .chat-input-area button:hover {
@@ -1013,14 +993,14 @@
 
         .chat-empty {
             text-align: center;
-            padding: 40px 20px;
-            color: rgba(255, 255, 255, 0.2);
+            padding: 30px 16px;
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .chat-empty i {
-            font-size: 36px;
+            font-size: 28px;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             opacity: 0.3;
         }
 
@@ -1028,62 +1008,63 @@
         /* ПАНЕЛЬ РАЗРАБОТЧИКА */
         /* ========================================================= */
         .dev-panel {
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .dev-panel__card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 127, 23, 0.15);
-            border-radius: 16px;
-            padding: 30px;
+            border: 1px solid rgba(255, 127, 23, 0.1);
+            border-radius: 12px;
+            padding: 20px;
         }
 
         .dev-panel__title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .dev-panel__title i {
             color: #ff7f17;
-            margin-right: 12px;
+            margin-right: 10px;
         }
 
         .dev-panel__subtitle {
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 18px;
+            font-size: 13px;
         }
 
         .dev-panel__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
         }
 
         .dev-panel__item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 14px 16px;
         }
 
         .dev-panel__item h4 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: #ff7f17;
         }
 
         .dev-panel__item select,
         .dev-panel__item input {
             width: 100%;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
+            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
             color: #fff;
-            font-size: 13px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            margin-bottom: 6px;
         }
 
         .dev-panel__item select:focus,
@@ -1094,11 +1075,13 @@
 
         .dev-panel__item .btn {
             width: 100%;
-            margin-top: 4px;
+            margin-top: 2px;
+            padding: 6px;
+            font-size: 11px;
         }
 
         .dev-panel__user-list {
-            max-height: 200px;
+            max-height: 180px;
             overflow-y: auto;
         }
 
@@ -1106,16 +1089,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 6px;
-            margin-bottom: 4px;
-            font-size: 13px;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.015);
+            border-radius: 4px;
+            margin-bottom: 2px;
+            font-size: 12px;
         }
 
         .dev-panel__user-item .prefix {
-            font-size: 9px;
-            padding: 1px 8px;
+            font-size: 8px;
+            padding: 1px 6px;
             border-radius: 20px;
             font-weight: 700;
             text-transform: uppercase;
@@ -1123,60 +1106,69 @@
 
         .dev-panel__user-item .actions {
             display: flex;
-            gap: 4px;
+            gap: 3px;
         }
 
         .dev-panel__user-item .actions button {
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            font-size: 12px;
-            padding: 2px 6px;
+            font-size: 11px;
+            padding: 2px 4px;
             border-radius: 4px;
             transition: 0.3s;
         }
 
         .dev-panel__user-item .actions button:hover {
             color: #ff7f17;
-            background: rgba(255, 127, 23, 0.1);
+            background: rgba(255, 127, 23, 0.08);
         }
 
         .dev-panel__user-item .actions button.danger:hover {
             color: #ff1744;
-            background: rgba(255, 23, 68, 0.1);
+            background: rgba(255, 23, 68, 0.08);
         }
 
         /* ========================================================= */
-        /* СТРАНИЦА ПРОФИЛЯ */
+        /* ПРОФИЛЬ */
         /* ========================================================= */
         .profile-page {
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .profile-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 480px;
             margin: 0 auto;
         }
 
         .profile-card__avatar {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff7f17, #ff5500);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 32px;
             font-weight: 700;
-            margin: 0 auto 16px;
+            margin: 0 auto 12px;
             cursor: pointer;
             transition: 0.3s;
-            border: 3px solid rgba(255, 127, 23, 0.3);
+            border: 2px solid rgba(255, 127, 23, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-card__avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .profile-card__avatar:hover {
@@ -1184,43 +1176,61 @@
             border-color: #ff7f17;
         }
 
+        .profile-card__avatar .avatar-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 10px;
+            padding: 4px;
+            text-align: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .profile-card__avatar:hover .avatar-overlay {
+            opacity: 1;
+        }
+
         .profile-card__name {
             text-align: center;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
         }
 
         .profile-card__prefix {
             text-align: center;
-            font-size: 12px;
-            padding: 2px 16px;
+            font-size: 11px;
+            padding: 2px 14px;
             border-radius: 20px;
             font-weight: 700;
             text-transform: uppercase;
             display: inline-block;
-            margin: 0 auto 16px;
+            margin: 0 auto 12px;
         }
 
         .profile-card__field {
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .profile-card__field label {
             display: block;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 4px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 2px;
         }
 
         .profile-card__field input,
         .profile-card__field select {
             width: 100%;
-            padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
             color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
 
@@ -1231,13 +1241,13 @@
         }
 
         .profile-card__field input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .profile-card__actions {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 14px;
             flex-wrap: wrap;
         }
 
@@ -1245,33 +1255,33 @@
         /* СТРАНИЦА КОНТЕНТА */
         /* ========================================================= */
         .content-page {
-            padding: 30px 0;
-            min-height: 50vh;
+            padding: 20px 0;
+            min-height: 40vh;
         }
 
         .content-page__title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             color: #ff7f17;
         }
 
         .content-page__subtitle {
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 25px;
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 18px;
+            font-size: 13px;
         }
 
         .content-page__editor {
             width: 100%;
-            min-height: 300px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 18px;
+            min-height: 250px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 14px;
             color: #e0e0e0;
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.7;
             resize: vertical;
             transition: 0.3s;
         }
@@ -1279,17 +1289,12 @@
         .content-page__editor:focus {
             outline: none;
             border-color: #ff7f17;
-            background: rgba(255, 127, 23, 0.02);
-        }
-
-        .content-page__editor::placeholder {
-            color: rgba(255, 255, 255, 0.15);
         }
 
         .content-page__actions {
             display: flex;
-            gap: 10px;
-            margin-top: 16px;
+            gap: 8px;
+            margin-top: 12px;
             flex-wrap: wrap;
         }
 
@@ -1297,57 +1302,57 @@
         /* СТРАНИЦА ЖАЛОБ */
         /* ========================================================= */
         .complaints-page {
-            padding: 30px 0;
+            padding: 20px 0;
         }
 
         .complaints-page__header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 8px;
         }
 
         .complaints-page__title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
         }
 
         .complaints-page__title i {
             color: #ff7f17;
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         .complaint-form {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 24px;
-            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 18px;
         }
 
         .complaint-form__title {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .complaint-form__subtitle {
-            color: rgba(255, 255, 255, 0.35);
-            font-size: 13px;
-            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            margin-bottom: 12px;
         }
 
         .complaint-form__input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             color: #fff;
-            font-size: 13px;
-            margin-bottom: 10px;
+            font-size: 12px;
+            margin-bottom: 8px;
             transition: 0.3s;
         }
 
@@ -1357,38 +1362,38 @@
         }
 
         .complaint-form__input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .complaint-form__textarea {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
 
         .complaint-form__row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
 
         .complaint-form__actions {
             display: flex;
-            gap: 10px;
-            margin-top: 4px;
+            gap: 8px;
+            margin-top: 2px;
             flex-wrap: wrap;
         }
 
         .complaints-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .complaint-item {
             background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
-            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 12px 14px;
             transition: 0.3s;
         }
 
@@ -1401,64 +1406,52 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 4px;
+            gap: 4px;
+            margin-bottom: 2px;
         }
 
         .complaint-item__title {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
         }
 
         .complaint-item__status {
-            font-size: 11px;
-            padding: 2px 12px;
+            font-size: 10px;
+            padding: 2px 10px;
             border-radius: 20px;
             font-weight: 600;
         }
 
-        .status-new {
-            background: rgba(255, 127, 23, 0.12);
-            color: #ff7f17;
-        }
-        .status-review {
-            background: rgba(33, 150, 243, 0.12);
-            color: #2196f3;
-        }
-        .status-answered {
-            background: rgba(76, 175, 80, 0.12);
-            color: #4caf50;
-        }
-        .status-rejected {
-            background: rgba(255, 23, 68, 0.12);
-            color: #ff1744;
-        }
+        .status-new { background: rgba(255, 127, 23, 0.1); color: #ff7f17; }
+        .status-review { background: rgba(33, 150, 243, 0.1); color: #2196f3; }
+        .status-answered { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
+        .status-rejected { background: rgba(255, 23, 68, 0.1); color: #ff1744; }
 
         .complaint-item__meta {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
         }
 
         .complaint-item__meta span {
-            margin-right: 14px;
+            margin-right: 10px;
         }
 
         .complaint-item__body {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            padding: 8px 0 6px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 6px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.45);
+            padding: 6px 0 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 4px;
         }
 
         .complaint-item__answer {
             background: rgba(76, 175, 80, 0.04);
             border-left: 3px solid #4caf50;
-            padding: 8px 14px;
-            border-radius: 8px;
-            margin-top: 6px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.65);
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-top: 4px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .complaint-item__answer strong {
@@ -1467,21 +1460,21 @@
 
         .complaint-item__actions {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 4px;
+            margin-top: 6px;
             flex-wrap: wrap;
         }
 
         .no-items {
             text-align: center;
-            padding: 30px 20px;
-            color: rgba(255, 255, 255, 0.2);
+            padding: 24px 16px;
+            color: rgba(255, 255, 255, 0.15);
         }
 
         .no-items i {
-            font-size: 36px;
+            font-size: 28px;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             opacity: 0.3;
         }
 
@@ -1490,59 +1483,59 @@
         /* ========================================================= */
         .forum-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            padding: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            padding: 18px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 16px;
+            margin-top: 12px;
         }
 
         .forum-stats__item {
             text-align: center;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.015);
-            border-radius: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 8px;
         }
 
         .forum-stats__number {
             display: block;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #ff7f17;
         }
 
         .forum-stats__label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* ========================================================= */
         /* ПОДВАЛ */
         /* ========================================================= */
         .footer {
-            background: rgba(13, 13, 26, 0.8);
-            padding: 30px 0 20px;
+            background: rgba(10, 10, 18, 0.6);
+            padding: 20px 0 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .footer__container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
         }
 
         .footer__column h4 {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             color: #fff;
         }
 
         .footer__column a {
             display: block;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
-            padding: 3px 0;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            padding: 2px 0;
             transition: 0.3s;
             cursor: pointer;
         }
@@ -1553,11 +1546,11 @@
 
         .footer__bottom {
             text-align: center;
-            padding-top: 25px;
+            padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 25px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.15);
+            margin-top: 16px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.1);
         }
 
         .footer__bottom span {
@@ -1581,11 +1574,11 @@
             }
 
             .hero__title {
-                font-size: 26px;
+                font-size: 22px;
             }
 
             .hero__stats {
-                gap: 16px;
+                gap: 14px;
             }
 
             .forum-grid {
@@ -1603,8 +1596,8 @@
             }
 
             .burger-menu {
-                width: 280px;
-                left: -290px;
+                width: 230px;
+                left: -250px;
             }
 
             .complaint-form__row {
@@ -1612,8 +1605,8 @@
             }
 
             .login-modal__box {
-                margin: 16px;
-                padding: 24px 16px;
+                margin: 12px;
+                padding: 20px 16px;
             }
 
             .dev-panel__grid {
@@ -1621,42 +1614,41 @@
             }
 
             .profile-card {
-                padding: 20px;
+                padding: 16px;
             }
 
             .chat-messages {
-                max-height: 300px;
-                padding: 12px 16px;
+                max-height: 250px;
             }
         }
 
         @media (max-width: 480px) {
             .header__logo-text {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .header__online {
-                font-size: 11px;
+                font-size: 10px;
             }
 
             .hero__title {
-                font-size: 22px;
+                font-size: 18px;
             }
 
             .forum-section__title {
-                font-size: 17px;
+                font-size: 14px;
             }
 
             .content-page__title {
-                font-size: 22px;
+                font-size: 20px;
             }
 
             .complaints-page__title {
-                font-size: 20px;
+                font-size: 17px;
             }
 
             .dev-panel__title {
-                font-size: 20px;
+                font-size: 17px;
             }
         }
     </style>
@@ -1664,7 +1656,7 @@
 <body>
 
 <!-- ========================================================= -->
-<!-- МОДАЛЬНОЕ ОКНО ВХОДА/РЕГИСТРАЦИИ -->
+<!-- МОДАЛЬНОЕ ОКНО ВХОДА -->
 <!-- ========================================================= -->
 <div class="login-modal" id="loginModal">
     <div class="login-modal__box">
@@ -1685,7 +1677,7 @@
 </div>
 
 <!-- ========================================================= -->
-<!-- ОСНОВНОЙ КОНТЕНТ (СКРЫТ ДО АВТОРИЗАЦИИ) -->
+<!-- ОСНОВНОЙ КОНТЕНТ -->
 <!-- ========================================================= -->
 <div id="mainContent" class="hidden">
 
@@ -1698,7 +1690,7 @@
             <div class="burger-avatar" id="burgerAvatar">И</div>
             <div>
                 <div class="burger-username" id="burgerUsername">Игрок</div>
-                <div class="burger-user-prefix" id="burgerPrefix" style="font-size:9px;padding:1px 8px;border-radius:20px;font-weight:700;text-transform:uppercase;display:inline-block;">Игрок</div>
+                <div class="burger-user-prefix" id="burgerPrefix">Игрок</div>
                 <div class="burger-user-status">🟢 В сети</div>
             </div>
         </div>
@@ -1729,16 +1721,16 @@
 
             <div class="burger-nav-title">💬 Социальное</div>
             <a onclick="navigateTo('bulletin')"><i class="fas fa-bullhorn"></i> Доска объявлений</a>
-            <a onclick="navigateTo('chat')"><i class="fas fa-comments"></i> Флудилка <span class="badge" id="chatBadge">0</span></a>
+            <a onclick="navigateTo('chat')"><i class="fas fa-comments"></i> Флудилка</a>
             <a onclick="navigateTo('events')"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
 
             <div class="burger-nav-title">📦 Архивы</div>
             <a onclick="navigateTo('archive')"><i class="fas fa-archive"></i> Архивы</a>
 
-            <!-- Панель разработчика (только для разработчиков) -->
+            <!-- Панель разработчика -->
             <div id="devMenuSection" class="hidden">
                 <div class="burger-nav-title">🛠 Панель разработчика</div>
-                <a onclick="navigateTo('devpanel')"><i class="fas fa-code"></i> Управление пользователями</a>
+                <a onclick="navigateTo('devpanel')"><i class="fas fa-code"></i> Управление</a>
             </div>
 
             <div class="burger-nav-title">👤 Личное</div>
@@ -1752,10 +1744,10 @@
         </div>
     </div>
 
-    <!-- ШАПКА (ПРОЗРАЧНАЯ) -->
+    <!-- ШАПКА -->
     <header class="header">
         <div class="container header__container">
-            <div style="display:flex;align-items:center;gap:12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
                 <div class="burger-icon" id="burgerIcon" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
@@ -1788,13 +1780,13 @@
     <!-- ========================================================= -->
     <div id="pageContainer">
 
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
+        <!-- ГЛАВНАЯ -->
         <div id="page-home">
             <section class="hero">
                 <div class="container">
                     <div class="hero__badge">🔥 ТОП-1 RP ПРОЕКТ 2025</div>
                     <h1 class="hero__title">Добро пожаловать в <span>CRYSTAL RUSSIA</span></h1>
-                    <p class="hero__subtitle">Уникальный RolePlay проект на базе GTA 5. Создай свою историю, найди друзей и стань легендой!</p>
+                    <p class="hero__subtitle">Уникальный RolePlay проект на базе GTA 5</p>
                     <div class="hero__stats">
                         <div class="hero__stat">
                             <span class="hero__stat-number" id="serverOnline">0</span>
@@ -1822,7 +1814,7 @@
                     <div class="forum-section__header">
                         <div>
                             <h2 class="forum-section__title"><i class="fas fa-info-circle"></i> Основные разделы</h2>
-                            <div class="forum-section__desc">Новости, правила, гайды и лор проекта</div>
+                            <div class="forum-section__desc">Новости, правила, гайды и лор</div>
                         </div>
                         <button class="btn btn-new-topic" id="createTopicBtn" onclick="showCreateTopic()">
                             <i class="fas fa-plus"></i> Создать тему
@@ -1833,10 +1825,10 @@
                         <div class="forum-card" onclick="navigateTo('news')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-newspaper"></i></span>
-                                <span class="forum-card__title"><a href="#">Новости проекта</a></span>
+                                <span class="forum-card__title">Новости проекта</span>
                                 <span class="forum-card__badge">3</span>
                             </div>
-                            <div class="forum-card__desc">Последние обновления сервера, анонсы ивентов и конкурсов</div>
+                            <div class="forum-card__desc">Последние обновления и анонсы</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 128</span>
                                 <span><i class="fas fa-eye"></i> 1.2K</span>
@@ -1846,9 +1838,9 @@
                         <div class="forum-card" onclick="navigateTo('rules')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-gavel"></i></span>
-                                <span class="forum-card__title"><a href="#">Правила проекта</a></span>
+                                <span class="forum-card__title">Правила проекта</span>
                             </div>
-                            <div class="forum-card__desc">Полные правила сервера с примерами нарушений и наказаний</div>
+                            <div class="forum-card__desc">Полные правила сервера</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 45</span>
                                 <span><i class="fas fa-eye"></i> 15.7K</span>
@@ -1858,9 +1850,9 @@
                         <div class="forum-card" onclick="navigateTo('guides')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-book"></i></span>
-                                <span class="forum-card__title"><a href="#">Гайды и FAQ</a></span>
+                                <span class="forum-card__title">Гайды и FAQ</span>
                             </div>
-                            <div class="forum-card__desc">Инструкции для новичков: установка, команды, лицензии, работа</div>
+                            <div class="forum-card__desc">Инструкции для новичков</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 89</span>
                                 <span><i class="fas fa-eye"></i> 8.4K</span>
@@ -1870,9 +1862,9 @@
                         <div class="forum-card" onclick="navigateTo('lore')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-scroll"></i></span>
-                                <span class="forum-card__title"><a href="#">Лор мира</a></span>
+                                <span class="forum-card__title">Лор мира</span>
                             </div>
-                            <div class="forum-card__desc">История штата, описание фракций и их задачи</div>
+                            <div class="forum-card__desc">История штата и фракций</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 23</span>
                                 <span><i class="fas fa-eye"></i> 3.1K</span>
@@ -1882,13 +1874,13 @@
                 </div>
             </section>
 
-            <!-- ФОРУМ: ВЗАИМОДЕЙСТВИЕ С АДМИНИСТРАЦИЕЙ -->
+            <!-- АДМИНИСТРАЦИЯ -->
             <section class="forum-section">
                 <div class="container">
                     <div class="forum-section__header">
                         <div>
-                            <h2 class="forum-section__title"><i class="fas fa-shield-alt"></i> Взаимодействие с администрацией</h2>
-                            <div class="forum-section__desc">Жалобы, разбаны и вопросы к команде</div>
+                            <h2 class="forum-section__title"><i class="fas fa-shield-alt"></i> Администрация</h2>
+                            <div class="forum-section__desc">Жалобы, разбаны и вопросы</div>
                         </div>
                     </div>
 
@@ -1896,12 +1888,12 @@
                         <div class="forum-card" onclick="navigateTo('complaints')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-users" style="color:#ff1744;"></i></span>
-                                <span class="forum-card__title"><a href="#">Жалобы на игроков</a></span>
+                                <span class="forum-card__title">Жалобы на игроков</span>
                                 <span class="forum-card__badge" id="complaintsBadgeCard">0</span>
                             </div>
-                            <div class="forum-card__desc">Подача жалоб на нарушение правил (DM, MG, NonRP)</div>
+                            <div class="forum-card__desc">Подача жалоб на нарушение правил</div>
                             <div class="forum-card__meta">
-                                <span><i class="fas fa-comment"></i> <span id="complaintsTotal">312</span></span>
+                                <span><i class="fas fa-comment"></i> 312</span>
                                 <span><i class="fas fa-eye"></i> 22.1K</span>
                             </div>
                         </div>
@@ -1909,9 +1901,9 @@
                         <div class="forum-card" onclick="navigateTo('admin-complaints')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-user-shield" style="color:#ff7f17;"></i></span>
-                                <span class="forum-card__title"><a href="#">Жалобы на администрацию</a></span>
+                                <span class="forum-card__title">Жалобы на администрацию</span>
                             </div>
-                            <div class="forum-card__desc">Обратная связь о действиях администрации</div>
+                            <div class="forum-card__desc">Обратная связь о действиях админов</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 67</span>
                                 <span><i class="fas fa-eye"></i> 5.8K</span>
@@ -1921,7 +1913,7 @@
                         <div class="forum-card" onclick="navigateTo('unban')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-unlock-alt" style="color:#4caf50;"></i></span>
-                                <span class="forum-card__title"><a href="#">Заявки на разбан</a></span>
+                                <span class="forum-card__title">Заявки на разбан</span>
                             </div>
                             <div class="forum-card__desc">Апелляции и обжалование блокировок</div>
                             <div class="forum-card__meta">
@@ -1933,7 +1925,7 @@
                         <div class="forum-card" onclick="navigateTo('questions')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-question-circle" style="color:#2196f3;"></i></span>
-                                <span class="forum-card__title"><a href="#">Вопросы к администрации</a></span>
+                                <span class="forum-card__title">Вопросы к администрации</span>
                             </div>
                             <div class="forum-card__desc">Общие вопросы по механике игры</div>
                             <div class="forum-card__meta">
@@ -1945,13 +1937,13 @@
                 </div>
             </section>
 
-            <!-- ФОРУМ: ROLEPLAY -->
+            <!-- ROLEPLAY -->
             <section class="forum-section">
                 <div class="container">
                     <div class="forum-section__header">
                         <div>
                             <h2 class="forum-section__title"><i class="fas fa-theater-masks"></i> RolePlay</h2>
-                            <div class="forum-section__desc">Государственные фракции, мафии, банды и бизнес</div>
+                            <div class="forum-section__desc">Фракции, мафии, банды и бизнес</div>
                         </div>
                     </div>
 
@@ -1959,10 +1951,10 @@
                         <div class="forum-card" onclick="navigateTo('lspd')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-police" style="color:#2196f3;"></i></span>
-                                <span class="forum-card__title"><a href="#">LSPD</a></span>
+                                <span class="forum-card__title">LSPD</span>
                                 <span class="forum-card__badge">12</span>
                             </div>
-                            <div class="forum-card__desc">Устав, отчеты, состав и объявления полиции</div>
+                            <div class="forum-card__desc">Устав, отчеты и состав полиции</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 234</span>
                                 <span><i class="fas fa-eye"></i> 18.7K</span>
@@ -1972,7 +1964,7 @@
                         <div class="forum-card" onclick="navigateTo('government')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-landmark" style="color:#4caf50;"></i></span>
-                                <span class="forum-card__title"><a href="#">Government</a></span>
+                                <span class="forum-card__title">Government</span>
                             </div>
                             <div class="forum-card__desc">Деятельность правительства штата</div>
                             <div class="forum-card__meta">
@@ -1984,10 +1976,10 @@
                         <div class="forum-card" onclick="navigateTo('mafia')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-user-secret" style="color:#ff1744;"></i></span>
-                                <span class="forum-card__title"><a href="#">Мафии и банды</a></span>
+                                <span class="forum-card__title">Мафии и банды</span>
                                 <span class="forum-card__badge">8</span>
                             </div>
-                            <div class="forum-card__desc">Криминальные организации и их внутренние дела</div>
+                            <div class="forum-card__desc">Криминальные организации</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 456</span>
                                 <span><i class="fas fa-eye"></i> 31.4K</span>
@@ -1997,9 +1989,9 @@
                         <div class="forum-card" onclick="navigateTo('business')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-store" style="color:#ff7f17;"></i></span>
-                                <span class="forum-card__title"><a href="#">Бизнес и организации</a></span>
+                                <span class="forum-card__title">Бизнес и организации</span>
                             </div>
-                            <div class="forum-card__desc">Легальный бизнес: вакансии, акции, бухгалтерия</div>
+                            <div class="forum-card__desc">Легальный бизнес и вакансии</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 178</span>
                                 <span><i class="fas fa-eye"></i> 11.5K</span>
@@ -2009,13 +2001,13 @@
                 </div>
             </section>
 
-            <!-- ФОРУМ: ТЕХНИЧЕСКАЯ ЧАСТЬ -->
+            <!-- ТЕХНИЧЕСКАЯ ЧАСТЬ -->
             <section class="forum-section">
                 <div class="container">
                     <div class="forum-section__header">
                         <div>
                             <h2 class="forum-section__title"><i class="fas fa-tools"></i> Техническая часть</h2>
-                            <div class="forum-section__desc">Помощь с игрой и сообщения об ошибках</div>
+                            <div class="forum-section__desc">Помощь с игрой и баг-репорты</div>
                         </div>
                     </div>
 
@@ -2023,10 +2015,10 @@
                         <div class="forum-card" onclick="navigateTo('support')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-tools" style="color:#2196f3;"></i></span>
-                                <span class="forum-card__title"><a href="#">Техническая поддержка</a></span>
+                                <span class="forum-card__title">Техническая поддержка</span>
                                 <span class="forum-card__badge">4</span>
                             </div>
-                            <div class="forum-card__desc">Проблемы с лаунчером, подключением и скриптами</div>
+                            <div class="forum-card__desc">Проблемы с лаунчером и подключением</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 423</span>
                                 <span><i class="fas fa-eye"></i> 27.8K</span>
@@ -2036,9 +2028,9 @@
                         <div class="forum-card" onclick="navigateTo('bugs')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-bug" style="color:#ff1744;"></i></span>
-                                <span class="forum-card__title"><a href="#">Баг-репорты</a></span>
+                                <span class="forum-card__title">Баг-репорты</span>
                             </div>
-                            <div class="forum-card__desc">Сообщения о найденных ошибках в игре</div>
+                            <div class="forum-card__desc">Сообщения о найденных ошибках</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 89</span>
                                 <span><i class="fas fa-eye"></i> 5.6K</span>
@@ -2048,12 +2040,12 @@
                 </div>
             </section>
 
-            <!-- ФОРУМ: СОЦИАЛЬНОЕ ВЗАИМОДЕЙСТВИЕ -->
+            <!-- СОЦИАЛЬНОЕ -->
             <section class="forum-section">
                 <div class="container">
                     <div class="forum-section__header">
                         <div>
-                            <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное взаимодействие</h2>
+                            <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное</h2>
                             <div class="forum-section__desc">Общение, объявления и ивенты</div>
                         </div>
                     </div>
@@ -2062,9 +2054,9 @@
                         <div class="forum-card" onclick="navigateTo('bulletin')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-bullhorn" style="color:#ff7f17;"></i></span>
-                                <span class="forum-card__title"><a href="#">Доска объявлений</a></span>
+                                <span class="forum-card__title">Доска объявлений</span>
                             </div>
-                            <div class="forum-card__desc">Продажа/покупка, поиск работы и напарников</div>
+                            <div class="forum-card__desc">Продажа, покупка, поиск работы</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 567</span>
                                 <span><i class="fas fa-eye"></i> 42.3K</span>
@@ -2074,10 +2066,10 @@
                         <div class="forum-card" onclick="navigateTo('chat')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-comments" style="color:#9c27b0;"></i></span>
-                                <span class="forum-card__title"><a href="#">Флудилка</a></span>
+                                <span class="forum-card__title">Флудилка</span>
                                 <span class="forum-card__badge">15</span>
                             </div>
-                            <div class="forum-card__desc">Неформальное общение на свободные темы</div>
+                            <div class="forum-card__desc">Неформальное общение на любые темы</div>
                             <div class="forum-card__meta">
                                 <span><i class="fas fa-comment"></i> 2.3K</span>
                                 <span><i class="fas fa-eye"></i> 89.1K</span>
@@ -2087,7 +2079,7 @@
                         <div class="forum-card" onclick="navigateTo('events')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
-                                <span class="forum-card__title"><a href="#">Конкурсы и ивенты</a></span>
+                                <span class="forum-card__title">Конкурсы и ивенты</span>
                             </div>
                             <div class="forum-card__desc">Анонсы и результаты мероприятий</div>
                             <div class="forum-card__meta">
@@ -2099,7 +2091,7 @@
                         <div class="forum-card" onclick="navigateTo('archive')">
                             <div class="forum-card__header">
                                 <span class="forum-card__icon"><i class="fas fa-archive" style="color:#757575;"></i></span>
-                                <span class="forum-card__title"><a href="#">Архивы</a></span>
+                                <span class="forum-card__title">Архивы</span>
                             </div>
                             <div class="forum-card__desc">Архив жалоб и новостей</div>
                             <div class="forum-card__meta">
@@ -2116,17 +2108,15 @@
                 <div class="container">
                     <div class="topics-section__header">
                         <h2 class="topics-section__title"><i class="fas fa-clock" style="color:#ff7f17;"></i> Последние темы</h2>
-                        <button class="btn btn-secondary btn-sm" onclick="navigateTo('all-topics')">Все темы →</button>
+                        <button class="btn btn-secondary btn-sm" onclick="navigateTo('all-topics')">Все →</button>
                     </div>
 
-                    <div class="topic-list" id="topicList">
-                        <!-- Темы загружаются через JS -->
-                    </div>
+                    <div class="topic-list" id="topicList"></div>
                 </div>
             </section>
         </div>
 
-        <!-- СТРАНИЦА РЕДАКТИРУЕМОГО КОНТЕНТА -->
+        <!-- СТРАНИЦА КОНТЕНТА -->
         <div id="page-content" class="hidden">
             <div class="container content-page">
                 <h1 class="content-page__title" id="contentTitle">Заголовок</h1>
@@ -2139,23 +2129,23 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ЖАЛОБ НА ИГРОКОВ -->
+        <!-- ЖАЛОБЫ НА ИГРОКОВ -->
         <div id="page-complaints" class="hidden">
             <div class="container complaints-page">
                 <div class="complaints-page__header">
                     <h1 class="complaints-page__title"><i class="fas fa-users"></i> Жалобы на игроков</h1>
-                    <button class="btn btn-primary" onclick="showComplaintForm('player')"><i class="fas fa-plus"></i> Подать жалобу</button>
+                    <button class="btn btn-primary" onclick="showComplaintForm('player')"><i class="fas fa-plus"></i> Подать</button>
                 </div>
 
                 <div class="complaint-form hidden" id="complaintFormPlayer">
                     <h3 class="complaint-form__title">📝 Новая жалоба</h3>
-                    <div class="complaint-form__subtitle">Заполните все поля для подачи жалобы на игрока</div>
+                    <div class="complaint-form__subtitle">Заполните все поля</div>
                     <div class="complaint-form__row">
-                        <input class="complaint-form__input" id="complaintTarget" placeholder="Никнейм нарушителя">
-                        <input class="complaint-form__input" id="complaintAuthor" placeholder="Ваш никнейм">
+                        <input class="complaint-form__input" id="complaintTarget" placeholder="Нарушитель">
+                        <input class="complaint-form__input" id="complaintAuthor" placeholder="Ваш ник">
                     </div>
-                    <input class="complaint-form__input" id="complaintTitle" placeholder="Заголовок жалобы">
-                    <textarea class="complaint-form__input complaint-form__textarea" id="complaintDesc" placeholder="Описание нарушения с доказательствами..."></textarea>
+                    <input class="complaint-form__input" id="complaintTitle" placeholder="Заголовок">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="complaintDesc" placeholder="Описание и доказательства..."></textarea>
                     <div class="complaint-form__actions">
                         <button class="btn btn-primary" onclick="submitComplaint('player')"><i class="fas fa-paper-plane"></i> Отправить</button>
                         <button class="btn btn-secondary" onclick="hideComplaintForm('player')">Отмена</button>
@@ -2166,20 +2156,20 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ЖАЛОБ НА АДМИНИСТРАЦИЮ -->
+        <!-- ЖАЛОБЫ НА АДМИНИСТРАЦИЮ -->
         <div id="page-admin-complaints" class="hidden">
             <div class="container complaints-page">
                 <div class="complaints-page__header">
                     <h1 class="complaints-page__title"><i class="fas fa-shield-alt"></i> Жалобы на администрацию</h1>
-                    <button class="btn btn-primary" onclick="showComplaintForm('admin')"><i class="fas fa-plus"></i> Подать жалобу</button>
+                    <button class="btn btn-primary" onclick="showComplaintForm('admin')"><i class="fas fa-plus"></i> Подать</button>
                 </div>
 
                 <div class="complaint-form hidden" id="complaintFormAdmin">
                     <h3 class="complaint-form__title">📝 Жалоба на администрацию</h3>
-                    <div class="complaint-form__subtitle">Укажите, на кого из администрации Вы жалуетесь</div>
-                    <input class="complaint-form__input" id="adminComplaintTarget" placeholder="Никнейм администратора">
-                    <input class="complaint-form__input" id="adminComplaintAuthor" placeholder="Ваш никнейм">
-                    <input class="complaint-form__input" id="adminComplaintTitle" placeholder="Заголовок жалобы">
+                    <div class="complaint-form__subtitle">Укажите администратора и причину</div>
+                    <input class="complaint-form__input" id="adminComplaintTarget" placeholder="Ник администратора">
+                    <input class="complaint-form__input" id="adminComplaintAuthor" placeholder="Ваш ник">
+                    <input class="complaint-form__input" id="adminComplaintTitle" placeholder="Заголовок">
                     <textarea class="complaint-form__input complaint-form__textarea" id="adminComplaintDesc" placeholder="Описание ситуации..."></textarea>
                     <div class="complaint-form__actions">
                         <button class="btn btn-primary" onclick="submitComplaint('admin')"><i class="fas fa-paper-plane"></i> Отправить</button>
@@ -2191,20 +2181,20 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ЗАЯВОК НА РАЗБАН -->
+        <!-- ЗАЯВКИ НА РАЗБАН -->
         <div id="page-unban" class="hidden">
             <div class="container complaints-page">
                 <div class="complaints-page__header">
                     <h1 class="complaints-page__title"><i class="fas fa-unlock-alt"></i> Заявки на разбан</h1>
-                    <button class="btn btn-primary" onclick="showComplaintForm('unban')"><i class="fas fa-plus"></i> Подать заявку</button>
+                    <button class="btn btn-primary" onclick="showComplaintForm('unban')"><i class="fas fa-plus"></i> Подать</button>
                 </div>
 
                 <div class="complaint-form hidden" id="complaintFormUnban">
                     <h3 class="complaint-form__title">📝 Заявка на разбан</h3>
-                    <div class="complaint-form__subtitle">Опишите причину, по которой Вы считаете бан несправедливым</div>
-                    <input class="complaint-form__input" id="unbanAuthor" placeholder="Ваш никнейм">
-                    <input class="complaint-form__input" id="unbanTitle" placeholder="Заголовок заявки">
-                    <textarea class="complaint-form__input complaint-form__textarea" id="unbanDesc" placeholder="Причина разбана, доказательства..."></textarea>
+                    <div class="complaint-form__subtitle">Опишите причину</div>
+                    <input class="complaint-form__input" id="unbanAuthor" placeholder="Ваш ник">
+                    <input class="complaint-form__input" id="unbanTitle" placeholder="Заголовок">
+                    <textarea class="complaint-form__input complaint-form__textarea" id="unbanDesc" placeholder="Причина разбана..."></textarea>
                     <div class="complaint-form__actions">
                         <button class="btn btn-primary" onclick="submitComplaint('unban')"><i class="fas fa-paper-plane"></i> Отправить</button>
                         <button class="btn btn-secondary" onclick="hideComplaintForm('unban')">Отмена</button>
@@ -2215,19 +2205,19 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ВОПРОСОВ К АДМИНИСТРАЦИИ -->
+        <!-- ВОПРОСЫ К АДМИНИСТРАЦИИ -->
         <div id="page-questions" class="hidden">
             <div class="container complaints-page">
                 <div class="complaints-page__header">
                     <h1 class="complaints-page__title"><i class="fas fa-question-circle"></i> Вопросы к администрации</h1>
-                    <button class="btn btn-primary" onclick="showComplaintForm('question')"><i class="fas fa-plus"></i> Задать вопрос</button>
+                    <button class="btn btn-primary" onclick="showComplaintForm('question')"><i class="fas fa-plus"></i> Задать</button>
                 </div>
 
                 <div class="complaint-form hidden" id="complaintFormQuestion">
                     <h3 class="complaint-form__title">❓ Новый вопрос</h3>
-                    <div class="complaint-form__subtitle">Задайте вопрос администрации проекта</div>
-                    <input class="complaint-form__input" id="questionAuthor" placeholder="Ваш никнейм">
-                    <input class="complaint-form__input" id="questionTitle" placeholder="Заголовок вопроса">
+                    <div class="complaint-form__subtitle">Задайте вопрос администрации</div>
+                    <input class="complaint-form__input" id="questionAuthor" placeholder="Ваш ник">
+                    <input class="complaint-form__input" id="questionTitle" placeholder="Заголовок">
                     <textarea class="complaint-form__input complaint-form__textarea" id="questionDesc" placeholder="Ваш вопрос..."></textarea>
                     <div class="complaint-form__actions">
                         <button class="btn btn-primary" onclick="submitComplaint('question')"><i class="fas fa-paper-plane"></i> Отправить</button>
@@ -2239,7 +2229,7 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ЧАТА (ФЛУДИЛКА) -->
+        <!-- ЧАТ -->
         <div id="page-chat" class="hidden">
             <div class="container chat-container">
                 <div class="chat-box">
@@ -2261,20 +2251,17 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ПАНЕЛИ РАЗРАБОТЧИКА -->
+        <!-- ПАНЕЛЬ РАЗРАБОТЧИКА -->
         <div id="page-devpanel" class="hidden">
             <div class="container dev-panel">
                 <div class="dev-panel__card">
                     <h2 class="dev-panel__title"><i class="fas fa-code"></i> Панель разработчика</h2>
-                    <div class="dev-panel__subtitle">Управление пользователями, префиксами и модерация</div>
+                    <div class="dev-panel__subtitle">Управление пользователями и префиксами</div>
 
                     <div class="dev-panel__grid">
-                        <!-- Назначить префикс -->
                         <div class="dev-panel__item">
                             <h4>👤 Назначить префикс</h4>
-                            <select id="devUserSelect">
-                                <option value="">Выберите пользователя</option>
-                            </select>
+                            <select id="devUserSelect"><option value="">Выберите пользователя</option></select>
                             <select id="devPrefixSelect">
                                 <option value="user">Игрок</option>
                                 <option value="helper">Хелпер</option>
@@ -2285,24 +2272,19 @@
                             <button class="btn btn-primary" onclick="setUserPrefix()"><i class="fas fa-save"></i> Назначить</button>
                         </div>
 
-                        <!-- Забанить пользователя -->
                         <div class="dev-panel__item">
                             <h4>🔒 Бан пользователя</h4>
-                            <select id="devBanSelect">
-                                <option value="">Выберите пользователя</option>
-                            </select>
+                            <select id="devBanSelect"><option value="">Выберите пользователя</option></select>
                             <button class="btn btn-danger" onclick="banUser()"><i class="fas fa-ban"></i> Заблокировать</button>
-                            <button class="btn btn-success" onclick="unbanUser()" style="margin-top:8px;"><i class="fas fa-unlock"></i> Разблокировать</button>
+                            <button class="btn btn-success" onclick="unbanUser()" style="margin-top:4px;"><i class="fas fa-unlock"></i> Разблокировать</button>
                         </div>
 
-                        <!-- Добавить разработчика -->
                         <div class="dev-panel__item">
                             <h4>👨‍💻 Добавить разработчика</h4>
                             <input id="devAddUser" placeholder="Имя пользователя" type="text">
                             <button class="btn btn-primary" onclick="addDeveloper()"><i class="fas fa-user-plus"></i> Сделать разработчиком</button>
                         </div>
 
-                        <!-- Список пользователей -->
                         <div class="dev-panel__item" style="grid-column:1/-1;">
                             <h4>📋 Все пользователи</h4>
                             <div class="dev-panel__user-list" id="devUserList"></div>
@@ -2312,11 +2294,16 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА ПРОФИЛЯ -->
+        <!-- ПРОФИЛЬ -->
         <div id="page-profile" class="hidden">
             <div class="container profile-page">
                 <div class="profile-card">
-                    <div class="profile-card__avatar" id="profileAvatar" onclick="changeAvatar()">И</div>
+                    <div class="profile-card__avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
+                        <span id="profileAvatarText">И</span>
+                        <div class="avatar-overlay">Изменить</div>
+                    </div>
+                    <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(event)">
+
                     <div class="profile-card__name" id="profileName">Игрок</div>
                     <div style="text-align:center;">
                         <span class="profile-card__prefix" id="profilePrefix">Игрок</span>
@@ -2334,7 +2321,7 @@
                         <label>Новый пароль</label>
                         <input id="profilePassword" placeholder="Новый пароль" type="password">
                     </div>
-                    <div class="profile-card__field">
+                    <div class="profile-card__field" id="profilePrefixField">
                         <label>Префикс (только для разработчиков)</label>
                         <select id="profilePrefixSelect">
                             <option value="user">Игрок</option>
@@ -2353,40 +2340,40 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА-ЗАГЛУШКА ДЛЯ ДРУГИХ РАЗДЕЛОВ -->
+        <!-- СТРАНИЦА-ЗАГЛУШКА -->
         <div id="page-placeholder" class="hidden">
-            <div class="container" style="padding:60px 0;text-align:center;">
-                <i class="fas fa-construction" style="font-size:60px;color:#ff7f17;opacity:0.3;display:block;margin-bottom:20px;"></i>
-                <h2 style="font-size:28px;font-weight:900;">Раздел в разработке</h2>
-                <p style="color:rgba(255,255,255,0.3);margin-top:8px;">Этот раздел будет доступен в ближайшее время</p>
-                <button class="btn btn-primary" onclick="navigateTo('home')" style="margin-top:20px;">Вернуться на главную</button>
+            <div class="container" style="padding:40px 0;text-align:center;">
+                <i class="fas fa-construction" style="font-size:48px;color:#ff7f17;opacity:0.3;display:block;margin-bottom:12px;"></i>
+                <h2 style="font-size:22px;font-weight:900;">Раздел в разработке</h2>
+                <p style="color:rgba(255,255,255,0.25);margin-top:4px;">Будет доступен в ближайшее время</p>
+                <button class="btn btn-primary" onclick="navigateTo('home')" style="margin-top:14px;">Вернуться</button>
             </div>
         </div>
 
     </div>
 
-    <!-- СТАТИСТИКА ФОРУМА -->
+    <!-- СТАТИСТИКА -->
     <div class="container">
         <div class="forum-stats">
             <div class="forum-stats__item">
                 <span class="forum-stats__number" id="statTopics">0</span>
-                <span class="forum-stats__label">Всего тем</span>
+                <span class="forum-stats__label">Тем</span>
             </div>
             <div class="forum-stats__item">
                 <span class="forum-stats__number" id="statPosts">0</span>
-                <span class="forum-stats__label">Всего сообщений</span>
+                <span class="forum-stats__label">Сообщений</span>
             </div>
             <div class="forum-stats__item">
                 <span class="forum-stats__number" id="statUsers">0</span>
-                <span class="forum-stats__label">Зарегистрировано</span>
+                <span class="forum-stats__label">Пользователей</span>
             </div>
             <div class="forum-stats__item">
                 <span class="forum-stats__number" id="statOnline">0</span>
-                <span class="forum-stats__label">Сейчас онлайн</span>
+                <span class="forum-stats__label">Онлайн</span>
             </div>
             <div class="forum-stats__item">
                 <span class="forum-stats__number" id="statNew">0</span>
-                <span class="forum-stats__label">Новых сегодня</span>
+                <span class="forum-stats__label">Новых</span>
             </div>
         </div>
     </div>
@@ -2399,7 +2386,7 @@
                     <h4>❄️ CRYSTAL RUSSIA</h4>
                     <a onclick="navigateTo('home')">О проекте</a>
                     <a onclick="navigateTo('rules')">Правила</a>
-                    <a onclick="navigateTo('privacy')">Политика конфиденциальности</a>
+                    <a onclick="navigateTo('privacy')">Политика</a>
                     <a onclick="navigateTo('contacts')">Контакты</a>
                 </div>
                 <div class="footer__column">
@@ -2420,7 +2407,7 @@
                     <h4>🛠 Поддержка</h4>
                     <a onclick="navigateTo('support')">Техподдержка</a>
                     <a onclick="navigateTo('guides')">FAQ</a>
-                    <a onclick="navigateTo('bugs')">Сообщить о баге</a>
+                    <a onclick="navigateTo('bugs')">Баг-репорты</a>
                     <a href="#">Пожертвовать</a>
                 </div>
             </div>
@@ -2440,73 +2427,56 @@
     // ДАННЫЕ ПО УМОЛЧАНИЮ
     // =========================================================
     const DEFAULT_USERS = [
-        { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: 'А' },
-        { username: 'Artyom_Orlov', password: '1424', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: 'А' },
-        { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: 'И' },
-        { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: 'И' },
-        { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: 'Х' }
+        { username: 'Admin', password: 'admin123', role: 'admin', prefix: 'admin', email: 'admin@crystal.ru', avatar: '' },
+        { username: 'Artyom_Orlov', password: '1424', role: 'developer', prefix: 'developer', email: 'artyom@crystal.ru', avatar: '' },
+        { username: 'Игрок_228', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
+        { username: 'Игрок_1337', password: '123456', role: 'user', prefix: 'user', email: '', avatar: '' },
+        { username: 'Helper_Pro', password: '123456', role: 'user', prefix: 'helper', email: '', avatar: '' }
     ];
 
     const DEFAULT_CONTENT = {
-        rules: '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Правила чата\n- Запрещен флуд и капс\n- Запрещена реклама сторонних проектов\n- Общение только на русском языке\n\n### 3. Правила боя (DM)\n- Запрещен беспричинный огонь (DM)\n- Обязательно наличие RP-причины\n- Запрещен спаун-киллинг\n\n### 4. Правила транспорта\n- Соблюдайте ПДД\n- Запрещено вождение без прав\n- Запрещен умышленный таран\n\n### 5. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан',
-        guides: '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер с официального сайта\n2. Зарегистрируйтесь на форуме\n3. Установите игру\n4. Запустите лаунчер и войдите в аккаунт\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию работы\n2. Нажмите на кнопку взаимодействия\n3. Выберите желаемую профессию\n4. Следуйте инструкциям на экране\n\n### 🚗 Как получить права?\n1. Придите в автошколу\n2. Сдайте теоретический экзамен\n3. Сдайте практический экзамен\n4. Оплатите пошлину\n\n### 💰 Как заработать деньги?\n- Устройтесь на работу\n- Занимайтесь бизнесом\n- Выполняйте задания\n- Продавайте товары',
-        lore: '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас был основан в 1848 году. За долгие годы он стал центром криминальной деятельности и экономического роста.\n\n### Основные фракции\n\n**LSPD (Полиция Лос-Сантоса)**\nГлавный орган правопорядка в городе. Занимаются патрулированием, раскрытием преступлений и поддержанием порядка.\n\n**FBI (Федеральное бюро расследований)**\nЭлитное подразделение, занимающееся особо важными делами, коррупцией и организованной преступностью.\n\n**Government (Правительство штата)**\nОрган управления, регулирующий экономику, законы и социальную политику.\n\n### Криминальные структуры\n- **Мафия** — организованная преступность\n- **Банды** — уличные группировки\n- **Одиночки** — независимые преступники'
+        rules: '## 📜 ПРАВИЛА ПРОЕКТА CRYSTAL RUSSIA\n\n### 1. Общие правила\n- Уважайте других игроков и администрацию\n- Запрещено использование читов и багов\n- Запрещен спам и оскорбления\n- Соблюдайте правила RP-отыгрыша\n\n### 2. Наказания\n- Предупреждение (3 раза)\n- Бан на 24 часа\n- Бан на 7 дней\n- Перманентный бан',
+        guides: '## 📚 ГАЙДЫ И FAQ\n\n### 🚀 Как начать играть?\n1. Скачайте лаунчер\n2. Зарегистрируйтесь\n3. Установите игру\n4. Запустите лаунчер\n\n### 💼 Как устроиться на работу?\n1. Подойдите к зданию\n2. Нажмите взаимодействие\n3. Выберите профессию\n\n### 🚗 Как получить права?\n1. Придите в автошколу\n2. Сдайте экзамены\n3. Оплатите пошлину',
+        lore: '## 🌍 ЛОР МИРА CRYSTAL RUSSIA\n\n### История штата\nШтат Сан-Андреас основан в 1848 году.\n\n### Основные фракции\n**LSPD** — полиция\n**FBI** — федералы\n**Government** — правительство\n\n### Криминал\n- Мафия\n- Банды\n- Одиночки'
     };
 
     // =========================================================
-    // ИНИЦИАЛИЗАЦИЯ ДАННЫХ
+    // ИНИЦИАЛИЗАЦИЯ
     // =========================================================
     function initData() {
-        // Пользователи
         if (!localStorage.getItem('forum_users')) {
             localStorage.setItem('forum_users', JSON.stringify(DEFAULT_USERS));
         }
 
-        // Контент
         ['rules', 'guides', 'lore'].forEach(key => {
             if (!localStorage.getItem('content_' + key)) {
                 localStorage.setItem('content_' + key, DEFAULT_CONTENT[key]);
             }
         });
 
-        // Жалобы
         ['complaints_player', 'complaints_admin', 'complaints_unban', 'complaints_questions'].forEach(key => {
             if (!localStorage.getItem(key)) {
                 localStorage.setItem(key, JSON.stringify([]));
             }
         });
 
-        // Темы
         if (!localStorage.getItem('forum_topics')) {
-            const defaultTopics = [
-                { id: 1, title: 'Обновление 2.3: Новая система экономики', author: 'Admin', date: 'Сегодня 15:30', replies: 45, views: 1200, status: 'pinned', tag: 'important' },
-                { id: 2, title: 'Как заработать первый миллион? Советы новичкам', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, views: 8400, status: 'hot', tag: 'new' },
-                { id: 3, title: 'Проблема с подключением к серверу (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, views: 3100, status: 'solved', tag: 'answered' },
-                { id: 4, title: 'Жалоба на игрока: NonRP поведение в LSPD', author: 'Игрок_420', date: 'Вчера 18:20', replies: 3, views: 5800, status: '', tag: '' },
-                { id: 5, title: '[Архив] Обсуждение старого обновления', author: 'DevTeam', date: '12.06.2025', replies: 234, views: 9300, status: 'locked', tag: '' }
-            ];
-            localStorage.setItem('forum_topics', JSON.stringify(defaultTopics));
+            localStorage.setItem('forum_topics', JSON.stringify([
+                { id: 1, title: 'Обновление 2.3: Новая экономика', author: 'Admin', date: 'Сегодня 15:30', replies: 45, status: 'pinned', tag: 'important' },
+                { id: 2, title: 'Как заработать первый миллион?', author: 'Игрок_228', date: 'Сегодня 12:15', replies: 78, status: 'hot', tag: 'new' },
+                { id: 3, title: 'Проблема с подключением (решение)', author: 'Игрок_777', date: 'Вчера 21:40', replies: 12, status: 'solved', tag: 'answered' }
+            ]));
         }
 
-        // Чат
         if (!localStorage.getItem('chat_messages')) {
             localStorage.setItem('chat_messages', JSON.stringify([]));
         }
 
-        // ID
-        if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '6');
+        if (!localStorage.getItem('topic_id_counter')) localStorage.setItem('topic_id_counter', '4');
         if (!localStorage.getItem('complaint_id_counter')) localStorage.setItem('complaint_id_counter', '1');
         if (!localStorage.getItem('chat_id_counter')) localStorage.setItem('chat_id_counter', '1');
-
-        // Забаненные пользователи
-        if (!localStorage.getItem('banned_users')) {
-            localStorage.setItem('banned_users', JSON.stringify([]));
-        }
-
-        // Разработчики
-        if (!localStorage.getItem('developers')) {
-            localStorage.setItem('developers', JSON.stringify(['Artyom_Orlov']));
-        }
+        if (!localStorage.getItem('banned_users')) localStorage.setItem('banned_users', JSON.stringify([]));
+        if (!localStorage.getItem('developers')) localStorage.setItem('developers', JSON.stringify(['Artyom_Orlov']));
 
         updateStats();
     }
@@ -2520,52 +2490,38 @@
         const saved = localStorage.getItem('current_user');
         if (saved) {
             currentUser = JSON.parse(saved);
-            // Проверяем, не забанен ли пользователь
             const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
             if (banned.includes(currentUser.username)) {
                 localStorage.removeItem('current_user');
                 currentUser = null;
-                alert('⛔ Ваш аккаунт был заблокирован!');
+                alert('⛔ Ваш аккаунт заблокирован!');
                 return;
             }
             showMainContent();
         }
     }
 
-    function saveUser(user) {
-        currentUser = user;
-        localStorage.setItem('current_user', JSON.stringify(user));
-        showMainContent();
-    }
-
     function showMainContent() {
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('mainContent').classList.remove('hidden');
 
-        // Обновляем данные пользователя
-        const prefixMap = {
-            'admin': 'Администратор',
-            'helper': 'Хелпер',
-            'moderator': 'Модератор',
-            'developer': 'Разработчик',
-            'user': 'Игрок'
-        };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
-        const prefixClass = 'prefix-' + (currentUser.prefix || 'user');
+        const avatar = currentUser.avatar ? `<img src="${currentUser.avatar}" alt="">` : currentUser.username.charAt(0).toUpperCase();
 
         document.getElementById('headerUsername').textContent = currentUser.username;
         document.getElementById('burgerUsername').textContent = currentUser.username;
-        const avatar = currentUser.avatar || currentUser.username.charAt(0).toUpperCase();
-        document.getElementById('headerAvatar').textContent = avatar;
-        document.getElementById('burgerAvatar').textContent = avatar;
+        document.getElementById('headerAvatar').innerHTML = avatar;
+        document.getElementById('burgerAvatar').innerHTML = avatar;
 
         const prefixText = prefixMap[currentUser.prefix] || 'Игрок';
         document.getElementById('headerPrefix').textContent = prefixText;
-        document.getElementById('headerPrefix').className = 'header__user-prefix ' + prefixClass;
+        document.getElementById('headerPrefix').className = 'header__user-prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
         document.getElementById('burgerPrefix').textContent = prefixText;
-        document.getElementById('burgerPrefix').className = 'burger-user-prefix ' + prefixClass;
+        document.getElementById('burgerPrefix').className = 'burger-user-prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
 
-        // Показываем панель разработчика
+        // Панель разработчика
         const devMenu = document.getElementById('devMenuSection');
         if (currentUser.role === 'developer' || currentUser.role === 'admin') {
             devMenu.classList.remove('hidden');
@@ -2573,7 +2529,6 @@
             devMenu.classList.add('hidden');
         }
 
-        // Показываем кнопку создания темы только админам/разработчикам
         const canCreate = currentUser.role === 'admin' || currentUser.role === 'developer';
         document.getElementById('createTopicBtn').style.display = canCreate ? 'inline-flex' : 'none';
 
@@ -2586,9 +2541,6 @@
         renderChat();
         renderDevPanel();
         loadProfile();
-
-        // Загружаем контент
-        loadContentPage();
     }
 
     function login() {
@@ -2605,14 +2557,15 @@
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            // Проверка бана
             const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
             if (banned.includes(username)) {
-                errorEl.textContent = '⛔ Ваш аккаунт заблокирован!';
+                errorEl.textContent = '⛔ Аккаунт заблокирован!';
                 return;
             }
             errorEl.textContent = '';
-            saveUser(user);
+            currentUser = user;
+            localStorage.setItem('current_user', JSON.stringify(user));
+            showMainContent();
         } else {
             errorEl.textContent = 'Неверный логин или пароль';
         }
@@ -2634,20 +2587,13 @@
 
         const users = JSON.parse(localStorage.getItem('forum_users'));
         if (users.find(u => u.username === username)) {
-            errorEl.textContent = 'Пользователь с таким именем уже существует';
+            errorEl.textContent = 'Пользователь уже существует';
             return;
         }
 
-        users.push({
-            username,
-            password,
-            role: 'user',
-            prefix: 'user',
-            email: '',
-            avatar: username.charAt(0).toUpperCase()
-        });
+        users.push({ username, password, role: 'user', prefix: 'user', email: '', avatar: '' });
         localStorage.setItem('forum_users', JSON.stringify(users));
-        errorEl.textContent = '✅ Регистрация успешна! Теперь войдите.';
+        errorEl.textContent = '✅ Регистрация успешна! Войдите.';
         document.getElementById('loginSubtitle').textContent = 'Войдите в свой аккаунт';
         document.getElementById('loginBtn').textContent = 'Войти';
         document.getElementById('registerText').innerHTML = 'Нет аккаунта? <a id="toggleAuth">Зарегистрироваться</a>';
@@ -2706,77 +2652,56 @@
         'profile': 'page-profile'
     };
 
+    const contentKeys = { 'rules': 'rules', 'guides': 'guides', 'lore': 'lore' };
     const pageTitles = {
         'rules': '📜 Правила проекта',
         'guides': '📚 Гайды и FAQ',
         'lore': '🌍 Лор мира'
     };
-
     const pageSubtitles = {
-        'rules': 'Полные правила сервера с примерами нарушений и наказаний',
-        'guides': 'Инструкции для новичков и ответы на частые вопросы',
-        'lore': 'История мира, описание фракций и их задач'
+        'rules': 'Полные правила сервера',
+        'guides': 'Инструкции для новичков',
+        'lore': 'История мира и фракций'
     };
-
-    const contentKeys = {
-        'rules': 'rules',
-        'guides': 'guides',
-        'lore': 'lore'
-    };
-
-    let currentPage = 'home';
 
     function navigateTo(page) {
-        // Скрываем все страницы
-        document.querySelectorAll('#pageContainer > div').forEach(el => {
-            el.classList.add('hidden');
-        });
+        document.querySelectorAll('#pageContainer > div').forEach(el => el.classList.add('hidden'));
 
-        // Для страниц-заглушек
         const placeholderPages = ['news', 'lspd', 'government', 'mafia', 'business', 'support', 'bugs', 'bulletin', 'events', 'archive', 'all-topics', 'privacy', 'contacts'];
         if (placeholderPages.includes(page)) {
             const placeholder = document.getElementById('page-placeholder');
             placeholder.classList.remove('hidden');
-            // Меняем текст
             const titles = {
                 'news': '📰 Новости проекта',
                 'lspd': '👮 LSPD',
                 'government': '🏛️ Government',
                 'mafia': '🔫 Мафии и банды',
                 'business': '🏪 Бизнес и организации',
-                'support': '🛠 Техническая поддержка',
+                'support': '🛠 Техподдержка',
                 'bugs': '🐛 Баг-репорты',
                 'bulletin': '📢 Доска объявлений',
                 'events': '🏆 Конкурсы и ивенты',
                 'archive': '📦 Архивы',
-                'all-topics': '📋 Все темы',
-                'privacy': '🔒 Политика конфиденциальности',
-                'contacts': '📞 Контакты'
+                'all-topics': '📋 Все темы'
             };
             document.querySelector('#page-placeholder h2').textContent = titles[page] || 'Раздел в разработке';
-            currentPage = page;
             if (window.innerWidth <= 768) toggleMenu();
             window.scrollTo(0, 0);
             return;
         }
 
         const target = document.getElementById(pageMap[page]);
-        if (target) {
-            target.classList.remove('hidden');
-            currentPage = page;
-        }
+        if (target) target.classList.remove('hidden');
 
-        // Если это страница контента
         if (['rules', 'guides', 'lore'].includes(page)) {
             const editor = document.getElementById('contentEditor');
             const key = contentKeys[page];
             editor.value = localStorage.getItem('content_' + key) || '';
-            document.getElementById('contentTitle').textContent = pageTitles[page] || 'Страница';
-            document.getElementById('contentSubtitle').textContent = pageSubtitles[page] || 'Редактируйте контент этой страницы';
+            document.getElementById('contentTitle').textContent = pageTitles[page];
+            document.getElementById('contentSubtitle').textContent = pageSubtitles[page];
             editor.dataset.contentKey = key;
         }
 
-        // Обновляем списки
         if (page === 'complaints') renderComplaints('player');
         if (page === 'admin-complaints') renderComplaints('admin');
         if (page === 'unban') renderComplaints('unban');
@@ -2784,11 +2709,7 @@
         if (page === 'chat') renderChat();
         if (page === 'devpanel') renderDevPanel();
         if (page === 'profile') loadProfile();
-
-        if (page === 'home') {
-            renderTopics();
-            updateStats();
-        }
+        if (page === 'home') { renderTopics(); updateStats(); }
 
         if (window.innerWidth <= 768) toggleMenu();
         window.scrollTo(0, 0);
@@ -2803,38 +2724,27 @@
         }
     }
 
-    function loadContentPage() {}
-
     // =========================================================
-    // СОЗДАНИЕ ТЕМ
+    // ТЕМЫ
     // =========================================================
     function showCreateTopic() {
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
-            alert('⛔ Только администраторы и разработчики могут создавать темы!');
+            alert('⛔ Только администраторы и разработчики!');
             return;
         }
-
         const title = prompt('Введите заголовок темы:');
         if (!title) return;
 
         const topics = JSON.parse(localStorage.getItem('forum_topics'));
         const id = parseInt(localStorage.getItem('topic_id_counter')) || 1;
-
         topics.unshift({
-            id: id,
-            title: title,
-            author: currentUser.username,
+            id, title, author: currentUser.username,
             date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
-            replies: 0,
-            views: 0,
-            status: '',
-            tag: ''
+            replies: 0, views: 0, status: '', tag: ''
         });
-
         localStorage.setItem('forum_topics', JSON.stringify(topics));
         localStorage.setItem('topic_id_counter', String(id + 1));
-
-        alert('✅ Тема "' + title + '" создана!');
+        alert('✅ Тема создана!');
         renderTopics();
         updateStats();
     }
@@ -2844,7 +2754,7 @@
         const container = document.getElementById('topicList');
 
         if (topics.length === 0) {
-            container.innerHTML = '<div class="no-items"><i class="fas fa-comments"></i>Нет созданных тем</div>';
+            container.innerHTML = '<div class="no-items"><i class="fas fa-comments"></i>Нет тем</div>';
             return;
         }
 
@@ -2855,35 +2765,30 @@
                 t.status === 'locked' ? '<i class="fas fa-lock"></i>' :
                 '<i class="fas fa-comment"></i>';
 
-            const statusClass = t.status || '';
-
             const tagHtml = t.tag === 'important' ? '<span class="topic-item__tag tag-important">ВАЖНО</span>' :
                 t.tag === 'new' ? '<span class="topic-item__tag tag-new">НОВОЕ</span>' :
                 t.tag === 'answered' ? '<span class="topic-item__tag tag-answered">РЕШЕНО</span>' :
                 '';
 
             return `
-                    <div class="topic-item">
-                        <div class="topic-item__left">
-                            <span class="topic-item__status ${statusClass}">${statusIcon}</span>
-                            <div>
-                                <div class="topic-item__title">
-                                    <a href="#">${t.title}</a>
-                                    ${tagHtml}
-                                </div>
-                                <div class="topic-item__meta">
-                                    <span>Автор: <strong>${t.author}</strong></span>
-                                    <span>📅 ${t.date}</span>
-                                    <span>💬 ${t.replies} ответов</span>
-                                </div>
+                <div class="topic-item">
+                    <div class="topic-item__left">
+                        <span class="topic-item__status ${t.status}">${statusIcon}</span>
+                        <div>
+                            <div class="topic-item__title"><a href="#">${t.title}</a> ${tagHtml}</div>
+                            <div class="topic-item__meta">
+                                <span>Автор: <strong>${t.author}</strong></span>
+                                <span>📅 ${t.date}</span>
+                                <span>💬 ${t.replies}</span>
                             </div>
                         </div>
-                        <div class="topic-item__right">
-                            <span class="author">Последний: <strong>${t.author}</strong></span>
-                            <span class="date">${t.date}</span>
-                        </div>
                     </div>
-                `;
+                    <div class="topic-item__right">
+                        <span class="author">${t.author}</span>
+                        <span class="date">${t.date}</span>
+                    </div>
+                </div>
+            `;
         }).join('');
     }
 
@@ -2893,9 +2798,6 @@
     function updateStats() {
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
-        const complaints = JSON.parse(localStorage.getItem('complaints_player')) || [];
-        const questions = JSON.parse(localStorage.getItem('complaints_questions')) || [];
-
         const totalPosts = topics.reduce((sum, t) => sum + t.replies + 1, 0);
 
         document.getElementById('totalUsers').textContent = users.length;
@@ -2904,50 +2806,19 @@
         document.getElementById('statPosts').textContent = totalPosts;
         document.getElementById('statOnline').textContent = Math.floor(Math.random() * 200) + 50;
         document.getElementById('statNew').textContent = Math.floor(Math.random() * 30) + 5;
-
-        const online = Math.floor(Math.random() * 150) + 50;
-        document.getElementById('onlineCount').textContent = online;
-        document.getElementById('serverOnline').textContent = online;
-
-        const totalComplaints = complaints.length + questions.length;
-        document.getElementById('complaintsBadge').textContent = totalComplaints;
-        document.getElementById('complaintsBadgeCard').textContent = totalComplaints;
-        document.getElementById('complaintsTotal').textContent = complaints.length + 50;
+        document.getElementById('onlineCount').textContent = Math.floor(Math.random() * 150) + 50;
+        document.getElementById('serverOnline').textContent = Math.floor(Math.random() * 150) + 50;
         document.getElementById('chatOnline').textContent = Math.floor(Math.random() * 30) + 5;
     }
 
     // =========================================================
-    // ЖАЛОБЫ (УНИВЕРСАЛЬНАЯ ФУНКЦИЯ)
+    // ЖАЛОБЫ (УНИВЕРСАЛЬНАЯ)
     // =========================================================
     const complaintConfigs = {
-        'player': {
-            formId: 'complaintFormPlayer',
-            listId: 'complaintsList',
-            storageKey: 'complaints_player',
-            title: 'Жалоба на игрока',
-            fields: ['target', 'author', 'title', 'desc']
-        },
-        'admin': {
-            formId: 'complaintFormAdmin',
-            listId: 'adminComplaintsList',
-            storageKey: 'complaints_admin',
-            title: 'Жалоба на администрацию',
-            fields: ['target', 'author', 'title', 'desc']
-        },
-        'unban': {
-            formId: 'complaintFormUnban',
-            listId: 'unbanList',
-            storageKey: 'complaints_unban',
-            title: 'Заявка на разбан',
-            fields: ['author', 'title', 'desc']
-        },
-        'question': {
-            formId: 'complaintFormQuestion',
-            listId: 'questionsList',
-            storageKey: 'complaints_questions',
-            title: 'Вопрос к администрации',
-            fields: ['author', 'title', 'desc']
-        }
+        'player': { formId: 'complaintFormPlayer', listId: 'complaintsList', storageKey: 'complaints_player', title: 'Жалоба на игрока', fields: ['target', 'author', 'title', 'desc'] },
+        'admin': { formId: 'complaintFormAdmin', listId: 'adminComplaintsList', storageKey: 'complaints_admin', title: 'Жалоба на администрацию', fields: ['target', 'author', 'title', 'desc'] },
+        'unban': { formId: 'complaintFormUnban', listId: 'unbanList', storageKey: 'complaints_unban', title: 'Заявка на разбан', fields: ['author', 'title', 'desc'] },
+        'question': { formId: 'complaintFormQuestion', listId: 'questionsList', storageKey: 'complaints_questions', title: 'Вопрос', fields: ['author', 'title', 'desc'] }
     };
 
     function showComplaintForm(type) {
@@ -2989,15 +2860,13 @@
         const complaints = JSON.parse(localStorage.getItem(config.storageKey)) || [];
         const id = parseInt(localStorage.getItem('complaint_id_counter')) || 1;
 
-        const complaint = {
-            id: id,
-            ...data,
+        complaints.unshift({
+            id, ...data,
             date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
             status: 'new',
             answer: ''
-        };
+        });
 
-        complaints.unshift(complaint);
         localStorage.setItem(config.storageKey, JSON.stringify(complaints));
         localStorage.setItem('complaint_id_counter', String(id + 1));
 
@@ -3014,19 +2883,7 @@
         const container = document.getElementById(config.listId);
 
         if (complaints.length === 0) {
-            const icons = {
-                'player': 'fa-users',
-                'admin': 'fa-shield-alt',
-                'unban': 'fa-unlock',
-                'question': 'fa-question-circle'
-            };
-            const texts = {
-                'player': 'Нет активных жалоб',
-                'admin': 'Нет жалоб на администрацию',
-                'unban': 'Нет заявок на разбан',
-                'question': 'Нет вопросов'
-            };
-            container.innerHTML = `<div class="no-items"><i class="fas ${icons[type]}"></i>${texts[type]}</div>`;
+            container.innerHTML = `<div class="no-items"><i class="fas fa-check-circle"></i>Нет записей</div>`;
             return;
         }
 
@@ -3039,23 +2896,17 @@
 
         container.innerHTML = complaints.map(c => {
             const status = statusMap[c.status] || statusMap.new;
-            const answerHtml = c.answer ? `
-                    <div class="complaint-item__answer">
-                        <strong>📩 Ответ:</strong> ${c.answer}
-                    </div>
-                ` : '';
+            const answerHtml = c.answer ? `<div class="complaint-item__answer"><strong>📩 Ответ:</strong> ${c.answer}</div>` : '';
 
             const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.role === 'developer');
             const actionsHtml = isAdmin ? `
-                    <div class="complaint-item__actions">
-                        <button class="btn btn-sm btn-success" onclick="answerComplaint('${type}', ${c.id})">
-                            <i class="fas fa-reply"></i> Ответить
-                        </button>
-                        <button class="btn btn-sm btn-primary" onclick="changeStatus('${type}', ${c.id}, 'review')">В работу</button>
-                        <button class="btn btn-sm btn-success" onclick="changeStatus('${type}', ${c.id}, 'answered')">✅ Решить</button>
-                        <button class="btn btn-sm btn-danger" onclick="changeStatus('${type}', ${c.id}, 'rejected')">❌ Отклонить</button>
-                    </div>
-                ` : '';
+                <div class="complaint-item__actions">
+                    <button class="btn btn-sm btn-success" onclick="answerComplaint('${type}', ${c.id})"><i class="fas fa-reply"></i> Ответить</button>
+                    <button class="btn btn-sm btn-primary" onclick="changeStatus('${type}', ${c.id}, 'review')">В работу</button>
+                    <button class="btn btn-sm btn-success" onclick="changeStatus('${type}', ${c.id}, 'answered')">✅ Решить</button>
+                    <button class="btn btn-sm btn-danger" onclick="changeStatus('${type}', ${c.id}, 'rejected')">❌ Отклонить</button>
+                </div>
+            ` : '';
 
             let metaHtml = `<span>📝 Автор: <strong>${c.author}</strong></span><span>📅 ${c.date}</span>`;
             if (c.target) {
@@ -3063,32 +2914,27 @@
             }
 
             return `
-                    <div class="complaint-item">
-                        <div class="complaint-item__header">
-                            <span class="complaint-item__title">${c.title}</span>
-                            <span class="complaint-item__status ${status.class}">${status.text}</span>
-                        </div>
-                        <div class="complaint-item__meta">${metaHtml}</div>
-                        <div class="complaint-item__body">${c.desc}</div>
-                        ${answerHtml}
-                        ${actionsHtml}
+                <div class="complaint-item">
+                    <div class="complaint-item__header">
+                        <span class="complaint-item__title">${c.title}</span>
+                        <span class="complaint-item__status ${status.class}">${status.text}</span>
                     </div>
-                `;
+                    <div class="complaint-item__meta">${metaHtml}</div>
+                    <div class="complaint-item__body">${c.desc}</div>
+                    ${answerHtml}
+                    ${actionsHtml}
+                </div>
+            `;
         }).join('');
     }
 
     function answerComplaint(type, id) {
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
-            alert('⛔ Только администраторы и разработчики могут отвечать!');
+            alert('⛔ Только администраторы и разработчики!');
             return;
         }
-
         const answer = prompt('Введите ответ:');
-        if (answer === null) return;
-        if (!answer.trim()) {
-            alert('⚠️ Введите текст ответа!');
-            return;
-        }
+        if (!answer || !answer.trim()) return;
 
         const config = complaintConfigs[type];
         if (!config) return;
@@ -3100,17 +2946,15 @@
         items[index].answer = answer.trim();
         items[index].status = 'answered';
         localStorage.setItem(config.storageKey, JSON.stringify(items));
-
         renderComplaints(type);
         alert('✅ Ответ добавлен!');
     }
 
     function changeStatus(type, id, status) {
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'developer')) {
-            alert('⛔ Только администраторы и разработчики могут менять статус!');
+            alert('⛔ Только администраторы и разработчики!');
             return;
         }
-
         const config = complaintConfigs[type];
         if (!config) return;
 
@@ -3120,7 +2964,6 @@
 
         items[index].status = status;
         localStorage.setItem(config.storageKey, JSON.stringify(items));
-
         renderComplaints(type);
         alert('✅ Статус изменен!');
     }
@@ -3133,51 +2976,32 @@
         const container = document.getElementById('chatMessages');
 
         if (messages.length === 0) {
-            container.innerHTML = `
-                    <div class="chat-empty">
-                        <i class="fas fa-comment-dots"></i>
-                        Здесь пока пусто. Начните общение!
-                    </div>
-                `;
+            container.innerHTML = `<div class="chat-empty"><i class="fas fa-comment-dots"></i>Начните общение!</div>`;
             return;
         }
 
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
-        const prefixMap = {
-            'admin': 'Администратор',
-            'helper': 'Хелпер',
-            'moderator': 'Модератор',
-            'developer': 'Разработчик',
-            'user': 'Игрок'
-        };
-        const prefixClassMap = {
-            'admin': 'prefix-admin',
-            'helper': 'prefix-helper',
-            'moderator': 'prefix-moderator',
-            'developer': 'prefix-developer',
-            'user': 'prefix-user'
-        };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
         container.innerHTML = messages.map(m => {
             const user = users.find(u => u.username === m.author);
             const prefix = user ? user.prefix : 'user';
-            const prefixText = prefixMap[prefix] || 'Игрок';
-            const prefixClass = prefixClassMap[prefix] || 'prefix-user';
-            const avatar = user ? (user.avatar || user.username.charAt(0).toUpperCase()) : m.author.charAt(0).toUpperCase();
+            const avatar = user && user.avatar ? `<img src="${user.avatar}" alt="">` : m.author.charAt(0).toUpperCase();
 
             return `
-                    <div class="chat-message">
-                        <div class="chat-message__avatar">${avatar}</div>
-                        <div class="chat-message__content">
-                            <div class="chat-message__user">
-                                ${m.author}
-                                <span class="prefix ${prefixClass}">${prefixText}</span>
-                            </div>
-                            <div class="chat-message__text">${m.text}</div>
+                <div class="chat-message">
+                    <div class="chat-message__avatar">${avatar}</div>
+                    <div class="chat-message__content">
+                        <div class="chat-message__user">
+                            ${m.author}
+                            <span class="prefix ${prefixClassMap[prefix] || 'prefix-user'}">${prefixMap[prefix] || 'Игрок'}</span>
                         </div>
-                        <div class="chat-message__time">${m.time}</div>
+                        <div class="chat-message__text">${m.text}</div>
                     </div>
-                `;
+                    <div class="chat-message__time">${m.time}</div>
+                </div>
+            `;
         }).join('');
 
         container.scrollTop = container.scrollHeight;
@@ -3185,7 +3009,6 @@
 
     function sendMessage() {
         if (!currentUser) return;
-
         const input = document.getElementById('chatInput');
         const text = input.value.trim();
         if (!text) return;
@@ -3193,35 +3016,18 @@
         const messages = JSON.parse(localStorage.getItem('chat_messages')) || [];
         const id = parseInt(localStorage.getItem('chat_id_counter')) || 1;
 
-        messages.push({
-            id: id,
-            author: currentUser.username,
-            text: text,
-            time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
-        });
-
+        messages.push({ id, author: currentUser.username, text, time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) });
         localStorage.setItem('chat_messages', JSON.stringify(messages));
         localStorage.setItem('chat_id_counter', String(id + 1));
 
         input.value = '';
         renderChat();
-
-        // Уведомление
-        const badge = document.getElementById('chatBadge');
-        if (badge) {
-            const count = parseInt(badge.textContent) + 1;
-            badge.textContent = count;
-        }
     }
 
-    // Enter для чата
     document.addEventListener('DOMContentLoaded', function() {
-        const chatInput = document.getElementById('chatInput');
-        if (chatInput) {
-            chatInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') sendMessage();
-            });
-        }
+        document.getElementById('chatInput')?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
     });
 
     // =========================================================
@@ -3232,36 +3038,18 @@
         const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
         const developers = JSON.parse(localStorage.getItem('developers')) || [];
 
-        // Заполняем селекты
-        const selects = ['devUserSelect', 'devBanSelect'];
-        selects.forEach(id => {
+        ['devUserSelect', 'devBanSelect'].forEach(id => {
             const sel = document.getElementById(id);
             if (!sel) return;
-            const currentVal = sel.value;
             sel.innerHTML = '<option value="">Выберите пользователя</option>' +
-                users
-                .filter(u => u.username !== currentUser?.username)
+                users.filter(u => u.username !== currentUser?.username)
                 .map(u => `<option value="${u.username}">${u.username} ${banned.includes(u.username) ? '🔒' : ''}</option>`)
                 .join('');
-            if (currentVal) sel.value = currentVal;
         });
 
-        // Список пользователей
         const list = document.getElementById('devUserList');
-        const prefixMap = {
-            'admin': 'Администратор',
-            'helper': 'Хелпер',
-            'moderator': 'Модератор',
-            'developer': 'Разработчик',
-            'user': 'Игрок'
-        };
-        const prefixClassMap = {
-            'admin': 'prefix-admin',
-            'helper': 'prefix-helper',
-            'moderator': 'prefix-moderator',
-            'developer': 'prefix-developer',
-            'user': 'prefix-user'
-        };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
         list.innerHTML = users.map(u => {
             const isBanned = banned.includes(u.username);
@@ -3270,22 +3058,22 @@
             const prefixClass = prefixClassMap[u.prefix] || 'prefix-user';
 
             return `
-                    <div class="dev-panel__user-item">
-                        <div>
-                            <strong>${u.username}</strong>
-                            <span class="prefix ${prefixClass}">${prefixText}</span>
-                            ${isDev ? ' 👨‍💻' : ''}
-                            ${isBanned ? ' 🔒' : ''}
-                        </div>
-                        <div class="actions">
-                            <button onclick="devAction('edit', '${u.username}')" title="Редактировать"><i class="fas fa-edit"></i></button>
-                            <button class="danger" onclick="devAction('ban', '${u.username}')" title="${isBanned ? 'Разбанить' : 'Забанить'}">
-                                <i class="fas ${isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
-                            </button>
-                            <button class="danger" onclick="devAction('delete', '${u.username}')" title="Удалить"><i class="fas fa-trash"></i></button>
-                        </div>
+                <div class="dev-panel__user-item">
+                    <div>
+                        <strong>${u.username}</strong>
+                        <span class="prefix ${prefixClass}">${prefixText}</span>
+                        ${isDev ? ' 👨‍💻' : ''}
+                        ${isBanned ? ' 🔒' : ''}
                     </div>
-                `;
+                    <div class="actions">
+                        <button onclick="devAction('edit', '${u.username}')" title="Редактировать"><i class="fas fa-edit"></i></button>
+                        <button class="danger" onclick="devAction('ban', '${u.username}')" title="${isBanned ? 'Разбанить' : 'Забанить'}">
+                            <i class="fas ${isBanned ? 'fa-unlock' : 'fa-ban'}"></i>
+                        </button>
+                        <button class="danger" onclick="devAction('delete', '${u.username}')" title="Удалить"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
         }).join('');
     }
 
@@ -3294,55 +3082,43 @@
             alert('⛔ Доступ запрещен!');
             return;
         }
-
         if (username === currentUser.username) {
-            alert('⛔ Нельзя выполнить это действие над собой!');
+            alert('⛔ Нельзя над собой!');
             return;
         }
 
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const userIndex = users.findIndex(u => u.username === username);
-        if (userIndex === -1) {
-            alert('Пользователь не найден');
-            return;
-        }
+        if (userIndex === -1) return;
 
         if (action === 'ban') {
             const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
             if (banned.includes(username)) {
-                // Разбан
-                const newBanned = banned.filter(b => b !== username);
-                localStorage.setItem('banned_users', JSON.stringify(newBanned));
-                alert(`✅ Пользователь ${username} разбанен!`);
+                localStorage.setItem('banned_users', JSON.stringify(banned.filter(b => b !== username)));
+                alert(`✅ ${username} разбанен!`);
             } else {
-                // Бан
                 banned.push(username);
                 localStorage.setItem('banned_users', JSON.stringify(banned));
-                // Если пользователь сейчас онлайн - выкинуть
-                if (currentUser && currentUser.username === username) {
-                    logout();
-                }
-                alert(`✅ Пользователь ${username} забанен!`);
+                alert(`✅ ${username} забанен!`);
             }
             renderDevPanel();
             return;
         }
 
         if (action === 'delete') {
-            if (!confirm(`Удалить пользователя ${username}? Это действие необратимо!`)) return;
+            if (!confirm(`Удалить ${username}?`)) return;
             users.splice(userIndex, 1);
             localStorage.setItem('forum_users', JSON.stringify(users));
-            // Удаляем из бана
             const banned = JSON.parse(localStorage.getItem('banned_users')) || [];
             localStorage.setItem('banned_users', JSON.stringify(banned.filter(b => b !== username)));
-            alert(`✅ Пользователь ${username} удален!`);
+            alert(`✅ ${username} удален!`);
             renderDevPanel();
             updateStats();
             return;
         }
 
         if (action === 'edit') {
-            const newPrefix = prompt('Введите новый префикс (user, helper, moderator, admin, developer):', users[userIndex].prefix || 'user');
+            const newPrefix = prompt('Префикс (user, helper, moderator, admin, developer):', users[userIndex].prefix || 'user');
             if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                 users[userIndex].prefix = newPrefix;
                 if (newPrefix === 'developer' && !JSON.parse(localStorage.getItem('developers')).includes(username)) {
@@ -3351,10 +3127,13 @@
                     localStorage.setItem('developers', JSON.stringify(devs));
                 }
                 localStorage.setItem('forum_users', JSON.stringify(users));
-                alert(`✅ Префикс пользователя ${username} изменен на ${newPrefix}!`);
+                alert(`✅ Префикс изменен на ${newPrefix}!`);
                 renderDevPanel();
-            } else if (newPrefix !== null) {
-                alert('⚠️ Неверный префикс!');
+                if (currentUser.username === username) {
+                    currentUser.prefix = newPrefix;
+                    localStorage.setItem('current_user', JSON.stringify(currentUser));
+                    showMainContent();
+                }
             }
         }
     }
@@ -3364,21 +3143,13 @@
             alert('⛔ Доступ запрещен!');
             return;
         }
-
         const username = document.getElementById('devUserSelect').value;
         const prefix = document.getElementById('devPrefixSelect').value;
-
-        if (!username) {
-            alert('Выберите пользователя!');
-            return;
-        }
+        if (!username) { alert('Выберите пользователя!'); return; }
 
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const user = users.find(u => u.username === username);
-        if (!user) {
-            alert('Пользователь не найден');
-            return;
-        }
+        if (!user) { alert('Пользователь не найден'); return; }
 
         user.prefix = prefix;
         if (prefix === 'developer' && !JSON.parse(localStorage.getItem('developers')).includes(username)) {
@@ -3387,9 +3158,8 @@
             localStorage.setItem('developers', JSON.stringify(devs));
         }
         localStorage.setItem('forum_users', JSON.stringify(users));
-        alert(`✅ Префикс пользователя ${username} изменен на ${prefix}!`);
+        alert(`✅ Префикс изменен на ${prefix}!`);
         renderDevPanel();
-        // Обновляем интерфейс если это текущий пользователь
         if (currentUser.username === username) {
             currentUser.prefix = prefix;
             localStorage.setItem('current_user', JSON.stringify(currentUser));
@@ -3399,19 +3169,13 @@
 
     function banUser() {
         const username = document.getElementById('devBanSelect').value;
-        if (!username) {
-            alert('Выберите пользователя!');
-            return;
-        }
+        if (!username) { alert('Выберите пользователя!'); return; }
         devAction('ban', username);
     }
 
     function unbanUser() {
         const username = document.getElementById('devBanSelect').value;
-        if (!username) {
-            alert('Выберите пользователя!');
-            return;
-        }
+        if (!username) { alert('Выберите пользователя!'); return; }
         devAction('ban', username);
     }
 
@@ -3420,36 +3184,24 @@
             alert('⛔ Доступ запрещен!');
             return;
         }
-
         const username = document.getElementById('devAddUser').value.trim();
-        if (!username) {
-            alert('Введите имя пользователя!');
-            return;
-        }
+        if (!username) { alert('Введите имя!'); return; }
 
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const user = users.find(u => u.username === username);
-        if (!user) {
-            alert('Пользователь не найден!');
-            return;
-        }
+        if (!user) { alert('Пользователь не найден!'); return; }
 
         const devs = JSON.parse(localStorage.getItem('developers')) || [];
-        if (devs.includes(username)) {
-            alert('Этот пользователь уже разработчик!');
-            return;
-        }
+        if (devs.includes(username)) { alert('Уже разработчик!'); return; }
 
         devs.push(username);
         localStorage.setItem('developers', JSON.stringify(devs));
         user.role = 'developer';
         user.prefix = 'developer';
         localStorage.setItem('forum_users', JSON.stringify(users));
-
         document.getElementById('devAddUser').value = '';
         alert(`✅ ${username} теперь разработчик!`);
         renderDevPanel();
-        // Обновляем если это текущий пользователь
         if (currentUser.username === username) {
             currentUser.role = 'developer';
             currentUser.prefix = 'developer';
@@ -3464,57 +3216,53 @@
     function loadProfile() {
         if (!currentUser) return;
 
+        const avatar = currentUser.avatar ? `<img src="${currentUser.avatar}" alt="">` : currentUser.username.charAt(0).toUpperCase();
+        document.getElementById('profileAvatarText').innerHTML = avatar;
         document.getElementById('profileName').textContent = currentUser.username;
-        document.getElementById('profileAvatar').textContent = currentUser.avatar || currentUser.username.charAt(0).toUpperCase();
         document.getElementById('profileUsername').value = currentUser.username;
         document.getElementById('profileEmail').value = currentUser.email || '';
         document.getElementById('profilePassword').value = '';
 
-        const prefixMap = {
-            'admin': 'Администратор',
-            'helper': 'Хелпер',
-            'moderator': 'Модератор',
-            'developer': 'Разработчик',
-            'user': 'Игрок'
-        };
+        const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик', 'user': 'Игрок' };
+        const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator', 'developer': 'prefix-developer', 'user': 'prefix-user' };
 
         document.getElementById('profilePrefix').textContent = prefixMap[currentUser.prefix] || 'Игрок';
-        const prefixClassMap = {
-            'admin': 'prefix-admin',
-            'helper': 'prefix-helper',
-            'moderator': 'prefix-moderator',
-            'developer': 'prefix-developer',
-            'user': 'prefix-user'
-        };
         document.getElementById('profilePrefix').className = 'profile-card__prefix ' + (prefixClassMap[currentUser.prefix] || 'prefix-user');
 
-        // Заполняем селект префиксов (только для разработчиков/админов)
-        const prefixSelect = document.getElementById('profilePrefixSelect');
+        const prefixField = document.getElementById('profilePrefixField');
         if (currentUser.role === 'developer' || currentUser.role === 'admin') {
-            prefixSelect.style.display = 'block';
-            document.querySelector('.profile-card__field label[for="profilePrefixSelect"]').style.display = 'block';
-            prefixSelect.value = currentUser.prefix || 'user';
+            prefixField.style.display = 'block';
+            document.getElementById('profilePrefixSelect').value = currentUser.prefix || 'user';
         } else {
-            prefixSelect.style.display = 'none';
-            document.querySelector('.profile-card__field label[for="profilePrefixSelect"]').style.display = 'none';
+            prefixField.style.display = 'none';
         }
     }
 
-    function changeAvatar() {
-        const newAvatar = prompt('Введите символ для аватара (букву или эмодзи):', currentUser.avatar || currentUser.username.charAt(0).toUpperCase());
-        if (newAvatar && newAvatar.length === 1) {
+    function uploadAvatar(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            alert('Загрузите изображение!');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const dataUrl = e.target.result;
             const users = JSON.parse(localStorage.getItem('forum_users')) || [];
             const user = users.find(u => u.username === currentUser.username);
             if (user) {
-                user.avatar = newAvatar;
+                user.avatar = dataUrl;
                 localStorage.setItem('forum_users', JSON.stringify(users));
-                currentUser.avatar = newAvatar;
+                currentUser.avatar = dataUrl;
                 localStorage.setItem('current_user', JSON.stringify(currentUser));
                 showMainContent();
                 loadProfile();
                 alert('✅ Аватар обновлен!');
             }
-        }
+        };
+        reader.readAsDataURL(file);
     }
 
     function saveProfile() {
@@ -3525,31 +3273,24 @@
         const newPassword = document.getElementById('profilePassword').value.trim();
         const newPrefix = document.getElementById('profilePrefixSelect').value;
 
-        if (!newUsername) {
-            alert('Имя пользователя не может быть пустым!');
-            return;
-        }
+        if (!newUsername) { alert('Имя не может быть пустым!'); return; }
 
         const users = JSON.parse(localStorage.getItem('forum_users')) || [];
         const userIndex = users.findIndex(u => u.username === currentUser.username);
         if (userIndex === -1) return;
 
-        // Проверка на существование имени
         if (newUsername !== currentUser.username) {
-            const existing = users.find(u => u.username === newUsername && u.username !== currentUser.username);
-            if (existing) {
+            if (users.find(u => u.username === newUsername && u.username !== currentUser.username)) {
                 alert('Пользователь с таким именем уже существует!');
                 return;
             }
         }
 
-        // Обновляем
         const oldUsername = users[userIndex].username;
         users[userIndex].username = newUsername;
         if (newEmail) users[userIndex].email = newEmail;
         if (newPassword && newPassword.length >= 4) users[userIndex].password = newPassword;
 
-        // Обновляем префикс (только для разработчиков/админов)
         if (currentUser.role === 'developer' || currentUser.role === 'admin') {
             if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                 users[userIndex].prefix = newPrefix;
@@ -3561,22 +3302,8 @@
             }
         }
 
-        // Обновляем имя в чате
-        const chatMessages = JSON.parse(localStorage.getItem('chat_messages')) || [];
-        chatMessages.forEach(m => {
-            if (m.author === oldUsername) m.author = newUsername;
-        });
-        localStorage.setItem('chat_messages', JSON.stringify(chatMessages));
-
-        // Обновляем в темах
-        const topics = JSON.parse(localStorage.getItem('forum_topics')) || [];
-        topics.forEach(t => {
-            if (t.author === oldUsername) t.author = newUsername;
-        });
-        localStorage.setItem('forum_topics', JSON.stringify(topics));
-
-        // Обновляем в жалобах
-        ['complaints_player', 'complaints_admin', 'complaints_unban', 'complaints_questions'].forEach(key => {
+        // Обновляем во всех данных
+        ['chat_messages', 'forum_topics', 'complaints_player', 'complaints_admin', 'complaints_unban', 'complaints_questions'].forEach(key => {
             const items = JSON.parse(localStorage.getItem(key)) || [];
             items.forEach(item => {
                 if (item.author === oldUsername) item.author = newUsername;
@@ -3586,8 +3313,6 @@
         });
 
         localStorage.setItem('forum_users', JSON.stringify(users));
-
-        // Обновляем сессию
         currentUser = users[userIndex];
         localStorage.setItem('current_user', JSON.stringify(currentUser));
 
@@ -3611,7 +3336,6 @@
     }
 
     document.getElementById('burgerOverlay').addEventListener('click', toggleMenu);
-
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const menu = document.getElementById('burgerMenu');
@@ -3620,21 +3344,10 @@
     });
 
     // =========================================================
-    // ОНЛАЙН
-    // =========================================================
-    function updateOnline() {
-        const online = Math.floor(Math.random() * 150) + 50;
-        document.getElementById('onlineCount').textContent = online;
-        document.getElementById('serverOnline').textContent = online;
-    }
-    setInterval(updateOnline, 10000);
-
-    // =========================================================
     // ЗАПУСК
     // =========================================================
     document.addEventListener('DOMContentLoaded', function() {
         initData();
-
         document.getElementById('loginBtn').onclick = login;
         document.getElementById('toggleAuth').onclick = toggleAuth;
 
@@ -3646,14 +3359,6 @@
         });
 
         loadUser();
-
-        // Enter для чата (повторно, т.к. DOM загружен)
-        const chatInput = document.getElementById('chatInput');
-        if (chatInput) {
-            chatInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') sendMessage();
-            });
-        }
 
         console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
         console.log('👤 Админ: Admin / admin123');
