@@ -3,221 +3,1494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRYSTAL RUSSIA | Главная</title>
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/main.css">
+    <title>CRYSTAL RUSSIA | Форум RolePlay проекта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========================================================= */
+        /* БАЗОВЫЕ СТИЛИ */
+        /* ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a12;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff7f17;
+            border-radius: 10px;
+        }
+
+        /* ========================================================= */
+        /* ШАПКА */
+        /* ========================================================= */
+        .header {
+            background: linear-gradient(135deg, #0d0d1a, #1a1a2e);
+            border-bottom: 2px solid #ff7f17;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header__logo-icon {
+            font-size: 32px;
+            color: #ff7f17;
+        }
+
+        .header__logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .header__logo-text span {
+            color: #ff7f17;
+        }
+
+        .header__online {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #4caf50;
+        }
+
+        .header__online-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4caf50;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .header__user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header__user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .header__user-name {
+            font-weight: 600;
+        }
+
+        .header__user-badge {
+            background: #ff7f17;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .header__messages {
+            position: relative;
+            font-size: 20px;
+            color: rgba(255,255,255,0.6);
+            transition: 0.3s;
+        }
+
+        .header__messages:hover {
+            color: #fff;
+        }
+
+        .header__messages .badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #ff1744;
+            font-size: 10px;
+            padding: 1px 7px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        /* ========================================================= */
+        /* БУРГЕР-МЕНЮ */
+        /* ========================================================= */
+        .burger-icon {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .burger-icon span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .burger-icon.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .burger-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-icon.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .burger-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s;
+        }
+
+        .burger-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .burger-menu {
+            position: fixed;
+            top: 0;
+            left: -340px;
+            width: 320px;
+            height: 100vh;
+            background: #0d0d1a;
+            padding: 20px 0;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border-right: 2px solid #ff7f17;
+            overflow-y: auto;
+        }
+
+        .burger-menu.open {
+            left: 0;
+        }
+
+        .burger-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .burger-close:hover {
+            color: #ff7f17;
+            transform: rotate(90deg);
+        }
+
+        .burger-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .burger-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .burger-username {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .burger-user-status {
+            font-size: 13px;
+            color: #4caf50;
+        }
+
+        .burger-nav {
+            padding: 10px 0;
+        }
+
+        .burger-nav-title {
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 20px 8px;
+        }
+
+        .burger-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: rgba(255,255,255,0.7);
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .burger-nav a:hover {
+            color: #ff7f17;
+            background: rgba(255,127,23,0.08);
+            padding-left: 25px;
+        }
+
+        .burger-nav a .badge {
+            background: #ff1744;
+            font-size: 11px;
+            padding: 1px 8px;
+            border-radius: 20px;
+        }
+
+        .burger-footer {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin-top: auto;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,23,68,0.15);
+            color: #ff1744;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255,23,68,0.3);
+        }
+
+        /* ========================================================= */
+        /* ГЛАВНЫЙ БАННЕР */
+        /* ========================================================= */
+        .hero {
+            padding: 60px 0 50px;
+            background: radial-gradient(ellipse at 50% 50%, #1a1a2e, #0a0a12);
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .hero__badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 50px;
+            background: rgba(255,127,23,0.15);
+            color: #ff7f17;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(255,127,23,0.2);
+            margin-bottom: 20px;
+        }
+
+        .hero__title {
+            font-size: 44px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .hero__title span {
+            color: #ff7f17;
+        }
+
+        .hero__subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .hero__stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero__stat {
+            text-align: center;
+        }
+
+        .hero__stat-number {
+            display: block;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff7f17;
+        }
+
+        .hero__stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ========================================================= */
+        /* КНОПКИ */
+        /* ========================================================= */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255,127,23,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn-secondary:hover {
+            border-color: #ff7f17;
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 12px;
+        }
+
+        .btn-new-topic {
+            background: linear-gradient(135deg, #ff7f17, #ff5500);
+            color: #fff;
+            padding: 10px 24px;
+        }
+
+        /* ========================================================= */
+        /* КАТЕГОРИИ ФОРУМА */
+        /* ========================================================= */
+        .forum-section {
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .forum-section:last-child {
+            border-bottom: none;
+        }
+
+        .forum-section__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .forum-section__title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .forum-section__title i {
+            color: #ff7f17;
+            margin-right: 10px;
+        }
+
+        .forum-section__desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        .forum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .forum-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .forum-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,127,23,0.2);
+            transform: translateY(-2px);
+        }
+
+        .forum-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .forum-card__icon {
+            font-size: 22px;
+            color: #ff7f17;
+            width: 40px;
+            text-align: center;
+        }
+
+        .forum-card__title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .forum-card__title a:hover {
+            color: #ff7f17;
+        }
+
+        .forum-card__desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-left: 52px;
+            margin-bottom: 10px;
+        }
+
+        .forum-card__meta {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            margin-left: 52px;
+        }
+
+        .forum-card__meta span i {
+            margin-right: 4px;
+        }
+
+        .forum-card__new {
+            color: #4caf50;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .forum-card__badge {
+            background: #ff1744;
+            font-size: 10px;
+            padding: 1px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+        }
+
+        /* ========================================================= */
+        /* ПОСЛЕДНИЕ ТЕМЫ */
+        /* ========================================================= */
+        .topics-section {
+            padding: 40px 0;
+        }
+
+        .topics-section__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .topics-section__title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .topic-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: 0.3s;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .topic-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,127,23,0.1);
+        }
+
+        .topic-item__left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .topic-item__status {
+            font-size: 16px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .topic-item__status.pinned {
+            color: #ff7f17;
+        }
+        .topic-item__status.locked {
+            color: #ff1744;
+        }
+        .topic-item__status.solved {
+            color: #4caf50;
+        }
+        .topic-item__status.hot {
+            color: #ff7f17;
+        }
+
+        .topic-item__title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .topic-item__title a:hover {
+            color: #ff7f17;
+        }
+
+        .topic-item__meta {
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .topic-item__meta span {
+            margin-right: 12px;
+        }
+
+        .topic-item__right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .topic-item__right .author {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .topic-item__right .date {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .topic-item__tag {
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-answered {
+            background: rgba(76,175,80,0.15);
+            color: #4caf50;
+        }
+
+        .tag-important {
+            background: rgba(255,23,68,0.15);
+            color: #ff1744;
+        }
+
+        .tag-new {
+            background: rgba(255,127,23,0.15);
+            color: #ff7f17;
+        }
+
+        /* ========================================================= */
+        /* СТАТИСТИКА ФОРУМА */
+        /* ========================================================= */
+        .forum-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            margin-top: 20px;
+        }
+
+        .forum-stats__item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+        }
+
+        .forum-stats__number {
+            display: block;
+            font-size: 24px;
+            font-weight: 900;
+            color: #ff7f17;
+        }
+
+        .forum-stats__label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ========================================================= */
+        /* ПОДВАЛ */
+        /* ========================================================= */
+        .footer {
+            background: #0d0d1a;
+            padding: 40px 0 30px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer__container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer__column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .footer__column a {
+            display: block;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            padding: 4px 0;
+            transition: 0.3s;
+        }
+
+        .footer__column a:hover {
+            color: #ff7f17;
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            margin-top: 30px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        .footer__bottom span {
+            color: #ff7f17;
+        }
+
+        /* ========================================================= */
+        /* АДАПТАЦИЯ */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            .burger-icon {
+                display: flex;
+            }
+
+            .header__user-name {
+                display: none;
+            }
+
+            .header__user-badge {
+                display: none;
+            }
+
+            .hero__title {
+                font-size: 28px;
+            }
+
+            .hero__stats {
+                gap: 20px;
+            }
+
+            .forum-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .topic-item__right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .burger-menu {
+                width: 290px;
+                left: -310px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header__logo-text {
+                font-size: 18px;
+            }
+
+            .header__online {
+                font-size: 12px;
+            }
+
+            .hero__title {
+                font-size: 24px;
+            }
+
+            .forum-section__title {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- ========================================================= -->
-<!-- БУРГЕР-МЕНЮ С ФОРУМОМ -->
+<!-- БУРГЕР-МЕНЮ -->
 <!-- ========================================================= -->
 <div class="burger-overlay" id="burgerOverlay"></div>
 <div class="burger-menu" id="burgerMenu">
     <button class="burger-close" onclick="toggleMenu()">✕</button>
-    
+
     <div class="burger-user">
-        <div class="burger-avatar">👤</div>
-        <div class="burger-user-info">
+        <div class="burger-avatar">И</div>
+        <div>
             <div class="burger-username">Игрок_228</div>
             <div class="burger-user-status">🟢 В сети</div>
         </div>
     </div>
 
     <nav class="burger-nav">
-        <ul>
-            <li class="burger-nav-title">📌 ОСНОВНОЕ</li>
-            <li><a href="index.html">🏠 Главная</a></li>
-            <li><a href="#about">📖 О сервере</a></li>
-            <li><a href="#rules">📜 Правила</a></li>
-            <li><a href="#status">📊 Статус</a></li>
-            
-            <li class="burger-nav-title">💬 ФОРУМ</li>
-            <li><a href="forum.html">📋 Все темы</a></li>
-            <li><a href="forum.html?section=open">📂 Открытые темы</a></li>
-            <li><a href="forum.html?section=my">👤 Мои темы</a></li>
-            <li><a href="forum.html?section=answered">✅ Отвеченные</a></li>
-            <li><a href="forum.html?section=discussion">💭 Обсуждения</a></li>
-            
-            <li class="burger-nav-title">⚠️ ЖАЛОБЫ</li>
-            <li><a href="complaints.html?type=player">👥 На игроков</a></li>
-            <li><a href="complaints.html?type=admin">🛡 На администрацию</a></li>
-            <li><a href="complaints.html?type=my">📝 Мои жалобы</a></li>
-            
-            <li class="burger-nav-title">📩 ЛИЧНОЕ</li>
-            <li><a href="messages.html">💌 Сообщения <span class="badge-new">3</span></a></li>
-            <li><a href="profile.html">👤 Мой профиль</a></li>
-            <li><a href="#settings">⚙️ Настройки</a></li>
-            
-            <li class="burger-nav-title">ℹ️ ИНФО</li>
-            <li><a href="#team">👥 Команда</a></li>
-            <li><a href="#vacancies">💼 Вакансии</a></li>
-            <li><a href="https://t.me/crystalrussianewss" target="_blank">📩 Поддержка</a></li>
-        </ul>
+        <div class="burger-nav-title">📌 Основное</div>
+        <a href="#"><i class="fas fa-home"></i> Главная</a>
+        <a href="#"><i class="fas fa-newspaper"></i> Новости <span class="badge">3</span></a>
+        <a href="#"><i class="fas fa-gavel"></i> Правила</a>
+        <a href="#"><i class="fas fa-book"></i> Гайды и FAQ</a>
+        <a href="#"><i class="fas fa-scroll"></i> Лор мира</a>
+
+        <div class="burger-nav-title">⚠️ Администрация</div>
+        <a href="#"><i class="fas fa-users"></i> Жалобы на игроков <span class="badge">5</span></a>
+        <a href="#"><i class="fas fa-shield-alt"></i> Жалобы на администрацию</a>
+        <a href="#"><i class="fas fa-unlock-alt"></i> Заявки на разбан</a>
+        <a href="#"><i class="fas fa-question-circle"></i> Вопросы к администрации</a>
+
+        <div class="burger-nav-title">🎭 RolePlay</div>
+        <a href="#"><i class="fas fa-police"></i> LSPD <span class="badge">12</span></a>
+        <a href="#"><i class="fas fa-landmark"></i> Government</a>
+        <a href="#"><i class="fas fa-user-secret"></i> Мафии и банды</a>
+        <a href="#"><i class="fas fa-store"></i> Бизнес и организации</a>
+
+        <div class="burger-nav-title">🛠 Техническое</div>
+        <a href="#"><i class="fas fa-tools"></i> Техническая поддержка</a>
+        <a href="#"><i class="fas fa-bug"></i> Баг-репорты</a>
+
+        <div class="burger-nav-title">💬 Социальное</div>
+        <a href="#"><i class="fas fa-bullhorn"></i> Доска объявлений</a>
+        <a href="#"><i class="fas fa-comments"></i> Флудилка</a>
+        <a href="#"><i class="fas fa-trophy"></i> Конкурсы и ивенты</a>
+
+        <div class="burger-nav-title">📦 Архивы</div>
+        <a href="#"><i class="fas fa-archive"></i> Архив жалоб</a>
+        <a href="#"><i class="fas fa-archive"></i> Архив новостей</a>
     </nav>
-    
+
     <div class="burger-footer">
-        <button class="btn btn--logout">🚪 Выйти</button>
+        <button class="btn-logout"><i class="fas fa-sign-out-alt"></i> Выйти</button>
     </div>
 </div>
-
-<button class="burger-icon" onclick="toggleMenu()" id="burgerIcon">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
 
 <!-- ========================================================= -->
 <!-- ШАПКА -->
 <!-- ========================================================= -->
 <header class="header">
     <div class="container header__container">
-        <div class="header__left">
-            <div class="logo">
-                <span class="logo__icon">❄️</span>
-                <span class="logo__name">CRYSTAL <span>RUSSIA</span></span>
+        <div style="display:flex;align-items:center;gap:15px;">
+            <div class="burger-icon" id="burgerIcon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header__logo">
+                <span class="header__logo-icon">❄️</span>
+                <span class="header__logo-text">CRYSTAL <span>RUSSIA</span></span>
             </div>
             <div class="header__online">
-                <span class="online-dot"></span>
+                <span class="header__online-dot"></span>
                 <span>Игроков: <strong id="onlineCount">0</strong></span>
             </div>
         </div>
-        <div class="header__right">
-            <a href="messages.html" class="header__messages">
-                💌 <span class="badge-new">3</span>
+        <div class="header__user">
+            <a href="#" class="header__messages">
+                <i class="fas fa-envelope"></i>
+                <span class="badge">3</span>
             </a>
-            <a href="profile.html" class="header__profile">👤 Игрок_228</a>
+            <div class="header__user-avatar">И</div>
+            <span class="header__user-name">Игрок_228</span>
+            <span class="header__user-badge">Игрок</span>
         </div>
     </div>
 </header>
 
 <!-- ========================================================= -->
-<!-- ГЛАВНЫЙ ЭКРАН -->
+<!-- ГЛАВНЫЙ БАННЕР -->
 <!-- ========================================================= -->
 <section class="hero">
-    <div class="container hero__container">
-        <div class="hero__content">
-            <div class="hero__badge">🔥 ТОП-1 RP ПРОЕКТ 2025</div>
-            <h1 class="hero__title">Добро пожаловать в <span>CRYSTAL RUSSIA</span></h1>
-            <p class="hero__descr">
-                Уникальный RolePlay проект на базе GTA 5. 
-                Создай свою историю, найди друзей и стань легендой!
-            </p>
-            <div class="hero__buttons">
-                <a href="#" class="btn btn--download">⬇️ Скачать игру</a>
-                <a href="forum.html" class="btn btn--forum">💬 Перейти на форум</a>
+    <div class="container">
+        <div class="hero__badge">🔥 ТОП-1 RP ПРОЕКТ 2025</div>
+        <h1 class="hero__title">Добро пожаловать в <span>CRYSTAL RUSSIA</span></h1>
+        <p class="hero__subtitle">Уникальный RolePlay проект на базе GTA 5. Создай свою историю, найди друзей и стань легендой!</p>
+        <div class="hero__stats">
+            <div class="hero__stat">
+                <span class="hero__stat-number" id="serverOnline">0</span>
+                <span class="hero__stat-label">Игроков онлайн</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-number">24/7</span>
+                <span class="hero__stat-label">Поддержка</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-number">50+</span>
+                <span class="hero__stat-label">Уникальных модов</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-number">12K+</span>
+                <span class="hero__stat-label">Зарегистрировано</span>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ========================================================= -->
-<!-- ОСТАЛЬНЫЕ СЕКЦИИ (О сервере, правила, статус, команда) -->
+<!-- ФОРУМ: ОСНОВНЫЕ РАЗДЕЛЫ -->
 <!-- ========================================================= -->
-<section class="about" id="about">
+<section class="forum-section">
     <div class="container">
-        <h2>📖 О сервере</h2>
-        <p>CRYSTAL RUSSIA — это уникальный мультиплеерный проект на базе GTA 5. Выбирай свой путь: стань бандитом, полицейским, бизнесменом или кем угодно!</p>
-        <div class="about__stats">
-            <div class="about__stat">
-                <span class="about__stat-number">150+</span>
-                <span class="about__stat-label">Игроков онлайн</span>
+        <div class="forum-section__header">
+            <div>
+                <h2 class="forum-section__title"><i class="fas fa-info-circle"></i> Основные разделы</h2>
+                <div class="forum-section__desc">Новости, правила, гайды и лор проекта</div>
             </div>
-            <div class="about__stat">
-                <span class="about__stat-number">24/7</span>
-                <span class="about__stat-label">Поддержка</span>
+            <a href="#" class="btn btn-new-topic"><i class="fas fa-plus"></i> Создать тему</a>
+        </div>
+
+        <div class="forum-grid">
+            <!-- Карточка 1 -->
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-newspaper"></i></span>
+                    <span class="forum-card__title"><a href="#">Новости проекта</a></span>
+                    <span class="forum-card__badge">3</span>
+                </div>
+                <div class="forum-card__desc">Последние обновления сервера, анонсы ивентов и конкурсов</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 128</span>
+                    <span><i class="fas fa-eye"></i> 1.2K</span>
+                    <span class="forum-card__new">⚡ Новое</span>
+                </div>
             </div>
-            <div class="about__stat">
-                <span class="about__stat-number">50+</span>
-                <span class="about__stat-label">Уникальных модов</span>
+
+            <!-- Карточка 2 -->
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-gavel"></i></span>
+                    <span class="forum-card__title"><a href="#">Правила проекта</a></span>
+                </div>
+                <div class="forum-card__desc">Полные правила сервера с примерами нарушений и наказаний</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 45</span>
+                    <span><i class="fas fa-eye"></i> 15.7K</span>
+                </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-book"></i></span>
+                    <span class="forum-card__title"><a href="#">Гайды и FAQ</a></span>
+                </div>
+                <div class="forum-card__desc">Инструкции для новичков: установка, команды, лицензии, работа</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 89</span>
+                    <span><i class="fas fa-eye"></i> 8.4K</span>
+                </div>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-scroll"></i></span>
+                    <span class="forum-card__title"><a href="#">Лор мира</a></span>
+                </div>
+                <div class="forum-card__desc">История штата, описание фракций и их задачи</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 23</span>
+                    <span><i class="fas fa-eye"></i> 3.1K</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="rules" id="rules">
+<!-- ========================================================= -->
+<!-- ФОРУМ: ВЗАИМОДЕЙСТВИЕ С АДМИНИСТРАЦИЕЙ -->
+<!-- ========================================================= -->
+<section class="forum-section">
     <div class="container">
-        <h2>📜 Правила сервера</h2>
-        <ul>
-            <li>✅ Запрещено использование читов и багов</li>
-            <li>✅ Уважай других игроков и администрацию</li>
-            <li>✅ Гриферство и оскорбления запрещены</li>
-            <li>✅ Соблюдай правила RP-отыгрыша</li>
-            <li>✅ Запрещен спам и реклама</li>
-        </ul>
-    </div>
-</section>
+        <div class="forum-section__header">
+            <div>
+                <h2 class="forum-section__title"><i class="fas fa-shield-alt"></i> Взаимодействие с администрацией</h2>
+                <div class="forum-section__desc">Жалобы, разбаны и вопросы к команде</div>
+            </div>
+        </div>
 
-<section class="status" id="status">
-    <div class="container">
-        <h2>📊 Статус сервера</h2>
-        <div class="status__info">
-            <div class="status__card">
-                <span class="status__icon">🟢</span>
-                <span class="status__label">Онлайн</span>
-                <span class="status__value" id="serverOnline">0</span>
+        <div class="forum-grid">
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-users" style="color:#ff1744;"></i></span>
+                    <span class="forum-card__title"><a href="#">Жалобы на игроков</a></span>
+                    <span class="forum-card__badge">5</span>
+                </div>
+                <div class="forum-card__desc">Подача жалоб на нарушение правил (DM, MG, NonRP)</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 312</span>
+                    <span><i class="fas fa-eye"></i> 22.1K</span>
+                    <span class="forum-card__new">⚡ Новое</span>
+                </div>
             </div>
-            <div class="status__card">
-                <span class="status__icon">📶</span>
-                <span class="status__label">Пинг</span>
-                <span class="status__value" id="serverPing">0 мс</span>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-user-shield" style="color:#ff7f17;"></i></span>
+                    <span class="forum-card__title"><a href="#">Жалобы на администрацию</a></span>
+                </div>
+                <div class="forum-card__desc">Обратная связь о действиях администрации</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 67</span>
+                    <span><i class="fas fa-eye"></i> 5.8K</span>
+                </div>
             </div>
-            <div class="status__card">
-                <span class="status__icon">⏱</span>
-                <span class="status__label">Аптайм</span>
-                <span class="status__value" id="serverUptime">0 дней</span>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-unlock-alt" style="color:#4caf50;"></i></span>
+                    <span class="forum-card__title"><a href="#">Заявки на разбан</a></span>
+                </div>
+                <div class="forum-card__desc">Апелляции и обжалование блокировок</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 156</span>
+                    <span><i class="fas fa-eye"></i> 9.3K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-question-circle" style="color:#2196f3;"></i></span>
+                    <span class="forum-card__title"><a href="#">Вопросы к администрации</a></span>
+                </div>
+                <div class="forum-card__desc">Общие вопросы по механике игры</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 203</span>
+                    <span><i class="fas fa-eye"></i> 14.6K</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="team" id="team">
+<!-- ========================================================= -->
+<!-- ФОРУМ: ROLEPLAY -->
+<!-- ========================================================= -->
+<section class="forum-section">
     <div class="container">
-        <h2>👥 Команда проекта</h2>
-        <div class="team__grid">
-            <div class="team__card">
-                <div class="team__avatar">👑</div>
-                <div class="team__name">Nikita</div>
-                <div class="team__role">Основатель</div>
+        <div class="forum-section__header">
+            <div>
+                <h2 class="forum-section__title"><i class="fas fa-theater-masks"></i> RolePlay</h2>
+                <div class="forum-section__desc">Государственные фракции, мафии, банды и бизнес</div>
             </div>
-            <div class="team__card">
-                <div class="team__avatar">🛠</div>
-                <div class="team__name">Alex</div>
-                <div class="team__role">Гл. разработчик</div>
+        </div>
+
+        <div class="forum-grid">
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-police" style="color:#2196f3;"></i></span>
+                    <span class="forum-card__title"><a href="#">LSPD</a></span>
+                    <span class="forum-card__badge">12</span>
+                </div>
+                <div class="forum-card__desc">Устав, отчеты, состав и объявления полиции</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 234</span>
+                    <span><i class="fas fa-eye"></i> 18.7K</span>
+                </div>
             </div>
-            <div class="team__card">
-                <div class="team__avatar">👮</div>
-                <div class="team__name">Dmitry</div>
-                <div class="team__role">Гл. администратор</div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-landmark" style="color:#4caf50;"></i></span>
+                    <span class="forum-card__title"><a href="#">Government</a></span>
+                </div>
+                <div class="forum-card__desc">Деятельность правительства штата</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 89</span>
+                    <span><i class="fas fa-eye"></i> 6.2K</span>
+                </div>
             </div>
-            <div class="team__card">
-                <div class="team__avatar">💬</div>
-                <div class="team__name">Elena</div>
-                <div class="team__role">PR-менеджер</div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-user-secret" style="color:#ff1744;"></i></span>
+                    <span class="forum-card__title"><a href="#">Мафии и банды</a></span>
+                    <span class="forum-card__badge">8</span>
+                </div>
+                <div class="forum-card__desc">Криминальные организации и их внутренние дела</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 456</span>
+                    <span><i class="fas fa-eye"></i> 31.4K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-store" style="color:#ff7f17;"></i></span>
+                    <span class="forum-card__title"><a href="#">Бизнес и организации</a></span>
+                </div>
+                <div class="forum-card__desc">Легальный бизнес: вакансии, акции, бухгалтерия</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 178</span>
+                    <span><i class="fas fa-eye"></i> 11.5K</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- ========================================================= -->
+<!-- ФОРУМ: ТЕХНИЧЕСКАЯ ЧАСТЬ -->
+<!-- ========================================================= -->
+<section class="forum-section">
+    <div class="container">
+        <div class="forum-section__header">
+            <div>
+                <h2 class="forum-section__title"><i class="fas fa-tools"></i> Техническая часть</h2>
+                <div class="forum-section__desc">Помощь с игрой и сообщения об ошибках</div>
+            </div>
+        </div>
+
+        <div class="forum-grid">
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-tools" style="color:#2196f3;"></i></span>
+                    <span class="forum-card__title"><a href="#">Техническая поддержка</a></span>
+                    <span class="forum-card__badge">4</span>
+                </div>
+                <div class="forum-card__desc">Проблемы с лаунчером, подключением и скриптами</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 423</span>
+                    <span><i class="fas fa-eye"></i> 27.8K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-bug" style="color:#ff1744;"></i></span>
+                    <span class="forum-card__title"><a href="#">Баг-репорты</a></span>
+                </div>
+                <div class="forum-card__desc">Сообщения о найденных ошибках в игре</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 89</span>
+                    <span><i class="fas fa-eye"></i> 5.6K</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ФОРУМ: СОЦИАЛЬНОЕ ВЗАИМОДЕЙСТВИЕ -->
+<!-- ========================================================= -->
+<section class="forum-section">
+    <div class="container">
+        <div class="forum-section__header">
+            <div>
+                <h2 class="forum-section__title"><i class="fas fa-comments"></i> Социальное взаимодействие</h2>
+                <div class="forum-section__desc">Общение, объявления и ивенты</div>
+            </div>
+        </div>
+
+        <div class="forum-grid">
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-bullhorn" style="color:#ff7f17;"></i></span>
+                    <span class="forum-card__title"><a href="#">Доска объявлений</a></span>
+                </div>
+                <div class="forum-card__desc">Продажа/покупка, поиск работы и напарников</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 567</span>
+                    <span><i class="fas fa-eye"></i> 42.3K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-comments" style="color:#9c27b0;"></i></span>
+                    <span class="forum-card__title"><a href="#">Флудилка</a></span>
+                    <span class="forum-card__badge">15</span>
+                </div>
+                <div class="forum-card__desc">Неформальное общение на свободные темы</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 2.3K</span>
+                    <span><i class="fas fa-eye"></i> 89.1K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-trophy" style="color:#ffd700;"></i></span>
+                    <span class="forum-card__title"><a href="#">Конкурсы и ивенты</a></span>
+                </div>
+                <div class="forum-card__desc">Анонсы и результаты мероприятий</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 134</span>
+                    <span><i class="fas fa-eye"></i> 9.8K</span>
+                </div>
+            </div>
+
+            <div class="forum-card">
+                <div class="forum-card__header">
+                    <span class="forum-card__icon"><i class="fas fa-archive" style="color:#757575;"></i></span>
+                    <span class="forum-card__title"><a href="#">Архивы</a></span>
+                </div>
+                <div class="forum-card__desc">Архив жалоб и новостей</div>
+                <div class="forum-card__meta">
+                    <span><i class="fas fa-comment"></i> 0</span>
+                    <span><i class="fas fa-eye"></i> 1.2K</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ПОСЛЕДНИЕ ТЕМЫ -->
+<!-- ========================================================= -->
+<section class="topics-section">
+    <div class="container">
+        <div class="topics-section__header">
+            <h2 class="topics-section__title"><i class="fas fa-clock" style="color:#ff7f17;"></i> Последние темы</h2>
+            <a href="#" class="btn btn-secondary btn-sm">Все темы →</a>
+        </div>
+
+        <div class="topic-list">
+
+            <!-- Тема 1 -->
+            <div class="topic-item">
+                <div class="topic-item__left">
+                    <span class="topic-item__status pinned"><i class="fas fa-thumbtack"></i></span>
+                    <div>
+                        <div class="topic-item__title">
+                            <a href="#">Обновление 2.3: Новая система экономики</a>
+                            <span class="topic-item__tag tag-important">ВАЖНО</span>
+                        </div>
+                        <div class="topic-item__meta">
+                            <span>Автор: <strong>Admin</strong></span>
+                            <span>📅 Сегодня 15:30</span>
+                            <span>💬 45 ответов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-item__right">
+                    <span class="author">Последний: <strong>Игрок_1337</strong></span>
+                    <span class="date">2 мин назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 2 -->
+            <div class="topic-item">
+                <div class="topic-item__left">
+                    <span class="topic-item__status hot"><i class="fas fa-fire"></i></span>
+                    <div>
+                        <div class="topic-item__title">
+                            <a href="#">Как заработать первый миллион? Советы новичкам</a>
+                            <span class="topic-item__tag tag-new">НОВОЕ</span>
+                        </div>
+                        <div class="topic-item__meta">
+                            <span>Автор: <strong>Игрок_228</strong></span>
+                            <span>📅 Сегодня 12:15</span>
+                            <span>💬 78 ответов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-item__right">
+                    <span class="author">Последний: <strong>Helper</strong></span>
+                    <span class="date">1 час назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 3 -->
+            <div class="topic-item">
+                <div class="topic-item__left">
+                    <span class="topic-item__status solved"><i class="fas fa-check-circle"></i></span>
+                    <div>
+                        <div class="topic-item__title">
+                            <a href="#">Проблема с подключением к серверу (решение)</a>
+                            <span class="topic-item__tag tag-answered">РЕШЕНО</span>
+                        </div>
+                        <div class="topic-item__meta">
+                            <span>Автор: <strong>Игрок_777</strong></span>
+                            <span>📅 Вчера 21:40</span>
+                            <span>💬 12 ответов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-item__right">
+                    <span class="author">Последний: <strong>Игрок_228</strong></span>
+                    <span class="date">3 часа назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 4 -->
+            <div class="topic-item">
+                <div class="topic-item__left">
+                    <span class="topic-item__status"><i class="fas fa-comment"></i></span>
+                    <div>
+                        <div class="topic-item__title">
+                            <a href="#">Жалоба на игрока: NonRP поведение в LSPD</a>
+                        </div>
+                        <div class="topic-item__meta">
+                            <span>Автор: <strong>Игрок_420</strong></span>
+                            <span>📅 Вчера 18:20</span>
+                            <span>💬 3 ответа</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-item__right">
+                    <span class="author">Последний: <strong>Moderator</strong></span>
+                    <span class="date">5 часов назад</span>
+                </div>
+            </div>
+
+            <!-- Тема 5 -->
+            <div class="topic-item">
+                <div class="topic-item__left">
+                    <span class="topic-item__status locked"><i class="fas fa-lock"></i></span>
+                    <div>
+                        <div class="topic-item__title">
+                            <a href="#">[Архив] Обсуждение старого обновления</a>
+                        </div>
+                        <div class="topic-item__meta">
+                            <span>Автор: <strong>DevTeam</strong></span>
+                            <span>📅 12.06.2025</span>
+                            <span>💬 234 ответа</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-item__right">
+                    <span class="author">Последний: <strong>Admin</strong></span>
+                    <span class="date">2 дня назад</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- СТАТИСТИКА ФОРУМА -->
+<!-- ========================================================= -->
+<div class="container">
+    <div class="forum-stats">
+        <div class="forum-stats__item">
+            <span class="forum-stats__number">12,847</span>
+            <span class="forum-stats__label">Всего тем</span>
+        </div>
+        <div class="forum-stats__item">
+            <span class="forum-stats__number">89,234</span>
+            <span class="forum-stats__label">Всего сообщений</span>
+        </div>
+        <div class="forum-stats__item">
+            <span class="forum-stats__number">9,541</span>
+            <span class="forum-stats__label">Зарегистрировано</span>
+        </div>
+        <div class="forum-stats__item">
+            <span class="forum-stats__number">247</span>
+            <span class="forum-stats__label">Сейчас онлайн</span>
+        </div>
+        <div class="forum-stats__item">
+            <span class="forum-stats__number">128</span>
+            <span class="forum-stats__label">Новых сегодня</span>
+        </div>
+    </div>
+</div>
 
 <!-- ========================================================= -->
 <!-- ПОДВАЛ -->
 <!-- ========================================================= -->
 <footer class="footer">
     <div class="container">
-        <div class="footer__content">
-            <div class="footer__logo">❄️ CRYSTAL RUSSIA</div>
-            <p class="footer__text">Игра бесплатная. В игре предусмотрена возможность приобретения внутриигровых предметов.</p>
-            <div class="footer__links">
-                <a href="https://t.me/crystalrussianewss" target="_blank">📩 Telegram</a>
-                <a href="#">💬 Discord</a>
-                <a href="#">📸 VK</a>
-                <a href="#">🎥 YouTube</a>
+        <div class="footer__container">
+            <div class="footer__column">
+                <h4>❄️ CRYSTAL RUSSIA</h4>
+                <a href="#">О проекте</a>
+                <a href="#">Правила</a>
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Контакты</a>
             </div>
-            <p class="footer__copyright">© 2025 CRYSTAL RUSSIA. Все права защищены.</p>
+            <div class="footer__column">
+                <h4>📌 Разделы</h4>
+                <a href="#">Новости</a>
+                <a href="#">Форум</a>
+                <a href="#">Гайды</a>
+                <a href="#">Жалобы</a>
+            </div>
+            <div class="footer__column">
+                <h4>📱 Соцсети</h4>
+                <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                <a href="#"><i class="fab fa-vk"></i> ВКонтакте</a>
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+            <div class="footer__column">
+                <h4>🛠 Поддержка</h4>
+                <a href="#">Техподдержка</a>
+                <a href="#">FAQ</a>
+                <a href="#">Сообщить о баге</a>
+                <a href="#">Пожертвовать</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            Copyright © 2025 <span>CRYSTAL RUSSIA</span> — Все права защищены
         </div>
     </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- ========================================================= -->
+<!-- СКРИПТЫ -->
+<!-- ========================================================= -->
+<script>
+    // =========================================================
+    // БУРГЕР-МЕНЮ
+    // =========================================================
+    function toggleMenu() {
+        const menu = document.getElementById('burgerMenu');
+        const overlay = document.getElementById('burgerOverlay');
+        const icon = document.getElementById('burgerIcon');
+
+        menu.classList.toggle('open');
+        overlay.classList.toggle('active');
+        icon.classList.toggle('active');
+        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Закрытие по оверлею
+    document.getElementById('burgerOverlay').addEventListener('click', toggleMenu);
+
+    // Закрытие по клику на ссылку
+    document.querySelectorAll('.burger-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) toggleMenu();
+        });
+    });
+
+    // =========================================================
+    // ОНЛАЙН (симуляция)
+    // =========================================================
+    function updateOnline() {
+        const online = Math.floor(Math.random() * 150) + 50;
+        document.getElementById('onlineCount').textContent = online;
+        document.getElementById('serverOnline').textContent = online;
+    }
+    updateOnline();
+    setInterval(updateOnline, 10000);
+
+    // =========================================================
+    // ЗАКРЫТИЕ МЕНЮ ПРИ ESC
+    // =========================================================
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const menu = document.getElementById('burgerMenu');
+            if (menu.classList.contains('open')) toggleMenu();
+        }
+    });
+
+    console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
+</script>
+
 </body>
 </html>
