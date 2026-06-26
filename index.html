@@ -2458,7 +2458,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <!-- ОСНОВНОЙ КОНТЕНТ (ЗДЕСЬ БУДЕТ ВЕСЬ ФУНКЦИОНАЛ) -->
     <!-- ========================================================= -->
     <div id="mainContent" class="hidden">
 
@@ -3496,15 +3496,15 @@
                     const savedServer = localStorage.getItem('current_server');
                     if (savedServer && ['crystal', 'russia'].includes(savedServer)) {
                         currentServer = savedServer;
-                        const user = DB.getUser(currentUser.username);
+                        const user = DB.getUser(currentServer, currentUser.username);
                         if (user) {
-                            if (DB.isBanned(currentUser.username)) {
+                            if (DB.isBanned(currentServer, currentUser.username)) {
                                 localStorage.removeItem('current_user');
                                 currentUser = null;
                                 alert('⛔ Ваш аккаунт заблокирован!');
                                 return false;
                             }
-                            DB.setUserOnline(currentUser.username, true);
+                            DB.setUserOnline(currentServer, currentUser.username, true);
                             currentUser = user;
                             localStorage.setItem('current_user', JSON.stringify(currentUser));
                             document.getElementById('serverSelectPrimary').style.display = 'none';
@@ -3516,7 +3516,6 @@
                             return true;
                         }
                     }
-                    // Если пользователь есть, но сервер не найден
                     document.getElementById('serverSelectPrimary').style.display = 'none';
                     document.getElementById('loginModal').classList.remove('active');
                     showServerSelection();
@@ -3564,7 +3563,7 @@
                 if (profileStatus) profileStatus.className = 'status-dot status-offline';
             }
 
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             const devMenu = document.getElementById('devMenuSection');
             if (isDev) {
                 devMenu.classList.remove('hidden');
@@ -3607,18 +3606,18 @@
                 errorEl.textContent = 'Заполните все поля';
                 return;
             }
-            const user = DB.getUser(username);
+            const user = DB.getUser(currentServer, username);
             if (user && user.password === password) {
-                if (DB.isBanned(username)) {
+                if (DB.isBanned(currentServer, username)) {
                     errorEl.textContent = '⛔ Аккаунт заблокирован!';
                     return;
                 }
-                if (DB.isMuted(username)) {
+                if (DB.isMuted(currentServer, username)) {
                     errorEl.textContent = '⛔ Вы заглушены!';
                     return;
                 }
                 errorEl.textContent = '';
-                DB.setUserOnline(username, true);
+                DB.setUserOnline(currentServer, username, true);
                 currentUser = user;
                 localStorage.setItem('current_user', JSON.stringify(user));
                 document.getElementById('loginModal').classList.remove('active');
@@ -3644,11 +3643,11 @@
                 errorEl.textContent = 'Пароль должен быть не менее 4 символов';
                 return;
             }
-            if (DB.getUser(username)) {
+            if (DB.getUser(currentServer, username)) {
                 errorEl.textContent = '❌ Пользователь уже существует!';
                 return;
             }
-            DB.addUser({ username: username, password: password, role: 'user', prefix: 'user' });
+            DB.addUser(currentServer, { username: username, password: password, role: 'user', prefix: 'user' });
             errorEl.textContent = '✅ Регистрация успешна! Войдите.';
             errorEl.className = 'login-modal__error success';
             document.getElementById('loginSubtitle').textContent = '🔑 Войдите в свой аккаунт';
@@ -3680,8 +3679,8 @@
         }
 
         function logout() {
-            if (currentUser) {
-                DB.setUserOnline(currentUser.username, false);
+            if (currentUser && currentServer) {
+                DB.setUserOnline(currentServer, currentUser.username, false);
             }
             localStorage.removeItem('current_user');
             localStorage.removeItem('current_server');
@@ -3800,14 +3799,14 @@
             const saveBtnMap = { 'lspd': 'lspdSaveBtn', 'government': 'governmentSaveBtn', 'mafia': 'mafiaSaveBtn',
                 'business': 'businessSaveBtn' };
 
-            const isDev = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
 
             if (['rules', 'guides', 'lore'].includes(page)) {
                 const body = document.getElementById('contentBody');
                 const editor = document.getElementById('contentEditor');
                 const editBtn = document.getElementById('contentEditBtn');
                 const saveBtn = document.getElementById('contentSaveBtn');
-                const content = DB.getContent(key);
+                const content = DB.getContent(currentServer, key);
                 body.textContent = content;
                 editor.value = content;
                 currentContentKey = key;
@@ -3827,7 +3826,7 @@
             const editBtn = document.getElementById(editBtnMap[page]);
             const saveBtn = document.getElementById(saveBtnMap[page]);
             if (body && editor) {
-                const content = DB.getContent(key);
+                const content = DB.getContent(currentServer, key);
                 body.textContent = content;
                 editor.value = content;
                 currentContentKey = key;
@@ -3854,7 +3853,7 @@
             const editor = document.getElementById('contentEditor');
             const key = currentContentKey;
             if (key) {
-                DB.setContent(key, editor.value);
+                DB.setContent(currentServer, key, editor.value);
                 alert('✅ Контент сохранен!');
                 renderContentPage(Object.keys(contentKeys).find(k => contentKeys[k] === key));
             }
@@ -3876,7 +3875,7 @@
         function saveLspd() {
             const editor = document.getElementById('lspdEditor');
             if (!editor) return;
-            DB.setContent('lspd', editor.value);
+            DB.setContent(currentServer, 'lspd', editor.value);
             alert('✅ Контент сохранен!');
             renderContentPage('lspd');
         }
@@ -3925,7 +3924,7 @@
                 alert('⚠️ Заполните все поля!');
                 return;
             }
-            DB.addNews({
+            DB.addNews(currentServer, {
                 title: title,
                 content: content,
                 images: newsImages,
@@ -3941,13 +3940,13 @@
         }
 
         function renderNews() {
-            const news = DB.getNews();
+            const news = DB.getNews(currentServer);
             const container = document.getElementById('newsList');
             if (news.length === 0) {
                 container.innerHTML = '<div class="no-items"><i class="fas fa-newspaper"></i>Нет новостей</div>';
                 return;
             }
-            const isDev = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
             container.innerHTML = news.map(n => {
                 const imagesHtml = n.images && n.images.length > 0 ?
                     `<div class="complaint-item__images">${n.images.map(img => `<img src="${img}" alt="image">`).join('')}</div>` :
@@ -3978,7 +3977,7 @@
 
         function deleteNews(id) {
             if (!confirm('Удалить новость?')) return;
-            DB.deleteNews(id);
+            DB.deleteNews(currentServer, id);
             renderNews();
             alert('✅ Новость удалена!');
         }
@@ -3988,7 +3987,7 @@
         // =========================================================
         function showCreateTopic() {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
@@ -3997,7 +3996,7 @@
             if (!title) return;
             const content = prompt('Введите текст темы:');
             if (!content) return;
-            DB.addTopic({
+            DB.addTopic(currentServer, {
                 title: title,
                 content: content,
                 author: currentUser.username,
@@ -4014,7 +4013,7 @@
         }
 
         function renderTopics() {
-            const topics = DB.getTopics();
+            const topics = DB.getTopics(currentServer);
             const container = document.getElementById('topicList');
             if (topics.length === 0) {
                 container.innerHTML = '<div class="no-items"><i class="fas fa-comments"></i>Нет тем</div>';
@@ -4052,7 +4051,7 @@
         }
 
         function viewTopic(id) {
-            const topics = DB.getTopics();
+            const topics = DB.getTopics(currentServer);
             const topic = topics.find(t => t.id === id);
             if (!topic) return;
             topic.views = (topic.views || 0) + 1;
@@ -4070,7 +4069,7 @@
         // =========================================================
         function showCreateEvent() {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
@@ -4080,7 +4079,7 @@
             const desc = prompt('Введите описание ивента:');
             if (!desc) return;
             const status = confirm('Ивент активен?') ? 'active' : 'upcoming';
-            DB.addEvent({
+            DB.addEvent(currentServer, {
                 title: title,
                 desc: desc,
                 status: status,
@@ -4095,7 +4094,7 @@
         }
 
         function renderEvents() {
-            const events = DB.getEvents();
+            const events = DB.getEvents(currentServer);
             const container = document.getElementById('eventsGrid');
             if (events.length === 0) {
                 container.innerHTML = '<div class="no-items"><i class="fas fa-trophy"></i>Нет ивентов</div>';
@@ -4119,10 +4118,10 @@
         }
 
         function viewEvent(id) {
-            const events = DB.getEvents();
+            const events = DB.getEvents(currentServer);
             const event = events.find(e => e.id === id);
             if (!event) return;
-            const isDev = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
             let html = `🏆 <b>${event.title}</b>\n\n📝 ${event.desc || 'Нет описания'}\n📅 Дата: ${event.date}\n👤 Участников: ${event.participants || 0}\n📊 Статус: ${event.status === 'active' ? '🟢 Активен' : event.status === 'upcoming' ? '🟡 Скоро' : '⚫ Завершен'}`;
             if (isDev) {
                 html += `\n\n---\n🛠 Управление ивентом:\n1. Изменить статус\n2. Редактировать\n3. Удалить`;
@@ -4133,7 +4132,7 @@
                 if (action === '1') {
                     const newStatus = prompt('Выберите статус (active, upcoming, ended):', event.status || 'active');
                     if (newStatus && ['active', 'upcoming', 'ended'].includes(newStatus)) {
-                        DB.updateEvent(id, { status: newStatus });
+                        DB.updateEvent(currentServer, id, { status: newStatus });
                         renderEvents();
                         alert('✅ Статус обновлен!');
                     }
@@ -4144,14 +4143,14 @@
                     if (newTitle !== null && newTitle.trim()) event.title = newTitle.trim();
                     const newDesc = prompt('Новое описание:', event.desc || '');
                     if (newDesc !== null) event.desc = newDesc.trim();
-                    DB.updateEvent(id, { title: event.title, desc: event.desc });
+                    DB.updateEvent(currentServer, id, { title: event.title, desc: event.desc });
                     renderEvents();
                     alert('✅ Ивент обновлен!');
                     return;
                 }
                 if (action === '3') {
                     if (confirm(`Удалить ивент "${event.title}"?`)) {
-                        DB.deleteEvent(id);
+                        DB.deleteEvent(currentServer, id);
                         renderEvents();
                         alert('✅ Ивент удален!');
                     }
@@ -4165,9 +4164,9 @@
         // СТАТИСТИКА
         // =========================================================
         function updateStats() {
-            const stats = DB.getStats();
-            const topics = DB.getTopics();
-            const chat = DB.getChatMessages();
+            const stats = DB.getStats(currentServer);
+            const topics = DB.getTopics(currentServer);
+            const chat = DB.getChatMessages(currentServer);
 
             document.getElementById('totalUsers').textContent = stats.totalUsers;
             document.getElementById('statUsers').textContent = stats.totalUsers;
@@ -4256,7 +4255,7 @@
                 alert('⚠️ Заполните все поля!');
                 return;
             }
-            DB.addComplaint(type, {
+            DB.addComplaint(currentServer, type, {
                 ...data,
                 images: complaintImages[type] || [],
                 date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
@@ -4264,7 +4263,7 @@
                 status: 'new',
                 answer: ''
             });
-            DB.addNotification({
+            DB.addNotification(currentServer, {
                 title: `${currentUser.username} подал(а) ${config.title}`,
                 message: `Жалоба: ${data.title}`,
                 type: 'complaint',
@@ -4282,7 +4281,7 @@
         function renderComplaints(type) {
             const config = complaintConfigs[type];
             if (!config) return;
-            const complaints = DB.getComplaints(type);
+            const complaints = DB.getComplaints(currentServer, type);
             const container = document.getElementById(config.listId);
             if (complaints.length === 0) {
                 container.innerHTML = `<div class="no-items"><i class="fas fa-check-circle"></i>Нет записей</div>`;
@@ -4291,7 +4290,7 @@
             const statusMap = { 'new': { class: 'status-new', text: 'Новая' }, 'review': { class: 'status-review',
                     text: 'Рассматривается' }, 'answered': { class: 'status-answered', text: 'Отвечено' },
                 'rejected': { class: 'status-rejected', text: 'Отклонено' } };
-            const isAdmin = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
             container.innerHTML = complaints.map(c => {
                 const status = statusMap[c.status] || statusMap.new;
                 const imagesHtml = c.images && c.images.length > 0 ?
@@ -4338,14 +4337,14 @@
 
         function answerComplaint(type, id) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
             const answer = prompt('Введите ответ:');
             if (!answer || !answer.trim()) return;
-            const complaints = DB.getComplaints(type);
+            const complaints = DB.getComplaints(currentServer, type);
             const index = complaints.findIndex(c => c.id === id);
             if (index === -1) return;
             complaints[index].answer = answer.trim();
@@ -4357,25 +4356,25 @@
 
         function changeComplaintStatus(type, id, status) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
-            DB.updateComplaint(type, id, { status: status });
+            DB.updateComplaint(currentServer, type, id, { status: status });
             renderComplaints(type);
             alert('✅ Статус изменен!');
         }
 
         function deleteComplaint(type, id) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
             if (!confirm('Удалить эту запись?')) return;
-            DB.deleteComplaint(type, id);
+            DB.deleteComplaint(currentServer, type, id);
             renderComplaints(type);
             alert('✅ Запись удалена!');
         }
@@ -4429,7 +4428,7 @@
                 alert('⚠️ Заполните все поля!');
                 return;
             }
-            DB.addApplication(type, {
+            DB.addApplication(currentServer, type, {
                 author: author,
                 title: title,
                 desc: desc,
@@ -4439,7 +4438,7 @@
                 status: 'new',
                 answer: ''
             });
-            DB.addNotification({
+            DB.addNotification(currentServer, {
                 title: `${currentUser.username} подал(а) заявление на ${type === 'admin' ? 'Администратора' : 'Хелпера'}`,
                 message: `Заявление: ${title}`,
                 type: 'application',
@@ -4454,7 +4453,7 @@
         }
 
         function renderApplications(type) {
-            const apps = DB.getApplications(type);
+            const apps = DB.getApplications(currentServer, type);
             const container = document.getElementById(type + 'AppList');
             if (apps.length === 0) {
                 container.innerHTML = `<div class="no-items"><i class="fas fa-check-circle"></i>Нет заявлений</div>`;
@@ -4463,7 +4462,7 @@
             const statusMap = { 'new': { class: 'status-new', text: 'Новое' }, 'review': { class: 'status-review',
                     text: 'Рассматривается' }, 'approved': { class: 'status-approved', text: 'Одобрено' },
                 'rejected': { class: 'status-rejected', text: 'Отклонено' } };
-            const isAdmin = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
             container.innerHTML = apps.map(a => {
                 const status = statusMap[a.status] || statusMap.new;
                 const imagesHtml = a.images && a.images.length > 0 ?
@@ -4510,14 +4509,14 @@
 
         function answerApplication(type, id) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
             const answer = prompt('Введите ответ:');
             if (!answer || !answer.trim()) return;
-            const apps = DB.getApplications(type);
+            const apps = DB.getApplications(currentServer, type);
             const index = apps.findIndex(a => a.id === id);
             if (index === -1) return;
             apps[index].answer = answer.trim();
@@ -4529,24 +4528,24 @@
 
         function changeApplicationStatus(type, id, status) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
-            const apps = DB.getApplications(type);
+            const apps = DB.getApplications(currentServer, type);
             const index = apps.findIndex(a => a.id === id);
             if (index === -1) return;
             apps[index].status = status;
             DB.save();
 
             if (status === 'approved') {
-                const user = DB.getUser(apps[index].author);
+                const user = DB.getUser(currentServer, apps[index].author);
                 if (user) {
                     user.prefix = type === 'admin' ? 'admin' : 'helper';
                     user.role = type === 'admin' ? 'admin' : 'helper';
-                    if (type === 'admin' && !DB.isDeveloper(user.username)) {
-                        DB.addDeveloper(user.username);
+                    if (type === 'admin' && !DB.isDeveloper(currentServer, user.username)) {
+                        DB.addDeveloper(currentServer, user.username);
                     }
                     DB.save();
                     if (currentUser.username === user.username) {
@@ -4562,13 +4561,13 @@
 
         function deleteApplication(type, id) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) {
                 alert('⛔ Только администраторы и разработчики!');
                 return;
             }
             if (!confirm('Удалить заявление?')) return;
-            DB.deleteApplication(type, id);
+            DB.deleteApplication(currentServer, type, id);
             renderApplications(type);
             alert('✅ Заявление удалено!');
         }
@@ -4577,7 +4576,7 @@
         // УВЕДОМЛЕНИЯ
         // =========================================================
         function renderNotifications() {
-            const notifications = DB.getNotifications();
+            const notifications = DB.getNotifications(currentServer);
             const container = document.getElementById('notificationsList');
             if (notifications.length === 0) {
                 container.innerHTML = '<div class="no-items"><i class="fas fa-check-circle"></i>Нет уведомлений</div>';
@@ -4600,35 +4599,35 @@
         }
 
         function markNotifRead(id) {
-            DB.markNotificationRead(id);
+            DB.markNotificationRead(currentServer, id);
             renderNotifications();
             updateBadges();
         }
 
         function deleteNotif(id) {
-            DB.deleteNotification(id);
+            DB.deleteNotification(currentServer, id);
             renderNotifications();
             updateBadges();
         }
 
         function updateBadges() {
-            const unread = DB.getUnreadNotifications().length;
+            const unread = DB.getUnreadNotifications(currentServer).length;
             document.getElementById('notifBadge').textContent = unread;
             document.getElementById('notifBadgeHeader').textContent = unread;
 
-            const complaints = DB.getComplaints('player');
+            const complaints = DB.getComplaints(currentServer, 'player');
             document.getElementById('complaintsBadge').textContent = complaints.filter(c => c.status === 'new' || c.status ===
                 'review').length;
             document.getElementById('complaintsBadgeCard').textContent = complaints.filter(c => c.status === 'new' || c.status ===
                 'review').length;
 
-            const adminApps = DB.getApplications('admin');
+            const adminApps = DB.getApplications(currentServer, 'admin');
             document.getElementById('adminAppBadge').textContent = adminApps.filter(a => a.status === 'new' || a.status ===
                 'review').length;
             document.getElementById('adminAppBadgeMenu').textContent = adminApps.filter(a => a.status === 'new' || a.status ===
                 'review').length;
 
-            const helperApps = DB.getApplications('helper');
+            const helperApps = DB.getApplications(currentServer, 'helper');
             document.getElementById('helperAppBadge').textContent = helperApps.filter(a => a.status === 'new' || a.status ===
                 'review').length;
             document.getElementById('helperAppBadgeMenu').textContent = helperApps.filter(a => a.status === 'new' || a.status ===
@@ -4641,25 +4640,25 @@
         let chatImages = [];
 
         function renderChat() {
-            const messages = DB.getChatMessages();
+            const messages = DB.getChatMessages(currentServer);
             const container = document.getElementById('chatMessages');
             if (messages.length === 0) {
                 container.innerHTML = `<div class="chat-empty"><i class="fas fa-comment-dots"></i>Начните общение!</div>`;
                 return;
             }
-            const users = DB.getUsers();
+            const users = DB.getUsers(currentServer);
             const prefixMap = { 'admin': 'Админ', 'helper': 'Хелпер', 'moderator': 'Модер', 'developer': 'Разработчик',
                 'user': 'Игрок' };
             const prefixClassMap = { 'admin': 'prefix-admin', 'helper': 'prefix-helper', 'moderator': 'prefix-moderator',
                 'developer': 'prefix-developer', 'user': 'prefix-user' };
-            const isAdmin = DB.isDeveloper(currentUser?.username) || currentUser?.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser?.username) || currentUser?.role === 'admin';
 
             container.innerHTML = messages.map(m => {
                 const user = users.find(u => u.username === m.author);
                 const prefix = user ? user.prefix : 'user';
                 const avatar = user && user.avatar ? `<img src="${user.avatar}" alt="">` : m.author.charAt(0)
                     .toUpperCase();
-                const isMuted = DB.isMuted(m.author);
+                const isMuted = DB.isMuted(currentServer, m.author);
                 let textHtml = isMuted ? '🔇 Сообщение скрыто (заглушен)' : m.text;
                 if (m.images && m.images.length > 0 && !isMuted) {
                     textHtml += `<br>${m.images.map(img => `<img src="${img}" alt="image">`).join('')}`;
@@ -4710,7 +4709,7 @@
 
         function sendMessage() {
             if (!currentUser) return;
-            if (DB.isMuted(currentUser.username)) {
+            if (DB.isMuted(currentServer, currentUser.username)) {
                 alert('⛔ Вы заглушены!');
                 return;
             }
@@ -4719,7 +4718,7 @@
             if (!text && chatImages.length === 0) return;
             const images = [...chatImages];
             chatImages = [];
-            DB.addChatMessage({
+            DB.addChatMessage(currentServer, {
                 author: currentUser.username,
                 text: text || '📷 Изображение',
                 images: images
@@ -4742,30 +4741,30 @@
 
         function muteUser(username) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) { alert('⛔ Только администраторы и разработчики!'); return; }
             if (username === currentUser.username) { alert('⛔ Нельзя замутить себя!'); return; }
-            if (DB.isMuted(username)) { alert('Пользователь уже заглушен!'); return; }
-            DB.muteUser(username, 'Флуд', currentUser.username, 3600);
+            if (DB.isMuted(currentServer, username)) { alert('Пользователь уже заглушен!'); return; }
+            DB.muteUser(currentServer, username, 'Флуд', currentUser.username, 3600);
             renderChat();
             alert(`✅ ${username} заглушен на 1 час!`);
         }
 
         function unmuteUser(username) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) { alert('⛔ Только администраторы и разработчики!'); return; }
-            DB.unmuteUser(username);
+            DB.unmuteUser(currentServer, username);
             renderChat();
             alert(`✅ ${username} размучен!`);
         }
 
         function deleteChatMessage(id) {
             if (!currentUser) return;
-            const isAdmin = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isAdmin = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isAdmin) { alert('⛔ Только администраторы и разработчики!'); return; }
             if (!confirm('Удалить сообщение?')) return;
-            DB.deleteChatMessage(id);
+            DB.deleteChatMessage(currentServer, id);
             renderChat();
             alert('✅ Сообщение удалено!');
         }
@@ -4774,7 +4773,7 @@
         // ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ (МОДАЛЬНОЕ ОКНО)
         // =========================================================
         function openUserProfile(username) {
-            const user = DB.getUser(username);
+            const user = DB.getUser(currentServer, username);
             if (!user) return;
             const modal = document.getElementById('userProfileModal');
             const avatar = user.avatar ? `<img src="${user.avatar}" alt="">` : user.username.charAt(0).toUpperCase();
@@ -4805,11 +4804,11 @@
         // ПАНЕЛЬ РАЗРАБОТЧИКА
         // =========================================================
         function renderDevPanel() {
-            const users = DB.getUsers();
-            const banned = DB.getBannedUsers();
-            const muted = DB.getMutedUsers();
-            const developers = DB.getDevelopers();
-            const stats = DB.getStats();
+            const users = DB.getUsers(currentServer);
+            const banned = DB.getBannedUsers(currentServer);
+            const muted = DB.getMutedUsers(currentServer);
+            const developers = DB.getDevelopers(currentServer);
+            const stats = DB.getStats(currentServer);
 
             ['devUserSelect', 'devBanSelect', 'devMuteSelect'].forEach(id => {
                 const sel = document.getElementById(id);
@@ -4870,16 +4869,16 @@
 
         function devAction(action, username) {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) { alert('⛔ Доступ запрещен!'); return; }
             if (username === currentUser.username) { alert('⛔ Нельзя над собой!'); return; }
 
             if (action === 'ban') {
-                if (DB.isBanned(username)) {
-                    DB.unbanUser(username);
+                if (DB.isBanned(currentServer, username)) {
+                    DB.unbanUser(currentServer, username);
                     alert(`✅ ${username} разбанен!`);
                 } else {
-                    DB.banUser(username, 'Нарушение правил', currentUser.username);
+                    DB.banUser(currentServer, username, 'Нарушение правил', currentUser.username);
                     alert(`✅ ${username} забанен!`);
                 }
                 renderDevPanel();
@@ -4887,11 +4886,11 @@
             }
 
             if (action === 'mute') {
-                if (DB.isMuted(username)) {
-                    DB.unmuteUser(username);
+                if (DB.isMuted(currentServer, username)) {
+                    DB.unmuteUser(currentServer, username);
                     alert(`✅ ${username} размучен!`);
                 } else {
-                    DB.muteUser(username, 'Флуд', currentUser.username, 3600);
+                    DB.muteUser(currentServer, username, 'Флуд', currentUser.username, 3600);
                     alert(`✅ ${username} заглушен на 1 час!`);
                 }
                 renderDevPanel();
@@ -4901,7 +4900,7 @@
 
             if (action === 'delete') {
                 if (!confirm(`Удалить ${username}?`)) return;
-                DB.deleteUser(username);
+                DB.deleteUser(currentServer, username);
                 alert(`✅ ${username} удален!`);
                 renderDevPanel();
                 updateStats();
@@ -4909,13 +4908,13 @@
             }
 
             if (action === 'edit') {
-                const user = DB.getUser(username);
+                const user = DB.getUser(currentServer, username);
                 if (!user) return;
                 const newPrefix = prompt('Префикс (user, helper, moderator, admin, developer):', user.prefix || 'user');
                 if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
-                    DB.updateUser(username, { prefix: newPrefix });
+                    DB.updateUser(currentServer, username, { prefix: newPrefix });
                     if (newPrefix === 'developer') {
-                        DB.addDeveloper(username);
+                        DB.addDeveloper(currentServer, username);
                     }
                     alert(`✅ Префикс изменен на ${newPrefix}!`);
                     renderDevPanel();
@@ -4930,15 +4929,15 @@
 
         function setUserPrefix() {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) { alert('⛔ Доступ запрещен!'); return; }
             const username = document.getElementById('devUserSelect').value;
             const prefix = document.getElementById('devPrefixSelect').value;
             if (!username) { alert('Выберите пользователя!'); return; }
-            if (!DB.getUser(username)) { alert('Пользователь не найден'); return; }
-            DB.updateUser(username, { prefix: prefix });
+            if (!DB.getUser(currentServer, username)) { alert('Пользователь не найден'); return; }
+            DB.updateUser(currentServer, username, { prefix: prefix });
             if (prefix === 'developer') {
-                DB.addDeveloper(username);
+                DB.addDeveloper(currentServer, username);
             }
             alert(`✅ Префикс изменен на ${prefix}!`);
             renderDevPanel();
@@ -4975,13 +4974,13 @@
 
         function addDeveloper() {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) { alert('⛔ Доступ запрещен!'); return; }
             const username = document.getElementById('devAddUser').value.trim();
             if (!username) { alert('Введите имя!'); return; }
-            if (!DB.getUser(username)) { alert('Пользователь не найден!'); return; }
-            if (DB.isDeveloper(username)) { alert('Уже разработчик!'); return; }
-            DB.addDeveloper(username);
+            if (!DB.getUser(currentServer, username)) { alert('Пользователь не найден!'); return; }
+            if (DB.isDeveloper(currentServer, username)) { alert('Уже разработчик!'); return; }
+            DB.addDeveloper(currentServer, username);
             document.getElementById('devAddUser').value = '';
             alert(`✅ ${username} теперь разработчик!`);
             renderDevPanel();
@@ -4995,12 +4994,12 @@
 
         function removeDeveloper() {
             if (!currentUser) return;
-            const isDev = DB.isDeveloper(currentUser.username) || currentUser.role === 'admin';
+            const isDev = DB.isDeveloper(currentServer, currentUser.username) || currentUser.role === 'admin';
             if (!isDev) { alert('⛔ Доступ запрещен!'); return; }
             const username = document.getElementById('devAddUser').value.trim();
             if (!username) { alert('Введите имя!'); return; }
-            if (!DB.isDeveloper(username)) { alert('Не является разработчиком!'); return; }
-            DB.removeDeveloper(username);
+            if (!DB.isDeveloper(currentServer, username)) { alert('Не является разработчиком!'); return; }
+            DB.removeDeveloper(currentServer, username);
             document.getElementById('devAddUser').value = '';
             alert(`✅ ${username} больше не разработчик!`);
             renderDevPanel();
@@ -5039,7 +5038,7 @@
 
         function clearChat() {
             if (!confirm('Очистить весь чат?')) return;
-            DB.clearChat();
+            DB.clearChat(currentServer);
             renderChat();
             alert('✅ Чат очищен!');
         }
@@ -5087,7 +5086,7 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const dataUrl = e.target.result;
-                DB.updateUser(currentUser.username, { avatar: dataUrl });
+                DB.updateUser(currentServer, currentUser.username, { avatar: dataUrl });
                 currentUser.avatar = dataUrl;
                 localStorage.setItem('current_user', JSON.stringify(currentUser));
                 showMainContent();
@@ -5105,7 +5104,7 @@
             const newBio = document.getElementById('profileBio').value.trim();
             const newPrefix = document.getElementById('profilePrefixSelect').value;
             if (!newUsername) { alert('Имя не может быть пустым!'); return; }
-            if (newUsername !== currentUser.username && DB.getUser(newUsername)) {
+            if (newUsername !== currentUser.username && DB.getUser(currentServer, newUsername)) {
                 alert('Пользователь с таким именем уже существует!');
                 return;
             }
@@ -5119,37 +5118,37 @@
                 if (newPrefix && ['user', 'helper', 'moderator', 'admin', 'developer'].includes(newPrefix)) {
                     updates.prefix = newPrefix;
                     if (newPrefix === 'developer') {
-                        DB.addDeveloper(newUsername);
+                        DB.addDeveloper(currentServer, newUsername);
                     }
                 }
             }
 
-            DB.updateUser(oldUsername, updates);
+            DB.updateUser(currentServer, oldUsername, updates);
 
-            const chatMessages = DB.getChatMessages();
+            const chatMessages = DB.getChatMessages(currentServer);
             chatMessages.forEach(m => {
                 if (m.author === oldUsername) m.author = newUsername;
             });
-            const topics = DB.getTopics();
+            const topics = DB.getTopics(currentServer);
             topics.forEach(t => {
                 if (t.author === oldUsername) t.author = newUsername;
             });
             ['player', 'admin', 'unban', 'questions'].forEach(key => {
-                const complaints = DB.getComplaints(key);
+                const complaints = DB.getComplaints(currentServer, key);
                 complaints.forEach(c => {
                     if (c.author === oldUsername) c.author = newUsername;
                     if (c.target === oldUsername) c.target = newUsername;
                 });
             });
             ['admin', 'helper'].forEach(key => {
-                const apps = DB.getApplications(key);
+                const apps = DB.getApplications(currentServer, key);
                 apps.forEach(a => {
                     if (a.author === oldUsername) a.author = newUsername;
                 });
             });
             DB.save();
 
-            currentUser = DB.getUser(newUsername);
+            currentUser = DB.getUser(currentServer, newUsername);
             localStorage.setItem('current_user', JSON.stringify(currentUser));
             alert('✅ Профиль обновлен!');
             showMainContent();
@@ -5205,11 +5204,10 @@
 
             console.log('❄️ CRYSTAL RUSSIA — Форум загружен!');
             console.log('📊 База данных:');
-            console.log(`👤 Пользователей: ${DB.data.users.length}`);
-            console.log(`👨‍💻 Разработчиков: ${DB.data.developers.length}`);
-            console.log(`📝 Тем: ${DB.data.topics.length}`);
-            console.log(`💬 Сообщений в чате: ${DB.data.chat.length}`);
+            console.log(`📊 Crystal: ${DB.servers.crystal.users.length} пользователей, ${DB.servers.crystal.chat.length} сообщений`);
+            console.log(`📊 Russia: ${DB.servers.russia.users.length} пользователей, ${DB.servers.russia.chat.length} сообщений`);
             console.log('🔑 Для входа: Admin / admin123 или Игрок_228 / 123456');
+            console.log('💡 Данные хранятся в localStorage под ключом "forum_database_v2"');
         });
     </script>
 </body>
