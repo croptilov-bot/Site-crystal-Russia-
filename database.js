@@ -1,6 +1,6 @@
 // =========================================================
 // database.js - Универсальная база данных форума
-// Поддерживает несколько серверов с отдельными данными
+// Хранит ВСЕ данные: пользователей, сообщения, жалобы, заявления и т.д.
 // =========================================================
 
 class ForumDatabase {
@@ -9,18 +9,44 @@ class ForumDatabase {
         this.servers = {
             crystal: {
                 name: 'Crystal',
+                // ПОЛЬЗОВАТЕЛИ
                 users: [],
+                // ЗАБАНЕННЫЕ
                 banned: [],
+                // ЗАГЛУШЕННЫЕ
                 muted: [],
+                // РАЗРАБОТЧИКИ
                 developers: [],
+                // КОНТЕНТ СТРАНИЦ (правила, гайды, лор и т.д.)
                 content: {},
+                // ТЕМЫ НА ФОРУМЕ
                 topics: [],
+                // НОВОСТИ
                 news: [],
+                // ИВЕНТЫ
                 events: [],
+                // ВСЕ СООБЩЕНИЯ ЧАТА
                 chat: [],
-                complaints: { player: [], admin: [], unban: [], questions: [] },
-                applications: { admin: [], helper: [] },
-                notifications: []
+                // ЖАЛОБЫ (разделены по типам)
+                complaints: { 
+                    player: [],    // жалобы на игроков
+                    admin: [],     // жалобы на администрацию
+                    unban: [],     // заявки на разбан
+                    questions: []  // вопросы к администрации
+                },
+                // ЗАЯВЛЕНИЯ (на посты)
+                applications: { 
+                    admin: [],     // заявления на администратора
+                    helper: []     // заявления на хелпера
+                },
+                // УВЕДОМЛЕНИЯ
+                notifications: [],
+                // СТАТИСТИКА СЕРВЕРА
+                serverStats: {
+                    totalMessages: 0,
+                    totalUsers: 0,
+                    createdAt: new Date().toISOString()
+                }
             },
             russia: {
                 name: 'Russia',
@@ -33,43 +59,57 @@ class ForumDatabase {
                 news: [],
                 events: [],
                 chat: [],
-                complaints: { player: [], admin: [], unban: [], questions: [] },
-                applications: { admin: [], helper: [] },
-                notifications: []
+                complaints: { 
+                    player: [], 
+                    admin: [], 
+                    unban: [], 
+                    questions: [] 
+                },
+                applications: { 
+                    admin: [], 
+                    helper: [] 
+                },
+                notifications: [],
+                serverStats: {
+                    totalMessages: 0,
+                    totalUsers: 0,
+                    createdAt: new Date().toISOString()
+                }
             }
         };
         this.load();
         this.initDefaultData();
     }
 
-    // Загрузка данных из localStorage
+    // =========================================================
+    // ЗАГРУЗКА И СОХРАНЕНИЕ
+    // =========================================================
     load() {
         try {
             const saved = localStorage.getItem('forum_database_v2');
             if (saved) {
                 const parsed = JSON.parse(saved);
-                // Объединяем с дефолтной структурой
                 for (const server in this.servers) {
                     if (parsed[server]) {
                         this.servers[server] = this.mergeDeep(this.servers[server], parsed[server]);
                     }
                 }
+                console.log('✅ Данные загружены из localStorage');
             }
         } catch (e) {
             console.error('Ошибка загрузки базы данных:', e);
         }
     }
 
-    // Сохранение данных в localStorage
     save() {
         try {
             localStorage.setItem('forum_database_v2', JSON.stringify(this.servers));
+            console.log('✅ Данные сохранены в localStorage');
         } catch (e) {
             console.error('Ошибка сохранения базы данных:', e);
         }
     }
 
-    // Глубокое объединение объектов
     mergeDeep(target, source) {
         const result = { ...target };
         for (const key in source) {
@@ -117,6 +157,7 @@ class ForumDatabase {
             registered: new Date().toISOString(),
             lastSeen: new Date().toISOString()
         });
+        data.serverStats.totalUsers = data.users.length;
         this.save();
         return true;
     }
@@ -133,6 +174,7 @@ class ForumDatabase {
     deleteUser(server, username) {
         const data = this.getServerData(server);
         data.users = data.users.filter(u => u.username !== username);
+        data.serverStats.totalUsers = data.users.length;
         this.save();
         return true;
     }
@@ -155,7 +197,12 @@ class ForumDatabase {
     banUser(server, username, reason = 'Нарушение правил', admin = 'System') {
         const data = this.getServerData(server);
         if (data.banned.find(b => b.username === username)) return false;
-        data.banned.push({ username, reason, admin, date: new Date().toISOString() });
+        data.banned.push({ 
+            username, 
+            reason, 
+            admin, 
+            date: new Date().toISOString() 
+        });
         this.setUserOnline(server, username, false);
         this.save();
         return true;
@@ -227,8 +274,10 @@ class ForumDatabase {
         if (data.developers.includes(username)) return false;
         data.developers.push(username);
         const user = data.users.find(u => u.username === username);
-        if (user) { user.role = 'developer';
-            user.prefix = 'developer'; }
+        if (user) { 
+            user.role = 'developer';
+            user.prefix = 'developer'; 
+        }
         this.save();
         return true;
     }
@@ -237,8 +286,10 @@ class ForumDatabase {
         const data = this.getServerData(server);
         data.developers = data.developers.filter(d => d !== username);
         const user = data.users.find(u => u.username === username);
-        if (user && user.role === 'developer') { user.role = 'user';
-            user.prefix = 'user'; }
+        if (user && user.role === 'developer') { 
+            user.role = 'user';
+            user.prefix = 'user'; 
+        }
         this.save();
         return true;
     }
@@ -254,7 +305,7 @@ class ForumDatabase {
     }
 
     // =========================================================
-    // УПРАВЛЕНИЕ КОНТЕНТОМ
+    // УПРАВЛЕНИЕ КОНТЕНТОМ (правила, гайды, лор и т.д.)
     // =========================================================
     getContent(server, key) {
         const data = this.getServerData(server);
@@ -269,7 +320,7 @@ class ForumDatabase {
     }
 
     // =========================================================
-    // УПРАВЛЕНИЕ ТЕМАМИ
+    // УПРАВЛЕНИЕ ТЕМАМИ НА ФОРУМЕ
     // =========================================================
     addTopic(server, topic) {
         const data = this.getServerData(server);
@@ -354,15 +405,18 @@ class ForumDatabase {
     }
 
     // =========================================================
-    // УПРАВЛЕНИЕ СООБЩЕНИЯМИ В ЧАТЕ
+    // УПРАВЛЕНИЕ СООБЩЕНИЯМИ В ЧАТЕ (ВСЕ СООБЩЕНИЯ)
     // =========================================================
     addChatMessage(server, message) {
         const data = this.getServerData(server);
         const chat = data.chat || [];
         message.id = chat.length > 0 ? Math.max(...chat.map(m => m.id)) + 1 : 1;
         message.time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        message.timestamp = new Date().toISOString();
         data.chat.push(message);
+        data.serverStats.totalMessages = data.chat.length;
         this.save();
+        console.log(`📩 Новое сообщение в чате ${server}:`, message.text);
         return message;
     }
 
@@ -371,9 +425,15 @@ class ForumDatabase {
         return data.chat || [];
     }
 
+    getChatMessagesCount(server) {
+        const data = this.getServerData(server);
+        return data.chat ? data.chat.length : 0;
+    }
+
     deleteChatMessage(server, id) {
         const data = this.getServerData(server);
         data.chat = (data.chat || []).filter(m => m.id !== id);
+        data.serverStats.totalMessages = data.chat.length;
         this.save();
         return true;
     }
@@ -381,12 +441,13 @@ class ForumDatabase {
     clearChat(server) {
         const data = this.getServerData(server);
         data.chat = [];
+        data.serverStats.totalMessages = 0;
         this.save();
         return true;
     }
 
     // =========================================================
-    // УПРАВЛЕНИЕ ЖАЛОБАМИ
+    // УПРАВЛЕНИЕ ЖАЛОБАМИ (ВСЕ ЖАЛОБЫ)
     // =========================================================
     addComplaint(server, type, complaint) {
         const data = this.getServerData(server);
@@ -401,6 +462,11 @@ class ForumDatabase {
     getComplaints(server, type) {
         const data = this.getServerData(server);
         return data.complaints[type] || [];
+    }
+
+    getAllComplaints(server) {
+        const data = this.getServerData(server);
+        return data.complaints;
     }
 
     updateComplaint(server, type, id, updates) {
@@ -420,7 +486,7 @@ class ForumDatabase {
     }
 
     // =========================================================
-    // УПРАВЛЕНИЕ ЗАЯВЛЕНИЯМИ
+    // УПРАВЛЕНИЕ ЗАЯВЛЕНИЯМИ (ВСЕ ЗАЯВЛЕНИЯ)
     // =========================================================
     addApplication(server, type, application) {
         const data = this.getServerData(server);
@@ -435,6 +501,11 @@ class ForumDatabase {
     getApplications(server, type) {
         const data = this.getServerData(server);
         return data.applications[type] || [];
+    }
+
+    getAllApplications(server) {
+        const data = this.getServerData(server);
+        return data.applications;
     }
 
     updateApplication(server, type, id, updates) {
@@ -474,8 +545,11 @@ class ForumDatabase {
     markNotificationRead(server, id) {
         const data = this.getServerData(server);
         const notif = data.notifications.find(n => n.id === id);
-        if (notif) { notif.read = true;
-            this.save(); return true; }
+        if (notif) { 
+            notif.read = true;
+            this.save(); 
+            return true; 
+        }
         return false;
     }
 
@@ -571,6 +645,15 @@ class ForumDatabase {
                 date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
                         minute: '2-digit' })
             }];
+            // Несколько тестовых сообщений в чате
+            crystal.chat = [
+                { id: 1, author: 'Admin', text: 'Добро пожаловать на CRYSTAL RUSSIA!', time: '12:00', images: [],
+                    timestamp: new Date().toISOString() },
+                { id: 2, author: 'Artyom_Orlov', text: 'Привет всем! Начинаем разработку!', time: '12:05', images: [],
+                    timestamp: new Date().toISOString() }
+            ];
+            crystal.serverStats.totalMessages = crystal.chat.length;
+            crystal.serverStats.totalUsers = crystal.users.length;
         }
 
         // Инициализация Russia
@@ -624,37 +707,42 @@ class ForumDatabase {
                 date: new Date().toLocaleDateString('ru-RU') + ' ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit',
                         minute: '2-digit' })
             }];
+            russia.chat = [
+                { id: 1, author: 'Admin', text: 'Добро пожаловать на Russia RP!', time: '12:00', images: [],
+                    timestamp: new Date().toISOString() }
+            ];
+            russia.serverStats.totalMessages = russia.chat.length;
+            russia.serverStats.totalUsers = russia.users.length;
         }
 
         this.save();
         console.log('✅ База данных инициализирована!');
+        console.log(`📊 Crystal: ${this.servers.crystal.users.length} пользователей, ${this.servers.crystal.chat.length} сообщений`);
+        console.log(`📊 Russia: ${this.servers.russia.users.length} пользователей, ${this.servers.russia.chat.length} сообщений`);
     }
 
     // =========================================================
-    // БЭКАП И ВОССТАНОВЛЕНИЕ
+    // ЭКСПОРТ И ИМПОРТ ДАННЫХ
     // =========================================================
-    backup() {
-        return JSON.stringify(this.servers, null, 2);
+    exportData(server) {
+        const data = this.getServerData(server);
+        return JSON.stringify(data, null, 2);
     }
 
-    restore(backupData) {
+    importData(server, jsonData) {
         try {
-            const parsed = JSON.parse(backupData);
-            for (const server in this.servers) {
-                if (parsed[server]) {
-                    this.servers[server] = this.mergeDeep(this.servers[server], parsed[server]);
-                }
-            }
+            const parsed = JSON.parse(jsonData);
+            this.servers[server] = this.mergeDeep(this.servers[server], parsed);
             this.save();
             return true;
         } catch (e) {
-            console.error('Ошибка восстановления базы данных:', e);
+            console.error('Ошибка импорта данных:', e);
             return false;
         }
     }
 
     downloadBackup() {
-        const data = this.backup();
+        const data = JSON.stringify(this.servers, null, 2);
         const blob = new Blob([data], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -663,11 +751,40 @@ class ForumDatabase {
         a.click();
         URL.revokeObjectURL(url);
     }
+
+    // Очистка всех данных сервера
+    clearServerData(server) {
+        const data = this.getServerData(server);
+        data.users = [];
+        data.banned = [];
+        data.muted = [];
+        data.developers = [];
+        data.content = {};
+        data.topics = [];
+        data.news = [];
+        data.events = [];
+        data.chat = [];
+        data.complaints = { player: [], admin: [], unban: [], questions: [] };
+        data.applications = { admin: [], helper: [] };
+        data.notifications = [];
+        data.serverStats = {
+            totalMessages: 0,
+            totalUsers: 0,
+            createdAt: new Date().toISOString()
+        };
+        this.save();
+        return true;
+    }
 }
 
 // Создаем глобальный экземпляр
 const DB = new ForumDatabase();
 
+// Делаем доступным в консоли для отладки
+window.DB = DB;
+
 console.log('✅ База данных загружена!');
-console.log('📊 Crystal:', DB.servers.crystal.users.length, 'пользователей');
-console.log('📊 Russia:', DB.servers.russia.users.length, 'пользователей');
+console.log('📊 Все данные хранятся в localStorage под ключом "forum_database_v2"');
+console.log('📊 Crystal:', DB.servers.crystal.users.length, 'пользователей,', DB.servers.crystal.chat.length, 'сообщений');
+console.log('📊 Russia:', DB.servers.russia.users.length, 'пользователей,', DB.servers.russia.chat.length, 'сообщений');
+console.log('💡 Для отладки введите в консоли: DB.servers.crystal');
