@@ -3,41 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10131d">
-<meta name="description" content="Nova — мессенджер для твоего общения.">
+<meta name="theme-color" content="#0b0e17">
+<meta name="description" content="Nova — мессенджер для общения.">
 <title>Nova — мессенджер</title>
 
 <style>
 :root {
-  --bg: #10131d;
-  --card: #191e2b;
+  --bg: #0b0e17;
+  --card: #141a29;
   --text: #f5f6fc;
-  --muted: #aab1c5;
-  --accent: #8d70ff;
-  --border: #ffffff16;
+  --muted: #9aa3ba;
+  --accent1: #8d70ff;
+  --accent2: #4dc9ff;
+  --accent3: #ff6ec7;
+  --border: #ffffff14;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Плавающие градиентные пятна на фоне */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: .35;
+  z-index: -1;
+  pointer-events: none;
 }
+body::before {
+  background: radial-gradient(circle, var(--accent1), transparent 70%);
+  top: -20vmax;
+  left: -15vmax;
+  animation: float1 18s ease-in-out infinite;
+}
+body::after {
+  background: radial-gradient(circle, var(--accent2), transparent 70%);
+  bottom: -25vmax;
+  right: -15vmax;
+  animation: float2 22s ease-in-out infinite;
+}
+@keyframes float1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(6vmax,4vmax) scale(1.15); }
+}
+@keyframes float2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-6vmax,-5vmax) scale(1.2); }
+}
+
+a { color: inherit; text-decoration: none; }
 
 .container {
   width: min(1000px, calc(100% - 36px));
@@ -45,7 +74,6 @@ a {
 }
 
 /* Шапка */
-
 header {
   min-height: 76px;
   display: flex;
@@ -53,6 +81,11 @@ header {
   justify-content: space-between;
   gap: 20px;
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  background: #0b0e17aa;
 }
 
 .brand {
@@ -62,21 +95,16 @@ header {
   font-size: 24px;
   font-weight: 800;
 }
-
 .brand img {
-  width: 40px;
-  height: 40px;
+  width: 40px; height: 40px;
   object-fit: contain;
   border-radius: 12px;
 }
-
 .brand-fallback {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
   border-radius: 12px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
   font-weight: 900;
 }
 
@@ -86,19 +114,17 @@ nav {
   color: var(--muted);
   font-size: 14px;
 }
-
-nav a:hover {
-  color: white;
-}
+nav a { transition: color .2s; }
+nav a:hover { color: #fff; }
 
 /* Кнопки */
-
 .button {
   min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
+  gap: 8px;
+  padding: 12px 20px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: #ffffff08;
@@ -106,30 +132,30 @@ nav a:hover {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: background .15s, border-color .15s;
+  transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
 }
-
 .button:hover {
   border-color: #8d70ff99;
+  transform: translateY(-2px);
 }
+.button:active { transform: translateY(0); }
 
 .button-primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  border-color: transparent;
+  box-shadow: 0 6px 24px -8px var(--accent1);
 }
-
 .button-primary:hover {
-  background: #a18aff;
+  box-shadow: 0 10px 32px -8px var(--accent1);
 }
 
 /* Первый экран */
-
 .hero {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   align-items: center;
   gap: 45px;
-  padding: 75px 0 80px;
+  padding: 80px 0 85px;
 }
 
 .label {
@@ -141,13 +167,16 @@ nav a:hover {
 
 h1 {
   margin: 15px 0 20px;
-  font-size: clamp(43px, 6vw, 66px);
-  line-height: 1.08;
+  font-size: clamp(43px, 6vw, 68px);
+  line-height: 1.05;
   letter-spacing: -2px;
 }
 
-.accent-text {
-  color: #a995ff;
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2) 50%, var(--accent3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .intro {
@@ -160,42 +189,59 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 26px;
+  margin-top: 28px;
 }
 
 .hint {
   margin-top: 14px;
-  color: #858da5;
+  color: #7c849b;
   font-size: 12px;
 }
 
-/* Картинка приложения */
-
+/* Арт */
 .app-art {
-  min-height: 300px;
+  min-height: 320px;
   display: grid;
   place-items: center;
   padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: 24px;
   background: var(--card);
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
 }
+.app-art:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -20px #000;
+}
+.app-art::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 0deg, transparent, #8d70ff33, transparent 40%);
+  animation: spin 12s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .app-art img {
+  position: relative;
   display: block;
   width: 100%;
-  max-width: 310px;
-  max-height: 350px;
+  max-width: 320px;
+  max-height: 360px;
   object-fit: contain;
   border-radius: 14px;
+  z-index: 1;
 }
 
 .image-placeholder {
+  position: relative;
+  z-index: 1;
   text-align: center;
   color: var(--muted);
   padding: 25px;
 }
-
 .image-placeholder strong {
   display: block;
   color: white;
@@ -203,24 +249,22 @@ h1 {
   margin-bottom: 8px;
 }
 
-/* Возможности */
-
-section {
-  padding: 48px 0;
-}
+/* Секции */
+section { padding: 55px 0; }
 
 .section-title {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 32px;
   letter-spacing: -.7px;
 }
 
 .section-intro {
   max-width: 650px;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
   color: var(--muted);
 }
 
+/* Карточки */
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -228,74 +272,107 @@ section {
 }
 
 .feature {
-  padding: 22px;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  background: var(--card);
-}
-
-.feature-icon {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.feature h3 {
-  margin-bottom: 7px;
-  font-size: 17px;
-}
-
-.feature p {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* Описание */
-
-.about-box {
-  padding: 26px;
+  padding: 24px;
   border: 1px solid var(--border);
   border-radius: 18px;
   background: var(--card);
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+.feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #8d70ff22, transparent 60%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.feature:hover {
+  transform: translateY(-4px);
+  border-color: #8d70ff66;
+  box-shadow: 0 16px 40px -20px var(--accent1);
+}
+.feature:hover::before { opacity: 1; }
+
+.feature-icon {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+.feature h3 {
+  margin-bottom: 7px;
+  font-size: 17px;
+  position: relative;
+}
+.feature p {
+  color: var(--muted);
+  font-size: 14px;
+  position: relative;
 }
 
-.about-box p {
-  color: var(--muted);
+/* О приложении */
+.about-box {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
 }
+.about-box p { color: var(--muted); }
+.about-box p + p { margin-top: 12px; }
 
 /* Скачать */
-
 .download {
-  padding: 36px 24px;
+  padding: 42px 24px;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: 24px;
   background: var(--card);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-
+.download::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, #8d70ff33, transparent 60%);
+  pointer-events: none;
+}
 .download h2 {
   margin: 10px 0;
-  font-size: 32px;
+  font-size: 34px;
+  position: relative;
 }
-
 .download p {
   max-width: 600px;
-  margin: 0 auto 22px;
+  margin: 0 auto 24px;
   color: var(--muted);
+  position: relative;
 }
-
 .download .actions {
   justify-content: center;
   margin-top: 0;
+  position: relative;
+}
+.download-note {
+  margin-top: 16px;
+  color: #7c849b;
+  font-size: 12px;
+  position: relative;
 }
 
-.download-note {
-  margin-top: 14px;
-  color: #858da5;
-  font-size: 12px;
+/* Анимация появления при скролле */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* Подвал */
-
 footer {
   display: flex;
   justify-content: space-between;
@@ -304,83 +381,41 @@ footer {
   margin-top: 45px;
   padding: 25px 0 32px;
   border-top: 1px solid var(--border);
-  color: #858da5;
+  color: #7c849b;
   font-size: 12px;
 }
 
 /* Телефоны */
-
 @media (max-width: 760px) {
-  nav {
-    display: none;
-  }
-
+  nav { display: none; }
   .hero {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 48px 0 55px;
+    gap: 30px;
+    padding: 52px 0 60px;
   }
-
-  .app-art {
-    min-height: 240px;
-  }
-
-  .app-art img {
-    max-height: 270px;
-  }
-
-  .features {
-    grid-template-columns: 1fr;
-  }
-
-  .feature {
-    padding: 19px;
-  }
-
-  section {
-    padding: 35px 0;
-  }
-
-  .download h2 {
-    font-size: 27px;
-  }
+  .app-art { min-height: 250px; }
+  .app-art img { max-height: 280px; }
+  .features { grid-template-columns: 1fr; }
+  section { padding: 38px 0; }
+  .download h2 { font-size: 28px; }
 }
 
 @media (max-width: 430px) {
-  .container {
-    width: calc(100% - 28px);
-  }
-
-  header {
-    min-height: 68px;
-  }
-
-  .brand {
-    font-size: 21px;
-  }
-
-  .header-download {
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-
-  .actions .button {
-    width: 100%;
-  }
-
-  h1 {
-    letter-spacing: -1.5px;
-  }
+  .container { width: calc(100% - 28px); }
+  header { min-height: 68px; }
+  .brand { font-size: 21px; }
+  .actions .button { width: 100%; }
+  h1 { letter-spacing: -1.5px; }
 }
 
+/* Уважение к настройке «меньше движения» */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
+    animation: none !important;
     transition: none !important;
   }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
@@ -389,11 +424,8 @@ footer {
 
 <header class="container">
   <a class="brand" href="#top">
-    <img
-      src="nova-logo.png"
-      alt=""
-      onerror="this.hidden=true;this.nextElementSibling.hidden=false"
-    >
+    <img src="nova-logo.png" alt=""
+         onerror="this.hidden=true;this.nextElementSibling.hidden=false">
     <span class="brand-fallback" hidden>N</span>
     <span>Nova</span>
   </a>
@@ -404,119 +436,108 @@ footer {
     <a href="#download">Скачать</a>
   </nav>
 
-  <a class="button button-primary header-download" href="#download">
-    Скачать
-  </a>
+  <a class="button button-primary" href="#download">Скачать</a>
 </header>
 
 <main id="top">
 
   <section class="container hero">
-    <div>
-      <div class="label">ТВОЁ ОБЩЕНИЕ — ТВОИ ПРАВИЛА</div>
+    <div class="reveal">
+      <div class="label">МЕССЕНДЖЕР NOVA</div>
 
       <h1>
         Общайся<br>
-        <span class="accent-text">по-своему.</span>
+        <span class="gradient-text">по-своему.</span>
       </h1>
 
       <p class="intro">
-        Nova — мессенджер для разговоров, обмена сообщениями
-        и общения в своём стиле. Просто, удобно и без лишнего.
+        Nova — мессенджер для разговоров и обмена сообщениями.
+        Простой интерфейс, ничего лишнего — только общение.
       </p>
 
       <div class="actions">
-        <a class="button button-primary"
-           href="./app-debug.apk"
-           download="Nova.apk">
+        <a class="button button-primary" id="downloadBtn" href="#download">
           ↓ Скачать для Android
         </a>
-
-        <a class="button" href="#features">
-          Возможности
-        </a>
+        <a class="button" href="#features">Возможности</a>
       </div>
 
       <p class="hint">Android · Установочный APK-файл</p>
     </div>
 
-    <div class="app-art">
-      <img
-        src="nova-preview.jpg"
-        alt="Скриншот приложения Nova"
-        onerror="this.hidden=true;document.getElementById('previewPlaceholder').hidden=false"
-      >
-
+    <div class="app-art reveal">
+      <img src="nova-preview.jpg" alt="Скриншот приложения Nova"
+           onerror="this.hidden=true;document.getElementById('previewPlaceholder').hidden=false">
       <div class="image-placeholder" id="previewPlaceholder" hidden>
-        <strong>Твой скриншот Nova</strong>
-        Добавь изображение рядом с index.html
-        и назови его nova-preview.png.
+        <strong>Скриншот Nova</strong>
+        Добавь изображение рядом с index.html и назови его nova-preview.jpg.
       </div>
     </div>
   </section>
 
   <section class="container" id="features">
-    <h2 class="section-title">Всё нужное для общения</h2>
-
-    <p class="section-intro">
-      Главное — разговоры. Понятный интерфейс без лишних эффектов
-      помогает сосредоточиться на общении.
+    <h2 class="section-title reveal">Простое общение</h2>
+    <p class="section-intro reveal">
+      Nova создан для того, чтобы сосредоточиться на главном — разговорах.
     </p>
 
     <div class="features">
-      <article class="feature">
+      <article class="feature reveal">
         <div class="feature-icon">💬</div>
         <h3>Личные чаты</h3>
-        <p>Общайся и возвращайся к нужным разговорам.</p>
+        <p>Общайся с собеседниками и возвращайся к нужным разговорам.</p>
       </article>
 
-      <article class="feature">
-        <div class="feature-icon">🎨</div>
-        <h3>Свой стиль</h3>
-        <p>Настраивай оформление, если эта функция доступна в приложении.</p>
+      <article class="feature reveal">
+        <div class="feature-icon">⚡</div>
+        <h3>Быстрая работа</h3>
+        <p>Лёгкий интерфейс без лишних элементов и задержек.</p>
       </article>
 
-      <article class="feature">
-        <div class="feature-icon">📎</div>
-        <h3>Обмен файлами</h3>
-        <p>Возможности отправки фотографий и файлов зависят от версии Nova.</p>
+      <article class="feature reveal">
+        <div class="feature-icon">🔒</div>
+        <h3>Твой аккаунт</h3>
+        <p>Вход в свой профиль и общение под своим именем.</p>
       </article>
     </div>
   </section>
 
   <section class="container" id="about">
-    <h2 class="section-title">Создаём Nova</h2>
+    <h2 class="section-title reveal">О Nova</h2>
 
-    <div class="about-box">
+    <div class="about-box reveal">
       <p>
-        Nova развивается как самостоятельный мессенджер.
-        Здесь можно разместить собственные скриншоты, описание
-        приложения и ссылку на актуальную Android-сборку.
+        Nova — самостоятельный мессенджер для Android. Это проект,
+        который развивается: интерфейс и функции могут меняться
+        от версии к версии.
+      </p>
+      <p>
+        Скачай актуальную сборку по кнопке ниже и установи приложение
+        на свой телефон.
       </p>
     </div>
   </section>
 
   <section class="container" id="download">
-    <div class="download">
+    <div class="download reveal">
       <div class="label">NOVA ДЛЯ ANDROID</div>
 
       <h2>Попробуй Nova</h2>
 
       <p>
         Скачай установочный файл и установи приложение на Android.
-        После скачивания телефон может попросить подтвердить установку.
+        После скачивания телефон может попросить подтвердить установку
+        из неизвестного источника.
       </p>
 
       <div class="actions">
-        <a class="button button-primary"
-           href="./app-debug.apk"
-           download="Nova.apk">
+        <a class="button button-primary" id="downloadBtn2" href="#">
           ↓ Скачать Nova.apk
         </a>
       </div>
 
       <div class="download-note">
-        Файл app-debug.apk должен находиться рядом с index.html.
+        Нажимая кнопку, ты запускаешь скачивание актуальной сборки.
       </div>
     </div>
   </section>
@@ -529,8 +550,66 @@ footer {
 </footer>
 
 <script>
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
+  // Год в подвале
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Появление секций при скролле
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("visible"));
+  }
+
+  // Кнопка скачивания: получаем свежую прямую ссылку с Яндекс.Диска
+  const PUBLIC_KEY = "https://disk.yandex.ru/d/tp5hohqOp2XnUQ";
+
+  async function startDownload(btn) {
+    const original = btn.textContent;
+    btn.textContent = "Готовим ссылку…";
+    btn.style.pointerEvents = "none";
+
+    try {
+      const res = await fetch(
+        "https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=" +
+        encodeURIComponent(PUBLIC_KEY)
+      );
+      const data = await res.json();
+      if (!data.href) throw new Error("Нет ссылки");
+
+      // Запускаем скачивание
+      const a = document.createElement("a");
+      a.href = data.href;
+      a.download = "Nova.apk";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      alert("Не удалось получить ссылку на скачивание. Попробуй позже.");
+    } finally {
+      btn.textContent = original;
+      btn.style.pointerEvents = "";
+    }
+  }
+
+  ["downloadBtn", "downloadBtn2"].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      // Верхняя кнопка ведёт к секции скачивания, нижняя — сразу качает
+      if (id === "downloadBtn") return;
+      e.preventDefault();
+      startDownload(btn);
+    });
+  });
 </script>
 
 </body>
